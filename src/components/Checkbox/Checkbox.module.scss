@@ -1,0 +1,59 @@
+@use '../../styles/variables.scss' as *;
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  border-radius: $radius-sm;
+  border: 1px solid $primary;
+  background-color: $background;
+  cursor: pointer;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+  position: relative;
+
+  &:hover {
+    background-color: hsl(210, 40%, 96%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:checked {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    width: 0.5rem;
+    height: 0.25rem;
+    border: 2px solid $primary-foreground;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg) translate(0.0625rem, -0.0625rem);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+  cursor: pointer;
+  user-select: none;
+}

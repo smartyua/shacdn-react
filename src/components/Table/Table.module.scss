@@ -1,0 +1,68 @@
+@use '../../styles/variables.scss' as *;
+
+.table {
+  width: 100%;
+  caption-side: bottom;
+  font-size: $font-size-sm;
+  border-collapse: collapse;
+}
+
+.caption {
+  margin-top: 1rem;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid $border;
+}
+
+.body {
+  tr:last-child {
+    border-bottom: none;
+  }
+}
+
+.footer {
+  border-top: 1px solid $border;
+  background-color: $muted;
+  font-weight: 500;
+}
+
+.row {
+  border-bottom: 1px solid $border;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $muted;
+  }
+
+  &[data-state='selected'] {
+    background-color: $muted;
+  }
+}
+
+.head {
+  height: 3rem;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 500;
+  color: $muted-foreground;
+
+  &:has([role='checkbox']) {
+    padding-left: 0.75rem;
+    padding-right: 0;
+  }
+}
+
+.cell {
+  padding: 0.75rem;
+  vertical-align: middle;
+
+  &:has([role='checkbox']) {
+    padding-left: 0.75rem;
+    padding-right: 0;
+  }
+}

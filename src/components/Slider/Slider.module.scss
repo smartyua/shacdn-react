@@ -1,0 +1,62 @@
+@use '../../styles/variables.scss' as *;
+
+.slider {
+  position: relative;
+  display: flex;
+  width: 100%;
+  touch-action: none;
+  user-select: none;
+  align-items: center;
+  height: 1.25rem;
+  cursor: pointer;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.track {
+  position: relative;
+  height: 0.5rem;
+  width: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  background-color: $secondary;
+}
+
+.range {
+  position: absolute;
+  height: 100%;
+  background-color: $primary;
+  transition: width 50ms ease-out;
+}
+
+.thumb {
+  display: block;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+  border: 2px solid $primary;
+  background-color: $background;
+  cursor: grab;
+  transition: box-shadow $transition-fast;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+
+  &:hover {
+    box-shadow: 0 0 0 4px hsla(222.2, 84%, 4.9%, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  .disabled & {
+    cursor: not-allowed;
+  }
+}

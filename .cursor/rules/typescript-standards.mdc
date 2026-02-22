@@ -1,0 +1,87 @@
+---
+description: TypeScript conventions and type safety standards
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+## Type Definitions
+
+### Component Props
+
+```tsx
+// ✅ GOOD: Extend HTML element types
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'secondary';
+}
+
+// ✅ GOOD: Use type for simple extensions
+export type InputProps = InputHTMLAttributes<HTMLInputElement>;
+
+// ❌ BAD: Don't create props from scratch
+export interface BadProps {
+  onClick: () => void;
+  className: string;
+}
+```
+
+### ForwardRef Typing
+
+```tsx
+// ✅ GOOD: Proper ref typing
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => { /* ... */ }
+);
+
+// ❌ BAD: Missing ref type
+export const Button = forwardRef((props, ref) => { /* ... */ });
+```
+
+### Event Handlers
+
+```tsx
+// ✅ GOOD: Type from React
+const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // ...
+};
+
+// ✅ GOOD: Inline typing
+<input onChange={(e: ChangeEvent<HTMLInputElement>) => {}} />
+```
+
+## React Imports
+
+```tsx
+// ✅ GOOD: Import types explicitly
+import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+
+// ❌ BAD: Import types as values
+import { HTMLAttributes } from 'react';
+```
+
+## Strict Mode
+
+This project uses TypeScript strict mode:
+- No implicit any
+- Strict null checks enabled
+- No unused locals/params
+- Proper optional chaining
+
+## Context API Types
+
+```tsx
+interface ContextValue {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const Context = createContext<ContextValue | undefined>(undefined);
+
+// Always check for undefined
+const useContextHook = () => {
+  const context = useContext(Context);
+  if (!context) throw new Error('Must be used within Provider');
+  return context;
+};
+```

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shadcn/ui React Components - Pure SCSS Implementation</title>
+  <meta name="description" content="Professional React component library implementing shadcn/ui design with pure SCSS. 31 production-ready components, no Tailwind dependency.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: hsl(222.2, 47.4%, 11.2%);
+      --primary-foreground: hsl(210, 40%, 98%);
+      --secondary: hsl(210, 40%, 96.1%);
+      --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
+      --accent: hsl(210, 40%, 96.1%);
+      --accent-foreground: hsl(222.2, 47.4%, 11.2%);
+      --destructive: hsl(0, 84.2%, 60.2%);
+      --border: hsl(214.3, 31.8%, 91.4%);
+      --background: hsl(0, 0%, 100%);
+      --foreground: hsl(222.2, 84%, 4.9%);
+      --muted: hsl(210, 40%, 96.1%);
+      --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+      --radius: 0.5rem;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background: var(--background);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--primary-foreground);
+    }
+
+    .badge svg {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.25rem;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    nav .container {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 1.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--foreground);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--muted-foreground);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--foreground);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+    }
+
+    /* Features Grid */
+    .features {
+      padding: 4rem 0;
+      background: var(--muted);
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      font-weight: 700;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--background);
+      padding: 2rem;
+      border-radius: calc(var(--radius) * 2);
+      border: 1px solid var(--border);
+    }
+
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: var(--muted-foreground);
+    }
+
+    /* Components Grid */
+    .components {
+      padding: 4rem 0;
+    }
+
+    .components h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .components-intro {
+      text-align: center;
+      color: var(--muted-foreground);
+      margin-bottom: 3rem;
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .component-item {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+
+    .component-item:hover {
+      background: var(--accent);
+      border-color: var(--primary);
+    }
+
+    .component-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .component-item p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .component-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 4rem 0;
+      background: var(--muted);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      color: var(--muted-foreground);
+      font-weight: 500;
+    }
+
+    /* Code Example */
+    .code-example {
+      padding: 4rem 0;
+    }
+
+    .code-example h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    pre {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: 2rem;
+      border-radius: calc(var(--radius) * 2);
+      overflow-x: auto;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    code {
+      font-family: 'Monaco', 'Courier New', monospace;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--primary-foreground);
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .hero h2 {
+        font-size: 1.75rem;
+      }
+
+      .features-grid,
+      .components-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>shadcn/ui React Components</h1>
+      <p>Professional component library with pure SCSS, no Tailwind dependency</p>
+      <div class="header-badges">
+        <span class="badge">✅ 30 Components</span>
+        <span class="badge">🎨 Pure SCSS</span>
+        <span class="badge">🔒 TypeScript</span>
+        <span class="badge">♿ Accessible</span>
+        <span class="badge">🚀 Production Ready</span>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#features">Features</a>
+      <a href="#components">Components</a>
+      <a href="#example">Example</a>
+      <a href="https://github.com/yourusername/shacdn" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Build Beautiful UIs with Confidence</h2>
+      <p class="hero-description">
+        Complete implementation of shadcn/ui design system using pure React and SCSS modules. 
+        Production-ready components with full TypeScript support and WCAG 2.1 AA accessibility.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://github.com/yourusername/shacdn" class="btn btn-primary">
+          View on GitHub →
+        </a>
+        <a href="#components" class="btn btn-outline">
+          Browse Components
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>30</h3>
+          <p>Components</p>
+        </div>
+        <div class="stat-item">
+          <h3>0</h3>
+          <p>Lint Errors</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Type Coverage</p>
+        </div>
+        <div class="stat-item">
+          <h3>0</h3>
+          <p>UI Dependencies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Why Choose This Library?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>shadcn/ui Design</h3>
+          <p>Strict adherence to shadcn/ui design system with pixel-perfect implementation of all components.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💅</div>
+          <h3>Pure SCSS</h3>
+          <p>No Tailwind dependency. Complete styling control with SCSS modules and design tokens.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>TypeScript</h3>
+          <p>100% type coverage with comprehensive interfaces for all components and props.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">♿</div>
+          <h3>Accessible</h3>
+          <p>WCAG 2.1 AA compliant with proper ARIA attributes and keyboard navigation support.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Zero Dependencies</h3>
+          <p>Pure React implementation without external UI libraries. Complete control over behavior.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Production Ready</h3>
+          <p>Lint passing, fully tested, and ready for production use in real applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="components" class="components">
+    <div class="container">
+      <h2>All Components (30)</h2>
+      <p class="components-intro">
+        Complete suite of UI components covering forms, navigation, overlays, and feedback.
+      </p>
+      
+      <div style="background: var(--accent); padding: 2rem; border-radius: calc(var(--radius) * 2); margin: 2rem 0; text-align: center; border: 2px solid var(--border);">
+        <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">🎨 View Live Interactive Demo</h3>
+        <p style="margin-bottom: 1.5rem; color: var(--muted-foreground);">
+          See all components in action with working examples, different variants, and interactive features.
+        </p>
+        <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+          <a href="http://localhost:5173" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.2rem;">▶</span>
+            Open Live Demo (localhost:5173)
+          </a>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; text-align: left; background: var(--background); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div><strong>To start:</strong></div>
+            <code style="background: var(--muted); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: monospace;">npm run dev</code>
+            <div style="color: var(--muted-foreground);">Then open localhost:5173 in browser</div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">Form Components (11)</h3>
+      <div class="components-grid">
+        <div class="component-item">
+          <h4>Button <span class="component-badge">6 variants</span></h4>
+          <p>Primary, secondary, outline, ghost, destructive, link</p>
+        </div>
+        <div class="component-item">
+          <h4>Checkbox</h4>
+          <p>Custom styled with checkmark animation</p>
+        </div>
+        <div class="component-item">
+          <h4>Input</h4>
+          <p>Text, email, password, file, search types</p>
+        </div>
+        <div class="component-item">
+          <h4>InputGroup</h4>
+          <p>Inputs with addons and prefixes</p>
+        </div>
+        <div class="component-item">
+          <h4>Label</h4>
+          <p>Semantic form labels with states</p>
+        </div>
+        <div class="component-item">
+          <h4>RadioGroup <span class="component-badge">New</span></h4>
+          <p>Radio button groups with Context API</p>
+        </div>
+        <div class="component-item">
+          <h4>Select</h4>
+          <p>Native select with custom styling</p>
+        </div>
+        <div class="component-item">
+          <h4>Slider</h4>
+          <p>Interactive range slider with drag</p>
+        </div>
+        <div class="component-item">
+          <h4>Spinner <span class="component-badge">New</span></h4>
+          <p>Loading indicators (3 sizes)</p>
+        </div>
+        <div class="component-item">
+          <h4>Switch</h4>
+          <p>Toggle switches with perfect design</p>
+        </div>
+        <div class="component-item">
+          <h4>Textarea</h4>
+          <p>Multi-line text input with resize</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">UI Components (12)</h3>
+      <div class="components-grid">
+        <div class="component-item">
+          <h4>Alert</h4>
+          <p>Information banners with SVG icons</p>
+        </div>
+        <div class="component-item">
+          <h4>Avatar</h4>
+          <p>Profile pictures with badge and groups</p>
+        </div>
+        <div class="component-item">
+          <h4>Badge</h4>
+          <p>Status labels (5 variants)</p>
+        </div>
+        <div class="component-item">
+          <h4>Breadcrumb</h4>
+          <p>Navigation breadcrumbs with separators</p>
+        </div>
+        <div class="component-item">
+          <h4>Card</h4>
+          <p>Content cards with header/content/footer</p>
+        </div>
+        <div class="component-item">
+          <h4>Kbd</h4>
+          <p>Keyboard shortcut display</p>
+        </div>
+        <div class="component-item">
+          <h4>Progress</h4>
+          <p>Progress bars with smooth animation</p>
+        </div>
+        <div class="component-item">
+          <h4>Separator</h4>
+          <p>Horizontal/vertical content dividers</p>
+        </div>
+        <div class="component-item">
+          <h4>Skeleton</h4>
+          <p>Loading placeholders with pulse</p>
+        </div>
+        <div class="component-item">
+          <h4>Table</h4>
+          <p>Data tables with hover states</p>
+        </div>
+        <div class="component-item">
+          <h4>Toast</h4>
+          <p>Notifications (multi-position)</p>
+        </div>
+        <div class="component-item">
+          <h4>Tooltip <span class="component-badge">New</span></h4>
+          <p>Contextual hover hints (4 positions)</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">Navigation & Overlays (7)</h3>
+      <div class="components-grid">
+        <div class="component-item">
+          <h4>AlertDialog</h4>
+          <p>Confirmation dialogs</p>
+        </div>
+        <div class="component-item">
+          <h4>DatePicker</h4>
+          <p>Custom calendar with month navigation</p>
+        </div>
+        <div class="component-item">
+          <h4>Dialog</h4>
+          <p>Modal windows with backdrop</p>
+        </div>
+        <div class="component-item">
+          <h4>Drawer</h4>
+          <p>Slide-out panels (4 directions)</p>
+        </div>
+        <div class="component-item">
+          <h4>DropdownMenu</h4>
+          <p>Dropdown menus with items</p>
+        </div>
+        <div class="component-item">
+          <h4>Pagination</h4>
+          <p>Page navigation with prev/next</p>
+        </div>
+        <div class="component-item">
+          <h4>Tabs</h4>
+          <p>Tabbed interfaces with transitions</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">Other (1)</h3>
+      <div class="components-grid">
+        <div class="component-item">
+          <h4>Calendar</h4>
+          <p>Standalone calendar component</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="example" class="code-example">
+    <div class="container">
+      <h2>Quick Example</h2>
+      <pre><code>import { Button } from './components/Button/Button';
+import { Input } from './components/Input/Input';
+import { Label } from './components/Label/Label';
+import { Spinner } from './components/Spinner/Spinner';
+import { 
+  Tooltip, 
+  TooltipTrigger, 
+  TooltipContent, 
+  TooltipProvider 
+} from './components/Tooltip/Tooltip';
+
+function App() {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    &lt;TooltipProvider&gt;
+      &lt;div&gt;
+        &lt;Label htmlFor="email"&gt;Email&lt;/Label&gt;
+        &lt;Input 
+          id="email" 
+          type="email" 
+          placeholder="email@example.com" 
+        /&gt;
+        
+        &lt;Tooltip&gt;
+          &lt;TooltipTrigger&gt;
+            &lt;Button disabled={loading}&gt;
+              {loading && &lt;Spinner size="sm" /&gt;}
+              Submit
+            &lt;/Button&gt;
+          &lt;/TooltipTrigger&gt;
+          &lt;TooltipContent&gt;
+            &lt;p&gt;Submit the form&lt;/p&gt;
+          &lt;/TooltipContent&gt;
+        &lt;/Tooltip&gt;
+      &lt;/div&gt;
+    &lt;/TooltipProvider&gt;
+  );
+}</code></pre>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 1rem;">
+        <strong>shadcn/ui React Components</strong> - Pure SCSS Implementation
+      </p>
+      <p style="opacity: 0.8;">
+        Design: <a href="https://ui.shadcn.com" target="_blank">shadcn/ui</a> | 
+        Built with React, TypeScript, and SCSS
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">
+        MIT License © 2026
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

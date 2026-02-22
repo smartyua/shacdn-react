@@ -1,0 +1,55 @@
+@use '../../styles/variables.scss' as *;
+
+.alertDialogContent {
+  max-width: 26rem;
+}
+
+.alertDialogAction,
+.alertDialogCancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  flex: 1;
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @media (min-width: 640px) {
+    flex: initial;
+  }
+}
+
+.alertDialogAction {
+  background: $primary;
+  color: $primary-foreground;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.alertDialogCancel {
+  background: transparent;
+  color: $foreground;
+  border: 1px solid $input;
+
+  &:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+}

@@ -1,0 +1,52 @@
+@use '../../styles/variables.scss' as *;
+
+.inputGroup {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  position: relative;
+  border-radius: $radius-md;
+  border: 1px solid $input;
+  overflow: hidden;
+
+  &:focus-within {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  // Target both native input and Input component
+  input,
+  :global(.input) {
+    flex: 1;
+    margin: 0;
+    outline: none;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent;
+    
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+
+.inputGroupAddon {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  background: $muted;
+  color: $muted-foreground;
+  border: none;
+  font-size: $font-size-sm;
+  white-space: nowrap;
+  border-radius: 0;
+  flex-shrink: 0;
+
+  &:first-child:not(:last-child) {
+    border-right: 1px solid $input;
+  }
+
+  &:last-child:not(:first-child) {
+    border-left: 1px solid $input;
+  }
+}

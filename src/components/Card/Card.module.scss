@@ -1,0 +1,50 @@
+@use '../../styles/variables.scss' as *;
+
+.card {
+  border-radius: $radius-lg;
+  border: 1px solid $border;
+  background-color: $card;
+  color: $card-foreground;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-lg;
+  position: relative;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0;
+  color: $foreground;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.action {
+  position: absolute;
+  top: $spacing-lg;
+  right: $spacing-lg;
+}
+
+.content {
+  padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+  gap: $spacing-sm;
+}

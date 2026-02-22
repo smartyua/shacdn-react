@@ -1,0 +1,36 @@
+@use '../../styles/variables.scss' as *;
+
+.textarea {
+  display: flex;
+  width: 100%;
+  min-height: 5rem;
+  border-radius: $radius-md;
+  border: 1px solid $input;
+  background-color: $background;
+  padding: 0.5rem 0.75rem;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+  transition: all $transition-fast;
+  outline: none;
+  resize: vertical;
+  line-height: 1.5;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+
+  &:focus {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+}

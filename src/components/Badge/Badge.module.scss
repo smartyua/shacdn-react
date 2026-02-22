@@ -1,0 +1,66 @@
+@use '../../styles/variables.scss' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  line-height: 1;
+  transition: all $transition-fast;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  font-family: $font-sans;
+  
+  svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+  }
+}
+
+.default {
+  background-color: $primary;
+  color: $primary-foreground;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.secondary {
+  background-color: $secondary;
+  color: $secondary-foreground;
+  border-color: transparent;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.outline {
+  color: $foreground;
+  border-color: $border;
+  background-color: transparent;
+}
+
+.destructive {
+  background-color: $destructive;
+  color: $destructive-foreground;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  color: $foreground;
+
+  &:hover {
+    background-color: $accent;
+  }
+}

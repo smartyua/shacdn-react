@@ -1,0 +1,43 @@
+---
+description: Design system variables and styling conventions
+globs: "**/*.scss"
+alwaysApply: false
+---
+
+# Design System
+
+All design tokens are centralized in `src/styles/variables.scss`.
+
+## Color System (HSL)
+Based on shadcn/ui design system:
+
+```scss
+$primary: hsl(222.2, 47.4%, 11.2%);
+$primary-foreground: hsl(210, 40%, 98%);
+$secondary: hsl(210, 40%, 96.1%);
+$destructive: hsl(0, 84.2%, 60.2%);
+$border: hsl(214.3, 31.8%, 91.4%);
+$ring: hsl(222.2, 84%, 4.9%);
+```
+
+## Spacing Scale
+- `$spacing-xs`: 0.25rem (4px)
+- `$spacing-sm`: 0.5rem (8px)
+- `$spacing-md`: 1rem (16px)
+- `$spacing-lg`: 1.5rem (24px)
+- `$spacing-xl`: 2rem (32px)
+
+## Border Radius
+- `$radius-xs` to `$radius-xl` (0.25rem to 1rem)
+
+## Typography
+- Font family: `$font-sans` (system fonts)
+- Sizes: `$font-size-xs` to `$font-size-xl` (0.75rem to 1.25rem)
+
+## Transitions
+- `$transition-fast`: 150ms (hover effects)
+- `$transition-base`: 200ms (default)
+- `$transition-slow`: 300ms (complex animations)
+
+## Usage Rule
+Always import variables: `@import '../../styles/variables.scss';`

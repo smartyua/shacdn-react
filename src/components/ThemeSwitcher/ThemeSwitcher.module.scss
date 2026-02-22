@@ -1,0 +1,150 @@
+@use '../../styles/variables.scss' as *;
+
+.themeSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $background;
+  color: $foreground;
+  cursor: pointer;
+  transition: all 100ms ease;
+
+  &:hover {
+    background: $accent;
+    border-color: $primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: $foreground;
+  }
+}
+
+.colorSchemeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $background;
+  color: $foreground;
+  cursor: pointer;
+  transition: all 100ms ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: white;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.colorSchemeWrapper {
+  position: relative;
+}
+
+.colorSchemeMenu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+  min-width: 150px;
+  z-index: 50;
+  animation: slideIn 0.1s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.colorOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: $foreground;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: all 100ms ease;
+  text-align: left;
+  position: relative;
+
+  &:hover {
+    background: $accent;
+  }
+
+  &.active {
+    background: $primary;
+    color: $primary-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.colorCircle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 1px solid $border;
+  flex-shrink: 0;
+}
+
+.checkIcon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}

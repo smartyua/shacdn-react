@@ -1,0 +1,117 @@
+@use '../../styles/variables.scss' as *;
+
+.dialogRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialogContent {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 51;
+  transform: translate(-50%, -50%);
+  background: $background;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: 32rem;
+  width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.dialogClose {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  background: transparent;
+  border: none;
+  padding: $spacing-xs;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  color: $muted-foreground;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $foreground;
+    background: $accent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.dialogHeader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
+
+.dialogFooter {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.dialogTitle {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  line-height: 1;
+  color: $foreground;
+  margin: 0;
+}
+
+.dialogDescription {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  margin: 0;
+  line-height: 1.5;
+}

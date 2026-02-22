@@ -1,0 +1,53 @@
+# Cursor Configuration
+
+This project uses Cursor rules for AI assistance. All rules are in `.cursor/rules/`.
+
+## ⚠️ CRITICAL: Lint Verification Required
+
+**After EVERY code change, you MUST:**
+1. Run `npm run lint` to check for errors
+2. Fix all lint errors before considering the task complete
+3. Never commit or finish a task with lint errors
+
+## Key Rules
+
+- **project-overview.mdc** - Always applies, describes project architecture
+- **design-system.mdc** - SCSS variable reference (applies to .scss files)
+- **react-component-patterns.mdc** - Component structure (applies to .tsx files)
+- **typescript-standards.mdc** - Type safety guidelines (applies to .ts/.tsx files)
+- **scss-conventions.mdc** - Styling patterns (applies to .scss files)
+- **component-creation.mdc** - New component checklist
+- **file-structure.mdc** - Always applies, project organization
+
+## Code Quality Requirements
+
+1. **Zero Lint Errors** - Run `npm run lint` after every change
+2. **TypeScript Strict** - No type errors allowed
+3. **Successful Build** - Run `npm run build` to verify
+4. **Design System Compliance** - Use SCSS variables, not hardcoded values
+5. **Accessibility** - Proper ARIA attributes and keyboard navigation
+
+## Documentation
+
+See `docs/` folder for:
+- Component usage guide
+- Project summary
+- Design system reference
+- Theme system documentation
+
+## Quick Start
+
+```bash
+npm install
+npm run dev
+```
+
+Visit http://localhost:5173
+
+## Development Workflow
+
+1. Make code changes
+2. **Run `npm run lint`** ✅ REQUIRED
+3. Fix any errors
+4. Test in browser
+5. Commit when lint passes

@@ -1,0 +1,50 @@
+---
+description: shadcn/ui React Components project overview and architecture
+alwaysApply: true
+---
+
+# Project Overview
+
+This is a React component library based on shadcn/ui design system, using SCSS modules without Tailwind CSS.
+
+## Tech Stack
+- **Framework**: React 19 + TypeScript
+- **Build Tool**: Vite 7
+- **Styling**: SCSS Modules (no Tailwind)
+- **Type System**: TypeScript strict mode
+- **Code Quality**: ESLint
+- **Icons**: lucide-react
+
+## Project Goals
+- Create shadcn/ui components using only SCSS modules
+- Maintain strict design compliance with shadcn/ui
+- Minimize external dependencies (no Radix UI, no external UI libs)
+- Full TypeScript type safety
+- Proper accessibility (ARIA attributes)
+
+## Key Principles
+1. **Pure Implementation**: No external UI component libraries
+2. **SCSS Modules**: Scoped styles, no global conflicts
+3. **Design Fidelity**: Exact shadcn/ui colors, sizes, and behaviors
+4. **Type Safety**: Full TypeScript coverage with proper generics
+5. **Accessibility First**: Proper ARIA attributes and keyboard navigation
+
+## 🚨 MANDATORY: Code Quality Requirements
+
+**AFTER EVERY CODE CHANGE:**
+
+1. ✅ **Run lint**: `npm run lint`
+2. ✅ **Fix all errors**: Must have 0 errors, 0 warnings
+3. ✅ **Verify build**: `npm run build` (for major changes)
+4. ✅ **Never finish with errors**: Task incomplete until lint passes
+
+**See `.cursor/rules/lint-verification.mdc` for detailed requirements.**
+
+## Component Count
+30 components implemented + ThemeSwitcher (see docs/COMPONENT_GUIDE.md for full list)
+
+## Theme System
+- 2 themes: Light (default), Dark
+- 6 color schemes: Default, Blue, Green, Purple, Orange, Rose
+- Fast animations: 150ms transitions
+- localStorage persistence

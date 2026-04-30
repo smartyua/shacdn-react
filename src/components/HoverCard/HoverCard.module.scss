@@ -12,7 +12,7 @@
 .content {
   position: absolute;
   top: calc(100% + $spacing-xs);
-  z-index: 50;
+  z-index: $z-floating;
   width: 20rem;
   padding: $spacing-md;
   border-radius: $radius-md;

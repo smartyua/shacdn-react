@@ -2,7 +2,7 @@
 
 .card {
   border-radius: $radius-lg;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background-color: $card;
   color: $card-foreground;
 }
@@ -19,7 +19,7 @@
   font-size: $font-size-lg;
   font-weight: 600;
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: $tracking-tight;
   margin: 0;
   color: $foreground;
 }

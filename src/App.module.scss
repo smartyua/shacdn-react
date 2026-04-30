@@ -24,9 +24,9 @@
   overscroll-behavior: contain;
   background-color: $card;
   border-right: none;
-  border-bottom: 1px solid $border;
+  border-bottom: $border-width solid $border;
   padding: 1rem 0;
-  z-index: 10;
+  z-index: $z-docked;
 
   h3 {
     padding: 0 1rem;
@@ -43,7 +43,7 @@
     height: 100vh;
     width: 250px;
     max-height: none;
-    border-right: 1px solid $border;
+    border-right: $border-width solid $border;
     border-bottom: none;
     padding: 2rem 0;
     overflow-y: auto;
@@ -63,19 +63,23 @@
 }
 
 .navItem {
+  margin: 0 $spacing-sm;
+
   a {
     display: block;
-    padding: 0.5rem 1.5rem;
+    padding: $spacing-sm $spacing-lg;
     color: $muted-foreground;
     text-decoration: none;
     font-size: $font-size-sm;
-    transition: all $transition-fast;
-    border-left: 2px solid transparent;
+    letter-spacing: $tracking-ui;
+    transition: background-color $transition-fast, color $transition-fast;
+    border-left: $border-width solid transparent;
+    border-radius: $radius-md;
 
     &:hover {
       color: $foreground;
       background-color: $accent;
-      border-left-color: $primary;
+      border-left-color: transparent;
     }
   }
 
@@ -110,7 +114,7 @@
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
     margin-bottom: 0.75rem;
-    letter-spacing: -0.025em;
+    letter-spacing: $tracking-tight;
   }
 
   p {
@@ -129,7 +133,7 @@
   position: fixed;
   bottom: clamp(0.75rem, 3vw, 2rem);
   right: clamp(0.75rem, 3vw, 2rem);
-  z-index: 100;
+  z-index: $z-sticky;
 }
 
 .section {
@@ -141,7 +145,8 @@
     font-weight: 600;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid $border;
+    border-bottom: $border-width solid $border;
+    letter-spacing: $tracking-tight;
   }
 
   h3 {

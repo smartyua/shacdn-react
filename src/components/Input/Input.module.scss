@@ -4,7 +4,7 @@
   display: flex;
   width: 100%;
   border-radius: $radius-md;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   background-color: $background;
   padding: 0 $control-px;
   font-size: $font-size-sm;
@@ -19,8 +19,8 @@
   }
 
   &:focus {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $border-width solid $ring;
+    outline-offset: 1px;
   }
 
   &:disabled {

@@ -46,7 +46,7 @@
   position: absolute;
   top: calc(100% + $spacing-xs);
   left: 0;
-  z-index: 50;
+  z-index: $z-floating;
   min-width: 12rem;
   padding: $spacing-xs;
   border-radius: $radius-md;

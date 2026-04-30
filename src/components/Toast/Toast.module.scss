@@ -2,7 +2,7 @@
 
 .toastViewport {
   position: fixed;
-  z-index: 100;
+  z-index: $z-toast;
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;

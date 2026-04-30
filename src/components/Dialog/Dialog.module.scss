@@ -3,7 +3,7 @@
 .dialogRoot {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: $z-overlay-backdrop;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@
 .dialogOverlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: $z-overlay-backdrop;
   background-color: rgba(0, 0, 0, 0.5);
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -30,11 +30,11 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  z-index: 51;
+  z-index: $z-overlay;
   transform: translate(-50%, -50%);
   background: $background;
-  border: 1px solid $border;
-  border-radius: $radius-md;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
   padding: $spacing-lg;
   max-width: 32rem;
   width: 90vw;
@@ -76,8 +76,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $border-width solid $ring;
+    outline-offset: 1px;
   }
 }
 
@@ -104,6 +104,7 @@
   font-size: $font-size-lg;
   font-weight: 600;
   line-height: 1;
+  letter-spacing: $tracking-tight;
   color: $foreground;
   margin: 0;
 }

@@ -2,7 +2,7 @@
 
 .tooltipContent {
   position: fixed;
-  z-index: 50;
+  z-index: $z-tooltip;
   max-width: 300px;
   padding: 0.375rem 0.75rem;
   background-color: $foreground;

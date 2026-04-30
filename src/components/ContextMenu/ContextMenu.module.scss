@@ -10,7 +10,7 @@
 
 .content {
   position: fixed;
-  z-index: 100;
+  z-index: $z-floating;
   min-width: 10rem;
   padding: $spacing-xs;
   border-radius: $radius-md;

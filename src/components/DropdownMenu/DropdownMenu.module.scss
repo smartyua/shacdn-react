@@ -12,12 +12,13 @@
   gap: $spacing-xs;
   font-size: $font-size-sm;
   font-weight: 500;
+  letter-spacing: $tracking-ui;
   min-height: $control-h-md;
   padding: 0 $control-px;
   border-radius: $radius-md;
   background: transparent;
   color: $foreground;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   cursor: pointer;
   transition: all $transition-fast;
 
@@ -27,17 +28,17 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $border-width solid $ring;
+    outline-offset: 1px;
   }
 }
 
 .dropdownMenuContent {
   position: absolute;
-  z-index: 50;
+  z-index: $z-floating;
   min-width: 12rem;
   background: $background;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   border-radius: $radius-md;
   padding: $spacing-xs;
   animation: slideDown 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -84,8 +85,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $border-width solid $ring;
+    outline-offset: 1px;
   }
 
   &.disabled {

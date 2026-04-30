@@ -1,0 +1,74 @@
+@use '../../styles/variables.scss' as *;
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.25rem;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $muted;
+}
+
+.menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $control-h-sm;
+  padding: 0 $spacing-sm;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-family: $font-sans;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $foreground;
+  cursor: pointer;
+
+  &:hover,
+  &[aria-expanded='true'] {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.content {
+  position: absolute;
+  top: calc(100% + $spacing-xs);
+  left: 0;
+  z-index: 50;
+  min-width: 12rem;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $popover;
+  color: $popover-foreground;
+}
+
+.item {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+
+  &:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+}
+
+.separator {
+  height: 1px;
+  background: $border;
+  margin: $spacing-xs 0;
+}

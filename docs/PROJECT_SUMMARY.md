@@ -1,5 +1,7 @@
 # Project Summary: shadcn/ui React Components
 
+**Официальный перечень компонентов и матрица «задача → контроль»:** [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md) (**50+** примитивов, соответствие размерам shadcn h-8 / h-9 / h-10).
+
 ## What's Implemented
 
 ### Components (23 total)

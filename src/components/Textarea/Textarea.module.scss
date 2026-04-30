@@ -3,11 +3,11 @@
 .textarea {
   display: flex;
   width: 100%;
-  min-height: 5rem;
+  min-height: 3.75rem;
   border-radius: $radius-md;
   border: 1px solid $input;
   background-color: $background;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem $control-px;
   font-size: $font-size-sm;
   font-family: $font-sans;
   color: $foreground;

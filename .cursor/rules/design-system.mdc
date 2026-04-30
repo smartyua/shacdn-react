@@ -27,6 +27,12 @@ $ring: hsl(222.2, 84%, 4.9%);
 - `$spacing-lg`: 1.5rem (24px)
 - `$spacing-xl`: 2rem (32px)
 
+## Control heights (shadcn / Tailwind parity)
+- `$control-h-sm`: 2rem (32px, h-8)
+- `$control-h-md`: 2.25rem (36px, h-9 — default button/input)
+- `$control-h-lg`: 2.5rem (40px, h-10)
+- `$control-px`: 0.75rem (horizontal padding, px-3)
+
 ## Border Radius
 - `$radius-xs` to `$radius-xl` (0.25rem to 1rem)
 

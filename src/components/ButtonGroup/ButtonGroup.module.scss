@@ -1,0 +1,44 @@
+@use '../../styles/variables.scss' as *;
+
+.group {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: $radius-md;
+  border: 1px solid $input;
+  background: $background;
+  overflow: hidden;
+
+  & > :global(button),
+  & > :global(a) {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    position: relative;
+
+    &:not(:first-child) {
+      border-left: 1px solid $input;
+    }
+
+    &:focus-visible {
+      z-index: 1;
+    }
+  }
+}
+
+.text {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 $spacing-sm;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  background: $muted;
+  border-left: 1px solid $input;
+  user-select: none;
+}
+
+.separator {
+  align-self: stretch;
+  width: 1px;
+  min-height: $control-h-md;
+  background: $input;
+}

@@ -1,0 +1,52 @@
+@use '../../styles/variables.scss' as *;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: $radius-lg;
+  border: 1px solid $border;
+  background: $card;
+  overflow: hidden;
+}
+
+.item {
+  border-bottom: 1px solid $border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md;
+  font-weight: 500;
+
+  &:hover {
+    background: $accent;
+  }
+}
+
+.triggerLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.chevron {
+  flex-shrink: 0;
+  transition: transform $transition-fast;
+  color: $muted-foreground;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.content {
+  padding: 0 $spacing-md $spacing-md;
+  color: $foreground;
+}

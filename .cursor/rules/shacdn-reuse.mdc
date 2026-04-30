@@ -1,0 +1,14 @@
+---
+description: Reusing shacdn design system and components in other repositories
+alwaysApply: false
+---
+
+# shacdn — reuse outside this repo
+
+When the user ports or consumes **shacdn** UI primitives in another React + Vite (or SPA) project:
+
+1. Read **`docs/COMPONENTS_AI_REFERENCE.md`** to pick controls by task, then **`docs/STYLE_GUIDE.md`** — tokens, `Button` with `href`, copy checklist.
+2. Copy **`src/styles/globals.scss`** and **`variables.scss`** (or replicate CSS variables there) before individual components so themes stay aligned.
+3. Prefer **SCSS modules** per component folder; avoid hardcoded colors where `$primary`, `$muted-foreground`, etc. exist.
+4. For landing/marketing layouts, mirror **`src/screens/SessyLanding/`** as a composition reference (Cards, Table, Badge, separator blocks).
+5. After edits in the consumer project: run **`npm run lint`** and **`npm run build`** per that project’s scripts.

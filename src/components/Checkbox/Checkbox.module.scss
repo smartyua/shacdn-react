@@ -16,7 +16,7 @@
   position: relative;
 
   &:hover {
-    background-color: hsl(210, 40%, 96%);
+    background-color: $accent;
   }
 
   &:focus-visible {

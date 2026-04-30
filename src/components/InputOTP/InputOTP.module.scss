@@ -1,0 +1,29 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: flex;
+  gap: $spacing-xs;
+  align-items: center;
+}
+
+.slot {
+  width: 2.25rem;
+  height: $control-h-md;
+  text-align: center;
+  border-radius: $radius-md;
+  border: 1px solid $input;
+  background: $background;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+
+  &:focus {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

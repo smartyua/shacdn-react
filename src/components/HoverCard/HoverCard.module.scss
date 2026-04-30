@@ -1,0 +1,35 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  display: inline-flex;
+}
+
+.content {
+  position: absolute;
+  top: calc(100% + $spacing-xs);
+  z-index: 50;
+  width: 20rem;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $popover;
+  color: $popover-foreground;
+}
+
+.alignStart {
+  left: 0;
+}
+
+.alignCenter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.alignEnd {
+  right: 0;
+}

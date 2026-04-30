@@ -1,0 +1,46 @@
+---
+description: Mandatory arrow functions in TypeScript and TSX (no function declarations for new or touched code)
+globs: "**/*.{ts,tsx}"
+alwaysApply: true
+---
+
+# Arrow functions (strict)
+
+## Rule
+
+Use **arrow function expressions** bound to `const` / `let`. Do **not** add or keep **`function` declarations** (`function name() {}`, `export function Name() {}`) in code you write or materially edit.
+
+## Do
+
+```ts
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => { ... });
+const usePopover = (): PopoverCtx => { ... };
+const formatLabel = (s: string) => s.trim();
+export const ShadcnHome = ({ onOpenShowcase }: ShadcnHomeProps) => { ... };
+const App = () => { ... };
+export default App;
+```
+
+## Do not
+
+```ts
+export function Button(props: ButtonProps) { ... }
+function usePopover(): PopoverCtx { ... }
+function App() { ... }
+export default function App() { ... }
+```
+
+## Scope
+
+- Applies to **components**, **hooks** (`useX`), **helpers**, **screen modules**, and **App** entry.
+- **`forwardRef` / `memo`**: inner implementation must be an **arrow function** (already the common pattern here).
+- **`displayName`**: set on the identifier after `forwardRef`, unchanged.
+
+## Exceptions (do not “fix” into arrows)
+
+- Generated or third-party code you must not rewrite.
+- **`declare function`** / ambient declarations required by TypeScript.
+
+## Legacy code
+
+Files that still use `export function` should be migrated to **`export const … = (`** when you are **already changing that file** for another task; avoid blanket repo-wide rewrites unless the user asks.

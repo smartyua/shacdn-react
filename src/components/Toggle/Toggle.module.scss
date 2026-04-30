@@ -1,0 +1,76 @@
+@use '../../styles/variables.scss' as *;
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-family: $font-sans;
+  transition: all $transition-fast;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: $foreground;
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.variantDefault {
+  background: transparent;
+
+  &[data-state='on'] {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:hover:not(:disabled) {
+    background: $muted;
+  }
+
+  &[data-state='on']:hover:not(:disabled) {
+    background: $accent;
+    opacity: 0.95;
+  }
+}
+
+.variantOutline {
+  border-color: $border;
+  background: $background;
+
+  &[data-state='on'] {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:hover:not(:disabled) {
+    background: $accent;
+    color: $accent-foreground;
+  }
+}
+
+.sizeDefault {
+  height: $control-h-md;
+  padding: 0 $control-px;
+}
+
+.sizeSm {
+  height: $control-h-sm;
+  padding: 0 0.625rem;
+  font-size: $font-size-xs;
+}
+
+.sizeLg {
+  height: $control-h-lg;
+  padding: 0 1.25rem;
+}

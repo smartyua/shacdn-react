@@ -1,5 +1,7 @@
 # Component Guide
 
+Руководство по API примитивов. **Полный каталог и матрица «задача → контрол»:** **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** (50+ компонентов, паритет с [shadcn/ui](https://ui.shadcn.com)). Перенос дизайн-системы: **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** · экран-референс `src/screens/SessyLanding/`.
+
 ## Using Existing Components
 
 ### Button
@@ -32,6 +34,9 @@ import { Button } from './components/Button/Button';
 // With events
 <Button onClick={() => alert('Clicked!')}>Click me</Button>
 <Button disabled>Disabled</Button>
+
+// As anchor (same styles; renders <a>)
+<Button href="https://example.com" target="_blank" rel="noopener noreferrer">Open site</Button>
 ```
 
 ### Input
@@ -443,6 +448,339 @@ import { Skeleton } from './components/Skeleton/Skeleton';
  <Skeleton style={{ width: '80%', height: '20px', marginBottom: '0.5rem' }} />
  <Skeleton style={{ width: '60%', height: '20px' }} />
 </div>
+```
+
+### Table
+
+```tsx
+import {
+ Table,
+ TableBody,
+ TableCell,
+ TableHead,
+ TableHeader,
+ TableRow,
+} from './components/Table/Table';
+
+<Table>
+ <TableHeader>
+  <TableRow>
+   <TableHead>Name</TableHead>
+   <TableHead>Status</TableHead>
+  </TableRow>
+ </TableHeader>
+ <TableBody>
+  <TableRow>
+   <TableCell>Ada</TableCell>
+   <TableCell>Active</TableCell>
+  </TableRow>
+ </TableBody>
+</Table>
+```
+
+### Breadcrumb
+
+```tsx
+import {
+ Breadcrumb,
+ BreadcrumbItem,
+ BreadcrumbLink,
+ BreadcrumbList,
+ BreadcrumbPage,
+ BreadcrumbSeparator,
+} from './components/Breadcrumb/Breadcrumb';
+
+<Breadcrumb>
+ <BreadcrumbList>
+  <BreadcrumbItem>
+   <BreadcrumbLink href="/">Home</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbSeparator />
+  <BreadcrumbItem>
+   <BreadcrumbPage>Current</BreadcrumbPage>
+  </BreadcrumbItem>
+ </BreadcrumbList>
+</Breadcrumb>
+```
+
+### Progress
+
+```tsx
+import { Progress } from './components/Progress/Progress';
+
+<Progress value={33} />
+<Progress value={66} max={100} />
+```
+
+### Kbd
+
+```tsx
+import { Kbd } from './components/Kbd/Kbd';
+
+<span>
+ Press <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>
+</span>
+```
+
+### Switch
+
+```tsx
+import { Switch } from './components/Switch/Switch';
+
+<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+ <Switch id="notifications" />
+ <label htmlFor="notifications">Notifications</label>
+</div>
+```
+
+### Select
+
+```tsx
+import { Select } from './components/Select/Select';
+
+<Select defaultValue="">
+ <option value="" disabled>
+  Select option
+ </option>
+ <option value="a">Option A</option>
+ <option value="b">Option B</option>
+</Select>
+```
+
+### Pagination
+
+```tsx
+import {
+ Pagination,
+ PaginationButton,
+ PaginationItem,
+ PaginationLink,
+ PaginationList,
+} from './components/Pagination/Pagination';
+
+<Pagination>
+ <PaginationList>
+  <PaginationItem>
+   <PaginationButton direction="previous" />
+  </PaginationItem>
+  <PaginationItem>
+   <PaginationLink href="?page=1" isActive>
+    1
+   </PaginationLink>
+  </PaginationItem>
+  <PaginationItem>
+   <PaginationButton direction="next" />
+  </PaginationItem>
+ </PaginationList>
+</Pagination>
+```
+
+### Dialog
+
+```tsx
+import {
+ Dialog,
+ DialogContent,
+ DialogDescription,
+ DialogFooter,
+ DialogHeader,
+ DialogTitle,
+} from './components/Dialog/Dialog';
+import { Button } from './components/Button/Button';
+
+const [open, setOpen] = useState(false);
+
+<>
+ <Button onClick={() => setOpen(true)}>Open</Button>
+ <Dialog open={open} onOpenChange={setOpen}>
+  <DialogContent onClose={() => setOpen(false)}>
+   <DialogHeader>
+    <DialogTitle>Title</DialogTitle>
+    <DialogDescription>Description</DialogDescription>
+   </DialogHeader>
+   <DialogFooter>
+    <Button onClick={() => setOpen(false)}>Done</Button>
+   </DialogFooter>
+  </DialogContent>
+ </Dialog>
+</>
+```
+
+### Modal (modal window)
+
+Те же пропсы и поведение, что у `Dialog`; при переносе в другой проект держите рядом папки `Modal/` и `Dialog/` (Modal импортирует Dialog).
+
+```tsx
+import {
+ Modal,
+ ModalContent,
+ ModalDescription,
+ ModalFooter,
+ ModalHeader,
+ ModalTitle,
+} from './components/Modal/Modal';
+import { Button } from './components/Button/Button';
+
+const [open, setOpen] = useState(false);
+
+<>
+ <Button onClick={() => setOpen(true)}>Open modal</Button>
+ <Modal open={open} onOpenChange={setOpen}>
+  <ModalContent onClose={() => setOpen(false)}>
+   <ModalHeader>
+    <ModalTitle>Modal title</ModalTitle>
+    <ModalDescription>Optional description.</ModalDescription>
+   </ModalHeader>
+   <ModalFooter>
+    <Button onClick={() => setOpen(false)}>Done</Button>
+   </ModalFooter>
+  </ModalContent>
+ </Modal>
+</>
+```
+
+### AlertDialog
+
+```tsx
+import {
+ AlertDialog,
+ AlertDialogAction,
+ AlertDialogCancel,
+ AlertDialogContent,
+ AlertDialogDescription,
+ AlertDialogFooter,
+ AlertDialogHeader,
+ AlertDialogTitle,
+} from './components/AlertDialog/AlertDialog';
+
+const [open, setOpen] = useState(false);
+
+<AlertDialog open={open} onOpenChange={setOpen}>
+ <AlertDialogContent onClose={() => setOpen(false)}>
+  <AlertDialogHeader>
+   <AlertDialogTitle>Confirm</AlertDialogTitle>
+   <AlertDialogDescription>This cannot be undone.</AlertDialogDescription>
+  </AlertDialogHeader>
+  <AlertDialogFooter>
+   <AlertDialogCancel onClick={() => setOpen(false)}>Cancel</AlertDialogCancel>
+   <AlertDialogAction onClick={() => setOpen(false)}>Continue</AlertDialogAction>
+  </AlertDialogFooter>
+ </AlertDialogContent>
+</AlertDialog>
+```
+
+### Drawer
+
+```tsx
+import {
+ Drawer,
+ DrawerContent,
+ DrawerDescription,
+ DrawerFooter,
+ DrawerHeader,
+ DrawerTitle,
+} from './components/Drawer/Drawer';
+import { Button } from './components/Button/Button';
+
+const [open, setOpen] = useState(false);
+
+<Drawer open={open} onOpenChange={setOpen} side="right">
+ <DrawerContent onClose={() => setOpen(false)}>
+  <DrawerHeader>
+   <DrawerTitle>Panel</DrawerTitle>
+   <DrawerDescription>Secondary content</DrawerDescription>
+  </DrawerHeader>
+  <DrawerFooter>
+   <Button onClick={() => setOpen(false)}>Close</Button>
+  </DrawerFooter>
+ </DrawerContent>
+</Drawer>
+```
+
+### DropdownMenu
+
+```tsx
+import {
+ DropdownMenu,
+ DropdownMenuContent,
+ DropdownMenuItem,
+ DropdownMenuLabel,
+ DropdownMenuSeparator,
+ DropdownMenuTrigger,
+} from './components/DropdownMenu/DropdownMenu';
+
+<DropdownMenu>
+ <DropdownMenuTrigger>Open menu</DropdownMenuTrigger>
+ <DropdownMenuContent>
+  <DropdownMenuLabel>Account</DropdownMenuLabel>
+  <DropdownMenuSeparator />
+  <DropdownMenuItem>Profile</DropdownMenuItem>
+  <DropdownMenuItem>Logout</DropdownMenuItem>
+ </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### InputGroup
+
+```tsx
+import { Input } from './components/Input/Input';
+import { InputGroup, InputGroupAddon } from './components/InputGroup/InputGroup';
+
+<InputGroup>
+ <InputGroupAddon>https://</InputGroupAddon>
+ <Input placeholder="example.com" />
+</InputGroup>
+```
+
+### DatePicker
+
+```tsx
+import { DatePicker } from './components/DatePicker/DatePicker';
+
+<DatePicker label="Pick a date" />
+<DatePicker defaultValue={new Date()} onValueChange={(d) => console.log(d)} />
+```
+
+### Toast
+
+```tsx
+import { ToastProvider, useToast } from './components/Toast/Toast';
+
+// Root (e.g. App.tsx): wrap the app
+function App() {
+ return (
+  <ToastProvider>
+   <YourApp />
+  </ToastProvider>
+ );
+}
+
+// Any child
+function SaveButton() {
+ const { addToast } = useToast();
+ return (
+  <button
+   type="button"
+   onClick={() =>
+    addToast({
+     title: 'Saved',
+     description: 'Changes applied',
+     position: 'bottom-right',
+    })
+   }
+  >
+   Save
+  </button>
+ );
+}
+```
+
+### ThemeSwitcher
+
+```tsx
+import { ThemeSwitcher } from './components/ThemeSwitcher/ThemeSwitcher';
+
+<ThemeSwitcher />
 ```
 
 ---

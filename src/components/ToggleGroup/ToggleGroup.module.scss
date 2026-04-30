@@ -1,0 +1,22 @@
+@use '../../styles/variables.scss' as *;
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $muted;
+  padding: 1px;
+}
+
+.group > * {
+  border-radius: calc($radius-md - 2px);
+  box-shadow: none;
+  border: none !important;
+}
+
+.group > *[data-state='off']:hover:not(:disabled) {
+  background: $background;
+}

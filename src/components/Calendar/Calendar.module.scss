@@ -67,6 +67,11 @@
   gap: 0.25rem;
 }
 
+.dayPlaceholder {
+  aspect-ratio: 1;
+  min-width: 2rem;
+}
+
 .day {
   aspect-ratio: 1;
   display: flex;
@@ -97,8 +102,8 @@
   background-color: $primary;
   color: $primary-foreground;
 
-  &:hover {
-    background-color: hsl(222.2, 47.4%, 9%);
+  &:hover:not(:disabled) {
+    opacity: 0.92;
   }
 }
 

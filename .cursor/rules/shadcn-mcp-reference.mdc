@@ -1,0 +1,24 @@
+---
+description: Auditing UI against the official shadcn/ui registry via MCP (https://ui.shadcn.com/docs/mcp)
+alwaysApply: false
+---
+
+# shadcn/ui MCP — reference for this repo
+
+This project is configured per [shadcn MCP docs](https://ui.shadcn.com/docs/mcp): **`.cursor/mcp.json`** runs `npx shadcn@latest mcp`. Enable the **shadcn** server in Cursor settings if tools are unavailable.
+
+## When to use it
+
+- Compare **behavior, structure, variants, and copy patterns** of a local primitive to the registry.
+- Pull **example/demo code** from the registry for parity checks (not for pasting Tailwind into this SCSS codebase wholesale).
+
+## MCP tools (map names from the shadcn server)
+
+- **`view_items_in_registries`** — pass `items` like `['@shadcn/button', '@shadcn/card']` to load registry metadata and source for a component.
+- **`get_item_examples_from_registries`** — pass `registries: ['@shadcn']` and a `query` (e.g. `button-demo`, `card example`) for full example implementations.
+- **`get_audit_checklist`** — quick post-change checklist (imports, lint, TypeScript, etc.).
+- **`get_add_command_for_items`** — official CLI add commands; **do not blindly run `shadcn add` here** — this repo uses **SCSS modules**, not the default Tailwind installation. Use the command output only if the user explicitly wants CLI-driven installs in a compatible setup.
+
+## Mapping to shacdn
+
+After pulling registry source or examples, translate to **tokens in `src/styles/variables.scss`** and **component `*.module.scss`**, and keep **accessibility** (roles, labels, keyboard) aligned with the reference implementation.

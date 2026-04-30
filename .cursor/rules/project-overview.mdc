@@ -41,7 +41,7 @@ This is a React component library based on shadcn/ui design system, using SCSS m
 **See `.cursor/rules/lint-verification.mdc` for detailed requirements.**
 
 ## Component Count
-30 components implemented + ThemeSwitcher (see docs/COMPONENT_GUIDE.md for full list)
+50+ UI components implemented + ThemeSwitcher (see docs/COMPONENT_GUIDE.md and COMPONENTS_AI_REFERENCE.md for full list)
 
 ## Theme System
 - 2 themes: Light (default), Dark

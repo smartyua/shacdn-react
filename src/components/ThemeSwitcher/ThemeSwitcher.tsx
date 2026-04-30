@@ -3,13 +3,15 @@ import styles from './ThemeSwitcher.module.scss';
 
 export interface ThemeSwitcherProps {
   className?: string;
+  /** Меньшие кнопки и отступы — для компактной шапки */
+  variant?: 'default' | 'compact';
 }
 
 type Theme = 'light' | 'dark';
 type ColorScheme = 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'rose';
 
 export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
-  ({ className = '' }, ref) => {
+  ({ className = '', variant = 'default' }, ref) => {
     const [theme, setTheme] = useState<Theme>(() => {
       return (localStorage.getItem('theme') as Theme) || 'light';
     });
@@ -73,7 +75,10 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
     };
 
     return (
-      <div ref={ref} className={`${styles.themeSwitcher} ${className}`}>
+      <div
+        ref={ref}
+        className={`${styles.themeSwitcher}${variant === 'compact' ? ` ${styles.compact}` : ''} ${className}`}
+      >
         <button
           className={styles.themeToggle}
           onClick={toggleTheme}

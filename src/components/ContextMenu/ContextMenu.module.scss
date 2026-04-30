@@ -1,0 +1,52 @@
+@use '../../styles/variables.scss' as *;
+
+.wrapper {
+  display: contents;
+}
+
+.trigger {
+  display: block;
+}
+
+.content {
+  position: fixed;
+  z-index: 100;
+  min-width: 10rem;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  background: $popover;
+  color: $popover-foreground;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover:not(.itemDisabled) {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.separator {
+  height: 1px;
+  background: $border;
+  margin: $spacing-xs 0;
+}

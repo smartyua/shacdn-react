@@ -1,0 +1,49 @@
+@use '../../styles/variables.scss' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.description {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.error {
+  font-size: $font-size-xs;
+  color: $destructive;
+}
+
+.group {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.oriVertical {
+  flex-direction: column;
+}
+
+.oriHorizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.oriResponsive {
+  flex-direction: column;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+}

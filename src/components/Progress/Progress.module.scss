@@ -2,10 +2,10 @@
 
 .progress {
   position: relative;
-  height: 1rem;
+  height: 0.5rem;
   width: 100%;
   overflow: hidden;
-  border-radius: $radius-xl;
+  border-radius: 9999px;
   background-color: $secondary;
 }
 

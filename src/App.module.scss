@@ -2,27 +2,57 @@
 
 .wrapper {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+
+  @media (min-width: 901px) {
+    display: block;
+    padding-left: 250px;
+    box-sizing: border-box;
+  }
 }
 
 .navigation {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 250px;
-  background-color: $card;
-  border-right: 1px solid $border;
-  padding: 2rem 0;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  max-height: min(40vh, 260px);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: $card;
+  border-right: none;
+  border-bottom: 1px solid $border;
+  padding: 1rem 0;
   z-index: 10;
 
   h3 {
-    padding: 0 1.5rem;
-    margin-bottom: 1rem;
-    font-size: $font-size-base;
+    padding: 0 1rem;
+    margin-bottom: 0.75rem;
+    font-size: $font-size-sm;
     font-weight: 600;
     color: $foreground;
+  }
+
+  @media (min-width: 901px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    max-height: none;
+    border-right: 1px solid $border;
+    border-bottom: none;
+    padding: 2rem 0;
+    overflow-y: auto;
+
+    h3 {
+      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+      font-size: $font-size-base;
+    }
   }
 }
 
@@ -59,39 +89,52 @@
 
 .container {
   flex: 1;
-  margin-left: 250px;
-  max-width: 1000px;
+  width: 100%;
+  max-width: min(1000px, 100%);
+  margin-left: auto;
   margin-right: auto;
-  padding: 3rem 3rem 3rem 4rem;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  box-sizing: border-box;
+
+  @media (min-width: 901px) {
+    max-width: min(1000px, calc(100vw - 250px - 2 * clamp(1.25rem, 4vw, 3rem)));
+    padding: 3rem clamp(1.5rem, 4vw, 4rem);
+  }
 }
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
-  
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+
   h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
     margin-bottom: 0.75rem;
     letter-spacing: -0.025em;
   }
-  
+
   p {
     font-size: $font-size-lg;
     color: $muted-foreground;
+    margin: 0;
   }
+}
+
+.headerInner {
+  max-width: 42rem;
+  margin: 0 auto;
 }
 
 .backToTop {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: clamp(0.75rem, 3vw, 2rem);
+  right: clamp(0.75rem, 3vw, 2rem);
   z-index: 100;
 }
 
 .section {
   margin-bottom: 4rem;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: 3.75rem;
   
   h2 {
     font-size: 1.875rem;

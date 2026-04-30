@@ -86,45 +86,45 @@
   }
 }
 
-// Sizes
+// Sizes — match shadcn button (h-7 / h-8 / h-9 / h-10)
 .xs {
   height: 1.75rem;
-  padding: 0 0.5rem;
+  padding: 0 0.625rem;
   font-size: $font-size-xs;
 }
 
 .sm {
-  height: 2.25rem;
-  padding: 0 0.75rem;
-  font-size: $font-size-sm;
+  height: $control-h-sm;
+  padding: 0 $control-px;
+  font-size: $font-size-xs;
 }
 
 .md {
-  height: 2.5rem;
+  height: $control-h-md;
   padding: 0 1rem;
   font-size: $font-size-sm;
 }
 
 .lg {
-  height: 2.75rem;
-  padding: 0 1.5rem;
-  font-size: $font-size-base;
+  height: $control-h-lg;
+  padding: 0 2rem;
+  font-size: $font-size-sm;
 }
 
 .icon {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: $control-h-md;
+  width: $control-h-md;
   padding: 0;
 }
 
 .iconSm {
-  height: 2.25rem;
-  width: 2.25rem;
+  height: $control-h-sm;
+  width: $control-h-sm;
   padding: 0;
 }
 
 .iconLg {
-  height: 2.75rem;
-  width: 2.75rem;
+  height: $control-h-lg;
+  width: $control-h-lg;
   padding: 0;
 }

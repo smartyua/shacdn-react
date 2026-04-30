@@ -1,0 +1,34 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  overflow: hidden;
+}
+
+.viewport {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: inherit;
+  height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: $border transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $border;
+    border-radius: 9999px;
+  }
+}
+
+.horizontal .viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.both .viewport {
+  overflow: auto;
+}

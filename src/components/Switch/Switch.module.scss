@@ -3,8 +3,8 @@
 .switch {
   position: relative;
   display: inline-flex;
-  width: 2.75rem;
-  height: 1.5rem;
+  width: $control-h-md;
+  height: 1.25rem;
   flex-shrink: 0;
   cursor: pointer;
   appearance: none;
@@ -37,32 +37,31 @@
     position: absolute;
     top: 0.125rem;
     left: 0.125rem;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 9999px;
     background-color: $background;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     transition: transform $transition-base;
     pointer-events: none;
   }
 
   &:checked::after {
-    transform: translateX(1.25rem);
+    transform: translateX(1rem);
   }
 }
 
 .sm {
-  width: 2.25rem;
-  height: 1.25rem;
+  width: $control-h-sm;
+  height: 1rem;
 
   &::after {
     top: 0.125rem;
     left: 0.125rem;
-    width: 1rem;
-    height: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
   }
 
   &:checked::after {
-    transform: translateX(1rem);
+    transform: translateX(0.75rem);
   }
 }

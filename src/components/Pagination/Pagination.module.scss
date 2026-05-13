@@ -29,7 +29,7 @@
   height: $control-h-md;
   padding: 0 0.5rem;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background-color: $background;
   color: $foreground;
   font-size: $font-size-sm;

@@ -39,7 +39,7 @@
   align-items: flex-start;
   gap: $spacing-md;
   background: $background;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   border-radius: $radius-md;
   padding: $spacing-md $spacing-lg;
   pointer-events: auto;

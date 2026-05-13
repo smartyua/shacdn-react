@@ -28,8 +28,8 @@
   }
 
   &:focus-visible {
-    outline: $border-width solid $ring;
-    outline-offset: 1px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 }
 
@@ -85,8 +85,8 @@
   }
 
   &:focus-visible {
-    outline: $border-width solid $ring;
-    outline-offset: 1px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &.disabled {

@@ -4,11 +4,11 @@ React component library based on shadcn/ui design using SCSS modules without Tai
 
 ## Overview
 
-Professional-grade React library aligned with [shadcn/ui](https://ui.shadcn.com): **50+ UI primitives** (plus `ThemeSwitcher` for demos), **control heights** matching Tailwind **h-8 / h-9 / h-10** (36px default button/input). Pure SCSS modules (no Tailwind), strict TypeScript.
+Professional-grade React library aligned with shadcn/ui: **50+ UI primitives** (plus `ThemeSwitcher` for demos), **control heights** matching Tailwind **h-8 / h-9 / h-10** (36px default button/input). Pure SCSS modules (no Tailwind), strict TypeScript.
 
 ## Features
 
-- **50+ Components** - Coverage of core shadcn registry primitives (see [COMPONENTS_AI_REFERENCE.md](./docs/COMPONENTS_AI_REFERENCE.md))
+- **50+ Components** - Coverage of core shadcn registry primitives
 - **shadcn/ui Design** - Strict adherence to official design system
 - **Pure SCSS** - No Tailwind dependency, full styling control
 - **TypeScript** - 100% type coverage
@@ -32,7 +32,6 @@ Open in your browser: **http://localhost:5173**
 
 ### What You'll See:
 - **Live Interactive Demo** - All components with working examples
-- **Sessy-style landing** — use the header button «Страница в стиле Sessy» (marketing layout inspired by [sessy.do](https://sessy.do/))
 - **Side Navigation** - Quick jump to any component section
 - **Real Components** - Click buttons, open dialogs, use sliders
 - **All Variants** - Sizes, colors, states, disabled options
@@ -51,7 +50,7 @@ npm run preview # Preview production build
 
 ## Component catalog
 
-Полный перечень папок в `src/components/`, матрица «задача → контроль» и заметки о **chart / carousel / command / sidebar** (внешние пакеты): **[docs/COMPONENTS_AI_REFERENCE.md](./docs/COMPONENTS_AI_REFERENCE.md)**.
+Полный перечень папок в `src/components/`, матрица «задача → контроль» и заметки о **chart / carousel / command / sidebar** (внешние пакеты): **docs/COMPONENTS_AI_REFERENCE.md**.
 
 Кратко добавлено к базовому набору: **Accordion**, **AspectRatio**, **ButtonGroup**, **Calendar**, **Collapsible**, **Combobox**, **ContextMenu**, **Empty**, **Field**, **Form**, **HoverCard**, **InputOTP**, **Item**, **Menubar**, **Popover**, **ScrollArea**, **Sheet** (алиас Drawer), **Toggle**, **ToggleGroup** и др.; **Modal** остаётся алиасом **Dialog**.
 
@@ -103,20 +102,20 @@ $transition-fast, $transition-base
 
 ### Complete Guides
 
-- **[Components AI reference](./docs/COMPONENTS_AI_REFERENCE.md)** — 32 компонента: задача → контрол (для кросс-проекта и AI)
-- **[Component Guide](./docs/COMPONENT_GUIDE.md)** — примеры кода для всех компонентов
-- **[Style guide (reuse)](./docs/STYLE_GUIDE.md)** - Tokens, patterns, transferring UI to other projects
-- **[Project Summary](./docs/PROJECT_SUMMARY.md)** - Architecture and features
-- **[Complete Audit](./docs/COMPLETE_AUDIT_FINAL.md)** - Quality assessment
-- **[New Components](./docs/NEW_COMPONENTS_IMPLEMENTATION.md)** - Latest additions
+- **docs/COMPONENTS_AI_REFERENCE.md** — 32 компонента: задача → контрол
+- **docs/COMPONENT_GUIDE.md** — примеры кода для всех компонентов
+- **docs/STYLE_GUIDE.md** - Tokens, patterns, transferring UI to other projects
+- **docs/PROJECT_SUMMARY.md** - Architecture and features
+- **docs/COMPLETE_AUDIT_FINAL.md** - Quality assessment
+- **docs/NEW_COMPONENTS_IMPLEMENTATION.md** - Latest additions
 
 ### Implementation Details
 
-- **[Alert Redesign](./docs/ALERT_REDESIGN.md)** - Alert component improvements
-- **[Avatar Implementation](./docs/AVATAR_IMPLEMENTATION.md)** - Avatar suite
-- **[InputGroup Fix](./docs/INPUTGROUP_FINAL_FIX.md)** - Seamless borders
-- **[Switch Review](./docs/SWITCH_REVIEW.md)** - Perfect design match
-- **[MCP Analysis](./docs/MCP_SHADCN_ANALYSIS.md)** - shadcn/ui integration
+- **docs/ALERT_REDESIGN.md** - Alert component improvements
+- **docs/AVATAR_IMPLEMENTATION.md** - Avatar suite
+- **docs/INPUTGROUP_FINAL_FIX.md** - Seamless borders
+- **docs/SWITCH_REVIEW.md** - Perfect design match
+- **docs/MCP_SHADCN_ANALYSIS.md** - shadcn/ui integration
 
 ## Quality Metrics
 
@@ -224,7 +223,7 @@ MIT
 
 ## Credits
 
-- Design: [shadcn/ui](https://ui.shadcn.com)
+- Design: shadcn/ui
 - Implementation: Pure React + SCSS
 - Icons: Inline SVG (lucide-react style)
 

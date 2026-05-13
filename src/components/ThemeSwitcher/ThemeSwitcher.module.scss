@@ -30,7 +30,7 @@
   width: $control-h-md;
   height: $control-h-md;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $background;
   color: $foreground;
   cursor: pointer;
@@ -62,7 +62,7 @@
   width: $control-h-md;
   height: $control-h-md;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $background;
   color: $foreground;
   cursor: pointer;
@@ -96,7 +96,7 @@
   top: calc(100% + 0.5rem);
   right: 0;
   background: $card;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   border-radius: $radius-lg;
   padding: 0.5rem;
   min-width: 150px;
@@ -151,7 +151,7 @@
   width: 1rem;
   height: 1rem;
   border-radius: 9999px;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   flex-shrink: 0;
 }
 

@@ -15,7 +15,7 @@
 }
 
 .header {
-  border-bottom: 1px solid $border;
+  border-bottom: $border-width solid $border;
 }
 
 .body {
@@ -25,13 +25,13 @@
 }
 
 .footer {
-  border-top: 1px solid $border;
+  border-top: $border-width solid $border;
   background-color: $muted;
   font-weight: 500;
 }
 
 .row {
-  border-bottom: 1px solid $border;
+  border-bottom: $border-width solid $border;
   transition: background-color $transition-fast;
 
   &:hover {

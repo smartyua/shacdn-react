@@ -27,7 +27,7 @@
   position: fixed;
   z-index: $z-overlay;
   background: $background;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   padding: $spacing-lg;
   overflow-y: auto;
   display: flex;
@@ -44,7 +44,7 @@
   height: 100%;
   width: 90vw;
   max-width: 400px;
-  border-left: 1px solid $border;
+  border-left: $border-width solid $border;
   animation: slideInRight 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -54,7 +54,7 @@
   height: 100%;
   width: 90vw;
   max-width: 400px;
-  border-right: 1px solid $border;
+  border-right: $border-width solid $border;
   animation: slideInLeft 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -64,7 +64,7 @@
   right: 0;
   height: 50vh;
   max-height: 400px;
-  border-bottom: 1px solid $border;
+  border-bottom: $border-width solid $border;
   animation: slideInTop 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -74,7 +74,7 @@
   right: 0;
   height: 50vh;
   max-height: 400px;
-  border-top: 1px solid $border;
+  border-top: $border-width solid $border;
   animation: slideInBottom 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 

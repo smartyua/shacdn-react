@@ -46,7 +46,7 @@
 .alertDialogCancel {
   background: transparent;
   color: $foreground;
-  border: 1px solid $input;
+  border: $border-width solid $input;
 
   &:hover {
     background: $accent;

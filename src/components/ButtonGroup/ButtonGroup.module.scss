@@ -4,7 +4,7 @@
   display: inline-flex;
   align-items: stretch;
   border-radius: $radius-md;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   background: $background;
   overflow: hidden;
 
@@ -16,7 +16,7 @@
     position: relative;
 
     &:not(:first-child) {
-      border-left: 1px solid $input;
+      border-left: $border-width solid $input;
     }
 
     &:focus-visible {
@@ -32,7 +32,7 @@
   font-size: $font-size-sm;
   color: $muted-foreground;
   background: $muted;
-  border-left: 1px solid $input;
+  border-left: $border-width solid $input;
   user-select: none;
 }
 

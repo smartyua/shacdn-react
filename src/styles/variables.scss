@@ -35,9 +35,15 @@ $control-px: 0.75rem; // px-3 horizontal padding inside h-9 controls
 
 // Transitions — calm, decisive (closer to platform default easing)
 $ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+// Spring easing for overlays, popovers, menus (snappy enter)
+$ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 $transition-fast: 120ms $ease-standard;
 $transition-base: 180ms $ease-standard;
 $transition-slow: 260ms $ease-standard;
+
+// Focus ring — unified 2px ring matching shadcn/ui
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
 
 // Stacking — page chrome < floating menus < modal overlays < toast < tooltip
 $z-docked: 10;

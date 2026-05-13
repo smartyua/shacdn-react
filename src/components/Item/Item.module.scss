@@ -6,7 +6,7 @@
   gap: $spacing-md;
   padding: $spacing-md;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $background;
   transition: background $transition-fast;
 

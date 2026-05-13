@@ -17,7 +17,7 @@
   padding: $spacing-xs;
   list-style: none;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $popover;
   color: $popover-foreground;
 }

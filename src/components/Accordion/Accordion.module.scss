@@ -5,13 +5,13 @@
   flex-direction: column;
   width: 100%;
   border-radius: $radius-lg;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $card;
   overflow: hidden;
 }
 
 .item {
-  border-bottom: 1px solid $border;
+  border-bottom: $border-width solid $border;
 
   &:last-child {
     border-bottom: none;
@@ -24,10 +24,29 @@
   justify-content: space-between;
   align-items: center;
   padding: $spacing-md;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
   font-weight: 500;
+  color: $foreground;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color $transition-fast;
 
   &:hover {
     background: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+    border-radius: $radius-sm;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 

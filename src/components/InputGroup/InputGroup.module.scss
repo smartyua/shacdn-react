@@ -6,7 +6,7 @@
   width: 100%;
   position: relative;
   border-radius: $radius-md;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   overflow: hidden;
 
   &:focus-within {
@@ -43,10 +43,10 @@
   flex-shrink: 0;
 
   &:first-child:not(:last-child) {
-    border-right: 1px solid $input;
+    border-right: $border-width solid $input;
   }
 
   &:last-child:not(:first-child) {
-    border-left: 1px solid $input;
+    border-left: $border-width solid $input;
   }
 }

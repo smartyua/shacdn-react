@@ -6,7 +6,7 @@
   justify-content: center;
   gap: 1px;
   border-radius: $radius-md;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background: $muted;
   padding: 1px;
 }

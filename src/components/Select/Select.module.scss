@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: $radius-md;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   background-color: $background;
   padding: 0 $control-px;
   font-size: $font-size-sm;

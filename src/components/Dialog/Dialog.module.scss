@@ -76,8 +76,8 @@
   }
 
   &:focus-visible {
-    outline: $border-width solid $ring;
-    outline-offset: 1px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 }
 
@@ -103,7 +103,7 @@
 .dialogTitle {
   font-size: $font-size-lg;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.25;
   letter-spacing: $tracking-tight;
   color: $foreground;
   margin: 0;

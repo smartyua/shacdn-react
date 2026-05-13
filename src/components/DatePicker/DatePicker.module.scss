@@ -28,7 +28,7 @@
   font-size: $font-size-sm;
   background: $background;
   color: $foreground;
-  border: 1px solid $input;
+  border: $border-width solid $input;
   border-radius: $radius-md;
   transition: all $transition-fast;
   cursor: pointer;

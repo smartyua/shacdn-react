@@ -11,7 +11,7 @@
   font-family: $font-sans;
   transition: all $transition-fast;
   cursor: pointer;
-  border: 1px solid transparent;
+  border: $border-width solid transparent;
   background: transparent;
   color: $foreground;
 

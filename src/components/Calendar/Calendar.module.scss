@@ -2,7 +2,7 @@
 
 .calendar {
   border-radius: $radius-lg;
-  border: 1px solid $border;
+  border: $border-width solid $border;
   background-color: $card;
   padding: $spacing-md;
   width: fit-content;

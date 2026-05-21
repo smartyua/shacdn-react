@@ -7,8 +7,10 @@ alwaysApply: false
 
 When the user ports or consumes **shacdn** UI primitives in another React + Vite (or SPA) project:
 
-1. Read **`docs/COMPONENTS_AI_REFERENCE.md`** to pick controls by task, then **`docs/STYLE_GUIDE.md`** — tokens, `Button` with `href`, copy checklist.
-2. Copy **`src/styles/globals.scss`** and **`variables.scss`** (or replicate CSS variables there) before individual components so themes stay aligned.
-3. Prefer **SCSS modules** per component folder; avoid hardcoded colors where `$primary`, `$muted-foreground`, etc. exist.
-4. For landing/marketing layouts, mirror **`src/screens/SessyLanding/`** as a composition reference (Cards, Table, Badge, separator blocks).
-5. After edits in the consumer project: run **`npm run lint`** and **`npm run build`** per that project’s scripts.
+1. Read **`docs/INTEGRATION_GUIDE.md`** first — quick start, deps, Vite/Next.js, checklist.
+2. Prefer **shacdn MCP** tools (`get_integration_guide`, `get_design_system`, `get_component_bundle`) — see `.cursor/rules/shacdn-mcp.mdc`.
+3. Pick controls: **`docs/COMPONENTS_AI_REFERENCE.md`** (task → component), then **`docs/STYLE_GUIDE.md`** (tokens, patterns).
+4. Copy **`src/styles/globals.scss`** and **`variables.scss`** before individual components.
+5. Copy component folders **whole** (tsx + module.scss); respect internal deps (Modal→Dialog, DatePicker→Calendar, etc.).
+6. For landing layouts, use **`get_screen_pattern("sessy-landing")`** or mirror **`src/screens/SessyLanding/`**.
+7. After edits in the consumer project: **`npm run lint`** and **`npm run build`**.

@@ -4,7 +4,12 @@ A comprehensive implementation guide for this React component library.
 
 ## Quick Links
 
+- **[Integration Guide](./INTEGRATION_GUIDE.md)** — use shacdn components & design in **other projects**
 - [Component Guide](./COMPONENT_GUIDE.md) - Usage examples and API
+- [Style Guide](./STYLE_GUIDE.md) - Design tokens and SCSS patterns
+- [AI Agent Guide](./AI_AGENT_GUIDE.md) - Migration and integration for AI
+- [Components AI Reference](./COMPONENTS_AI_REFERENCE.md) - Task → component matrix
+- [MCP Server](../mcp/shacdn-server/README.md) - Export via Cursor MCP
 - [Project Summary](./PROJECT_SUMMARY.md) - Architecture and features
 
 ## Component Categories

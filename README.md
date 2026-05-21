@@ -6,6 +6,22 @@ React component library based on shadcn/ui design using SCSS modules without Tai
 
 Professional-grade React library aligned with shadcn/ui: **50+ UI primitives** (plus `ThemeSwitcher` for demos), **control heights** matching Tailwind **h-8 / h-9 / h-10** (36px default button/input). Pure SCSS modules (no Tailwind), strict TypeScript.
 
+## Use in other projects
+
+shacdn is designed to be **copied into your app** — not installed as an npm package.
+
+**Start here:** [docs/INTEGRATION_GUIDE.md](./docs/INTEGRATION_GUIDE.md)
+
+Quick steps:
+
+1. `npm install sass` in your project
+2. Copy `src/styles/globals.scss` + `variables.scss`
+3. Copy component folders (`Button/`, `Card/`, …) with their `.module.scss`
+4. `import './styles/globals.scss'` in `main.tsx`
+5. Use MCP **`shacdn`** in Cursor for AI-assisted export (`get_component_bundle`, `get_design_system`)
+
+See also: [STYLE_GUIDE.md](./docs/STYLE_GUIDE.md) · [AI_AGENT_GUIDE.md](./docs/AI_AGENT_GUIDE.md) · [mcp/shacdn-server/](./mcp/shacdn-server/)
+
 ## Features
 
 - **50+ Components** - Coverage of core shadcn registry primitives
@@ -102,7 +118,9 @@ $transition-fast, $transition-base
 
 ### Complete Guides
 
-- **docs/COMPONENTS_AI_REFERENCE.md** — 32 компонента: задача → контрол
+- **docs/INTEGRATION_GUIDE.md** — **подключение в другой проект** (главный гайд)
+- **mcp/shacdn-server/** — MCP server for AI agents to export components + design system
+- **docs/COMPONENTS_AI_REFERENCE.md** — 51 компонент: задача → контрол
 - **docs/COMPONENT_GUIDE.md** — примеры кода для всех компонентов
 - **docs/STYLE_GUIDE.md** - Tokens, patterns, transferring UI to other projects
 - **docs/PROJECT_SUMMARY.md** - Architecture and features

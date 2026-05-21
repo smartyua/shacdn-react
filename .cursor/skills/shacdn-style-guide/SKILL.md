@@ -1,6 +1,6 @@
 ---
 name: shacdn-style-guide
-description: Apply shacdn (shadcn-style SCSS modules) tokens and reusable UI patterns across projects — load when exporting components, aligning new apps with shacdn, or opening docs/STYLE_GUIDE.md workflows.
+description: Apply shacdn (shadcn-style SCSS modules) tokens and reusable UI patterns across projects — load when exporting components, aligning new apps with shacdn, or integrating via docs/INTEGRATION_GUIDE.md.
 ---
 
 # shacdn style guide skill
@@ -13,11 +13,13 @@ description: Apply shacdn (shadcn-style SCSS modules) tokens and reusable UI pat
 
 ## Steps
 
-1. Открыть **`docs/COMPONENTS_AI_REFERENCE.md`** (выбор из 50+ примитивов по задаче), затем **`docs/STYLE_GUIDE.md`** по чеклисту переноса токенов.
-2. Токены: `@use '../../styles/variables.scss' as *;` в SCSS модулей; не дублировать цвета вне `--*` / `$*` токенов без причины.
-3. Компоненты копировать **парой файлов** (`.tsx` + `.module.scss`); сохранять `forwardRef`, вариантные классы через `styles[variant]` как в существующих примитивах.
-4. CTA во внешние URL: использовать **`Button` с `href`** (полиморфная ссылка).
-5. Проверка: lint + production build проекта-потребителя.
+1. Открыть **`docs/INTEGRATION_GUIDE.md`** — быстрый старт, deps, MCP, чеклист для consumer-проекта.
+2. Выбор компонентов: **`docs/COMPONENTS_AI_REFERENCE.md`**; визуальные паттерны: **`docs/STYLE_GUIDE.md`**.
+3. MCP **`shacdn`**: `get_design_system` → `get_component_bundle` (если доступен в Cursor).
+4. Токены: `@use '../../styles/variables.scss' as *;` в SCSS модулей; не дублировать цвета вне `--*` / `$*` токенов без причины.
+5. Компоненты копировать **парой файлов** (`.tsx` + `.module.scss`); сохранять `forwardRef`, вариантные классы через `styles[variant]` как в существующих примитивах.
+6. CTA во внешние URL: **`Button` с `href`** (полиморфная ссылка).
+7. Проверка: lint + production build проекта-потребителя.
 
 ## Reference implementation
 

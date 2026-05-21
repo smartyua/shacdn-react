@@ -6,6 +6,12 @@
         "shadcn@latest",
         "mcp"
       ]
+    },
+    "shacdn": {
+      "command": "node",
+      "args": [
+        "mcp/shacdn-server/dist/index.js"
+      ]
     }
   }
 }

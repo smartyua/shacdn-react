@@ -1,46 +1,96 @@
 # Style guide · shacdn (для других проектов)
 
-Этот документ помогает **перенести паттерны и элементы UI** из `shacdn` в приложения без Tailwind: React 19 + TypeScript + SCSS modules + темы через CSS‑переменные (как в shadcn/ui).
+Этот документ описывает **визуальные паттерны и токены** shacdn при переносе в приложения без Tailwind: React + TypeScript + SCSS modules + темы через CSS‑переменные.
+
+> **Пошаговое подключение в новый репозиторий:** [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)  
+> **Выбор компонентов по задаче:** [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)
+
+---
 
 ## Принципы
 
-1. **Дизайн-токены** — только переменные из `src/styles/variables.scss`; на страницах и в модулях не использовать «магические» hex/rgb там, где есть токен.
-2. **Темизация** — цвет и фон задаются через `hsl(var(--background))` и связанный набор переменных в `src/styles/globals.scss` (`:root`, `data-theme`, цветовые схемы).
+1. **Дизайн-токены** — только переменные из `src/styles/variables.scss`; не использовать «магические» hex/rgb там, где есть токен.
+2. **Темизация** — цвет и фон через `hsl(var(--background))` и CSS‑переменные в `globals.scss` (`:root`, `data-theme`, цветовые схемы).
 3. **Изоляция стилей** — один компонент = `ComponentName.tsx` + `ComponentName.module.scss`.
-4. **Доступность** — видимые фокусы (`:focus-visible`), подписи `aria-*` для декоративных иконок (`aria-hidden` на svg, когда рядом есть текст).
+4. **Доступность** — видимые фокусы (`:focus-visible`), `aria-*` для иконок (`aria-hidden` на svg при наличии текста).
 
-Глобальная утилита **скрытый текст для скринридеров**: классы `.visually-hidden` / `.visuallyHidden` в `globals.scss`.
+Утилита для скринридеров: `.visually-hidden` / `.visuallyHidden` в `globals.scss`.
 
-## Структура для копирования в другой репозиторий
+---
 
-Минимальный набор для визуального паритета с этой либой:
+## Что копировать (минимум)
 
-| Путь | Назначение |
-|------|------------|
-| `src/styles/globals.scss` | Темы, `:root`, сброс, body |
-| `src/styles/variables.scss` | Sass-алиасы на токены |
-| `src/components/**/*` | Нужные примитивы (или подмножество) |
-| `src/index.css` / подключение `globals` | Точка входа стилей |
+| Путь в shacdn | Назначение | Порядок |
+|---------------|------------|---------|
+| `src/styles/variables.scss` | Sass-токены | **1** |
+| `src/styles/globals.scss` | Темы, `:root`, reset | **2** |
+| `src/components/<Name>/` | tsx + module.scss | **3** |
 
 В целевом проекте:
 
-- Подключите `sass`, в Vite уже достаточно импортировать `globals.scss` из `main.tsx` (или аналога).
-- Скопируйте нужные компоненты **целиком** (tsx + module.scss); зависимости между ними сохраните (например `Modal/` требует **`Dialog/`** — реэкспорт).
+```bash
+npm install sass
+```
 
-## Композиция лендингов (пример)
+```tsx
+// main.tsx
+import './styles/globals.scss';
+```
 
-Экран `src/screens/SessyLanding/` — образец маркетинговой страницы без новых зависимостей:
+Компоненты копируйте **целиком** (tsx + scss). См. таблицу зависимостей в [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md#зависимости-между-компонентами).
 
-- **Hero + CTA** — `Button` (в том числе с `href` как ссылка).
-- **Сетки** — CSS Grid в модуле страницы; карточки — `Card` + подкомпоненты.
-- **Сравнение тарифов** — `Table` + иконки `lucide-react`.
-- **Шапка / переключение темы** — `ThemeSwitcher`.
+---
 
-Оригинальный продукт, с которого взята структура копирайта и блоков: [Sessy](https://sessy.do/) ([репозиторий](https://github.com/marckohlbrugge/sessy)).
+## SCSS в consumer-проекте
+
+```scss
+// MyPage.module.scss
+@use '../../styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: $background;
+  color: $foreground;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  transition: background-color $transition-fast;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+```
+
+**Не добавляйте Tailwind.** Для layout используйте свой SCSS module или flex/grid в модуле страницы.
+
+---
+
+## Импорт компонентов
+
+```tsx
+import { Button } from './components/Button/Button';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from './components/Card/Card';
+```
+
+Barrel-файлов (`index.ts`) нет — только прямой импорт из папки компонента.
+
+---
 
 ## Компонент `Button` как ссылка
 
-Если передан **`href: string`**, рендерится `<a>` с теми же визуальными классами, что и `<button>`:
+При **`href: string`** рендерится `<a>` с теми же классами, что у `<button>`:
 
 ```tsx
 <Button href="https://example.com" variant="outline" target="_blank" rel="noopener noreferrer">
@@ -48,40 +98,78 @@
 </Button>
 ```
 
-Для действий без навигации по-прежнему используйте `<button>` (не передавайте `href`).
+---
 
-## Карта токенов (кратко)
+## Карта токенов
 
 | Sass / CSS | Использование |
-|-------------|----------------|
+|------------|---------------|
 | `$background`, `$foreground` | Базовый текст и подложка |
-| `$primary`, `$primary-foreground` | Основный акцент, CTA |
-| `$muted`, `$muted-foreground` | Второстепенный текст, поля |
-| `$border`, `$ring` | Обводки, фокус |
-| `$radius-*`, `$spacing-*`, `$font-size-*`, `$transition-fast` | Сетка, типографика, анимация |
+| `$primary`, `$primary-foreground` | Акцент, CTA |
+| `$secondary`, `$secondary-foreground` | Вторичные кнопки, бейджи |
+| `$muted`, `$muted-foreground` | Подписи, placeholder |
+| `$accent`, `$accent-foreground` | Hover ghost-кнопок, меню |
+| `$destructive`, `$destructive-foreground` | Ошибки, удаление |
+| `$border`, `$input`, `$ring` | Обводки, фокус |
+| `$card`, `$popover` | Фон карточек и поповеров |
+| `$radius-*`, `$spacing-*`, `$font-size-*` | Сетка, типографика |
+| `$control-h-sm/md/lg` | Высоты контролов (32/36/40px) |
+| `$transition-fast/base/slow` | Анимации |
+| `$z-floating`, `$z-overlay`, `$z-toast`, `$z-tooltip` | Слои |
 
-Полный список: `variables.scss`; семантические оттенки темы: `globals.scss`.
+Полный список: `src/styles/variables.scss`. Семантика тем: `src/styles/globals.scss`.
 
-## Что имеет смысл добавить в библиотеку позже
+---
 
-По опыту лендинга и документации:
+## Темизация
 
-| Идея | Зачем |
-|------|--------|
-| **Accordion / Collapsible** | FAQ без длинной простыни карточек |
-| **`Card` с опциональным `as`/полиморфным заголовком** | Иногда нужен `<h2>` вместо жёсткого `<h3>` в `CardTitle` |
-| **Набор маркетинговых паттернов** (опционально) | Отдельная папка `patterns/` или экспорт экранов как «рецепты», не усложняя core UI |
-| **Табличные «фичечеклисты»** | Обёртка над `Table` с фиксированными колонками и иконкой ✓ / — |
+```ts
+document.documentElement.setAttribute('data-theme', 'dark blue');
+```
+
+Схемы: `default`, `blue`, `green`, `purple`, `orange`, `rose`.  
+Готовый UI: компонент `ThemeSwitcher`. Подробнее: [THEME_SYSTEM.md](./THEME_SYSTEM.md).
+
+---
+
+## Композиция страниц (примеры)
+
+| Экран | Путь | Компоненты |
+|-------|------|------------|
+| Маркетинговый лендинг | `src/screens/SessyLanding/` | Button, Card, Table, Badge, Separator, ThemeSwitcher |
+| Showcase библиотеки | `src/screens/ShadcnHome/` | Button, Card, Badge |
+
+Паттерны: Hero + CTA (`Button` с `href`), сетки на CSS Grid, тарифы через `Table`, FAQ через `Accordion`.
+
+---
+
+## AI / MCP
+
+В Cursor включите MCP **`shacdn`** для автоматического экспорта:
+
+- `get_design_system` — токены
+- `get_component_bundle` — компоненты с зависимостями
+- `get_screen_pattern` — экран + bundle
+
+Сборка: `cd mcp/shacdn-server && npm install && npm run build`
+
+---
 
 ## Проверка после переноса
 
 1. `npm run lint`
 2. `npm run build`
-3. Пройти вкладкой клавиатуры по формам и CTA на целевой странице
-4. Переключить светлую/тёмную тему и одну цветовую схему
+3. Клавиатура: Tab по формам и CTA
+4. Переключить light/dark и одну цветовую схему
+
+---
 
 ## Связанные документы
 
-- `docs/COMPONENTS_AI_REFERENCE.md` — все 32 компонента для AI и кросс-проекта
-- `docs/COMPONENT_GUIDE.md` — API и примеры компонентов
-- `.cursor/rules/shacdn-reuse.mdc` — напоминание агенту при работе в консьюмерских репозиториях
+| Документ | Содержание |
+|----------|------------|
+| [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md) | Быстрый старт, Vite/Next.js, чеклист |
+| [AI_AGENT_GUIDE.md](./AI_AGENT_GUIDE.md) | Миграция HTML/Tailwind → shacdn |
+| [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md) | Матрица «задача → компонент» |
+| [COMPONENT_GUIDE.md](./COMPONENT_GUIDE.md) | API и примеры |
+| `.cursor/rules/shacdn-reuse.mdc` | Правило для агентов в consumer-репо |

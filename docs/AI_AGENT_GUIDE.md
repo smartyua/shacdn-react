@@ -1,6 +1,21 @@
 # shacdn — AI Agent Migration & Integration Guide
 
-> **Для AI-агентов.** Этот документ — главная точка входа при переносе существующего интерфейса на компоненты shacdn или при написании нового кода с нуля. Содержит: архитектуру, правила импорта, типы пропсов, карту «старый код → новый компонент», шаблоны форм/страниц и контрольные списки.
+> **Для AI-агентов.** Главная точка входа при переносе интерфейса на shacdn или написании нового кода с нуля.
+
+| Документ | Когда читать |
+|----------|--------------|
+| **[INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)** | Подключение shacdn в **другой** React-проект (копирование, deps, MCP) |
+| **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** | Выбор компонента по задаче |
+| **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** | Токены, SCSS-паттерны, темизация |
+| **MCP `shacdn`** | `get_component_bundle`, `get_design_system`, `get_integration_guide` |
+
+### Быстрый workflow для consumer-проекта
+
+1. `search_components` / матрица в COMPONENTS_AI_REFERENCE — выбрать контролы
+2. `get_design_system("both")` — скопировать `variables.scss` + `globals.scss` **первыми**
+3. `get_component_bundle([...])` — компоненты + внутренние зависимости в порядке копирования
+4. Подключить `globals.scss` в entry; добавить `ToastProvider` / `TooltipProvider` при необходимости
+5. `npm run lint` + `npm run build` в целевом проекте
 
 ---
 
@@ -648,9 +663,11 @@ localStorage.setItem('theme', 'dark blue');
 
 | Документ | Содержание |
 |----------|------------|
+| **`docs/INTEGRATION_GUIDE.md`** | **Подключение в другой проект** — быстрый старт, deps, MCP, чеклист |
 | `docs/COMPONENT_GUIDE.md` | Полный API каждого компонента с примерами |
 | `docs/COMPONENTS_AI_REFERENCE.md` | Матрица «задача → компонент» на русском |
-| `docs/STYLE_GUIDE.md` | Визуальный стайл-гайд |
+| `docs/STYLE_GUIDE.md` | Визуальный стайл-гайд и токены |
 | `docs/THEME_SYSTEM.md` | Детали системы тем и цветовых схем |
+| `mcp/shacdn-server/README.md` | MCP-инструменты для экспорта |
 | `src/styles/variables.scss` | Все токены дизайна (источник истины) |
 | `src/App.tsx` | Живое демо всех 51 компонента |

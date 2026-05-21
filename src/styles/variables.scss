@@ -27,11 +27,19 @@ $spacing-md: 1rem;
 $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
 
-// Control dimensions — align with shadcn/ui (Tailwind h-8 / h-9 / h-10)
-$control-h-sm: 2rem; // 32px — button size sm
-$control-h-md: 2.25rem; // 36px — default input / button
-$control-h-lg: 2.5rem; // 40px — button / input lg
-$control-px: 0.75rem; // px-3 horizontal padding inside h-9 controls
+// Sticky site header (SiteHeader) — keeps fixed side nav from overlapping
+$site-header-height: 2.75rem;
+
+// Control dimensions — align with shadcn/ui v4 (Tailwind h-6 … h-9)
+$control-h-xs: 1.5rem; // 24px — button xs
+$control-h-sm: 1.75rem; // 28px — button sm
+$control-h-md: 2rem; // 32px — default input / button (h-8)
+$control-h-lg: 2.25rem; // 36px — button lg (h-9)
+$control-px: 0.625rem; // px-2.5 — horizontal padding in h-8 controls (shadcn v4)
+
+// Switch — shadcn w-9 × h-5 (independent of button h-8 default)
+$switch-track-w: 2.25rem; // 36px
+$switch-track-h: 1.25rem; // 20px
 
 // Transitions — calm, decisive (closer to platform default easing)
 $ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);

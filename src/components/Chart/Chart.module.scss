@@ -1,0 +1,81 @@
+@use '../../styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  width: 100%;
+  padding: $spacing-md;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background-color: $card;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.title {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $foreground;
+}
+
+.description {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.chart {
+  width: 100%;
+  height: 12rem;
+}
+
+.bar {
+  fill: $primary;
+  opacity: 0.9;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.axis {
+  stroke: $border;
+  stroke-width: 1;
+}
+
+.grid {
+  stroke: $border;
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.label {
+  font-size: 10px;
+  fill: $muted-foreground;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.legendSwatch {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background-color: $primary;
+}

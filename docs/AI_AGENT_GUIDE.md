@@ -4,6 +4,8 @@
 
 | Документ | Когда читать |
 |----------|--------------|
+| **[DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md)** | Официальный референс [ui.shadcn.com](https://ui.shadcn.com), pixel-perfect workflow |
+| **[SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)** | Статус паритета каждого примитива |
 | **[INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)** | Подключение shacdn в **другой** React-проект (копирование, deps, MCP) |
 | **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** | Выбор компонента по задаче |
 | **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** | Токены, SCSS-паттерны, темизация |
@@ -27,11 +29,11 @@
 | Стили | SCSS Modules (`*.module.scss`); Tailwind **отсутствует** |
 | Иконки | `lucide-react` |
 | Роутинг | `react-router-dom` v7 |
-| Компонентов | 51 папка в `src/components/` |
-| Дизайн-система | Полный паритет с shadcn/ui без Radix UI |
+| Компонентов | 54+ папки в `src/components/` |
+| Дизайн-система | Паритет с [shadcn/ui](https://ui.shadcn.com) без Radix UI |
 
-### Что **не** включено (нужны доп. пакеты или ручная композиция)
-`chart`, `carousel`, `command`, `navigation-menu`, `resizable`, `sidebar`, `sonner`
+### Что **не** включено как примитив (нужны доп. пакеты или blocks)
+`chart`, `resizable`, `sidebar` (blocks). Замены: `Toast`≈sonner, `Select`≈native-select. `Carousel` / `Command` / `NavigationMenu` — zero-dep реализации.
 
 ---
 

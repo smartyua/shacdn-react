@@ -88,28 +88,28 @@
   }
 }
 
-// Sizes — match shadcn button (h-7 / h-8 / h-9 / h-10)
+// Sizes — match shadcn/ui docs (h-6 / h-7 / h-8 / h-9)
 .xs {
-  height: 1.75rem;
-  padding: 0 0.625rem;
+  height: $control-h-xs;
+  padding: 0 0.5rem;
   font-size: $font-size-xs;
 }
 
 .sm {
   height: $control-h-sm;
-  padding: 0 $control-px;
+  padding: 0 0.625rem;
   font-size: $font-size-xs;
 }
 
 .md {
   height: $control-h-md;
-  padding: 0 1rem;
+  padding: 0 $control-px;
   font-size: $font-size-sm;
 }
 
 .lg {
   height: $control-h-lg;
-  padding: 0 2rem;
+  padding: 0 0.625rem;
   font-size: $font-size-sm;
 }
 

@@ -2,6 +2,7 @@
 
 Этот документ описывает **визуальные паттерны и токены** shacdn при переносе в приложения без Tailwind: React + TypeScript + SCSS modules + темы через CSS‑переменные.
 
+> **Официальный референс:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md)  
 > **Пошаговое подключение в новый репозиторий:** [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)  
 > **Выбор компонентов по задаче:** [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)
 

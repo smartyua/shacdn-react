@@ -3,8 +3,8 @@
 .switch {
   position: relative;
   display: inline-flex;
-  width: $control-h-md;
-  height: 1.25rem;
+  width: $switch-track-w;
+  height: $switch-track-h;
   flex-shrink: 0;
   cursor: pointer;
   appearance: none;

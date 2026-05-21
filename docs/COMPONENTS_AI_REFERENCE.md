@@ -1,7 +1,8 @@
 # Справочник компонентов shacdn для AI и кросс-проектной разработки
 
-Документ для **выбора нужного контроля** из папки `src/components/` репозитория shacdn. Каталог охватывает **50+ примитивов** в паритете с реестром [shadcn/ui](https://ui.shadcn.com) (без Tailwind: те же типичные высоты контролов **h-8 / h-9 / h-10**). Полный список папок см. навигацию в демо `App.tsx` и блок ниже.
+Документ для **выбора нужного контроля** из папки `src/components/` репозитория shacdn. Каталог охватывает **54+ примитивов** в паритете с реестром [shadcn/ui](https://ui.shadcn.com) (без Tailwind: те же типичные высоты контролов **h-8 / h-9 / h-10**). Полный список папок см. навигацию в демо `App.tsx` и блок ниже.
 
+> **Официальный референс дизайна:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)  
 > **Подключение в другой проект:** [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md) — копирование, зависимости, MCP, чеклист  
 > **Визуальные токены:** [STYLE_GUIDE.md](./STYLE_GUIDE.md)
 
@@ -46,6 +47,9 @@
 | Переключение вкладок панелей | `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent` | `Tabs/` |
 | Нумерация страниц списка | `Pagination`, … | `Pagination/` |
 | Меню действий из кнопки | `DropdownMenu`, … | `DropdownMenu/` |
+| Горизонтальная навигация сайта с выпадающими панелями | `NavigationMenu`, … | `NavigationMenu/` |
+| Карусель слайдов | `Carousel`, … | `Carousel/` |
+| Палитра команд (поиск + действия) | `Command`, `CommandDialog`, … | `Command/` |
 | Неблокирующее сообщение в контексте страницы | `Alert`, `AlertTitle`, `AlertDescription` | `Alert/` |
 | Краткая обратная связь после действия | `ToastProvider`, `useToast`, `ToastTitle`, … | `Toast/` |
 | Индикатор долгого процесса (полоска %) | `Progress` | `Progress/` |
@@ -66,9 +70,9 @@
 
 Имена папок в `src/components/` (в скобках — примечание):
 
-`Accordion`, `Alert`, `AlertDialog`, `AspectRatio`, `Avatar`, `Badge`, `Breadcrumb`, `Button`, `ButtonGroup`, `Calendar`, `Card`, `Checkbox`, `Collapsible` (база для Accordion), `Combobox`, `ContextMenu`, `DatePicker`, `Dialog`, `Drawer`, `DropdownMenu`, `Empty`, `Field`, `Form`, `HoverCard`, `Input`, `InputGroup`, `InputOTP`, `Item`, `Kbd`, `Label`, `Menubar`, `Modal` (алиас Dialog), `Pagination`, `Popover`, `Progress`, `RadioGroup`, `ScrollArea`, `Select`, `Separator`, `Sheet` (алиас Drawer), `Skeleton`, `Slider`, `Spinner`, `Switch`, `Table`, `Tabs`, `Textarea`, `ThemeSwitcher` (демо темы), `Toast`, `Toggle`, `ToggleGroup`, `Tooltip`.
+`Accordion`, `Alert`, `AlertDialog`, `AspectRatio`, `Avatar`, `Badge`, `Breadcrumb`, `Button`, `ButtonGroup`, `Calendar`, `Card`, `Carousel`, `Checkbox`, `Collapsible` (база для Accordion), `Combobox`, `Command`, `ContextMenu`, `DatePicker`, `Dialog`, `Drawer`, `DropdownMenu`, `Empty`, `Field`, `Form`, `HoverCard`, `Input`, `InputGroup`, `InputOTP`, `Item`, `Kbd`, `Label`, `Menubar`, `Modal` (алиас Dialog), `NavigationMenu`, `Pagination`, `Popover`, `Progress`, `RadioGroup`, `ScrollArea`, `Select`, `Separator`, `Sheet` (алиас Drawer), `Skeleton`, `Slider`, `Spinner`, `Switch`, `Table`, `Tabs`, `Textarea`, `ThemeSwitcher` (демо темы), `Toast`, `Toggle`, `ToggleGroup`, `Tooltip`.
 
-**В реестре shadcn/ui, но не как отдельные бинарные пакеты в этом репо (нужны доп. зависимости или блоки):** `chart` (Recharts), `carousel` (Embla), `command` / комбо на `cmdk`, `navigation-menu` (сложная компоновка), `resizable` (react-resizable-patterns), `sidebar` (крупные blocks), `sonner` (альтернатива — наш `Toast`). Для `native-select` используйте `Select`.
+**Zero-dep варианты реестра:** `chart` (SVG `BarChart`), `resizable` (pointer-drag panels), `sidebar` (layout provider). **Замены:** `sonner` → `Sonner`/`Toast`, `native-select` → `NativeSelect`/`Select`, `direction` → `DirectionProvider`. **Carousel / Command** — без Embla/cmdk. См. [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md).
 
 ---
 

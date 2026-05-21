@@ -2,11 +2,15 @@
 
 **Подключение в другой проект:** [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md)
 
-**Официальный перечень компонентов и матрица «задача → контроль»:** [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md) (**50+** примитивов, соответствие размерам shadcn h-8 / h-9 / h-10).
+**Design reference:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)
+
+**Официальный перечень компонентов и матрица «задача → контроль»:** [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md) (**54+** примитивов, соответствие размерам shadcn h-8 / h-9 / h-10).
 
 ## What's Implemented
 
-### Components (23 total)
+### Components (54+ in `src/components/`)
+
+> Полный актуальный список — [COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md). Ниже — исторический краткий обзор базового набора.
 
 1. **Button** - complete set of variants and sizes
  - Variants: default, secondary, outline, ghost, destructive, link

@@ -74,7 +74,54 @@ import {
   ContextMenuTrigger,
 } from './components/ContextMenu/ContextMenu';
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from './components/Sheet/Sheet';
-import { Inbox } from 'lucide-react';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuContentLink,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from './components/NavigationMenu/NavigationMenu';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselSlide,
+  CarouselViewport,
+} from './components/Carousel/Carousel';
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from './components/Command/Command';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './components/Collapsible/Collapsible';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './components/Resizable/Resizable';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuButtonLabel,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from './components/Sidebar/Sidebar';
+import { BarChart, ChartContainer } from './components/Chart/Chart';
+import { TypographyH1, TypographyLead, TypographyMuted, TypographyP } from './components/Typography/Typography';
+import { DirectionProvider } from './components/Direction/Direction';
+import { NativeSelect } from './components/NativeSelect/NativeSelect';
+import { ChevronDown, Home, Inbox, LayoutDashboard, Settings } from 'lucide-react';
 
 const ComponentsShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -85,6 +132,7 @@ const ComponentsShowcase = () => {
   const [calDate, setCalDate] = useState<Date | undefined>(() => new Date());
   const [comboValue, setComboValue] = useState('apple');
   const [otp, setOtp] = useState('');
+  const [commandOpen, setCommandOpen] = useState(false);
   const { addToast } = useToast();
 
   const comboOptions = [
@@ -97,11 +145,13 @@ const ComponentsShowcase = () => {
 
   const components = [
     'Accordion', 'Alert', 'Alert Dialog', 'Aspect Ratio', 'Avatar', 'Badge', 'Breadcrumb', 'Button',
-    'Button Group', 'Calendar', 'Card', 'Checkbox', 'Combobox', 'Context Menu', 'Date Picker', 'Dialog',
-    'Drawer', 'Dropdown Menu', 'Empty', 'Field', 'Form', 'Hover Card', 'Input', 'Input Group',
-    'Input OTP', 'Item', 'Kbd', 'Label', 'Menubar', 'Modal', 'Pagination', 'Popover', 'Progress',
-    'RadioGroup', 'Scroll Area', 'Select', 'Separator', 'Sheet', 'Skeleton', 'Slider', 'Spinner',
-    'Switch', 'Table', 'Tabs', 'Textarea', 'Toast', 'Toggle', 'Toggle Group', 'Tooltip',
+    'Button Group', 'Calendar', 'Card', 'Carousel', 'Chart', 'Checkbox', 'Collapsible', 'Combobox',
+    'Command', 'Context Menu', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty',
+    'Field', 'Form', 'Hover Card', 'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label',
+    'Menubar', 'Modal', 'Native Select', 'Navigation Menu', 'Pagination', 'Popover', 'Progress',
+    'RadioGroup', 'Resizable', 'Scroll Area', 'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton',
+    'Slider', 'Sonner', 'Spinner', 'Switch', 'Table', 'Tabs', 'Textarea', 'Toast', 'Toggle',
+    'Toggle Group', 'Tooltip', 'Typography',
   ];
 
   return (
@@ -122,7 +172,13 @@ const ComponentsShowcase = () => {
           <div className={styles.headerInner}>
             <div>
               <h1>Каталог компонентов</h1>
-              <p>50+ примитивов в стиле shadcn/ui — SCSS modules, высоты h-8 / h-9 / h-10</p>
+              <p>
+                60+ примитивов · референс{' '}
+                <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">
+                  ui.shadcn.com
+                </a>{' '}
+                · SCSS modules · h-6 / h-7 / h-8 / h-9 (v4)
+              </p>
             </div>
           </div>
         </header>
@@ -312,6 +368,21 @@ const ComponentsShowcase = () => {
           </div>
         </section>
 
+        <section id="collapsible" className={styles.section}>
+          <h2>Collapsible</h2>
+          <Collapsible className={styles.collapsibleDemo}>
+            <CollapsibleTrigger className={styles.collapsibleTrigger}>
+              <span>Can I use this in my project?</span>
+              <ChevronDown size={16} aria-hidden />
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <p className={styles.collapsibleContent}>
+                Yes. Free to use for personal and commercial projects. No attribution required.
+              </p>
+            </CollapsibleContent>
+          </Collapsible>
+        </section>
+
         <section id="checkbox" className={styles.section}>
           <h2>Checkbox</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -384,6 +455,17 @@ const ComponentsShowcase = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
+        </section>
+
+        <section id="direction" className={styles.section}>
+          <h2>Direction</h2>
+          <DirectionProvider dir="rtl" className={styles.directionDemo}>
+            <p>RTL layout wrapper — text and flex order follow <code>dir=&quot;rtl&quot;</code>.</p>
+            <div className={styles.directionRow}>
+              <Button size="sm" variant="outline">First</Button>
+              <Button size="sm" variant="outline">Second</Button>
+            </div>
+          </DirectionProvider>
         </section>
 
         <section id="drawer" className={styles.section}>
@@ -502,6 +584,17 @@ const ComponentsShowcase = () => {
           </div>
         </section>
 
+        <section id="native-select" className={styles.section}>
+          <h2>Native Select</h2>
+          <div style={{ maxWidth: '16rem' }}>
+            <NativeSelect aria-label="Native select">
+              <option value="">Pick a fruit</option>
+              <option value="apple">Apple</option>
+              <option value="banana">Banana</option>
+            </NativeSelect>
+          </div>
+        </section>
+
         <section id="select" className={styles.section}>
           <h2>Select</h2>
           <div className={`${styles.grid} ${styles.cols2}`}>
@@ -515,6 +608,60 @@ const ComponentsShowcase = () => {
               <option>Disabled</option>
             </Select>
           </div>
+        </section>
+
+        <section id="sidebar" className={styles.section}>
+          <h2>Sidebar</h2>
+          <SidebarProvider>
+            <Sidebar>
+              <SidebarHeader>
+                <strong style={{ fontSize: '0.875rem' }}>shacdn</strong>
+              </SidebarHeader>
+              <SidebarContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton isActive>
+                      <Home size={16} aria-hidden />
+                      <SidebarMenuButtonLabel>Home</SidebarMenuButtonLabel>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <LayoutDashboard size={16} aria-hidden />
+                      <SidebarMenuButtonLabel>Dashboard</SidebarMenuButtonLabel>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <Settings size={16} aria-hidden />
+                      <SidebarMenuButtonLabel>Settings</SidebarMenuButtonLabel>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarContent>
+              <SidebarFooter>
+                <span style={{ fontSize: '0.75rem', color: 'hsl(var(--muted-foreground))' }}>v0.0.0</span>
+              </SidebarFooter>
+            </Sidebar>
+            <SidebarInset>
+              <div className={styles.sidebarInsetHeader}>
+                <SidebarTrigger />
+                <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>Application</span>
+              </div>
+              <div className={styles.sidebarInsetBody}>
+                <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>
+                  Main content area — matches shadcn sidebar-01 layout pattern.
+                </p>
+              </div>
+            </SidebarInset>
+          </SidebarProvider>
+        </section>
+
+        <section id="sonner" className={styles.section}>
+          <h2>Sonner</h2>
+          <p className={styles.sectionNote}>
+            Registry <code>sonner</code> maps to <code>Toast</code> / <code>useToast</code> in this repo (see Toast section).
+          </p>
         </section>
 
         <section id="separator" className={styles.section}>
@@ -705,6 +852,29 @@ const ComponentsShowcase = () => {
           </RadioGroup>
         </section>
 
+        <section id="resizable" className={styles.section}>
+          <h2>Resizable</h2>
+          <div className={styles.resizableWrap}>
+            <ResizablePanelGroup orientation="horizontal">
+              <ResizablePanel defaultSize="50%">
+                <div className={styles.resizableCell}>One</div>
+              </ResizablePanel>
+              <ResizableHandle withHandle />
+              <ResizablePanel defaultSize="50%">
+                <ResizablePanelGroup orientation="vertical">
+                  <ResizablePanel defaultSize="25%">
+                    <div className={styles.resizableCell}>Two</div>
+                  </ResizablePanel>
+                  <ResizableHandle />
+                  <ResizablePanel defaultSize="75%">
+                    <div className={styles.resizableCell}>Three</div>
+                  </ResizablePanel>
+                </ResizablePanelGroup>
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+        </section>
+
         <section id="spinner" className={styles.section}>
           <h2>Spinner</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
@@ -766,11 +936,76 @@ const ComponentsShowcase = () => {
           <Calendar selected={calDate} onSelect={d => setCalDate(d)} />
         </section>
 
+        <section id="chart" className={styles.section}>
+          <h2>Chart</h2>
+          <div style={{ maxWidth: '28rem' }}>
+            <ChartContainer title="Monthly total" description="SVG bar chart — zero-dep (Recharts optional in apps)">
+              <BarChart
+                data={[
+                  { label: 'Jan', value: 186 },
+                  { label: 'Feb', value: 305 },
+                  { label: 'Mar', value: 237 },
+                  { label: 'Apr', value: 273 },
+                  { label: 'May', value: 209 },
+                ]}
+              />
+            </ChartContainer>
+          </div>
+        </section>
+
+        <section id="carousel" className={styles.section}>
+          <h2>Carousel</h2>
+          <Carousel>
+            <CarouselViewport>
+              <CarouselContent>
+                <CarouselItem>
+                  <CarouselSlide>Slide 1</CarouselSlide>
+                </CarouselItem>
+                <CarouselItem>
+                  <CarouselSlide>Slide 2</CarouselSlide>
+                </CarouselItem>
+                <CarouselItem>
+                  <CarouselSlide>Slide 3</CarouselSlide>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </CarouselViewport>
+            <CarouselDots />
+          </Carousel>
+        </section>
+
         <section id="combobox" className={styles.section}>
           <h2>Combobox</h2>
           <div style={{ maxWidth: '16rem' }}>
             <Combobox options={comboOptions} value={comboValue} onValueChange={setComboValue} placeholder="Pick a fruit…" />
           </div>
+        </section>
+
+        <section id="command" className={styles.section}>
+          <h2>Command</h2>
+          <Button variant="outline" onClick={() => setCommandOpen(true)}>
+            Open command palette
+          </Button>
+          <CommandDialog open={commandOpen} onOpenChange={setCommandOpen}>
+            <Command>
+              <CommandInput placeholder="Search commands..." />
+              <CommandList>
+                <CommandEmpty />
+                <CommandGroup heading="Suggestions">
+                  <CommandItem value="calendar" onSelect={() => setCommandOpen(false)}>
+                    Calendar
+                  </CommandItem>
+                  <CommandItem value="profile" onSelect={() => setCommandOpen(false)}>
+                    Profile
+                  </CommandItem>
+                  <CommandItem value="settings" onSelect={() => setCommandOpen(false)}>
+                    Settings
+                  </CommandItem>
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </CommandDialog>
         </section>
 
         <section id="context-menu" className={styles.section}>
@@ -852,6 +1087,30 @@ const ComponentsShowcase = () => {
           </Item>
         </section>
 
+        <section id="navigation-menu" className={styles.section}>
+          <h2>Navigation Menu</h2>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="#navigation-menu">Home</NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger menuId="nav-components">Components</NavigationMenuTrigger>
+                <NavigationMenuContent menuId="nav-components">
+                  <NavigationMenuContentLink href="#button">Button</NavigationMenuContentLink>
+                  <NavigationMenuContentLink href="#card">Card</NavigationMenuContentLink>
+                  <NavigationMenuContentLink href="#dialog">Dialog</NavigationMenuContentLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">
+                  shadcn/ui
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </section>
+
         <section id="menubar" className={styles.section}>
           <h2>Menubar</h2>
           <Menubar>
@@ -924,6 +1183,20 @@ const ComponentsShowcase = () => {
             <ToggleGroupItem value="center" aria-label="Center">C</ToggleGroupItem>
             <ToggleGroupItem value="right" aria-label="Right">R</ToggleGroupItem>
           </ToggleGroup>
+        </section>
+
+        <section id="typography" className={styles.section}>
+          <h2>Typography</h2>
+          <div className={styles.typographyDemo}>
+            <TypographyH1>Taxing Laughter: The Joke Tax</TypographyH1>
+            <TypographyLead>
+              A modal dialog that interrupts the user with important content and expects a response.
+            </TypographyLead>
+            <TypographyP>
+              The king, seeing how much happier his subjects were, lifted the joke tax.
+            </TypographyP>
+            <TypographyMuted>Muted helper text for descriptions and hints.</TypographyMuted>
+          </div>
         </section>
 
         <section id="tooltip" className={styles.section}>

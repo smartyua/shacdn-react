@@ -11,6 +11,7 @@ This project uses Cursor rules for AI assistance. All rules are in `.cursor/rule
 
 ## Key Rules
 
+- **design-reference.mdc** - [ui.shadcn.com](https://ui.shadcn.com) as canonical design reference
 - **project-overview.mdc** - Always applies, describes project architecture
 - **design-system.mdc** - SCSS variable reference (applies to .scss files)
 - **react-component-patterns.mdc** - Component structure (applies to .tsx files)
@@ -30,9 +31,11 @@ This project uses Cursor rules for AI assistance. All rules are in `.cursor/rule
 ## Documentation
 
 See `docs/` folder for:
-- Component usage guide
+- **DESIGN_REFERENCE.md** — ui.shadcn.com + pixel-perfect workflow
+- **SHADCN_PARITY_MATRIX.md** — per-component audit status
+- Component usage guide (COMPONENT_GUIDE.md)
 - Project summary
-- Design system reference
+- Design system reference (STYLE_GUIDE.md)
 - Theme system documentation
 
 ## Quick Start

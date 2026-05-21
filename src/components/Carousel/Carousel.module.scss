@@ -1,0 +1,116 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.viewport {
+  overflow: hidden;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+}
+
+.content {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.item {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.slide {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  align-items: center;
+  justify-content: center;
+  background: $muted;
+  color: $muted-foreground;
+  font-size: $font-size-lg;
+  font-weight: 500;
+}
+
+.control {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  height: $control-h-md;
+  width: $control-h-md;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $background;
+  color: $foreground;
+  cursor: pointer;
+  transition: background-color $transition-fast, opacity $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+.previous {
+  left: $spacing-md;
+}
+
+.next {
+  right: $spacing-md;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-md;
+  padding: 0;
+  list-style: none;
+}
+
+.dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  border: none;
+  background: $border;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &[data-active='true'] {
+    background: $primary;
+    transform: scale(1.15);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}

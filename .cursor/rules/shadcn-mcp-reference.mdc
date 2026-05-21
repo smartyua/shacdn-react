@@ -5,6 +5,8 @@ alwaysApply: false
 
 # shadcn/ui MCP — reference for this repo
 
+**Visual reference:** [https://ui.shadcn.com](https://ui.shadcn.com) · **Local parity matrix:** `docs/SHADCN_PARITY_MATRIX.md` · **Pixel workflow:** `docs/DESIGN_REFERENCE.md`
+
 This project is configured per [shadcn MCP docs](https://ui.shadcn.com/docs/mcp): **`.cursor/mcp.json`** runs `npx shadcn@latest mcp`. Enable the **shadcn** server in Cursor settings if tools are unavailable.
 
 ## When to use it

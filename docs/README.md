@@ -4,6 +4,9 @@ A comprehensive implementation guide for this React component library.
 
 ## Quick Links
 
+- **[Design Reference](./DESIGN_REFERENCE.md)** — [ui.shadcn.com](https://ui.shadcn.com) + pixel-perfect workflow
+- **[Parity Matrix](./SHADCN_PARITY_MATRIX.md)** — audit status per registry primitive
+- **[Visual Audit Report](./VISUAL_AUDIT_REPORT.md)** — screenshot + computed-style comparison vs ui.shadcn.com
 - **[Integration Guide](./INTEGRATION_GUIDE.md)** — use shacdn components & design in **other projects**
 - [Component Guide](./COMPONENT_GUIDE.md) - Usage examples and API
 - [Style Guide](./STYLE_GUIDE.md) - Design tokens and SCSS patterns
@@ -38,7 +41,10 @@ A comprehensive implementation guide for this React component library.
 
 ### Navigation
 - **Breadcrumb** - navigation breadcrumbs
+- **NavigationMenu** - site nav with dropdown panels
 - **Pagination** - page navigation controls
+- **Carousel** - horizontal scroll-snap slides
+- **Command** - command palette (search + actions)
 
 ### Overlays
 - **Dialog** - modal dialogs

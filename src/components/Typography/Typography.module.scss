@@ -1,0 +1,113 @@
+@use '../../styles/variables.scss' as *;
+
+.h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: $tracking-tight;
+  line-height: 1.1;
+  color: $foreground;
+}
+
+.h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.2;
+  color: $foreground;
+}
+
+.h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.25;
+  color: $foreground;
+}
+
+.h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: $tracking-ui;
+  line-height: 1.3;
+  color: $foreground;
+}
+
+.p {
+  font-size: $font-size-base;
+  line-height: 1.75;
+  color: $foreground;
+}
+
+.lead {
+  font-size: $font-size-xl;
+  line-height: 1.6;
+  color: $muted-foreground;
+}
+
+.large {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  line-height: 1.5;
+  color: $foreground;
+}
+
+.small {
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.muted {
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: $muted-foreground;
+}
+
+.blockquote {
+  margin: 0;
+  padding-left: $spacing-md;
+  border-left: 3px solid $border;
+  font-size: $font-size-base;
+  font-style: italic;
+  color: $foreground;
+}
+
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  font-weight: 600;
+  background-color: $muted;
+  padding: 0.15em 0.35em;
+  border-radius: $radius-sm;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: $font-size-base;
+  line-height: 1.75;
+  color: $foreground;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-sm;
+
+  th,
+  td {
+    border: $border-width solid $border;
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+  }
+
+  th {
+    font-weight: 600;
+    color: $foreground;
+  }
+
+  td {
+    color: $muted-foreground;
+  }
+}

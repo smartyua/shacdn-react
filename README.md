@@ -4,7 +4,7 @@ React component library based on shadcn/ui design using SCSS modules without Tai
 
 ## Overview
 
-Professional-grade React library aligned with shadcn/ui: **50+ UI primitives** (plus `ThemeSwitcher` for demos), **control heights** matching Tailwind **h-8 / h-9 / h-10** (36px default button/input). Pure SCSS modules (no Tailwind), strict TypeScript.
+Professional-grade React library aligned with **[shadcn/ui](https://ui.shadcn.com)**: **54+ UI primitives** (plus `ThemeSwitcher` for demos), **control heights** matching Tailwind **h-8 / h-9 / h-10** (36px default button/input). Pure SCSS modules (no Tailwind), strict TypeScript. Design reference: [docs/DESIGN_REFERENCE.md](./docs/DESIGN_REFERENCE.md).
 
 ## Use in other projects
 
@@ -24,8 +24,8 @@ See also: [STYLE_GUIDE.md](./docs/STYLE_GUIDE.md) · [AI_AGENT_GUIDE.md](./docs/
 
 ## Features
 
-- **50+ Components** - Coverage of core shadcn registry primitives
-- **shadcn/ui Design** - Strict adherence to official design system
+- **54+ Components** - Full coverage of shadcn UI registry primitives (see parity matrix)
+- **shadcn/ui Design** - [ui.shadcn.com](https://ui.shadcn.com) as canonical reference
 - **Pure SCSS** - No Tailwind dependency, full styling control
 - **TypeScript** - 100% type coverage
 - **Accessible** - WCAG 2.1 AA compliant
@@ -120,7 +120,9 @@ $transition-fast, $transition-base
 
 - **docs/INTEGRATION_GUIDE.md** — **подключение в другой проект** (главный гайд)
 - **mcp/shacdn-server/** — MCP server for AI agents to export components + design system
-- **docs/COMPONENTS_AI_REFERENCE.md** — 51 компонент: задача → контрол
+- **docs/DESIGN_REFERENCE.md** — [ui.shadcn.com](https://ui.shadcn.com) + pixel-perfect workflow
+- **docs/SHADCN_PARITY_MATRIX.md** — audit status per primitive
+- **docs/COMPONENTS_AI_REFERENCE.md** — 54+ компонентов: задача → контрол
 - **docs/COMPONENT_GUIDE.md** — примеры кода для всех компонентов
 - **docs/STYLE_GUIDE.md** - Tokens, patterns, transferring UI to other projects
 - **docs/PROJECT_SUMMARY.md** - Architecture and features
@@ -141,7 +143,7 @@ $transition-fast, $transition-base
 |--------|--------|
 | **Lint Errors** | 0 |
 | **TypeScript Errors** | 0 |
-| **Component Coverage** | 32/41 (78.0%) |
+| **Component Coverage** | 54/58 UI registry items (see docs/SHADCN_PARITY_MATRIX.md) |
 | **Design Compliance** | 100% |
 | **Accessibility** | WCAG 2.1 AA |
 | **Production Ready** | Yes |

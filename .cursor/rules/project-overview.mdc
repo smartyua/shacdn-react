@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Project Overview
 
-This is a React component library based on shadcn/ui design system, using SCSS modules without Tailwind CSS.
+This is a React component library based on the official [shadcn/ui](https://ui.shadcn.com) design system, using SCSS modules without Tailwind CSS. See `docs/DESIGN_REFERENCE.md` and `docs/SHADCN_PARITY_MATRIX.md` for parity audits.
 
 ## Tech Stack
 - **Framework**: React 19 + TypeScript

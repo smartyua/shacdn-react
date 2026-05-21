@@ -4,6 +4,8 @@
   position: sticky;
   top: 0;
   z-index: $z-sticky;
+  min-height: $site-header-height;
+  box-sizing: border-box;
   border-bottom: $border-width solid $border;
   background-color: color-mix(in srgb, $background 82%, transparent);
   backdrop-filter: blur(12px);

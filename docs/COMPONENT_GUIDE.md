@@ -1,6 +1,10 @@
 # Component Guide
 
-Руководство по API примитивов. **Полный каталог и матрица «задача → контрол»:** **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** (50+ компонентов, паритет с [shadcn/ui](https://ui.shadcn.com)). Перенос дизайн-системы: **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** · экран-референс `src/screens/SessyLanding/`.
+Руководство по API примитивов.
+
+**Официальный референс:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)
+
+**Полный каталог и матрица «задача → контрол»:** **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** (54+ компонентов). Перенос дизайн-системы: **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** · экран-референс `src/screens/SessyLanding/`.
 
 ## Using Existing Components
 
@@ -1086,6 +1090,90 @@ export const Component = ({ value, defaultValue, onValueChange }) => {
 };
 ```
 
+### Navigation Menu
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuContentLink,
+  NavigationMenuLink,
+} from './components/NavigationMenu/NavigationMenu';
+
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="/">Home</NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger menuId="products">Products</NavigationMenuTrigger>
+      <NavigationMenuContent menuId="products">
+        <NavigationMenuContentLink href="/widgets">Widgets</NavigationMenuContentLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+### Carousel
+
+```tsx
+import {
+  Carousel,
+  CarouselViewport,
+  CarouselContent,
+  CarouselItem,
+  CarouselSlide,
+  CarouselPrevious,
+  CarouselNext,
+  CarouselDots,
+} from './components/Carousel/Carousel';
+
+<Carousel>
+  <CarouselViewport>
+    <CarouselContent>
+      <CarouselItem><CarouselSlide>1</CarouselSlide></CarouselItem>
+      <CarouselItem><CarouselSlide>2</CarouselSlide></CarouselItem>
+    </CarouselContent>
+    <CarouselPrevious />
+    <CarouselNext />
+  </CarouselViewport>
+  <CarouselDots />
+</Carousel>
+```
+
+### Command
+
+```tsx
+import {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from './components/Command/Command';
+
+const [open, setOpen] = useState(false);
+
+<Button onClick={() => setOpen(true)}>Command palette</Button>
+<CommandDialog open={open} onOpenChange={setOpen}>
+  <Command>
+    <CommandInput />
+    <CommandList>
+      <CommandEmpty />
+      <CommandGroup heading="Actions">
+        <CommandItem value="settings" onSelect={() => setOpen(false)}>Settings</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</CommandDialog>
+```
+
 ---
 
 ## Best Practices
@@ -1109,7 +1197,8 @@ export const Component = ({ value, defaultValue, onValueChange }) => {
 
 ## Resources
 
-- [shadcn/ui documentation](https://ui.shadcn.com)
+- [shadcn/ui — canonical design reference](https://ui.shadcn.com)
+- [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)
 - [shadcn/ui GitHub](https://github.com/shadcn-ui/ui)
 - Examples in `src/App.tsx`
 - All components in `src/components/`

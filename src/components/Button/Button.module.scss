@@ -22,6 +22,11 @@
     outline-offset: $focus-ring-offset;
   }
 
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+    transition-duration: 80ms;
+  }
+
   &:disabled {
     pointer-events: none;
     opacity: 0.5;

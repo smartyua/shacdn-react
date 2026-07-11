@@ -1,5 +1,7 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState, useCallback } from 'react';
 import styles from './Dialog.module.scss';
+
+const EXIT_DURATION = 150;
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -12,22 +14,33 @@ export interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   ({ open = false, children, ...props }, ref) => {
+    const [visible, setVisible] = useState(false);
+    const [closing, setClosing] = useState(false);
+
     useEffect(() => {
       if (open) {
+        setVisible(true);
+        setClosing(false);
         document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
+      } else if (visible) {
+        setClosing(true);
+        const timer = setTimeout(() => {
+          setVisible(false);
+          setClosing(false);
+          document.body.style.overflow = '';
+        }, EXIT_DURATION);
+        return () => clearTimeout(timer);
       }
-      
-      return () => {
-        document.body.style.overflow = '';
-      };
     }, [open]);
 
-    if (!open) return null;
+    useEffect(() => {
+      return () => { document.body.style.overflow = ''; };
+    }, []);
+
+    if (!visible) return null;
 
     return (
-      <div ref={ref} className={styles.dialogRoot} {...props}>
+      <div ref={ref} className={`${styles.dialogRoot} ${closing ? styles.closing : ''}`} {...props}>
         {children}
       </div>
     );

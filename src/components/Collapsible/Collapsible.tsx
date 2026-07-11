@@ -91,12 +91,15 @@ export type CollapsibleContentProps = HTMLAttributes<HTMLDivElement>;
 
 export function CollapsibleContent({ className = '', children, ...props }: CollapsibleContentProps) {
   const { open, contentId } = useCollapsibleContext('CollapsibleContent');
-  if (!open) {
-    return null;
-  }
   return (
-    <div id={contentId} role="region" className={`${styles.content} ${className}`} data-state="open" {...props}>
-      {children}
+    <div
+      id={contentId}
+      role="region"
+      className={`${styles.content} ${open ? styles.contentOpen : ''} ${className}`}
+      data-state={open ? 'open' : 'closed'}
+      {...props}
+    >
+      <div className={styles.contentInner}>{children}</div>
     </div>
   );
 }

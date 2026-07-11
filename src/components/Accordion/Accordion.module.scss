@@ -57,7 +57,7 @@
 
 .chevron {
   flex-shrink: 0;
-  transition: transform $transition-fast;
+  transition: transform 200ms $ease-spring;
   color: $muted-foreground;
 }
 

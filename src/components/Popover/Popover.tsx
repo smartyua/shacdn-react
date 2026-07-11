@@ -12,6 +12,7 @@ import styles from './Popover.module.scss';
 
 type PopoverCtx = {
   open: boolean;
+  closing: boolean;
   setOpen: (v: boolean) => void;
 };
 
@@ -32,6 +33,8 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
+const POPOVER_EXIT_DURATION = 120;
+
 export function Popover({
   open: openControlled,
   defaultOpen = false,
@@ -41,13 +44,26 @@ export function Popover({
   ...props
 }: PopoverProps) {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const [visible, setVisible] = useState(defaultOpen);
+  const [closing, setClosing] = useState(false);
   const open = openControlled ?? internalOpen;
+
   const setOpen = useCallback(
     (v: boolean) => {
-      if (openControlled === undefined) {
-        setInternalOpen(v);
+      if (v) {
+        setVisible(true);
+        setClosing(false);
+        if (openControlled === undefined) setInternalOpen(true);
+        onOpenChange?.(true);
+      } else {
+        setClosing(true);
+        setTimeout(() => {
+          setVisible(false);
+          setClosing(false);
+          if (openControlled === undefined) setInternalOpen(false);
+          onOpenChange?.(false);
+        }, POPOVER_EXIT_DURATION);
       }
-      onOpenChange?.(v);
     },
     [openControlled, onOpenChange]
   );
@@ -55,7 +71,7 @@ export function Popover({
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!visible || closing) return;
     const onDoc = (e: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
         setOpen(false);
@@ -63,10 +79,10 @@ export function Popover({
     };
     document.addEventListener('mousedown', onDoc);
     return () => document.removeEventListener('mousedown', onDoc);
-  }, [open, setOpen]);
+  }, [visible, closing, setOpen]);
 
   return (
-    <PopoverContext.Provider value={{ open, setOpen }}>
+    <PopoverContext.Provider value={{ open: visible, closing, setOpen }}>
       <div ref={rootRef} className={`${styles.root} ${className}`} {...props}>
         {children}
       </div>
@@ -108,7 +124,7 @@ export function PopoverContent({
   children,
   ...props
 }: PopoverContentProps) {
-  const { open } = usePopover();
+  const { open, closing } = usePopover();
   if (!open) {
     return null;
   }
@@ -116,7 +132,7 @@ export function PopoverContent({
     align === 'start' ? styles.alignStart : align === 'end' ? styles.alignEnd : styles.alignCenter;
 
   return (
-    <div className={`${styles.content} ${alignClass} ${className}`} {...props}>
+    <div className={`${styles.content} ${alignClass} ${closing ? styles.closing : ''} ${className}`} {...props}>
       {children}
     </div>
   );

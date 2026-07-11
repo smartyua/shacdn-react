@@ -20,6 +20,7 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
 
   &::-webkit-scrollbar {
     display: none;

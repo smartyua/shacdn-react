@@ -16,25 +16,39 @@ export interface DropdownMenuItemProps extends React.HTMLAttributes<HTMLDivEleme
   disabled?: boolean;
 }
 
+const DROPDOWN_EXIT_DURATION = 120;
+
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({ children }) => {
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const handleOpen = () => {
+    setVisible(true);
+    setClosing(false);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setClosing(true);
+    setTimeout(() => {
+      setVisible(false);
+      setClosing(false);
+      setOpen(false);
+    }, DROPDOWN_EXIT_DURATION);
+  };
+
   useEffect(() => {
+    if (!visible || closing) return;
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpen(false);
+        handleClose();
       }
     };
-
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [open]);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [visible, closing]);
 
   return (
     <div ref={menuRef} className={styles.dropdownMenu}>
@@ -42,13 +56,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ children }) => {
         if (React.isValidElement(child)) {
           if (child.type === DropdownMenuTrigger) {
             return React.cloneElement(child as React.ReactElement<{ onClick?: () => void }>, {
-              onClick: () => setOpen(!open),
+              onClick: () => visible ? handleClose() : handleOpen(),
             });
           }
           if (child.type === DropdownMenuContent) {
-            return React.cloneElement(child as React.ReactElement<{ open?: boolean; onClose?: () => void }>, {
-              open,
-              onClose: () => setOpen(false),
+            return React.cloneElement(child as React.ReactElement<{ open?: boolean; closing?: boolean; onClose?: () => void }>, {
+              open: visible,
+              closing,
+              onClose: handleClose,
             });
           }
         }
@@ -74,17 +89,18 @@ DropdownMenuTrigger.displayName = 'DropdownMenuTrigger';
 
 interface DropdownMenuContentPropsInternal extends DropdownMenuContentProps {
   open?: boolean;
+  closing?: boolean;
   onClose?: () => void;
 }
 
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentPropsInternal>(
-  ({ className = '', align = 'end', sideOffset = 4, open, onClose, children, ...props }, ref) => {
+  ({ className = '', align = 'end', sideOffset = 4, open, closing, onClose, children, ...props }, ref) => {
     if (!open) return null;
 
     return (
       <div
         ref={ref}
-        className={`${styles.dropdownMenuContent} ${styles[`align-${align}`]} ${className}`}
+        className={`${styles.dropdownMenuContent} ${styles[`align-${align}`]} ${closing ? styles.closing : ''} ${className}`}
         style={{ marginTop: `${sideOffset}px` }}
         {...props}
       >

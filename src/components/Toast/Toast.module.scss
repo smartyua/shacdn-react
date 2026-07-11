@@ -67,6 +67,17 @@
   &.toast--top-center {
     animation: slideInFromTop 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  // Exit — reverse entry path (Apple §7)
+  &.closing.toast--bottom-right,
+  &.closing.toast--bottom-center {
+    animation: slideOutToBottom 200ms ease-in forwards;
+  }
+
+  &.closing.toast--top-right,
+  &.closing.toast--top-center {
+    animation: slideOutToTop 200ms ease-in forwards;
+  }
 }
 
 @keyframes slideInFromBottom {
@@ -88,6 +99,28 @@
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes slideOutToBottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
   }
 }
 

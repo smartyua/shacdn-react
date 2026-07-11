@@ -25,17 +25,29 @@
 .alignStart {
   left: 0;
   animation: popInStart 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.closing {
+    animation: popOutStart 120ms ease-in forwards;
+  }
 }
 
 .alignCenter {
   left: 50%;
   transform: translateX(-50%);
   animation: popInCenter 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.closing {
+    animation: popOutCenter 120ms ease-in forwards;
+  }
 }
 
 .alignEnd {
   right: 0;
   animation: popInEnd 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.closing {
+    animation: popOutEnd 120ms ease-in forwards;
+  }
 }
 
 @keyframes popInStart {
@@ -69,4 +81,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+// Exit — reverse entry path
+@keyframes popOutStart {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes popOutCenter {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, -4px); }
+}
+
+@keyframes popOutEnd {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
 }

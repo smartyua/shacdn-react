@@ -35,64 +35,41 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       onValueChange?.(clampedValue);
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handlePointerDown = (e: React.PointerEvent) => {
       if (disabled) return;
       isDragging.current = true;
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
       updateValue(e.clientX);
-      
-      const handleMouseMove = (e: MouseEvent) => {
-        if (isDragging.current) {
-          updateValue(e.clientX);
-        }
-      };
-      
-      const handleMouseUp = () => {
-        isDragging.current = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-      
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
     };
 
-    const handleTouchStart = (e: React.TouchEvent) => {
-      if (disabled) return;
-      isDragging.current = true;
-      updateValue(e.touches[0].clientX);
-      
-      const handleTouchMove = (e: TouchEvent) => {
-        if (isDragging.current && e.touches[0]) {
-          updateValue(e.touches[0].clientX);
-        }
-      };
-      
-      const handleTouchEnd = () => {
-        isDragging.current = false;
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleTouchEnd);
-      };
-      
-      document.addEventListener('touchmove', handleTouchMove);
-      document.addEventListener('touchend', handleTouchEnd);
+    const handlePointerMove = (e: React.PointerEvent) => {
+      if (isDragging.current) {
+        updateValue(e.clientX);
+      }
+    };
+
+    const handlePointerUp = () => {
+      isDragging.current = false;
     };
 
     return (
-      <div 
+      <div
         ref={ref}
         className={`${styles.slider} ${disabled ? styles.disabled : ''} ${className || ''}`}
         {...props}
       >
-        <div 
+        <div
           ref={trackRef}
           className={styles.track}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           <div className={styles.range} style={{ width: `${percentage}%` }} />
         </div>
-        <div 
-          className={styles.thumb} 
+        <div
+          className={styles.thumb}
           style={{ left: `${percentage}%` }}
           role="slider"
           aria-valuemin={min}

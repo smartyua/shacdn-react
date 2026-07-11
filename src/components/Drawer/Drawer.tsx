@@ -1,5 +1,7 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import styles from './Drawer.module.scss';
+
+const EXIT_DURATION = 200;
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -14,22 +16,33 @@ export interface DrawerContentProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   ({ open = false, children, side = 'right', ...props }, ref) => {
+    const [visible, setVisible] = useState(false);
+    const [closing, setClosing] = useState(false);
+
     useEffect(() => {
       if (open) {
+        setVisible(true);
+        setClosing(false);
         document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
+      } else if (visible) {
+        setClosing(true);
+        const timer = setTimeout(() => {
+          setVisible(false);
+          setClosing(false);
+          document.body.style.overflow = '';
+        }, EXIT_DURATION);
+        return () => clearTimeout(timer);
       }
-      
-      return () => {
-        document.body.style.overflow = '';
-      };
     }, [open]);
 
-    if (!open) return null;
+    useEffect(() => {
+      return () => { document.body.style.overflow = ''; };
+    }, []);
+
+    if (!visible) return null;
 
     return (
-      <div ref={ref} className={styles.drawerRoot} {...props}>
+      <div ref={ref} className={`${styles.drawerRoot} ${closing ? styles.closing : ''}`} {...props}>
         {React.Children.map(children, child => {
           if (React.isValidElement(child) && child.type === DrawerContent) {
             return React.cloneElement(child as React.ReactElement<DrawerContentProps>, { side });

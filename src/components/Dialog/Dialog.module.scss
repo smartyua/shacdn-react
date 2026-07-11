@@ -13,17 +13,23 @@
   position: fixed;
   inset: 0;
   z-index: $z-overlay-backdrop;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  .closing & {
+    animation: overlayHide 150ms ease-in forwards;
+  }
 }
 
 @keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; backdrop-filter: blur(0); }
+  to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+@keyframes overlayHide {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .dialogContent {
@@ -40,7 +46,11 @@
   width: 90vw;
   max-height: 85vh;
   overflow-y: auto;
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  .closing & {
+    animation: contentHide 150ms ease-in forwards;
+  }
 
   &:focus {
     outline: none;
@@ -55,6 +65,17 @@
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
   }
 }
 

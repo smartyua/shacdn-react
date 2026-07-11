@@ -156,8 +156,8 @@ export type AccordionContentProps = HTMLAttributes<HTMLDivElement>;
 
 export function AccordionContent({ className = '', children, ...props }: AccordionContentProps) {
   return (
-    <CollapsibleContent className={`${styles.content} ${className}`} {...props}>
-      {children}
+    <CollapsibleContent className={className} {...props}>
+      <div className={styles.content}>{children}</div>
     </CollapsibleContent>
   );
 }

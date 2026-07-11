@@ -41,7 +41,7 @@
     height: 1rem;
     border-radius: 9999px;
     background-color: $background;
-    transition: transform $transition-base;
+    transition: transform 300ms $ease-spring;
     pointer-events: none;
   }
 

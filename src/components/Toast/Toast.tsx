@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, forwardRef, useEffect } from 'react';
+import React, { createContext, useContext, useState, forwardRef, useEffect, useCallback } from 'react';
 import styles from './Toast.module.scss';
 
 export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -91,21 +91,31 @@ interface ToastItemProps extends ToastProps {
   position?: ToastPosition;
 }
 
+const TOAST_EXIT_DURATION = 200;
+
 export const ToastItem = forwardRef<HTMLDivElement, ToastItemProps>(
   ({ className = '', variant = 'default', duration = 5000, position = 'bottom-right', onClose, children, ...props }, ref) => {
+    const [closing, setClosing] = useState(false);
+
+    const handleClose = useCallback(() => {
+      if (closing) return;
+      setClosing(true);
+      setTimeout(() => onClose?.(), TOAST_EXIT_DURATION);
+    }, [closing, onClose]);
+
     useEffect(() => {
       if (duration && onClose) {
-        const timer = setTimeout(onClose, duration);
+        const timer = setTimeout(handleClose, duration);
         return () => clearTimeout(timer);
       }
-    }, [duration, onClose]);
+    }, [duration, onClose, handleClose]);
 
     const positionClass = styles[`toast--${position}`];
 
     return (
       <div
         ref={ref}
-        className={`${styles.toast} ${styles[`toast--${variant}`]} ${positionClass} ${className}`}
+        className={`${styles.toast} ${styles[`toast--${variant}`]} ${positionClass} ${closing ? styles.closing : ''} ${className}`}
         {...props}
       >
         <div className={styles.toastContent}>{children}</div>
@@ -113,7 +123,7 @@ export const ToastItem = forwardRef<HTMLDivElement, ToastItemProps>(
           <button
             type="button"
             className={styles.toastClose}
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close"
           >
             <svg

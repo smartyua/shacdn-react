@@ -18,6 +18,7 @@ export interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement
 
 type TooltipContextValue = {
   open: boolean;
+  closing: boolean;
   setOpen: (open: boolean) => void;
   triggerElement: HTMLElement | null;
   setTriggerElement: (el: HTMLElement | null) => void;
@@ -29,12 +30,30 @@ export const TooltipProvider: React.FC<{ children: React.ReactNode }> = ({ child
   return <>{children}</>;
 };
 
+const TOOLTIP_EXIT_DURATION = 100;
+
 export const Tooltip: React.FC<TooltipProps> = ({ children }) => {
-  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
   const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const setOpen = (v: boolean) => {
+    if (v) {
+      clearTimeout(closeTimer.current);
+      setVisible(true);
+      setClosing(false);
+    } else {
+      setClosing(true);
+      closeTimer.current = setTimeout(() => {
+        setVisible(false);
+        setClosing(false);
+      }, TOOLTIP_EXIT_DURATION);
+    }
+  };
 
   return (
-    <TooltipContext.Provider value={{ open, setOpen, triggerElement, setTriggerElement }}>
+    <TooltipContext.Provider value={{ open: visible, closing, setOpen, triggerElement, setTriggerElement }}>
       {children}
     </TooltipContext.Provider>
   );
@@ -121,10 +140,12 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
 
   if (!context?.open) return null;
 
+  const isClosing = context?.closing;
+
   return createPortal(
     <div
       ref={contentRef}
-      className={`${styles.tooltipContent} ${styles[side]} ${className}`}
+      className={`${styles.tooltipContent} ${styles[side]} ${isClosing ? styles.closing : ''} ${className}`}
       style={{ top: `${position.top}px`, left: `${position.left}px` }}
       {...props}
     >

@@ -42,10 +42,21 @@ export const InputOTP = ({
     [valueControlled, onChange]
   );
 
+  const focusSlot = useCallback(
+    (index: number) => {
+      document.getElementById(`${baseId}-${index}`)?.focus();
+    },
+    [baseId]
+  );
+
   const setChar = (index: number, ch: string) => {
     const arr = padded.split('');
-    arr[index] = ch === '' ? ' ' : ch.slice(-1).replace(/\D/g, '') || ' ';
+    const digit = ch === '' ? ' ' : ch.slice(-1).replace(/\D/g, '') || ' ';
+    arr[index] = digit;
     emit(arr.join(''));
+    if (digit !== ' ' && index < length - 1) {
+      focusSlot(index + 1);
+    }
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
@@ -54,17 +65,17 @@ export const InputOTP = ({
       if (el.value === '') {
         if (index > 0) {
           setChar(index - 1, '');
-          document.getElementById(`${baseId}-${index - 1}`)?.focus();
+          focusSlot(index - 1);
         }
       } else {
         setChar(index, '');
       }
     }
     if (e.key === 'ArrowLeft' && index > 0) {
-      document.getElementById(`${baseId}-${index - 1}`)?.focus();
+      focusSlot(index - 1);
     }
     if (e.key === 'ArrowRight' && index < length - 1) {
-      document.getElementById(`${baseId}-${index + 1}`)?.focus();
+      focusSlot(index + 1);
     }
   };
 
@@ -72,6 +83,7 @@ export const InputOTP = ({
     e.preventDefault();
     const text = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, length);
     emit(padDigits(text, length));
+    focusSlot(Math.min(text.length, length - 1));
   };
 
   return (

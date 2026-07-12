@@ -8,6 +8,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         ref={ref}
+        data-slot="textarea"
         className={`${styles.textarea} ${className || ''}`}
         {...props}
       />

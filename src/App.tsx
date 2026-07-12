@@ -2,7 +2,7 @@ import './styles/globals.scss';
 import styles from './App.module.scss';
 import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { ToastProvider, useToast } from './components/Toast/Toast';
+import { ToastProvider, useToastActions } from './components/Toast/Toast';
 import { Button } from './components/Button/Button';
 import { Input } from './components/Input/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './components/Card/Card';
@@ -40,6 +40,7 @@ import { Skeleton } from './components/Skeleton/Skeleton';
 import { Spinner } from './components/Spinner/Spinner';
 import { RadioGroup, RadioGroupItem } from './components/RadioGroup/RadioGroup';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './components/Tooltip/Tooltip';
+import { LocaleProvider } from './components/Locale/Locale';
 import { SiteHeader } from './components/SiteHeader/SiteHeader';
 import { SessyLanding } from './screens/SessyLanding/SessyLanding';
 import { ShadcnHome } from './screens/ShadcnHome/ShadcnHome';
@@ -121,45 +122,388 @@ import { BarChart, ChartContainer } from './components/Chart/Chart';
 import { TypographyH1, TypographyLead, TypographyMuted, TypographyP } from './components/Typography/Typography';
 import { DirectionProvider } from './components/Direction/Direction';
 import { NativeSelect } from './components/NativeSelect/NativeSelect';
-import { ChevronDown, Home, Inbox, LayoutDashboard, Settings } from 'lucide-react';
+import {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentGroup,
+  AttachmentMedia,
+  AttachmentTitle,
+  AttachmentTrigger,
+} from './components/Attachment/Attachment';
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions,
+} from './components/Bubble/Bubble';
+import { Marker, MarkerContent, MarkerIcon } from './components/Marker/Marker';
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageGroup,
+  MessageHeader,
+} from './components/Message/Message';
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
+} from './components/MessageScroller/MessageScroller';
+import {
+  CheckCircle2,
+  ChevronDown,
+  Download,
+  FileText,
+  Heart,
+  Home,
+  Inbox,
+  LayoutDashboard,
+  Loader2,
+  Plus,
+  Settings,
+  ThumbsUp,
+  X,
+} from 'lucide-react';
+
+type ScrollerDemoMessage = {
+  id: string;
+  author: string;
+  initials: string;
+  body: string;
+  time: string;
+  isUser: boolean;
+};
+
+const SCROLLER_SEED: ScrollerDemoMessage[] = [
+  { id: 'msg-1', author: 'Alex Kim', initials: 'AK', body: 'Hey! Did you review the design specs I sent over?', time: '9:12 AM', isUser: false },
+  { id: 'msg-2', author: 'You', initials: 'YO', body: 'Just finished — overall looks great. A few spacing tweaks on mobile.', time: '9:14 AM', isUser: true },
+  { id: 'msg-3', author: 'Alex Kim', initials: 'AK', body: 'Perfect. I pushed an update to the Figma file with the revised tokens.', time: '9:15 AM', isUser: false },
+  { id: 'msg-4', author: 'You', initials: 'YO', body: 'Nice. Can we align the chat bubble radius with the card component?', time: '9:18 AM', isUser: true },
+  { id: 'msg-5', author: 'Alex Kim', initials: 'AK', body: 'Already on it — using $radius-xl across both.', time: '9:20 AM', isUser: false },
+  { id: 'msg-6', author: 'You', initials: 'YO', body: 'Also added attachment previews for image uploads in the composer.', time: '9:22 AM', isUser: true },
+  { id: 'msg-7', author: 'Alex Kim', initials: 'AK', body: 'Love it. The horizontal scroll group feels very native.', time: '9:24 AM', isUser: false },
+  { id: 'msg-8', author: 'You', initials: 'YO', body: 'Message scroller auto-scrolls when pinned to the bottom — try adding more below.', time: '9:26 AM', isUser: true },
+  { id: 'msg-9', author: 'Alex Kim', initials: 'AK', body: 'Scroll up and the jump-to-latest button should appear.', time: '9:28 AM', isUser: false },
+  { id: 'msg-10', author: 'You', initials: 'YO', body: 'Markers for “Today” and delivery status slot in cleanly too.', time: '9:30 AM', isUser: true },
+  { id: 'msg-11', author: 'Alex Kim', initials: 'AK', body: 'Ship it when lint passes — this thread demo is convincing.', time: '9:32 AM', isUser: false },
+  { id: 'msg-12', author: 'You', initials: 'YO', body: 'Running build now. Almost there.', time: '9:34 AM', isUser: true },
+];
+
+const COMBO_OPTIONS = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana' },
+  { value: 'blueberry', label: 'Blueberry' },
+  { value: 'grapes', label: 'Grapes' },
+  { value: 'pineapple', label: 'Pineapple' },
+] as const;
+
+const COMPONENTS_NAV = [
+  'Accordion', 'Alert', 'Alert Dialog', 'Attachment', 'Aspect Ratio', 'Avatar', 'Badge', 'Breadcrumb', 'Button',
+  'Button Group', 'Bubble', 'Calendar', 'Card', 'Carousel', 'Chart', 'Checkbox', 'Collapsible', 'Combobox',
+  'Command', 'Context Menu', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty',
+  'Field', 'Form', 'Hover Card', 'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label', 'Marker',
+  'Menubar', 'Message', 'Message Scroller', 'Modal', 'Native Select', 'Navigation Menu', 'Pagination', 'Popover', 'Progress',
+  'RadioGroup', 'Resizable', 'Scroll Area', 'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton',
+  'Slider', 'Sonner', 'Spinner', 'Switch', 'Table', 'Tabs', 'Textarea', 'Toast', 'Toggle',
+  'Toggle Group', 'Tooltip', 'Typography',
+] as const;
+
+const CHART_DEMO_DATA = [
+  { label: 'Jan', value: 186 },
+  { label: 'Feb', value: 305 },
+  { label: 'Mar', value: 237 },
+  { label: 'Apr', value: 273 },
+  { label: 'May', value: 209 },
+] as const;
+
+const SCROLL_AREA_LINES = Array.from({ length: 20 }, (_, index) => index + 1);
+
+const MessageScrollerDemo = () => {
+  const [messages, setMessages] = useState(SCROLLER_SEED);
+
+  const addMessage = () => {
+    setMessages((prev) => {
+      const index = prev.length + 1;
+      return [
+        ...prev,
+        {
+          id: `msg-${index}-${Date.now()}`,
+          author: 'You',
+          initials: 'YO',
+          body: `Follow-up #${index} — scroller should anchor here with auto-scroll.`,
+          time: new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+          isUser: true,
+        },
+      ];
+    });
+  };
+
+  return (
+    <Card className={styles.scrollerFrame}>
+      <CardContent className={styles.scrollerCardBody}>
+        <MessageScrollerProvider autoScroll initialScroll="end">
+          <MessageScroller className={styles.scrollerRoot}>
+            <MessageScrollerViewport aria-label="Demo conversation">
+              <MessageScrollerContent className={styles.scrollerPadding}>
+                <MessageScrollerItem messageId="today-marker">
+                  <Marker variant="separator">
+                    <MarkerContent>Today</MarkerContent>
+                  </Marker>
+                </MessageScrollerItem>
+                {messages.map((message) => (
+                  <MessageScrollerItem
+                    key={message.id}
+                    messageId={message.id}
+                    scrollAnchor={message.isUser}
+                  >
+                    <Message align={message.isUser ? 'end' : 'start'}>
+                      <MessageAvatar>
+                        <Avatar size="sm">
+                          <AvatarFallback>{message.initials}</AvatarFallback>
+                        </Avatar>
+                      </MessageAvatar>
+                      <MessageContent>
+                        {!message.isUser && (
+                          <MessageHeader>{message.author}</MessageHeader>
+                        )}
+                        <Bubble variant={message.isUser ? 'default' : 'muted'} align={message.isUser ? 'end' : 'start'}>
+                          <BubbleContent>{message.body}</BubbleContent>
+                        </Bubble>
+                        <MessageFooter>{message.time}</MessageFooter>
+                      </MessageContent>
+                    </Message>
+                  </MessageScrollerItem>
+                ))}
+              </MessageScrollerContent>
+            </MessageScrollerViewport>
+            <MessageScrollerButton direction="start" />
+            <MessageScrollerButton direction="end" />
+          </MessageScroller>
+        </MessageScrollerProvider>
+      </CardContent>
+      <CardFooter className={styles.scrollerControls}>
+        <Button size="sm" onClick={addMessage}>
+          <Plus size={16} aria-hidden />
+          Add message
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+};
+
+const AlertDialogSection = () => {
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+
+  return (
+    <section id="alert-dialog" className={styles.section}>
+      <h2>Alert Dialog</h2>
+      <Button onClick={() => setAlertDialogOpen(true)}>Open Alert Dialog</Button>
+      <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
+        <AlertDialogContent onClose={() => setAlertDialogOpen(false)}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. Data will be permanently deleted.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setAlertDialogOpen(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={() => setAlertDialogOpen(false)}>
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </section>
+  );
+};
+
+const DialogSection = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <section id="dialog" className={styles.section}>
+      <h2>Dialog</h2>
+      <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent onClose={() => setDialogOpen(false)}>
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here
+            </DialogDescription>
+          </DialogHeader>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Input placeholder="Name" />
+            <Input placeholder="Email" />
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setDialogOpen(false)}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+};
+
+const ModalSection = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <section id="modal" className={styles.section}>
+      <h2>Modal</h2>
+      <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1rem', maxWidth: '40rem' }}>
+        Same implementation as Dialog, exported as Modal* for documentation and codebases that prefer the term «modal window».
+      </p>
+      <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
+      <Modal open={modalOpen} onOpenChange={setModalOpen}>
+        <ModalContent onClose={() => setModalOpen(false)}>
+          <ModalHeader>
+            <ModalTitle>Modal window</ModalTitle>
+            <ModalDescription>
+              Overlay, focus trap via escape/close, body scroll lock — identical to Dialog.
+            </ModalDescription>
+          </ModalHeader>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Input placeholder="Example field" />
+          </div>
+          <ModalFooter>
+            <Button variant="outline" onClick={() => setModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setModalOpen(false)}>Done</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </section>
+  );
+};
+
+const DrawerSection = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  return (
+    <section id="drawer" className={styles.section}>
+      <h2>Drawer</h2>
+      <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
+      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} side="right">
+        <DrawerContent onClose={() => setDrawerOpen(false)}>
+          <DrawerHeader>
+            <DrawerTitle>Settings</DrawerTitle>
+            <DrawerDescription>Manage your settings</DrawerDescription>
+          </DrawerHeader>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: '0.875rem' }}>Drawer content here</p>
+          </div>
+          <DrawerFooter>
+            <Button onClick={() => setDrawerOpen(false)}>Close</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </section>
+  );
+};
+
+const SheetSection = () => {
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  return (
+    <section id="sheet" className={styles.section}>
+      <h2>Sheet</h2>
+      <Button onClick={() => setSheetOpen(true)}>Open Sheet</Button>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen} side="left">
+        <SheetContent onClose={() => setSheetOpen(false)} side="left">
+          <SheetHeader>
+            <SheetTitle>Sheet panel</SheetTitle>
+            <SheetDescription>Same implementation as Drawer, shadcn-style API.</SheetDescription>
+          </SheetHeader>
+          <SheetFooter>
+            <Button size="sm" onClick={() => setSheetOpen(false)}>Close</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    </section>
+  );
+};
+
+const CalendarSection = () => {
+  const [calDate, setCalDate] = useState<Date | undefined>(() => new Date());
+
+  return (
+    <section id="calendar" className={styles.section}>
+      <h2>Calendar</h2>
+      <Calendar selected={calDate} onSelect={d => setCalDate(d)} />
+    </section>
+  );
+};
+
+const ComboboxSection = () => {
+  const [comboValue, setComboValue] = useState('apple');
+
+  return (
+    <section id="combobox" className={styles.section}>
+      <h2>Combobox</h2>
+      <div style={{ maxWidth: '16rem' }}>
+        <Combobox options={[...COMBO_OPTIONS]} value={comboValue} onValueChange={setComboValue} placeholder="Pick a fruit…" />
+      </div>
+    </section>
+  );
+};
+
+const ToastSection = () => {
+  const { addToast } = useToastActions();
+
+  return (
+    <section id="toast" className={styles.section}>
+      <h2>Toast</h2>
+      <div className={styles.examples}>
+        <Button onClick={() => addToast({ title: 'Success', description: 'Operation completed' })}>
+          Show Toast (Bottom Right)
+        </Button>
+        <Button
+          variant="destructive"
+          onClick={() => addToast({
+            title: 'Error',
+            description: 'Something went wrong',
+            variant: 'destructive',
+          })}
+        >
+          Show Error Toast
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => addToast({
+            title: 'Information',
+            description: 'This toast appears at the top center',
+            position: 'top-center',
+          })}
+        >
+          Show Toast (Top Center)
+        </Button>
+      </div>
+    </section>
+  );
+};
 
 const ComponentsShowcase = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [calDate, setCalDate] = useState<Date | undefined>(() => new Date());
-  const [comboValue, setComboValue] = useState('apple');
   const [otp, setOtp] = useState('');
   const [commandOpen, setCommandOpen] = useState(false);
-  const { addToast } = useToast();
-
-  const comboOptions = [
-    { value: 'apple', label: 'Apple' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'blueberry', label: 'Blueberry' },
-    { value: 'grapes', label: 'Grapes' },
-    { value: 'pineapple', label: 'Pineapple' },
-  ];
-
-  const components = [
-    'Accordion', 'Alert', 'Alert Dialog', 'Aspect Ratio', 'Avatar', 'Badge', 'Breadcrumb', 'Button',
-    'Button Group', 'Calendar', 'Card', 'Carousel', 'Chart', 'Checkbox', 'Collapsible', 'Combobox',
-    'Command', 'Context Menu', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty',
-    'Field', 'Form', 'Hover Card', 'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label',
-    'Menubar', 'Modal', 'Native Select', 'Navigation Menu', 'Pagination', 'Popover', 'Progress',
-    'RadioGroup', 'Resizable', 'Scroll Area', 'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton',
-    'Slider', 'Sonner', 'Spinner', 'Switch', 'Table', 'Tabs', 'Textarea', 'Toast', 'Toggle',
-    'Toggle Group', 'Tooltip', 'Typography',
-  ];
 
   return (
     <div className={styles.wrapper}>
       <nav className={styles.navigation}>
-        <h3>Components ({components.length})</h3>
+        <h3>Components ({COMPONENTS_NAV.length})</h3>
         <ul className={styles.navList}>
-          {components.map(comp => (
+          {COMPONENTS_NAV.map(comp => (
             <li key={comp} className={styles.navItem}>
               <a href={`#${comp.toLowerCase().replace(/ /g, '-')}`}>{comp}</a>
             </li>
@@ -227,27 +571,77 @@ const ComponentsShowcase = () => {
           </div>
         </section>
 
-        <section id="alert-dialog" className={styles.section}>
-          <h2>Alert Dialog</h2>
-          <Button onClick={() => setAlertDialogOpen(true)}>Open Alert Dialog</Button>
-          <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
-            <AlertDialogContent onClose={() => setAlertDialogOpen(false)}>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. Data will be permanently deleted.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel onClick={() => setAlertDialogOpen(false)}>
-                  Cancel
-                </AlertDialogCancel>
-                <AlertDialogAction onClick={() => setAlertDialogOpen(false)}>
-                  Delete
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+        <AlertDialogSection />
+
+        <section id="attachment" className={styles.section}>
+          <h2>Attachment</h2>
+          <div className={styles.demoStack}>
+            <div className={styles.subsection}>
+              <h3>Image group</h3>
+              <AttachmentGroup>
+                <Attachment orientation="vertical">
+                  <AttachmentMedia variant="image">
+                    <div className={styles.attachmentImagePlaceholder} aria-hidden />
+                  </AttachmentMedia>
+                  <AttachmentContent>
+                    <AttachmentTitle>sunset.jpg</AttachmentTitle>
+                    <AttachmentDescription>2.4 MB</AttachmentDescription>
+                  </AttachmentContent>
+                </Attachment>
+                <Attachment orientation="vertical">
+                  <AttachmentMedia variant="image">
+                    <div className={styles.attachmentImagePlaceholderAlt} aria-hidden />
+                  </AttachmentMedia>
+                  <AttachmentContent>
+                    <AttachmentTitle>board.png</AttachmentTitle>
+                    <AttachmentDescription>890 KB</AttachmentDescription>
+                  </AttachmentContent>
+                </Attachment>
+                <Attachment orientation="vertical">
+                  <AttachmentMedia variant="image">
+                    <div className={styles.attachmentImagePlaceholder} aria-hidden />
+                  </AttachmentMedia>
+                  <AttachmentContent>
+                    <AttachmentTitle>wireframe.jpg</AttachmentTitle>
+                    <AttachmentDescription>1.1 MB</AttachmentDescription>
+                  </AttachmentContent>
+                </Attachment>
+              </AttachmentGroup>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Uploading</h3>
+              <Attachment state="uploading" className={styles.attachmentFullWidth}>
+                <AttachmentMedia>
+                  <Loader2 size={16} aria-hidden />
+                </AttachmentMedia>
+                <AttachmentContent>
+                  <AttachmentTitle>quarterly-report.pdf</AttachmentTitle>
+                  <AttachmentDescription>Uploading… 64%</AttachmentDescription>
+                </AttachmentContent>
+              </Attachment>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Done with actions</h3>
+              <Attachment state="done" className={styles.attachmentFullWidth}>
+                <AttachmentMedia>
+                  <FileText size={16} aria-hidden />
+                </AttachmentMedia>
+                <AttachmentContent>
+                  <AttachmentTitle>invoice-march.pdf</AttachmentTitle>
+                  <AttachmentDescription>PDF · 248 KB</AttachmentDescription>
+                </AttachmentContent>
+                <AttachmentActions>
+                  <AttachmentAction aria-label="Download invoice">
+                    <Download size={16} aria-hidden />
+                  </AttachmentAction>
+                  <AttachmentAction aria-label="Remove attachment">
+                    <X size={16} aria-hidden />
+                  </AttachmentAction>
+                </AttachmentActions>
+                <AttachmentTrigger aria-label="Open invoice-march.pdf" />
+              </Attachment>
+            </div>
+          </div>
         </section>
 
         <section id="avatar" className={styles.section}>
@@ -408,54 +802,9 @@ const ComponentsShowcase = () => {
           </div>
         </section>
 
-        <section id="dialog" className={styles.section}>
-          <h2>Dialog</h2>
-          <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
-          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <DialogContent onClose={() => setDialogOpen(false)}>
-              <DialogHeader>
-                <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here
-                </DialogDescription>
-              </DialogHeader>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <Input placeholder="Name" />
-                <Input placeholder="Email" />
-              </div>
-              <DialogFooter>
-                <Button onClick={() => setDialogOpen(false)}>Save</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </section>
+        <DialogSection />
 
-        <section id="modal" className={styles.section}>
-          <h2>Modal</h2>
-          <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1rem', maxWidth: '40rem' }}>
-            Same implementation as Dialog, exported as Modal* for documentation and codebases that prefer the term «modal window».
-          </p>
-          <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
-          <Modal open={modalOpen} onOpenChange={setModalOpen}>
-            <ModalContent onClose={() => setModalOpen(false)}>
-              <ModalHeader>
-                <ModalTitle>Modal window</ModalTitle>
-                <ModalDescription>
-                  Overlay, focus trap via escape/close, body scroll lock — identical to Dialog.
-                </ModalDescription>
-              </ModalHeader>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <Input placeholder="Example field" />
-              </div>
-              <ModalFooter>
-                <Button variant="outline" onClick={() => setModalOpen(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={() => setModalOpen(false)}>Done</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-        </section>
+        <ModalSection />
 
         <section id="direction" className={styles.section}>
           <h2>Direction</h2>
@@ -468,24 +817,7 @@ const ComponentsShowcase = () => {
           </DirectionProvider>
         </section>
 
-        <section id="drawer" className={styles.section}>
-          <h2>Drawer</h2>
-          <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
-          <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} side="right">
-            <DrawerContent onClose={() => setDrawerOpen(false)}>
-              <DrawerHeader>
-                <DrawerTitle>Settings</DrawerTitle>
-                <DrawerDescription>Manage your settings</DrawerDescription>
-              </DrawerHeader>
-              <div style={{ flex: 1 }}>
-                <p style={{ fontSize: '0.875rem' }}>Drawer content here</p>
-              </div>
-              <DrawerFooter>
-                <Button onClick={() => setDrawerOpen(false)}>Close</Button>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        </section>
+        <DrawerSection />
 
         <section id="dropdown-menu" className={styles.section}>
           <h2>Dropdown Menu</h2>
@@ -548,6 +880,42 @@ const ComponentsShowcase = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <Label htmlFor="email-label">Email address</Label>
               <Input id="email-label" type="email" placeholder="email@example.com" />
+            </div>
+          </div>
+        </section>
+
+        <section id="marker" className={styles.section}>
+          <h2>Marker</h2>
+          <div className={styles.demoStack}>
+            <div className={styles.subsection}>
+              <h3>Default</h3>
+              <Marker>
+                <MarkerIcon>
+                  <CheckCircle2 size={16} aria-hidden />
+                </MarkerIcon>
+                <MarkerContent>Message edited</MarkerContent>
+              </Marker>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Status</h3>
+              <Marker>
+                <MarkerIcon>
+                  <CheckCircle2 size={16} aria-hidden />
+                </MarkerIcon>
+                <MarkerContent>Delivered · 9:41 AM</MarkerContent>
+              </Marker>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Separator</h3>
+              <Marker variant="separator">
+                <MarkerContent>Today</MarkerContent>
+              </Marker>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Border</h3>
+              <Marker variant="border">
+                <MarkerContent>3 unread messages</MarkerContent>
+              </Marker>
             </div>
           </div>
         </section>
@@ -805,34 +1173,7 @@ const ComponentsShowcase = () => {
           </div>
         </section>
 
-        <section id="toast" className={styles.section}>
-          <h2>Toast</h2>
-          <div className={styles.examples}>
-            <Button onClick={() => addToast({ title: 'Success', description: 'Operation completed' })}>
-              Show Toast (Bottom Right)
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={() => addToast({ 
-                title: 'Error', 
-                description: 'Something went wrong', 
-                variant: 'destructive' 
-              })}
-            >
-              Show Error Toast
-            </Button>
-            <Button 
-              variant="secondary"
-              onClick={() => addToast({ 
-                title: 'Information', 
-                description: 'This toast appears at the top center', 
-                position: 'top-center'
-              })}
-            >
-              Show Toast (Top Center)
-            </Button>
-          </div>
-        </section>
+        <ToastSection />
 
         <section id="radiogroup" className={styles.section}>
           <h2>RadioGroup</h2>
@@ -931,24 +1272,58 @@ const ComponentsShowcase = () => {
           </ButtonGroup>
         </section>
 
-        <section id="calendar" className={styles.section}>
-          <h2>Calendar</h2>
-          <Calendar selected={calDate} onSelect={d => setCalDate(d)} />
+        <section id="bubble" className={styles.section}>
+          <h2>Bubble</h2>
+          <div className={styles.demoStack}>
+            <div className={styles.subsection}>
+              <h3>Variants</h3>
+              <BubbleGroup>
+                <Bubble variant="default">
+                  <BubbleContent>Primary bubble for outgoing messages.</BubbleContent>
+                </Bubble>
+                <Bubble variant="secondary">
+                  <BubbleContent>Secondary tone for subtle emphasis.</BubbleContent>
+                </Bubble>
+                <Bubble variant="muted">
+                  <BubbleContent>Muted bubble for incoming messages.</BubbleContent>
+                </Bubble>
+                <Bubble variant="outline">
+                  <BubbleContent>Outline variant with a border.</BubbleContent>
+                </Bubble>
+              </BubbleGroup>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Alignment</h3>
+              <BubbleGroup>
+                <Bubble variant="muted" align="start">
+                  <BubbleContent>Aligned to the start (incoming).</BubbleContent>
+                </Bubble>
+                <Bubble variant="default" align="end">
+                  <BubbleContent>Aligned to the end (outgoing).</BubbleContent>
+                </Bubble>
+              </BubbleGroup>
+            </div>
+            <div className={styles.subsection}>
+              <h3>Reactions</h3>
+              <Bubble variant="muted" align="start">
+                <BubbleContent>Great work on the scroll behavior!</BubbleContent>
+                <BubbleReactions side="bottom" align="start">
+                  <ThumbsUp size={14} aria-hidden />
+                  <Heart size={14} aria-hidden />
+                  <span>2</span>
+                </BubbleReactions>
+              </Bubble>
+            </div>
+          </div>
         </section>
+
+        <CalendarSection />
 
         <section id="chart" className={styles.section}>
           <h2>Chart</h2>
           <div style={{ maxWidth: '28rem' }}>
             <ChartContainer title="Monthly total" description="SVG bar chart — zero-dep (Recharts optional in apps)">
-              <BarChart
-                data={[
-                  { label: 'Jan', value: 186 },
-                  { label: 'Feb', value: 305 },
-                  { label: 'Mar', value: 237 },
-                  { label: 'Apr', value: 273 },
-                  { label: 'May', value: 209 },
-                ]}
-              />
+              <BarChart data={[...CHART_DEMO_DATA]} />
             </ChartContainer>
           </div>
         </section>
@@ -975,12 +1350,7 @@ const ComponentsShowcase = () => {
           </Carousel>
         </section>
 
-        <section id="combobox" className={styles.section}>
-          <h2>Combobox</h2>
-          <div style={{ maxWidth: '16rem' }}>
-            <Combobox options={comboOptions} value={comboValue} onValueChange={setComboValue} placeholder="Pick a fruit…" />
-          </div>
-        </section>
+        <ComboboxSection />
 
         <section id="command" className={styles.section}>
           <h2>Command</h2>
@@ -1133,11 +1503,87 @@ const ComponentsShowcase = () => {
           </Menubar>
         </section>
 
+        <section id="message" className={styles.section}>
+          <h2>Message</h2>
+          <div className={styles.chatStack}>
+            <MessageGroup>
+              <Marker variant="separator">
+                <MarkerContent>Today</MarkerContent>
+              </Marker>
+              <Message align="start">
+                <MessageAvatar>
+                  <Avatar size="sm">
+                    <AvatarFallback>AK</AvatarFallback>
+                  </Avatar>
+                </MessageAvatar>
+                <MessageContent>
+                  <MessageHeader>Alex Kim · 9:12 AM</MessageHeader>
+                  <Bubble variant="muted">
+                    <BubbleContent>Can you review the chat primitives before we ship?</BubbleContent>
+                  </Bubble>
+                </MessageContent>
+              </Message>
+              <Message align="end">
+                <MessageAvatar>
+                  <Avatar size="sm">
+                    <AvatarFallback>YO</AvatarFallback>
+                  </Avatar>
+                </MessageAvatar>
+                <MessageContent>
+                  <Bubble variant="default" align="end">
+                    <BubbleContent>Sure — Attachment, Bubble, and MessageScroller are wired up in the catalog.</BubbleContent>
+                    <BubbleReactions side="bottom" align="end">
+                      <ThumbsUp size={14} aria-hidden />
+                    </BubbleReactions>
+                  </Bubble>
+                  <MessageFooter className={styles.messageReactionFooter}>
+                    Read · 9:14 AM
+                  </MessageFooter>
+                </MessageContent>
+              </Message>
+              <Message align="start">
+                <MessageAvatar>
+                  <Avatar size="sm">
+                    <AvatarFallback>AK</AvatarFallback>
+                  </Avatar>
+                </MessageAvatar>
+                <MessageContent>
+                  <MessageHeader>Alex Kim</MessageHeader>
+                  <Bubble variant="muted">
+                    <BubbleContent>Perfect. The marker separators look clean between days too.</BubbleContent>
+                  </Bubble>
+                  <MessageFooter>9:15 AM</MessageFooter>
+                </MessageContent>
+              </Message>
+              <Marker variant="border">
+                <MarkerContent>
+                  <CheckCircle2 size={16} aria-hidden />
+                  {' '}
+                  Alex is typing…
+                </MarkerContent>
+              </Marker>
+            </MessageGroup>
+          </div>
+        </section>
+
+        <section id="message-scroller" className={styles.section}>
+          <h2>Message Scroller</h2>
+          <p className={styles.sectionNote}>
+            Interactive thread in a fixed-height card — scroll up to reveal jump buttons, then add messages to test auto-scroll anchoring.
+          </p>
+          <MessageScrollerDemo />
+        </section>
+
         <section id="popover" className={styles.section}>
           <h2>Popover</h2>
           <Popover>
-            <PopoverTrigger>Open popover</PopoverTrigger>
-            <PopoverContent>The popover is absolutely positioned below the trigger.</PopoverContent>
+            <PopoverTrigger asChild>
+              <Button variant="outline">Open popover</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              The popover is portaled to the document body and repositioned with collision-aware
+              flip and shift as you scroll or resize.
+            </PopoverContent>
           </Popover>
         </section>
 
@@ -1145,28 +1591,14 @@ const ComponentsShowcase = () => {
           <h2>Scroll Area</h2>
           <ScrollArea style={{ height: '8rem', maxWidth: '20rem', border: '1px solid var(--border, #eee)', borderRadius: '8px' }}>
             <div style={{ padding: '1rem' }}>
-              {Array.from({ length: 20 }, (_, i) => (
-                <p key={i} style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Line {i + 1}</p>
+              {SCROLL_AREA_LINES.map((line) => (
+                <p key={line} style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Line {line}</p>
               ))}
             </div>
           </ScrollArea>
         </section>
 
-        <section id="sheet" className={styles.section}>
-          <h2>Sheet</h2>
-          <Button onClick={() => setSheetOpen(true)}>Open Sheet</Button>
-          <Sheet open={sheetOpen} onOpenChange={setSheetOpen} side="left">
-            <SheetContent onClose={() => setSheetOpen(false)} side="left">
-              <SheetHeader>
-                <SheetTitle>Sheet panel</SheetTitle>
-                <SheetDescription>Same implementation as Drawer, shadcn-style API.</SheetDescription>
-              </SheetHeader>
-              <SheetFooter>
-                <Button size="sm" onClick={() => setSheetOpen(false)}>Close</Button>
-              </SheetFooter>
-            </SheetContent>
-          </Sheet>
-        </section>
+        <SheetSection />
 
         <section id="toggle" className={styles.section}>
           <h2>Toggle</h2>
@@ -1247,40 +1679,42 @@ const ComponentsShowcase = () => {
 
 const App = () => {
   return (
-    <ToastProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <SiteHeader />
-                <ShadcnHome />
-              </>
-            }
-          />
-          <Route
-            path="/components"
-            element={
-              <>
-                <SiteHeader />
-                <ComponentsShowcase />
-              </>
-            }
-          />
-          <Route
-            path="/sessy"
-            element={
-              <>
-                <SiteHeader />
-                <SessyLanding />
-              </>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </ToastProvider>
+    <LocaleProvider>
+      <ToastProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SiteHeader />
+                  <ShadcnHome />
+                </>
+              }
+            />
+            <Route
+              path="/components"
+              element={
+                <>
+                  <SiteHeader />
+                  <ComponentsShowcase />
+                </>
+              }
+            />
+            <Route
+              path="/sessy"
+              element={
+                <>
+                  <SiteHeader />
+                  <SessyLanding />
+                </>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </ToastProvider>
+    </LocaleProvider>
   );
 };
 

@@ -1,15 +1,10 @@
 @use '../../styles/variables.scss' as *;
 
 .root {
-  position: relative;
   width: 100%;
 }
 
 .list {
-  position: absolute;
-  top: calc(100% + $spacing-xs);
-  left: 0;
-  right: 0;
   z-index: $z-floating;
   max-height: 16rem;
   overflow: auto;
@@ -20,6 +15,46 @@
   border: $border-width solid $border;
   background: $popover;
   color: $popover-foreground;
+  animation: comboboxPopIn $content-enter;
+}
+
+.list[data-side='top'] {
+  animation-name: comboboxPopInTop;
+}
+
+.list[data-side='bottom'] {
+  animation-name: comboboxPopInBottom;
+}
+
+@keyframes comboboxPopInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes comboboxPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes comboboxPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .option {
@@ -42,6 +77,11 @@
     color: $accent-foreground;
     outline: none;
   }
+}
+
+.optionActive {
+  background: $accent;
+  color: $accent-foreground;
 }
 
 .empty {

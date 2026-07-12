@@ -8,6 +8,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <select
         ref={ref}
+        data-slot="select"
         className={`${styles.select} ${styles.selectNative} ${className || ''}`}
         {...props}
       >

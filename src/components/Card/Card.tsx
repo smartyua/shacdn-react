@@ -8,6 +8,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
+        data-slot="card"
         className={`${styles.card} ${className || ''}`}
         {...props}
       />
@@ -22,6 +23,7 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     return (
       <div
         ref={ref}
+        data-slot="card-header"
         className={`${styles.header} ${className || ''}`}
         {...props}
       />
@@ -36,6 +38,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadi
     return (
       <h3
         ref={ref}
+        data-slot="card-title"
         className={`${styles.title} ${className || ''}`}
         {...props}
       />
@@ -50,6 +53,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<H
     return (
       <p
         ref={ref}
+        data-slot="card-description"
         className={`${styles.description} ${className || ''}`}
         {...props}
       />
@@ -64,6 +68,7 @@ export const CardAction = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     return (
       <div
         ref={ref}
+        data-slot="card-action"
         className={`${styles.action} ${className || ''}`}
         {...props}
       />
@@ -78,6 +83,7 @@ export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
     return (
       <div
         ref={ref}
+        data-slot="card-content"
         className={`${styles.content} ${className || ''}`}
         {...props}
       />
@@ -92,6 +98,7 @@ export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     return (
       <div
         ref={ref}
+        data-slot="card-footer"
         className={`${styles.footer} ${className || ''}`}
         {...props}
       />

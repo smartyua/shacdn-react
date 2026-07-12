@@ -1,29 +1,44 @@
 import {
+  cloneElement,
   createContext,
+  forwardRef,
+  isValidElement,
   useCallback,
   useContext,
-  useEffect,
+  useMemo,
   useRef,
   useState,
   type HTMLAttributes,
+  type MouseEvent,
+  type ReactElement,
   type ReactNode,
+  type RefObject,
 } from 'react';
+import {
+  composeRefs,
+  FloatingPortal,
+  useDismissLayer,
+  useFloatingPosition,
+  type FloatingAlign,
+  type FloatingSide,
+} from '../Floating/Floating';
 import styles from './Popover.module.scss';
 
 type PopoverCtx = {
   open: boolean;
   setOpen: (v: boolean) => void;
+  triggerRef: RefObject<HTMLElement | null>;
 };
 
 const PopoverContext = createContext<PopoverCtx | null>(null);
 
-function usePopover(): PopoverCtx {
+const usePopover = (): PopoverCtx => {
   const c = useContext(PopoverContext);
   if (!c) {
     throw new Error('Popover components must be used within Popover');
   }
   return c;
-}
+};
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -32,16 +47,18 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function Popover({
+export const Popover = ({
   open: openControlled,
   defaultOpen = false,
   onOpenChange,
   className = '',
   children,
   ...props
-}: PopoverProps) {
+}: PopoverProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const open = openControlled ?? internalOpen;
+  const triggerRef = useRef<HTMLElement | null>(null);
+
   const setOpen = useCallback(
     (v: boolean) => {
       if (openControlled === undefined) {
@@ -52,72 +69,131 @@ export function Popover({
     [openControlled, onOpenChange]
   );
 
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e: MouseEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
-  }, [open, setOpen]);
+  const value = useMemo(() => ({ open, setOpen, triggerRef }), [open, setOpen]);
 
   return (
-    <PopoverContext.Provider value={{ open, setOpen }}>
-      <div ref={rootRef} className={`${styles.root} ${className}`} {...props}>
+    <PopoverContext.Provider value={value}>
+      <div className={`${styles.root} ${className}`} data-slot="popover" {...props}>
         {children}
       </div>
     </PopoverContext.Provider>
   );
-}
+};
 
 export interface PopoverTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-export function PopoverTrigger({ className = '', children, onClick, ...props }: PopoverTriggerProps) {
-  const { open, setOpen } = usePopover();
-  return (
-    <button
-      type="button"
-      className={`${styles.trigger} ${className}`}
-      aria-expanded={open}
-      onClick={e => {
-        onClick?.(e);
-        if (!e.defaultPrevented) {
-          setOpen(!open);
-        }
-      }}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
+export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(
+  ({ asChild = false, className = '', children, onClick, ...props }, ref) => {
+    const { open, setOpen, triggerRef } = usePopover();
+
+    const handleClick = (e: MouseEvent<HTMLElement>) => {
+      onClick?.(e as MouseEvent<HTMLButtonElement>);
+      if (!e.defaultPrevented) {
+        setOpen(!open);
+      }
+    };
+
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{
+        className?: string;
+        onClick?: (e: MouseEvent<HTMLElement>) => void;
+        ref?: RefObject<HTMLElement | null>;
+      }>;
+      const childRef = child.props.ref;
+      const mergedRef = (node: HTMLElement | null) => {
+        composeRefs(ref, triggerRef, childRef)(node);
+      };
+      // eslint-disable-next-line react-hooks/refs -- asChild ref merge runs on commit, not during render
+      return cloneElement(child, {
+        ...props,
+        ref: mergedRef,
+        className: `${styles.trigger} ${child.props.className ?? ''} ${className}`.trim(),
+        'aria-expanded': open,
+        'aria-haspopup': 'dialog',
+        'data-slot': 'popover-trigger',
+        onClick: (e: MouseEvent<HTMLElement>) => {
+          child.props.onClick?.(e);
+          handleClick(e);
+        },
+      } as Record<string, unknown>);
+    }
+
+    return (
+      <button
+        ref={composeRefs(ref as RefObject<HTMLButtonElement>, triggerRef as RefObject<HTMLButtonElement>)}
+        type="button"
+        className={`${styles.trigger} ${className}`}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        data-slot="popover-trigger"
+        onClick={handleClick as (e: MouseEvent<HTMLButtonElement>) => void}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+PopoverTrigger.displayName = 'PopoverTrigger';
 
 export interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
-  align?: 'start' | 'center' | 'end';
+  align?: FloatingAlign;
+  side?: FloatingSide;
+  sideOffset?: number;
+  sameWidth?: boolean;
 }
 
-export function PopoverContent({
+export const PopoverContent = ({
   className = '',
   align = 'center',
+  side = 'bottom',
+  sideOffset = 4,
+  sameWidth = false,
   children,
   ...props
-}: PopoverContentProps) {
-  const { open } = usePopover();
+}: PopoverContentProps) => {
+  const { open, setOpen, triggerRef } = usePopover();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const { style, floatingProps } = useFloatingPosition({
+    anchorRef: triggerRef,
+    floatingRef: contentRef,
+    open,
+    side,
+    align,
+    sideOffset,
+    sameWidth,
+  });
+
+  useDismissLayer({
+    open,
+    onDismiss: () => setOpen(false),
+    contentRef,
+    excludeRefs: [triggerRef],
+    dismissOnEscape: true,
+    dismissOnOutsidePointer: true,
+  });
+
   if (!open) {
     return null;
   }
-  const alignClass =
-    align === 'start' ? styles.alignStart : align === 'end' ? styles.alignEnd : styles.alignCenter;
 
   return (
-    <div className={`${styles.content} ${alignClass} ${className}`} {...props}>
-      {children}
-    </div>
+    <FloatingPortal>
+      <div
+        ref={contentRef}
+        role="dialog"
+        data-slot="popover-content"
+        className={`${styles.content} ${className}`}
+        style={style}
+        {...floatingProps}
+        {...props}
+      >
+        {children}
+      </div>
+    </FloatingPortal>
   );
-}
+};

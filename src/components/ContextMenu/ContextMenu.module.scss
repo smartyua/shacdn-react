@@ -9,7 +9,6 @@
 }
 
 .content {
-  position: fixed;
   z-index: $z-floating;
   min-width: 10rem;
   padding: $spacing-xs;
@@ -17,6 +16,46 @@
   border: $border-width solid $border;
   background: $popover;
   color: $popover-foreground;
+  animation: contextMenuIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: contextMenuInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: contextMenuInBottom;
+}
+
+@keyframes contextMenuInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contextMenuInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contextMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .item {

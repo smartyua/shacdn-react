@@ -7,7 +7,7 @@
 }
 
 .slot {
-  width: 2.25rem;
+  width: $control-h-md;
   height: $control-h-md;
   text-align: center;
   border-radius: $radius-md;
@@ -16,14 +16,22 @@
   font-size: $font-size-sm;
   font-family: $font-sans;
   color: $foreground;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+  outline: none;
+  padding: 0;
 
-  &:focus {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
   }
 }

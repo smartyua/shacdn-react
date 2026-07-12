@@ -14,6 +14,6 @@
   width: 100%;
   flex: 1 1 0%;
   background-color: $primary;
-  transition: all $transition-base;
+  transition: transform $transition-base;
   transform-origin: left;
 }

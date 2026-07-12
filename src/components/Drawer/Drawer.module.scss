@@ -10,17 +10,8 @@
   position: fixed;
   inset: 0;
   z-index: $z-overlay-backdrop;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  background-color: hsl(0 0% 0% / 0.5);
+  animation: shacdn-overlay-enter $overlay-enter;
 }
 
 .drawerContent {
@@ -42,20 +33,20 @@
   top: 0;
   right: 0;
   height: 100%;
-  width: 90vw;
-  max-width: 400px;
+  width: min(90vw, 24rem);
+  max-width: 24rem;
   border-left: $border-width solid $border;
-  animation: slideInRight 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideInRight 200ms $ease-spring;
 }
 
 .drawerContent--left {
   top: 0;
   left: 0;
   height: 100%;
-  width: 90vw;
-  max-width: 400px;
+  width: min(90vw, 24rem);
+  max-width: 24rem;
   border-right: $border-width solid $border;
-  animation: slideInLeft 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideInLeft 200ms $ease-spring;
 }
 
 .drawerContent--top {
@@ -63,9 +54,9 @@
   left: 0;
   right: 0;
   height: 50vh;
-  max-height: 400px;
+  max-height: 24rem;
   border-bottom: $border-width solid $border;
-  animation: slideInTop 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideInTop 200ms $ease-spring;
 }
 
 .drawerContent--bottom {
@@ -73,9 +64,9 @@
   left: 0;
   right: 0;
   height: 50vh;
-  max-height: 400px;
+  max-height: 24rem;
   border-top: $border-width solid $border;
-  animation: slideInBottom 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideInBottom 200ms $ease-spring;
 }
 
 @keyframes slideInRight {
@@ -124,7 +115,10 @@
   cursor: pointer;
   border-radius: $radius-sm;
   color: $muted-foreground;
-  transition: all $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast,
+    opacity $transition-fast;
 
   &:hover {
     color: $foreground;
@@ -132,8 +126,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 }
 

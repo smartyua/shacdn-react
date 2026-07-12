@@ -1,136 +1,237 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import {
+  cloneElement,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+  type FocusEvent,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
+} from 'react';
+import {
+  composeRefs,
+  FloatingPortal,
+  useFloatingPosition,
+  type FloatingSide,
+} from '../Floating/Floating';
 import styles from './Tooltip.module.scss';
 
 export interface TooltipProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export interface TooltipTriggerProps {
-  children: React.ReactElement;
+  children: ReactElement;
   asChild?: boolean;
 }
 
-export interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  side?: 'top' | 'right' | 'bottom' | 'left';
+export interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
+  side?: FloatingSide;
   sideOffset?: number;
 }
 
 type TooltipContextValue = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  triggerElement: HTMLElement | null;
-  setTriggerElement: (el: HTMLElement | null) => void;
+  triggerRef: RefObject<HTMLElement | null>;
 };
 
-const TooltipContext = React.createContext<TooltipContextValue | null>(null);
+const TooltipContext = createContext<TooltipContextValue | null>(null);
 
-export const TooltipProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const useTooltip = (): TooltipContextValue => {
+  const context = useContext(TooltipContext);
+  if (!context) {
+    throw new Error('Tooltip components must be used within Tooltip');
+  }
+  return context;
+};
+
+export const TooltipProvider = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
 };
 
-export const Tooltip: React.FC<TooltipProps> = ({ children }) => {
-  const [open, setOpen] = useState(false);
-  const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(null);
+export const Tooltip = ({ children }: TooltipProps) => {
+  const [open, setOpenState] = useState(false);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const setOpen = useCallback((next: boolean) => {
+    setOpenState(next);
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({ open, setOpen, triggerRef }),
+    [open, setOpen]
+  );
 
   return (
-    <TooltipContext.Provider value={{ open, setOpen, triggerElement, setTriggerElement }}>
+    <TooltipContext.Provider value={contextValue}>
       {children}
     </TooltipContext.Provider>
   );
 };
 
-export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({ children }) => {
-  const context = React.useContext(TooltipContext);
-  if (!context) throw new Error('TooltipTrigger must be used within Tooltip');
-  const triggerElementRef = useRef<HTMLElement | null>(null);
+export const TooltipTrigger = forwardRef<HTMLElement, TooltipTriggerProps>(
+  ({ children, asChild = false }, ref) => {
+    const { setOpen, triggerRef } = useTooltip();
 
-  const handleMouseEnter = () => context.setOpen(true);
-  const handleMouseLeave = () => context.setOpen(false);
-  const handleFocus = () => context.setOpen(true);
-  const handleBlur = () => context.setOpen(false);
+    const handleMouseEnter = useCallback(() => setOpen(true), [setOpen]);
+    const handleMouseLeave = useCallback(() => setOpen(false), [setOpen]);
+    const handleFocus = useCallback(() => setOpen(true), [setOpen]);
+    const handleBlur = useCallback(() => setOpen(false), [setOpen]);
 
-  useEffect(() => {
-    if (triggerElementRef.current) {
-      context.setTriggerElement(triggerElementRef.current);
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{
+        className?: string;
+        onMouseEnter?: (e: MouseEvent<HTMLElement>) => void;
+        onMouseLeave?: (e: MouseEvent<HTMLElement>) => void;
+        onFocus?: (e: FocusEvent<HTMLElement>) => void;
+        onBlur?: (e: FocusEvent<HTMLElement>) => void;
+        ref?: RefObject<HTMLElement | null>;
+      }>;
+      const childRef = child.props.ref;
+      const mergedRef = (node: HTMLElement | null) => {
+        composeRefs(ref, triggerRef, childRef)(node);
+      };
+
+      // eslint-disable-next-line react-hooks/refs -- asChild ref merge runs on commit, not during render
+      return cloneElement(child, {
+        ref: mergedRef as unknown as RefObject<HTMLElement | null>,
+        onMouseEnter: (e: MouseEvent<HTMLElement>) => {
+          child.props.onMouseEnter?.(e);
+          handleMouseEnter();
+        },
+        onMouseLeave: (e: MouseEvent<HTMLElement>) => {
+          child.props.onMouseLeave?.(e);
+          handleMouseLeave();
+        },
+        onFocus: (e: FocusEvent<HTMLElement>) => {
+          child.props.onFocus?.(e);
+          handleFocus();
+        },
+        onBlur: (e: FocusEvent<HTMLElement>) => {
+          child.props.onBlur?.(e);
+          handleBlur();
+        },
+      });
     }
-  }, [context]);
 
-  const childProps = {
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onFocus: handleFocus,
-    onBlur: handleBlur,
-  };
+    if (isValidElement(children)) {
+      const child = children as ReactElement<{
+        onMouseEnter?: (e: MouseEvent<HTMLElement>) => void;
+        onMouseLeave?: (e: MouseEvent<HTMLElement>) => void;
+        onFocus?: (e: FocusEvent<HTMLElement>) => void;
+        onBlur?: (e: FocusEvent<HTMLElement>) => void;
+        ref?: RefObject<HTMLElement | null>;
+      }>;
+      const childRef = child.props.ref;
+      const mergedRef = (node: HTMLElement | null) => {
+        composeRefs(ref, triggerRef, childRef)(node);
+      };
 
-  return (
-    <span
-      ref={triggerElementRef as React.RefObject<HTMLSpanElement>}
-      style={{ display: 'inline-flex' }}
-    >
-      {React.cloneElement(children, childProps)}
-    </span>
-  );
-};
+      // eslint-disable-next-line react-hooks/refs -- asChild ref merge runs on commit, not during render
+      return cloneElement(child, {
+        ref: mergedRef as unknown as RefObject<HTMLElement | null>,
+        onMouseEnter: (e: MouseEvent<HTMLElement>) => {
+          child.props.onMouseEnter?.(e);
+          handleMouseEnter();
+        },
+        onMouseLeave: (e: MouseEvent<HTMLElement>) => {
+          child.props.onMouseLeave?.(e);
+          handleMouseLeave();
+        },
+        onFocus: (e: FocusEvent<HTMLElement>) => {
+          child.props.onFocus?.(e);
+          handleFocus();
+        },
+        onBlur: (e: FocusEvent<HTMLElement>) => {
+          child.props.onBlur?.(e);
+          handleBlur();
+        },
+      });
+    }
+
+    return (
+      <span
+        ref={composeRefs(ref as RefObject<HTMLSpanElement>, triggerRef as RefObject<HTMLSpanElement>)}
+        style={{ display: 'inline-flex' }}
+      >
+        {children}
+      </span>
+    );
+  }
+);
 
 TooltipTrigger.displayName = 'TooltipTrigger';
 
-export const TooltipContent: React.FC<TooltipContentProps> = ({ 
-  className = '', 
-  side = 'top', 
-  sideOffset = 4, 
-  children, 
-  ...props 
-}) => {
-  const context = React.useContext(TooltipContext);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+type TooltipContentPositionedProps = TooltipContentProps;
+
+const TooltipContentPositioned = ({
+  className = '',
+  side = 'top',
+  sideOffset = 4,
+  children,
+  ...props
+}: TooltipContentPositionedProps) => {
+  const { triggerRef } = useTooltip();
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!context?.open || !context.triggerElement || !contentRef.current) return;
+  const { style, floatingProps } = useFloatingPosition({
+    anchorRef: triggerRef,
+    floatingRef: contentRef,
+    open: true,
+    side,
+    align: 'center',
+    sideOffset,
+  });
 
-    const triggerRect = context.triggerElement.getBoundingClientRect();
-    const contentRect = contentRef.current.getBoundingClientRect();
-    
-    let top = 0;
-    let left = 0;
+  return (
+    <FloatingPortal>
+      <div
+        ref={contentRef}
+        role="tooltip"
+        data-slot="tooltip-content"
+        className={`${styles.tooltipContent} ${styles[floatingProps['data-side']]} ${className}`}
+        style={style}
+        {...floatingProps}
+        {...props}
+      >
+        {children}
+      </div>
+    </FloatingPortal>
+  );
+};
 
-    switch (side) {
-      case 'top':
-        top = triggerRect.top - contentRect.height - sideOffset;
-        left = triggerRect.left + (triggerRect.width - contentRect.width) / 2;
-        break;
-      case 'bottom':
-        top = triggerRect.bottom + sideOffset;
-        left = triggerRect.left + (triggerRect.width - contentRect.width) / 2;
-        break;
-      case 'left':
-        top = triggerRect.top + (triggerRect.height - contentRect.height) / 2;
-        left = triggerRect.left - contentRect.width - sideOffset;
-        break;
-      case 'right':
-        top = triggerRect.top + (triggerRect.height - contentRect.height) / 2;
-        left = triggerRect.right + sideOffset;
-        break;
-    }
+TooltipContentPositioned.displayName = 'TooltipContentPositioned';
 
-    requestAnimationFrame(() => {
-      setPosition({ top, left });
-    });
-  }, [context?.open, context?.triggerElement, side, sideOffset]);
+export const TooltipContent = ({
+  className = '',
+  side = 'top',
+  sideOffset = 4,
+  children,
+  ...props
+}: TooltipContentProps) => {
+  const { open } = useTooltip();
 
-  if (!context?.open) return null;
+  if (!open) {
+    return null;
+  }
 
-  return createPortal(
-    <div
-      ref={contentRef}
-      className={`${styles.tooltipContent} ${styles[side]} ${className}`}
-      style={{ top: `${position.top}px`, left: `${position.left}px` }}
+  return (
+    <TooltipContentPositioned
+      className={className}
+      side={side}
+      sideOffset={sideOffset}
       {...props}
     >
       {children}
-    </div>,
-    document.body
+    </TooltipContentPositioned>
   );
 };
 

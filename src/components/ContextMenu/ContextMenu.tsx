@@ -1,64 +1,82 @@
 import {
   createContext,
+  forwardRef,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
   type HTMLAttributes,
+  type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
+  type RefObject,
 } from 'react';
+import {
+  composeRefs,
+  FloatingPortal,
+  useDismissLayer,
+  useFloatingPosition,
+  useInitialMenuFocus,
+} from '../Floating/Floating';
 import styles from './ContextMenu.module.scss';
 
-type Ctx = {
+type ContextMenuContextValue = {
   open: boolean;
-  setOpen: (v: boolean) => void;
+  setOpen: (open: boolean) => void;
   point: { x: number; y: number };
-  setPoint: (p: { x: number; y: number }) => void;
+  setPoint: (point: { x: number; y: number }) => void;
+  triggerRef: RefObject<HTMLDivElement | null>;
+  contentRef: RefObject<HTMLDivElement | null>;
+  close: () => void;
 };
 
-const ContextMenuContext = createContext<Ctx | null>(null);
+const ContextMenuContext = createContext<ContextMenuContextValue | null>(null);
 
-function useCtx(): Ctx {
-  const c = useContext(ContextMenuContext);
-  if (!c) {
+const useContextMenu = (): ContextMenuContextValue => {
+  const context = useContext(ContextMenuContext);
+  if (!context) {
     throw new Error('ContextMenu components must be used together');
   }
-  return c;
-}
+  return context;
+};
+
+const getEnabledMenuItems = (content: HTMLDivElement | null): HTMLElement[] => {
+  if (!content) {
+    return [];
+  }
+  return Array.from(
+    content.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"])')
+  ) as HTMLElement[];
+};
+
+const focusMenuItem = (content: HTMLDivElement | null, index: number): void => {
+  const items = getEnabledMenuItems(content);
+  if (items.length === 0) {
+    return;
+  }
+  const normalized = ((index % items.length) + items.length) % items.length;
+  items[normalized]?.focus();
+};
 
 export interface ContextMenuProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function ContextMenu({ className = '', children, ...props }: ContextMenuProps) {
+export const ContextMenu = ({ className = '', children, ...props }: ContextMenuProps) => {
   const [open, setOpen] = useState(false);
   const [point, setPoint] = useState({ x: 0, y: 0 });
-  const value = useMemo(() => ({ open, setOpen, point, setPoint }), [open, point]);
+  const triggerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (!open) return;
-    const close = () => setOpen(false);
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
-    };
-    let clickAttached = false;
-    const attachClick = () => {
-      document.addEventListener('click', close);
-      clickAttached = true;
-    };
-    const t = window.setTimeout(attachClick, 0);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      window.clearTimeout(t);
-      if (clickAttached) {
-        document.removeEventListener('click', close);
-      }
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
+  const close = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  const value = useMemo(
+    () => ({ open, setOpen, point, setPoint, triggerRef, contentRef, close }),
+    [open, point, close]
+  );
 
   return (
     <ContextMenuContext.Provider value={value}>
@@ -67,102 +85,183 @@ export function ContextMenu({ className = '', children, ...props }: ContextMenuP
       </div>
     </ContextMenuContext.Provider>
   );
-}
+};
 
 export type ContextMenuTriggerProps = HTMLAttributes<HTMLDivElement>;
 
-export function ContextMenuTrigger({ className = '', children, onContextMenu, ...props }: ContextMenuTriggerProps) {
-  const { setOpen, setPoint } = useCtx();
+export const ContextMenuTrigger = forwardRef<HTMLDivElement, ContextMenuTriggerProps>(
+  ({ className = '', children, onContextMenu, ...props }, ref) => {
+    const { setOpen, setPoint, triggerRef } = useContextMenu();
 
-  const handleContextMenu = useCallback(
-    (e: MouseEvent<HTMLDivElement>) => {
-      onContextMenu?.(e);
-      if (e.defaultPrevented) return;
-      e.preventDefault();
-      setPoint({ x: e.clientX, y: e.clientY });
-      setOpen(true);
-    },
-    [onContextMenu, setOpen, setPoint]
-  );
+    const handleContextMenu = useCallback(
+      (e: MouseEvent<HTMLDivElement>) => {
+        onContextMenu?.(e);
+        if (e.defaultPrevented) {
+          return;
+        }
+        e.preventDefault();
+        setPoint({ x: e.clientX, y: e.clientY });
+        setOpen(true);
+      },
+      [onContextMenu, setOpen, setPoint]
+    );
 
-  return (
-    <div className={`${styles.trigger} ${className}`} onContextMenu={handleContextMenu} {...props}>
-      {children}
-    </div>
-  );
-}
+    return (
+      <div
+        ref={composeRefs(ref, triggerRef)}
+        className={`${styles.trigger} ${className}`}
+        onContextMenu={handleContextMenu}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+ContextMenuTrigger.displayName = 'ContextMenuTrigger';
 
 export type ContextMenuContentProps = HTMLAttributes<HTMLDivElement>;
 
-export function ContextMenuContent({ className = '', children, ...props }: ContextMenuContentProps) {
-  const { open, point } = useCtx();
-  const ref = useRef<HTMLDivElement>(null);
+export const ContextMenuContent = forwardRef<HTMLDivElement, ContextMenuContentProps>(
+  ({ className = '', children, onKeyDown, ...props }, ref) => {
+    const { open, point, triggerRef, contentRef, close } = useContextMenu();
 
-  useEffect(() => {
-    if (!open || !ref.current) return;
-    const el = ref.current;
-    const rect = el.getBoundingClientRect();
-    let x = point.x;
-    let y = point.y;
-    if (x + rect.width > window.innerWidth) {
-      x = window.innerWidth - rect.width - 8;
-    }
-    if (y + rect.height > window.innerHeight) {
-      y = window.innerHeight - rect.height - 8;
-    }
-    el.style.left = `${Math.max(8, x)}px`;
-    el.style.top = `${Math.max(8, y)}px`;
-  }, [open, point]);
+    const { style, floatingProps, isPositioned } = useFloatingPosition({
+      anchorRef: triggerRef,
+      anchorPoint: point,
+      floatingRef: contentRef,
+      open,
+      sideOffset: 0,
+    });
 
-  if (!open) {
-    return null;
+    useDismissLayer({
+      open,
+      onDismiss: close,
+      contentRef,
+      excludeRefs: [triggerRef],
+      dismissOnEscape: true,
+      dismissOnOutsidePointer: true,
+    });
+
+    useInitialMenuFocus({
+      open,
+      isPositioned,
+      containerRef: contentRef,
+    });
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+      onKeyDown?.(e);
+      if (e.defaultPrevented) {
+        return;
+      }
+
+      const items = getEnabledMenuItems(contentRef.current);
+      if (items.length === 0) {
+        return;
+      }
+
+      const activeIndex = items.findIndex(item => item === document.activeElement);
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          focusMenuItem(contentRef.current, activeIndex + 1);
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          focusMenuItem(contentRef.current, activeIndex <= 0 ? items.length - 1 : activeIndex - 1);
+          break;
+        case 'Home':
+          e.preventDefault();
+          focusMenuItem(contentRef.current, 0);
+          break;
+        case 'End':
+          e.preventDefault();
+          focusMenuItem(contentRef.current, items.length - 1);
+          break;
+        default:
+          break;
+      }
+    };
+
+    if (!open) {
+      return null;
+    }
+
+    return (
+      <FloatingPortal>
+        <div
+          ref={composeRefs(ref, contentRef)}
+          className={`${styles.content} ${className}`}
+          role="menu"
+          style={style}
+          onClick={e => e.stopPropagation()}
+          onKeyDown={handleKeyDown}
+          {...floatingProps}
+          {...props}
+        >
+          {children}
+        </div>
+      </FloatingPortal>
+    );
   }
+);
 
-  return (
-    <div
-      ref={ref}
-      className={`${styles.content} ${className}`}
-      role="menu"
-      onClick={e => e.stopPropagation()}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
+ContextMenuContent.displayName = 'ContextMenuContent';
 
 export interface ContextMenuItemProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export function ContextMenuItem({
-  className = '',
-  disabled,
-  children,
-  onClick,
-  ...props
-}: ContextMenuItemProps) {
-  const { setOpen } = useCtx();
-  return (
-    <div
-      role="menuitem"
-      tabIndex={-1}
-      className={`${styles.item} ${disabled ? styles.itemDisabled : ''} ${className}`}
-      aria-disabled={disabled || undefined}
-      onClick={e => {
-        if (disabled) return;
-        onClick?.(e);
-        if (!e.defaultPrevented) {
-          setOpen(false);
-        }
-      }}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
+export const ContextMenuItem = forwardRef<HTMLDivElement, ContextMenuItemProps>(
+  ({ className = '', disabled, children, onClick, onKeyDown, ...props }, ref) => {
+    const { close } = useContextMenu();
 
-export function ContextMenuSeparator({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`${styles.separator} ${className}`} role="separator" {...props} />;
-}
+    const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+      if (disabled) {
+        return;
+      }
+      onClick?.(e);
+      if (!e.defaultPrevented) {
+        close();
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+      onKeyDown?.(e);
+      if (e.defaultPrevented || disabled) {
+        return;
+      }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.currentTarget.click();
+      }
+    };
+
+    return (
+      <div
+        ref={ref}
+        role="menuitem"
+        tabIndex={-1}
+        className={`${styles.item} ${disabled ? styles.itemDisabled : ''} ${className}`}
+        aria-disabled={disabled || undefined}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+ContextMenuItem.displayName = 'ContextMenuItem';
+
+export const ContextMenuSeparator = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className = '', ...props }, ref) => (
+    <div ref={ref} className={`${styles.separator} ${className}`} role="separator" {...props} />
+  )
+);
+
+ContextMenuSeparator.displayName = 'ContextMenuSeparator';

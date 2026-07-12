@@ -1,4 +1,4 @@
-import React, { forwardRef, createContext, useContext } from 'react';
+import React, { forwardRef, createContext, useCallback, useContext, useMemo } from 'react';
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupContextValue = {
@@ -27,15 +27,23 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     const [internalValue, setInternalValue] = React.useState(defaultValue || '');
     const currentValue = value !== undefined ? value : internalValue;
 
-    const handleChange = (newValue: string) => {
-      if (value === undefined) {
-        setInternalValue(newValue);
-      }
-      onValueChange?.(newValue);
-    };
+    const handleChange = useCallback(
+      (newValue: string) => {
+        if (value === undefined) {
+          setInternalValue(newValue);
+        }
+        onValueChange?.(newValue);
+      },
+      [onValueChange, value]
+    );
+
+    const contextValue = useMemo(
+      () => ({ value: currentValue, onValueChange: handleChange, name, disabled }),
+      [currentValue, handleChange, name, disabled]
+    );
 
     return (
-      <RadioGroupContext.Provider value={{ value: currentValue, onValueChange: handleChange, name, disabled }}>
+      <RadioGroupContext.Provider value={contextValue}>
         <div
           ref={ref}
           role="radiogroup"

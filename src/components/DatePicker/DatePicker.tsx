@@ -1,4 +1,9 @@
-import { forwardRef, useState, useRef, useEffect } from 'react';
+import { forwardRef, useCallback, useRef, useState } from 'react';
+import {
+  FloatingPortal,
+  useDismissLayer,
+  useFloatingPosition,
+} from '../Floating/Floating';
 import { Calendar } from '../Calendar/Calendar';
 import styles from './DatePicker.module.scss';
 
@@ -15,50 +20,63 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ({ className = '', label, value, defaultValue, onValueChange, disabled }, ref) => {
     const [internalValue, setInternalValue] = useState<Date | undefined>(defaultValue);
     const [isOpen, setIsOpen] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const selectedDate = value !== undefined ? value : internalValue;
 
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-          setIsOpen(false);
-        }
-      };
+    const close = useCallback(() => {
+      setIsOpen(false);
+      triggerRef.current?.focus();
+    }, []);
 
-      if (isOpen) {
-        document.addEventListener('mousedown', handleClickOutside);
-      }
+    const { style, floatingProps } = useFloatingPosition({
+      anchorRef: triggerRef,
+      floatingRef: contentRef,
+      open: isOpen && !disabled,
+      side: 'bottom',
+      align: 'start',
+      sideOffset: 4,
+      sameWidth: false,
+    });
 
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [isOpen]);
+    useDismissLayer({
+      open: isOpen && !disabled,
+      onDismiss: close,
+      contentRef,
+      excludeRefs: [triggerRef],
+      dismissOnEscape: true,
+      dismissOnOutsidePointer: true,
+    });
 
     const handleDateSelect = (date: Date) => {
       if (value === undefined) {
         setInternalValue(date);
       }
       onValueChange?.(date);
-      setIsOpen(false);
+      close();
     };
 
     const formatDate = (date: Date | undefined) => {
-      if (!date) return 'Pick a date';
+      if (!date) {
+        return 'Pick a date';
+      }
       return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     };
 
     return (
-      <div ref={ref} className={`${styles.datePickerWrapper} ${className}`}>
+      <div ref={ref} className={`${styles.datePickerWrapper} ${className}`} data-slot="date-picker">
         {label && <span className={styles.datePickerLabel}>{label}</span>}
-        <div ref={containerRef} className={styles.datePickerContainer}>
+        <div className={styles.datePickerContainer}>
           <button
+            ref={triggerRef}
             type="button"
             className={styles.datePickerTrigger}
             onClick={() => !disabled && setIsOpen(!isOpen)}
             disabled={disabled}
             aria-expanded={isOpen}
             aria-haspopup="dialog"
+            data-slot="date-picker-trigger"
           >
             <span>{formatDate(selectedDate)}</span>
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden>
@@ -69,14 +87,24 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             </svg>
           </button>
 
-          {isOpen && (
-            <div className={styles.calendarPopover} role="dialog" aria-label="Choose date">
-              <Calendar
-                selected={selectedDate}
-                onSelect={handleDateSelect}
-                defaultMonth={selectedDate}
-              />
-            </div>
+          {isOpen && !disabled && (
+            <FloatingPortal>
+              <div
+                ref={contentRef}
+                className={styles.calendarPopover}
+                role="dialog"
+                aria-label="Choose date"
+                data-slot="date-picker-content"
+                style={style}
+                {...floatingProps}
+              >
+                <Calendar
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  defaultMonth={selectedDate}
+                />
+              </div>
+            </FloatingPortal>
           )}
         </div>
       </div>

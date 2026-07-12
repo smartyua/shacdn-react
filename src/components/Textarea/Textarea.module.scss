@@ -11,7 +11,8 @@
   font-size: $font-size-sm;
   font-family: $font-sans;
   color: $foreground;
-  transition: all $transition-fast;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
   outline: none;
   resize: vertical;
   line-height: 1.5;
@@ -20,9 +21,9 @@
     color: $muted-foreground;
   }
 
-  &:focus {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &:disabled {

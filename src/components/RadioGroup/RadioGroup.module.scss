@@ -36,7 +36,7 @@
   border-radius: 9999px;
   border: $border-width solid $input;
   background-color: $background;
-  transition: all $transition-fast;
+  transition: border-color $transition-fast, opacity $transition-fast;
   pointer-events: none;
 
   .input:checked ~ & {
@@ -44,8 +44,8 @@
   }
 
   .input:focus-visible ~ & {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   .input:disabled ~ & {

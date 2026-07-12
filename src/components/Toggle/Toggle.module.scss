@@ -9,15 +9,16 @@
   font-size: $font-size-sm;
   font-weight: 500;
   font-family: $font-sans;
-  transition: all $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast,
+    opacity $transition-fast;
   cursor: pointer;
   border: $border-width solid transparent;
   background: transparent;
   color: $foreground;
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &:disabled {

@@ -1,7 +1,6 @@
 @use '../../styles/variables.scss' as *;
 
 .root {
-  position: relative;
   display: inline-block;
 }
 
@@ -10,8 +9,6 @@
 }
 
 .content {
-  position: absolute;
-  top: calc(100% + $spacing-xs);
   z-index: $z-floating;
   width: 20rem;
   padding: $spacing-md;
@@ -19,17 +16,4 @@
   border: $border-width solid $border;
   background: $popover;
   color: $popover-foreground;
-}
-
-.alignStart {
-  left: 0;
-}
-
-.alignCenter {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.alignEnd {
-  right: 0;
 }

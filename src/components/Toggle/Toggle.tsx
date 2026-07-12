@@ -1,8 +1,8 @@
 import {
   forwardRef,
-  type ButtonHTMLAttributes,
   useCallback,
   useState,
+  type ButtonHTMLAttributes,
   type MouseEvent,
 } from 'react';
 import styles from './Toggle.module.scss';
@@ -36,14 +36,16 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
     const handleClick = useCallback(
       (e: MouseEvent<HTMLButtonElement>) => {
         onClick?.(e);
-        if (e.defaultPrevented || disabled) return;
+        if (e.defaultPrevented || disabled) {
+          return;
+        }
         const next = !pressed;
         if (pressedControlled === undefined) {
           setInternal(next);
         }
         onPressedChange?.(next);
       },
-      [onClick, disabled, pressed, pressedControlled, onPressedChange]
+      [disabled, onClick, onPressedChange, pressed, pressedControlled]
     );
 
     const variantClass = variant === 'outline' ? styles.variantOutline : styles.variantDefault;
@@ -54,9 +56,9 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       <button
         ref={ref}
         type="button"
-        role="switch"
-        aria-checked={pressed}
+        aria-pressed={pressed}
         data-state={pressed ? 'on' : 'off'}
+        data-slot="toggle"
         disabled={disabled}
         className={`${styles.toggle} ${variantClass} ${sizeClass} ${className}`}
         onClick={handleClick}

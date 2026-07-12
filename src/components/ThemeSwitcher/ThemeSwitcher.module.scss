@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
 }
 
 .compact {
@@ -34,7 +33,7 @@
   background: $background;
   color: $foreground;
   cursor: pointer;
-  transition: all 100ms ease;
+  transition: background-color 100ms ease, border-color 100ms ease;
 
   &:hover {
     background: $accent;
@@ -42,8 +41,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   svg {
@@ -66,7 +65,7 @@
   background: $background;
   color: $foreground;
   cursor: pointer;
-  transition: all 100ms ease;
+  transition: opacity 100ms ease, transform 100ms ease;
 
   &:hover {
     opacity: 0.9;
@@ -74,8 +73,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   svg {
@@ -88,23 +87,36 @@
 }
 
 .colorSchemeWrapper {
-  position: relative;
+  display: inline-flex;
 }
 
 .colorSchemeMenu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
+  z-index: $z-floating;
   background: $card;
   border: $border-width solid $border;
   border-radius: $radius-lg;
   padding: 0.5rem;
   min-width: 150px;
-  z-index: $z-floating;
-  animation: slideIn 0.1s ease-out;
+  animation: colorMenuIn $content-enter;
 }
 
-@keyframes slideIn {
+.colorSchemeMenu[data-side='top'] {
+  animation-name: colorMenuInTop;
+}
+
+.colorSchemeMenu[data-side='bottom'] {
+  animation-name: colorMenuInBottom;
+}
+
+.colorSchemeMenu[data-side='left'] {
+  animation-name: colorMenuInLeft;
+}
+
+.colorSchemeMenu[data-side='right'] {
+  animation-name: colorMenuInRight;
+}
+
+@keyframes colorMenuInBottom {
   from {
     opacity: 0;
     transform: translateY(-0.5rem);
@@ -112,6 +124,48 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes colorMenuInTop {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes colorMenuInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes colorMenuInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes colorMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -128,7 +182,7 @@
   font-family: $font-sans;
   cursor: pointer;
   border-radius: $radius-sm;
-  transition: all 100ms ease;
+  transition: background-color 100ms ease, color 100ms ease;
   text-align: left;
   position: relative;
 
@@ -142,8 +196,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 }
 

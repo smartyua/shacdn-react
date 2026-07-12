@@ -47,11 +47,11 @@ When implementing or reviewing a component:
 
 | Category | Count | Notes |
 |----------|-------|--------|
-| **UI primitives in @shadcn registry** | 58 | See parity matrix |
-| **Implemented in shacdn** | 54+ | `src/components/` |
+| **UI primitives in @shadcn registry** | 61 | See parity matrix |
+| **Implemented in shacdn** | 61/61 registry items; 68 component folders | Includes internal Floating infrastructure |
 | **Aliases** | Modal→Dialog, Sheet→Drawer | Same API, different names |
 | **Substitutes** | Toast≈sonner, Select≈native-select | Documented in matrix |
-| **Blocks / heavy deps** | chart, sidebar blocks, resizable | Require Recharts, Embla, or large compositions — compose from primitives or add deps in consumer apps |
+| **Blocks / heavy deps** | chart blocks, Embla examples, sidebar blocks | Local zero-dep primitives are documented in the parity matrix; full registry blocks may add dependencies |
 
 ---
 

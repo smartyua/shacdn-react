@@ -1,9 +1,21 @@
 # Visual audit report — shacdn vs [ui.shadcn.com](https://ui.shadcn.com)
 
-**Date:** 2026-05-21 (pass 2 — re-verification after token fix)  
-**Method:** Side-by-side browser screenshots + `getComputedStyle` on live demos  
-**Local demo:** http://localhost:5173/components (`colorScheme=default`, light theme)  
+**Date:** 2026-07-12 (pass 4 — full catalog geometry, state, and accessibility verification)
+**Method:** Side-by-side screenshots + automated DOM geometry/contrast checks + keyboard interaction checks
+**Local demo:** http://localhost:5173/components
 **Reference:** https://ui.shadcn.com/docs/components/radix/
+
+## Pass 4 results
+
+- Scanned all **65** showcase sections at **1280px** and **390px**: no document-level horizontal overflow or unintended interactive-control intersections.
+- Checked rendered text contrast in light/dark across **Default, Blue, Green, Purple, Orange, and Rose**: **0 failures** below 4.5:1 for normal text or 3:1 for large text after theme-token corrections.
+- Verified collision-aware, body-portaled Popover, DropdownMenu, HoverCard, Tooltip, Combobox, DatePicker, ContextMenu, Menubar, NavigationMenu, and ThemeSwitcher surfaces.
+- Verified Dialog, Drawer, and AlertDialog portal, labeling, focus trap, focus restore, body scroll lock, and outside-content inert behavior. AlertDialog overlay clicks do not dismiss it.
+- Verified Slider, Tabs, Toggle, DropdownMenu, and ContextMenu keyboard paths.
+- Verified reduced-motion emulation: no computed animation or transition duration above **0.02ms**.
+- Verified Toast live regions/timer cleanup and MessageScroller append anchoring/jump-control states.
+
+Intentional geometry exceptions: Carousel keeps offscreen slides inside its clipped viewport; Progress translates its indicator inside a clipped track; Attachment actions layer above its full-card trigger by design.
 
 ## Screenshots
 
@@ -26,9 +38,9 @@ All files live in [`docs/audit-screenshots/`](./audit-screenshots/).
 
 | Setting | Local (shacdn) | Reference (shadcn) |
 |---------|----------------|---------------------|
-| Theme | Light | Light |
-| Color scheme | **Default** (`localStorage.colorScheme=default`) | Default (zinc/neutral) |
-| Viewport | ~1280px desktop | Same |
+| Theme | Light + dark | Matching reference theme |
+| Color scheme | Default + Blue/Green/Purple/Orange/Rose | Default for screenshot comparison |
+| Viewport | 1280px desktop + 390px mobile | 1280px screenshot reference |
 
 Compare **geometry** (height, padding, radius) separately from **hue** (primary follows `data-theme` / color scheme).
 
@@ -94,7 +106,7 @@ Heights align with **shadcn v4** (`h-6` / `h-7` / `h-8` / `h-9`). Border radius 
 1. **Horizontal padding** — shadcn v4 uses `px-2.5` (10px) on md controls; shacdn had `$control-px: 0.75rem` (12px). Updated to **0.625rem** in `variables.scss`.
 2. **Radius on xs/sm buttons** — reference 8px vs local `$radius-md` 10px; acceptable variance.
 3. **Demo copy** — local Alert titles differ from docs (“Heads up!” vs “Account updated”); layout and tokens compared, not literal strings.
-4. **Color scheme picker** — shacdn demo exposes 6 schemes; compare geometry with `colorScheme=default` only.
+4. **Color scheme picker** — screenshot comparison uses Default; pass 4 contrast checks cover all 6 schemes in both themes.
 
 ---
 
@@ -108,7 +120,7 @@ Heights align with **shadcn v4** (`h-6` / `h-7` / `h-8` / `h-9`). Border radius 
 
 ## Showcase coverage (all demo sections)
 
-All **60** nav items in `/components` have a matching `#section` anchor. New in pass 3: **Chart**, **Collapsible**, **Direction**, **Native Select**, **Resizable**, **Sidebar**, **Sonner**, **Typography**.
+All **65** nav items in `/components` have a matching `#section` anchor.
 
 | Status | Components |
 |--------|------------|
@@ -127,6 +139,9 @@ All **60** nav items in `/components` have a matching `#section` anchor. New in 
 - [x] Confirmed `$control-h-*` v4 scale (32px default control)
 - [x] Adjusted `$control-px` to 10px for button/input md padding
 - [x] Saved screenshots to `docs/audit-screenshots/`
+- [x] Pass 4 — 65-section desktop/mobile geometry scan
+- [x] Pass 4 — 12 theme/scheme contrast combinations
+- [x] Pass 4 — floating-layer, modal, keyboard, reduced-motion, Toast, and MessageScroller interaction checks
 
 ---
 

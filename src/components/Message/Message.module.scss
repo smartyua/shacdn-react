@@ -1,0 +1,103 @@
+@use '../../styles/variables' as *;
+
+.group {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.message {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $foreground;
+
+  &[data-align='end'] {
+    .avatar {
+      order: 1;
+      margin-left: auto;
+    }
+
+    .content {
+      order: 2;
+
+      > [data-slot] {
+        align-self: flex-end;
+      }
+    }
+
+    .footer {
+      justify-content: flex-end;
+    }
+  }
+
+  &:has([data-slot='message-footer']) {
+    .avatar {
+      transform: translateY(-$spacing-xl);
+    }
+  }
+
+  &:has([data-variant='ghost']) {
+    .header,
+    .footer {
+      padding-inline: 0;
+    }
+  }
+}
+
+.avatar {
+  order: 2;
+  display: flex;
+  width: $spacing-xl;
+  min-width: $spacing-xl;
+  height: $spacing-xl;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: $muted;
+  transition: transform $transition-fast;
+}
+
+.content {
+  order: 1;
+  display: flex;
+  width: fit-content;
+  max-width: 80%;
+  min-width: 0;
+  flex-direction: column;
+  gap: $spacing-xs;
+  overflow-wrap: break-word;
+
+  > [data-slot='bubble'] {
+    max-width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  padding-inline: 0.75rem;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.footer {
+  display: flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  padding-inline: 0.75rem;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  color: $muted-foreground;
+}

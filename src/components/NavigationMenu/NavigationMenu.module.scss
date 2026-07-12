@@ -1,7 +1,6 @@
 @use '../../styles/variables.scss' as *;
 
 .root {
-  position: relative;
   display: flex;
   max-width: 100%;
   flex: 1;
@@ -21,7 +20,7 @@
 }
 
 .item {
-  position: relative;
+  display: inline-flex;
 }
 
 .trigger {
@@ -78,11 +77,7 @@
 }
 
 .content {
-  position: absolute;
-  left: 0;
-  top: 100%;
   z-index: $z-floating;
-  margin-top: $spacing-xs;
   min-width: 12rem;
   border-radius: $radius-md;
   border: $border-width solid $border;
@@ -90,10 +85,26 @@
   color: $popover-foreground;
   padding: $spacing-md;
   box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  animation: navMenuIn 150ms $ease-spring;
+  animation: navMenuIn $content-enter;
 }
 
-@keyframes navMenuIn {
+.content[data-side='top'] {
+  animation-name: navMenuInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: navMenuInBottom;
+}
+
+.content[data-side='left'] {
+  animation-name: navMenuInLeft;
+}
+
+.content[data-side='right'] {
+  animation-name: navMenuInRight;
+}
+
+@keyframes navMenuInBottom {
   from {
     opacity: 0;
     transform: translateY(-4px);
@@ -101,6 +112,48 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes navMenuInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navMenuInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes navMenuInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes navMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -121,6 +174,11 @@
   &:hover {
     background: $accent;
     color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 }
 

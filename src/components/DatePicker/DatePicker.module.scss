@@ -14,7 +14,6 @@
 }
 
 .datePickerContainer {
-  position: relative;
   width: 100%;
 }
 
@@ -30,7 +29,7 @@
   color: $foreground;
   border: $border-width solid $input;
   border-radius: $radius-md;
-  transition: all $transition-fast;
+  transition: background-color $transition-fast, opacity $transition-fast;
   cursor: pointer;
   text-align: left;
 
@@ -39,8 +38,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &:disabled {
@@ -55,20 +54,45 @@
 }
 
 .calendarPopover {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
   z-index: $z-floating;
-  animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: calendarPopIn $content-enter;
 }
 
-@keyframes slideIn {
+.calendarPopover[data-side='top'] {
+  animation-name: calendarPopInTop;
+}
+
+.calendarPopover[data-side='bottom'] {
+  animation-name: calendarPopInBottom;
+}
+
+@keyframes calendarPopInBottom {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes calendarPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes calendarPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

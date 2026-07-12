@@ -4,7 +4,7 @@
 
 **Официальный референс:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)
 
-**Полный каталог и матрица «задача → контрол»:** **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** (54+ компонентов). Перенос дизайн-системы: **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** · экран-референс `src/screens/SessyLanding/`.
+**Полный каталог и матрица «задача → контрол»:** **[COMPONENTS_AI_REFERENCE.md](./COMPONENTS_AI_REFERENCE.md)** (61 registry UI items + local extras). Перенос дизайн-системы: **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** · экран-референс `src/screens/SessyLanding/`.
 
 ## Using Existing Components
 
@@ -165,6 +165,60 @@ import { Alert, AlertTitle, AlertDescription } from './components/Alert/Alert';
  </div>
 </Alert>
 ```
+
+### Attachment
+
+```tsx
+import {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentGroup,
+  AttachmentMedia,
+  AttachmentTitle,
+  AttachmentTrigger,
+} from './components/Attachment/Attachment';
+
+// Image group (horizontal scroll)
+<AttachmentGroup>
+  <Attachment orientation="vertical" size="sm">
+    <AttachmentMedia variant="image">
+      <img src="/preview.jpg" alt="" />
+    </AttachmentMedia>
+    <AttachmentContent>
+      <AttachmentTitle>photo.jpg</AttachmentTitle>
+      <AttachmentDescription>2.4 MB</AttachmentDescription>
+    </AttachmentContent>
+  </Attachment>
+</AttachmentGroup>
+
+// Uploading state
+<Attachment state="uploading">
+  <AttachmentMedia><Spinner size="sm" /></AttachmentMedia>
+  <AttachmentContent>
+    <AttachmentTitle>report.pdf</AttachmentTitle>
+    <AttachmentDescription>Uploading… 64%</AttachmentDescription>
+  </AttachmentContent>
+</Attachment>
+
+// Done with actions + open trigger
+<Attachment state="done">
+  <AttachmentMedia variant="icon"><FileIcon /></AttachmentMedia>
+  <AttachmentContent>
+    <AttachmentTitle>invoice.pdf</AttachmentTitle>
+    <AttachmentDescription>PDF · 248 KB</AttachmentDescription>
+  </AttachmentContent>
+  <AttachmentActions>
+    <AttachmentAction aria-label="Download"><DownloadIcon /></AttachmentAction>
+    <AttachmentAction aria-label="Remove"><XIcon /></AttachmentAction>
+  </AttachmentActions>
+  <AttachmentTrigger aria-label="Open invoice.pdf" />
+</Attachment>
+```
+
+**Props (root `Attachment`):** `state?` (`idle` | `uploading` | `processing` | `error` | `done`), `size?` (`default` | `sm` | `xs`), `orientation?` (`horizontal` | `vertical`).
 
 ### Textarea
 
@@ -405,6 +459,37 @@ import {
 </AvatarGroup>
 ```
 
+### Bubble
+
+```tsx
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions,
+} from './components/Bubble/Bubble';
+
+// Variants
+<BubbleGroup>
+  <Bubble variant="default">
+    <BubbleContent>Outgoing message</BubbleContent>
+  </Bubble>
+  <Bubble variant="muted">
+    <BubbleContent>Incoming message</BubbleContent>
+  </Bubble>
+</BubbleGroup>
+
+// Alignment + reactions
+<Bubble variant="muted" align="start">
+  <BubbleContent>Great work on the scroll behavior!</BubbleContent>
+  <BubbleReactions side="bottom" align="start">
+    <ThumbsUpIcon /><span>2</span>
+  </BubbleReactions>
+</Bubble>
+```
+
+**Props (`Bubble`):** `variant?` (`default` | `secondary` | `muted` | `tinted` | `outline` | `ghost` | `destructive`), `align?` (`start` | `end`). **`BubbleReactions`:** `side?` (`top` | `bottom`), `align?` (`start` | `end`).
+
 ### Label
 
 ```tsx
@@ -418,6 +503,112 @@ import { Label } from './components/Label/Label';
 <Label data-disabled>Disabled Label</Label>
 <Label data-invalid>Invalid Label</Label>
 ```
+
+### Marker
+
+```tsx
+import { Marker, MarkerContent, MarkerIcon } from './components/Marker/Marker';
+
+// Status chip
+<Marker>
+  <MarkerIcon><CheckIcon /></MarkerIcon>
+  <MarkerContent>Delivered · 9:41 AM</MarkerContent>
+</Marker>
+
+// Date separator (common in chat threads)
+<Marker variant="separator">
+  <MarkerContent>Today</MarkerContent>
+</Marker>
+
+// Unread divider
+<Marker variant="border">
+  <MarkerContent>3 unread messages</MarkerContent>
+</Marker>
+```
+
+**Props (`Marker`):** `variant?` (`default` | `separator` | `border`).
+
+### Message
+
+```tsx
+import { Avatar, AvatarFallback } from './components/Avatar/Avatar';
+import { Bubble, BubbleContent } from './components/Bubble/Bubble';
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageGroup,
+  MessageHeader,
+} from './components/Message/Message';
+
+<MessageGroup>
+  <Message align="start">
+    <MessageAvatar>
+      <Avatar size="sm"><AvatarFallback>AK</AvatarFallback></Avatar>
+    </MessageAvatar>
+    <MessageContent>
+      <MessageHeader>Alex Kim · 9:12 AM</MessageHeader>
+      <Bubble variant="muted">
+        <BubbleContent>Can you review the chat primitives?</BubbleContent>
+      </Bubble>
+    </MessageContent>
+  </Message>
+  <Message align="end">
+    <MessageAvatar>
+      <Avatar size="sm"><AvatarFallback>YO</AvatarFallback></Avatar>
+    </MessageAvatar>
+    <MessageContent>
+      <Bubble variant="default" align="end">
+        <BubbleContent>Sure — wiring up the catalog now.</BubbleContent>
+      </Bubble>
+      <MessageFooter>Read · 9:14 AM</MessageFooter>
+    </MessageContent>
+  </Message>
+</MessageGroup>
+```
+
+**Props (`Message`):** `align?` (`start` | `end`). Compose with **`Avatar`** + **`Bubble`** inside **`MessageContent`**.
+
+### MessageScroller
+
+```tsx
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
+  useMessageScroller,
+} from './components/MessageScroller/MessageScroller';
+import { Message, MessageContent } from './components/Message/Message';
+import { Bubble, BubbleContent } from './components/Bubble/Bubble';
+import { Marker, MarkerContent } from './components/Marker/Marker';
+
+<MessageScrollerProvider autoScroll initialScroll="end">
+  <MessageScroller>
+    <MessageScrollerViewport aria-label="Conversation">
+      <MessageScrollerContent>
+        <MessageScrollerItem messageId="today">
+          <Marker variant="separator"><MarkerContent>Today</MarkerContent></Marker>
+        </MessageScrollerItem>
+        <MessageScrollerItem messageId="msg-1" scrollAnchor>
+          <Message align="end">
+            <MessageContent>
+              <Bubble variant="default"><BubbleContent>Hello!</BubbleContent></Bubble>
+            </MessageContent>
+          </Message>
+        </MessageScrollerItem>
+      </MessageScrollerContent>
+    </MessageScrollerViewport>
+    <MessageScrollerButton direction="start" />
+    <MessageScrollerButton direction="end" />
+  </MessageScroller>
+</MessageScrollerProvider>
+```
+
+**Provider props:** `autoScroll?`, `initialScroll?` (`start` | `end`). **`MessageScrollerItem`:** required `messageId`, optional `scrollAnchor` (peek previous row on append). Zero-dep implementation — no `@shadcn/react` npm package. Hooks: `useMessageScroller`, `useMessageScrollerScrollable`, `useMessageScrollerVisibility`.
 
 ### Separator
 

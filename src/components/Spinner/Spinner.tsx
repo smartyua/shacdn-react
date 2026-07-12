@@ -6,12 +6,12 @@ export type SpinnerProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ className = '', size = 'default', ...props }, ref) => {
+  ({ className = '', size = 'default', 'aria-label': ariaLabel = 'Loading', ...props }, ref) => {
     return (
       <div
         ref={ref}
         role="status"
-        aria-label="Loading"
+        aria-label={ariaLabel}
         className={`${styles.spinner} ${styles[size]} ${className}`}
         {...props}
       >
@@ -29,7 +29,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
         >
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
-        <span className={styles.srOnly}>Loading...</span>
+        <span className={styles.srOnly}>{ariaLabel}</span>
       </div>
     );
   }

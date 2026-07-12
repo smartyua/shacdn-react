@@ -11,7 +11,6 @@
 }
 
 .menu {
-  position: relative;
   display: inline-flex;
 }
 
@@ -43,9 +42,6 @@
 }
 
 .content {
-  position: absolute;
-  top: calc(100% + $spacing-xs);
-  left: 0;
   z-index: $z-floating;
   min-width: 12rem;
   padding: $spacing-xs;
@@ -53,6 +49,76 @@
   border: $border-width solid $border;
   background: $popover;
   color: $popover-foreground;
+  animation: menubarIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: menubarInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: menubarInBottom;
+}
+
+.content[data-side='left'] {
+  animation-name: menubarInLeft;
+}
+
+.content[data-side='right'] {
+  animation-name: menubarInRight;
+}
+
+@keyframes menubarInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menubarInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menubarInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menubarInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menubarIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .item {
@@ -64,6 +130,11 @@
   &:hover {
     background: $accent;
     color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
   }
 }
 

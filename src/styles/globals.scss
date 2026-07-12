@@ -24,7 +24,8 @@
   --accent: 220 14% 95%;
   --accent-foreground: 222.2 47.4% 11.2%;
   
-  --destructive: 0 84.2% 60.2%;
+  // Dark enough to keep light foreground text above WCAG AA 4.5:1.
+  --destructive: 0 72.2% 50.6%;
   --destructive-foreground: 210 40% 98%;
   
   --border: 220 13% 90%;
@@ -55,8 +56,8 @@
   --accent: 240 4% 18%;
   --accent-foreground: 210 40% 98%;
   
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive: 0 91% 71%;
+  --destructive-foreground: 222.2 47.4% 11.2%;
   
   --border: 240 5% 24%;
   --input: 240 5% 24%;
@@ -71,19 +72,21 @@
 }
 
 :root[data-theme*="blue"][data-theme*="dark"] {
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 213.1 93.9% 67.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --ring: 213.1 93.9% 67.8%;
 }
 
 // Green scheme
 :root[data-theme*="green"] {
-  --primary: 142.1 76.2% 36.3%;
-  --ring: 142.1 76.2% 36.3%;
+  --primary: 142.4 71.8% 29.2%;
+  --ring: 142.4 71.8% 29.2%;
 }
 
 :root[data-theme*="green"][data-theme*="dark"] {
-  --primary: 142.1 76.2% 45%;
-  --primary-foreground: 355.7 100% 97.3%;
+  --primary: 141.9 69.2% 58%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --ring: 141.9 69.2% 58%;
 }
 
 // Purple scheme
@@ -93,30 +96,33 @@
 }
 
 :root[data-theme*="purple"][data-theme*="dark"] {
-  --primary: 262.1 83.3% 57.8%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 269.2 97.4% 76.3%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --ring: 269.2 97.4% 76.3%;
 }
 
 // Orange scheme
 :root[data-theme*="orange"] {
-  --primary: 24.6 95% 53.1%;
-  --ring: 24.6 95% 53.1%;
+  --primary: 17.5 88.3% 40.4%;
+  --ring: 17.5 88.3% 40.4%;
 }
 
 :root[data-theme*="orange"][data-theme*="dark"] {
-  --primary: 24.6 95% 53.1%;
-  --primary-foreground: 60 9.1% 97.8%;
+  --primary: 27 96% 61%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --ring: 27 96% 61%;
 }
 
 // Rose scheme
 :root[data-theme*="rose"] {
-  --primary: 346.8 77.2% 49.8%;
-  --ring: 346.8 77.2% 49.8%;
+  --primary: 345.3 82.7% 40.8%;
+  --ring: 345.3 82.7% 40.8%;
 }
 
 :root[data-theme*="rose"][data-theme*="dark"] {
-  --primary: 346.8 77.2% 49.8%;
-  --primary-foreground: 355.7 100% 97.3%;
+  --primary: 349.7 89.2% 71.2%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --ring: 349.7 89.2% 71.2%;
 }
 
 *,
@@ -158,4 +164,44 @@ h1, h2, h3, h4, h5, h6 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+// Shared overlay keyframes — global names for CSS-module consumers (animation: shacdn-overlay-enter …)
+@keyframes shacdn-overlay-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shacdn-overlay-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    // Near-instant: still completes one iteration so final keyframe states remain visible.
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Intentionally omit transform/transition-property overrides — JS-positioned layers keep
+  // computed transforms; instant duration is enough without breaking layout math.
 }

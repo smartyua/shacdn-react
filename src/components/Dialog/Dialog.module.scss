@@ -13,17 +13,8 @@
   position: fixed;
   inset: 0;
   z-index: $z-overlay-backdrop;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  background-color: hsl(0 0% 0% / 0.5);
+  animation: shacdn-overlay-enter $overlay-enter;
 }
 
 .dialogContent {
@@ -36,11 +27,19 @@
   border: $border-width solid $border;
   border-radius: $radius-lg;
   padding: $spacing-lg;
-  max-width: 32rem;
+  max-width: calc(100% - #{$spacing-xl});
   width: 90vw;
   max-height: 85vh;
   overflow-y: auto;
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 10px 15px -3px hsl(0 0% 0% / 0.1),
+    0 4px 6px -4px hsl(0 0% 0% / 0.1);
+  animation: contentShow 150ms $ease-spring;
+
+  @media (min-width: 640px) {
+    max-width: 32rem;
+    width: 100%;
+  }
 
   &:focus {
     outline: none;
@@ -68,7 +67,10 @@
   cursor: pointer;
   border-radius: $radius-sm;
   color: $muted-foreground;
-  transition: all $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast,
+    opacity $transition-fast;
 
   &:hover {
     color: $foreground;

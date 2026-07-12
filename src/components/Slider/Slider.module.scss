@@ -44,7 +44,7 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none;
+  pointer-events: auto;
 
   &:hover {
     border-color: color-mix(in srgb, $primary 85%, $foreground);

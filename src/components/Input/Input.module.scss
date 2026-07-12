@@ -10,7 +10,8 @@
   font-size: $font-size-sm;
   font-family: $font-sans;
   color: $foreground;
-  transition: all $transition-fast;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
   outline: none;
   height: $control-h-md;
 
@@ -18,7 +19,7 @@
     color: $muted-foreground;
   }
 
-  &:focus {
+  &:focus-visible {
     outline: $focus-ring-width solid $ring;
     outline-offset: $focus-ring-offset;
   }
@@ -36,7 +37,7 @@
 .file {
   padding: 0.375rem 0.75rem;
   cursor: pointer;
-  
+
   &::file-selector-button {
     margin-right: 0.5rem;
     border: none;

@@ -35,7 +35,8 @@
   font-size: $font-size-sm;
   font-weight: 500;
   text-decoration: none;
-  transition: all $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast,
+    opacity $transition-fast;
   cursor: pointer;
 
   &:hover:not([aria-disabled='true']) {
@@ -43,8 +44,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &[aria-disabled='true'] {

@@ -1,6 +1,6 @@
 # Справочник компонентов shacdn для AI и кросс-проектной разработки
 
-Документ для **выбора нужного контроля** из папки `src/components/` репозитория shacdn. Каталог охватывает **54+ примитивов** в паритете с реестром [shadcn/ui](https://ui.shadcn.com) (без Tailwind: те же типичные высоты контролов **h-8 / h-9 / h-10**). Полный список папок см. навигацию в демо `App.tsx` и блок ниже.
+Документ для **выбора нужного контроля** из папки `src/components/` репозитория shacdn. Каталог охватывает **61 registry UI item** (полная локальная реализация) плюс **DatePicker**, alias-папки, demo chrome и внутреннюю Floating-инфраструктуру — **68** папок всего. Реестр [shadcn/ui](https://ui.shadcn.com) (без Tailwind: те же типичные высоты контролов **h-8 / h-9 / h-10**). Полный список папок см. навигацию в демо `App.tsx` и блок ниже.
 
 > **Официальный референс дизайна:** [https://ui.shadcn.com](https://ui.shadcn.com) · [DESIGN_REFERENCE.md](./DESIGN_REFERENCE.md) · [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md)  
 > **Подключение в другой проект:** [INTEGRATION_GUIDE.md](./INTEGRATION_GUIDE.md) — копирование, зависимости, MCP, чеклист  
@@ -62,6 +62,11 @@
 | Разделитель блоков или пунктов меню | `Separator` | `Separator/` |
 | Отображение сочетания клавиш | `Kbd`, `KbdGroup` | `Kbd/` |
 | Аватар пользователя / группа участников | `Avatar`, … | `Avatar/` |
+| Превью вложения в чате / композере | `Attachment`, `AttachmentMedia`, `AttachmentContent`, … | `Attachment/` |
+| Пузырь текста сообщения (incoming/outgoing) | `Bubble`, `BubbleContent`, `BubbleReactions` | `Bubble/` |
+| Метка статуса / разделитель даты в треде | `Marker`, `MarkerIcon`, `MarkerContent` | `Marker/` |
+| Строка сообщения (аватар + контент + meta) | `Message`, `MessageAvatar`, `MessageContent`, … | `Message/` |
+| Прокручиваемый список сообщений с auto-scroll | `MessageScrollerProvider`, `MessageScroller`, `MessageScrollerViewport`, … | `MessageScroller/` |
 | Светлая/тёмная тема и цветовая схема | `ThemeSwitcher` | `ThemeSwitcher/` |
 
 ---
@@ -70,9 +75,9 @@
 
 Имена папок в `src/components/` (в скобках — примечание):
 
-`Accordion`, `Alert`, `AlertDialog`, `AspectRatio`, `Avatar`, `Badge`, `Breadcrumb`, `Button`, `ButtonGroup`, `Calendar`, `Card`, `Carousel`, `Checkbox`, `Collapsible` (база для Accordion), `Combobox`, `Command`, `ContextMenu`, `DatePicker`, `Dialog`, `Drawer`, `DropdownMenu`, `Empty`, `Field`, `Form`, `HoverCard`, `Input`, `InputGroup`, `InputOTP`, `Item`, `Kbd`, `Label`, `Menubar`, `Modal` (алиас Dialog), `NavigationMenu`, `Pagination`, `Popover`, `Progress`, `RadioGroup`, `ScrollArea`, `Select`, `Separator`, `Sheet` (алиас Drawer), `Skeleton`, `Slider`, `Spinner`, `Switch`, `Table`, `Tabs`, `Textarea`, `ThemeSwitcher` (демо темы), `Toast`, `Toggle`, `ToggleGroup`, `Tooltip`.
+`Accordion`, `Alert`, `AlertDialog`, `AspectRatio`, `Attachment`, `Avatar`, `Badge`, `Breadcrumb`, `Bubble`, `Button`, `ButtonGroup`, `Calendar`, `Card`, `Carousel`, `Checkbox`, `Collapsible` (база для Accordion), `Combobox`, `Command`, `ContextMenu`, `DatePicker`, `Dialog`, `Drawer`, `DropdownMenu`, `Empty`, `Field`, `Form`, `HoverCard`, `Input`, `InputGroup`, `InputOTP`, `Item`, `Kbd`, `Label`, `Marker`, `Menubar`, `Message`, `MessageScroller`, `Modal` (алиас Dialog), `NavigationMenu`, `Pagination`, `Popover`, `Progress`, `RadioGroup`, `ScrollArea`, `Select`, `Separator`, `Sheet` (алиас Drawer), `Skeleton`, `Slider`, `Spinner`, `Switch`, `Table`, `Tabs`, `Textarea`, `ThemeSwitcher` (демо темы), `Toast`, `Toggle`, `ToggleGroup`, `Tooltip`.
 
-**Zero-dep варианты реестра:** `chart` (SVG `BarChart`), `resizable` (pointer-drag panels), `sidebar` (layout provider). **Замены:** `sonner` → `Sonner`/`Toast`, `native-select` → `NativeSelect`/`Select`, `direction` → `DirectionProvider`. **Carousel / Command** — без Embla/cmdk. См. [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md).
+**Zero-dep варианты реестра:** `chart` (SVG `BarChart`), `resizable` (pointer-drag panels), `sidebar` (layout provider), `message-scroller` (scroll engine без `@shadcn/react`). **Замены:** `sonner` → `Sonner`/`Toast`, `native-select` → `NativeSelect`/`Select`, `direction` → `DirectionProvider`. **Carousel / Command** — без Embla/cmdk. **Chat (Jun 2026):** `Attachment`, `Bubble`, `Marker`, `Message`, `MessageScroller`. См. [SHADCN_PARITY_MATRIX.md](./SHADCN_PARITY_MATRIX.md).
 
 ---
 
@@ -417,6 +422,7 @@
 - **Модалка с формой:** `Dialog` или `Modal` + `Input` + `Button`.
 - **Уведомление об успехе:** `ToastProvider` (корень) + `useToast` в обработчике.
 - **Справка по UI:** `Tooltip` вокруг `Button` только с иконкой.
+- **Чат / тред сообщений:** `MessageScrollerProvider` → `MessageScroller` + `MessageScrollerViewport` + `MessageScrollerContent` + `MessageScrollerItem`; внутри item — `Message` + `Avatar` + `Bubble`; разделители — `Marker`; вложения — `Attachment`.
 
 ---
 

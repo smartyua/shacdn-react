@@ -5,42 +5,66 @@
   align-items: stretch;
   width: 100%;
   position: relative;
+  height: $control-h-md;
   border-radius: $radius-md;
   border: $border-width solid $input;
-  overflow: hidden;
+  background-color: $background;
+  transition: border-color $transition-fast, outline-color $transition-fast,
+    outline-offset $transition-fast;
 
-  &:focus-within {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+  &:has(textarea) {
+    height: auto;
+    min-height: $control-h-md;
   }
 
-  // Target both native input and Input component
+  &:has(:focus-visible) {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+
   input,
-  :global(.input) {
+  textarea,
+  select,
+  :global(.input),
+  :global(.textarea),
+  :global(.select) {
     flex: 1;
+    min-width: 0;
     margin: 0;
     outline: none;
     border: none !important;
     border-radius: 0 !important;
     background: transparent;
-    
-    &:focus {
+    height: 100%;
+    box-shadow: none;
+    transition: none;
+
+    &:focus,
+    &:focus-visible {
       outline: none !important;
     }
   }
 }
 
 .inputGroupAddon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  padding: $spacing-sm $spacing-md;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: $spacing-xs;
+  height: 100%;
+  padding: 0 $control-px;
   background: $muted;
   color: $muted-foreground;
   border: none;
   font-size: $font-size-sm;
+  font-weight: 500;
   white-space: nowrap;
   border-radius: 0;
-  flex-shrink: 0;
 
   &:first-child:not(:last-child) {
     border-right: $border-width solid $input;
@@ -48,5 +72,11 @@
 
   &:last-child:not(:first-child) {
     border-left: $border-width solid $input;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
   }
 }

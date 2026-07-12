@@ -1,0 +1,82 @@
+@use '../../styles/variables.scss' as *;
+
+.marker {
+  position: relative;
+  display: flex;
+  min-height: 1rem;
+  width: 100%;
+  align-items: center;
+  gap: $spacing-sm;
+  text-align: left;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $muted-foreground;
+
+  svg:not([class*='size-']) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $foreground;
+    }
+  }
+}
+
+.variantSeparator {
+  &::before,
+  &::after {
+    content: '';
+    height: 1px;
+    min-width: 0;
+    flex: 1;
+    background-color: $border;
+  }
+
+  &::before {
+    margin-right: 0.25rem;
+  }
+
+  &::after {
+    margin-left: 0.25rem;
+  }
+
+  .content {
+    flex: none;
+    text-align: center;
+  }
+}
+
+.variantBorder {
+  border-bottom: $border-width solid $border;
+  padding-bottom: $spacing-sm;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+
+  svg:not([class*='size-']) {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.content {
+  min-width: 0;
+  overflow-wrap: break-word;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $foreground;
+    }
+  }
+}

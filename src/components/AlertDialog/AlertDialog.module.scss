@@ -13,15 +13,15 @@
   font-weight: 500;
   padding: $spacing-sm $spacing-md;
   border-radius: $radius-sm;
-  transition: all $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, opacity $transition-fast;
   cursor: pointer;
   border: none;
   white-space: nowrap;
   flex: 1;
 
   &:focus-visible {
-    outline: 2px solid $ring;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
   }
 
   &:disabled {

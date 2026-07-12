@@ -1,10 +1,10 @@
 import { useCallback, useState, type ClipboardEvent, type KeyboardEvent } from 'react';
 import styles from './InputOTP.module.scss';
 
-function padDigits(s: string, length: number): string {
+const padDigits = (s: string, length: number): string => {
   const d = s.replace(/\D/g, '').slice(0, length);
   return d.padEnd(length, ' ');
-}
+};
 
 export interface InputOTPProps {
   length?: number;
@@ -17,7 +17,7 @@ export interface InputOTPProps {
   'aria-invalid'?: boolean | 'true' | 'false';
 }
 
-export function InputOTP({
+export const InputOTP = ({
   length = 6,
   value: valueControlled,
   defaultValue = '',
@@ -26,7 +26,7 @@ export function InputOTP({
   className = '',
   id,
   'aria-invalid': ariaInvalid,
-}: InputOTPProps) {
+}: InputOTPProps) => {
   const baseId = id ?? 'otp';
   const [internal, setInternal] = useState(() => padDigits(defaultValue, length));
 
@@ -75,7 +75,12 @@ export function InputOTP({
   };
 
   return (
-    <div className={`${styles.root} ${className}`} role="group" aria-label="One-time code">
+    <div
+      className={`${styles.root} ${className}`}
+      data-slot="input-otp"
+      role="group"
+      aria-label="One-time code"
+    >
       {Array.from({ length }, (_, index) => {
         const c = padded[index] === ' ' ? '' : padded[index];
         return (
@@ -86,6 +91,7 @@ export function InputOTP({
             inputMode="numeric"
             maxLength={1}
             disabled={disabled}
+            data-slot="input-otp-slot"
             className={styles.slot}
             value={c}
             aria-invalid={ariaInvalid === true || ariaInvalid === 'true' ? true : undefined}
@@ -97,4 +103,6 @@ export function InputOTP({
       })}
     </div>
   );
-}
+};
+
+InputOTP.displayName = 'InputOTP';

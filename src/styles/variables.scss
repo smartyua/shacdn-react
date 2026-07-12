@@ -49,6 +49,19 @@ $transition-fast: 120ms $ease-standard;
 $transition-base: 180ms $ease-standard;
 $transition-slow: 260ms $ease-standard;
 
+// Overlay motion — backdrop fade + floating surface enter/exit (Dialog, Drawer, Popover, menus)
+$overlay-enter-duration: 150ms;
+$overlay-enter-ease: $ease-spring;
+$overlay-exit-duration: 120ms;
+$overlay-exit-ease: $ease-standard;
+$overlay-enter: $overlay-enter-duration $overlay-enter-ease;
+$overlay-exit: $overlay-exit-duration $overlay-exit-ease;
+
+// Content pop-in — dialog/dropdown surface scale + opacity (paired with overlay backdrop)
+$content-enter-duration: 150ms;
+$content-enter-ease: $ease-spring;
+$content-enter: $content-enter-duration $content-enter-ease;
+
 // Focus ring — unified 2px ring matching shadcn/ui
 $focus-ring-width: 2px;
 $focus-ring-offset: 2px;

@@ -3,15 +3,18 @@
 .tooltipContent {
   position: fixed;
   z-index: $z-tooltip;
-  max-width: 300px;
+  width: fit-content;
+  max-width: min(300px, calc(100vw - #{$spacing-md} * 2));
   padding: 0.375rem 0.75rem;
   background-color: $foreground;
   color: $background;
   font-size: $font-size-xs;
+  line-height: 1.4;
   border-radius: $radius-md;
-  animation: fadeIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: tooltipFadeIn 150ms $ease-spring;
   pointer-events: none;
-  white-space: nowrap;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .top {
@@ -30,7 +33,7 @@
   transform-origin: left;
 }
 
-@keyframes fadeIn {
+@keyframes tooltipFadeIn {
   from {
     opacity: 0;
     transform: scale(0.95);

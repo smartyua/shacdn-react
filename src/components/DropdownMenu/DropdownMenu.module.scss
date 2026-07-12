@@ -1,7 +1,6 @@
 @use '../../styles/variables.scss' as *;
 
 .dropdownMenu {
-  position: relative;
   display: inline-block;
 }
 
@@ -20,7 +19,10 @@
   color: $foreground;
   border: $border-width solid $input;
   cursor: pointer;
-  transition: all $transition-fast;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast,
+    border-color $transition-fast;
 
   &:hover {
     background: $accent;
@@ -34,30 +36,36 @@
 }
 
 .dropdownMenuContent {
-  position: absolute;
   z-index: $z-floating;
-  min-width: 12rem;
-  background: $background;
+  min-width: 8rem;
+  background: $popover;
+  color: $popover-foreground;
   border: $border-width solid $border;
   border-radius: $radius-md;
   padding: $spacing-xs;
-  animation: slideDown 150ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  &.align-start {
-    left: 0;
-  }
-
-  &.align-center {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &.align-end {
-    right: 0;
-  }
+  box-shadow:
+    0 4px 6px -1px hsl(0 0% 0% / 0.1),
+    0 2px 4px -2px hsl(0 0% 0% / 0.1);
+  animation: menuPopIn $content-enter;
 }
 
-@keyframes slideDown {
+.dropdownMenuContent[data-side='top'] {
+  animation-name: menuPopInTop;
+}
+
+.dropdownMenuContent[data-side='bottom'] {
+  animation-name: menuPopInBottom;
+}
+
+.dropdownMenuContent[data-side='left'] {
+  animation-name: menuPopInLeft;
+}
+
+.dropdownMenuContent[data-side='right'] {
+  animation-name: menuPopInRight;
+}
+
+@keyframes menuPopInBottom {
   from {
     opacity: 0;
     transform: translateY(-4px);
@@ -68,15 +76,59 @@
   }
 }
 
+@keyframes menuPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuPopInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menuPopInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menuPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .dropdownMenuItem {
   display: flex;
   align-items: center;
-  padding: $spacing-xs $spacing-sm;
+  padding: 0.375rem $spacing-sm;
   font-size: $font-size-sm;
   border-radius: $radius-sm;
   cursor: pointer;
-  transition: all $transition-fast;
-  color: $foreground;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast;
+  color: $popover-foreground;
   user-select: none;
 
   &:hover {
@@ -103,8 +155,8 @@
 }
 
 .dropdownMenuLabel {
-  padding: $spacing-xs $spacing-sm;
-  font-size: $font-size-xs;
-  font-weight: 600;
+  padding: 0.375rem $spacing-sm;
+  font-size: $font-size-sm;
+  font-weight: 500;
   color: $muted-foreground;
 }

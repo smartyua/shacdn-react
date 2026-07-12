@@ -11,6 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         type={type}
+        data-slot="input"
         className={`${styles.input} ${fileClass} ${className || ''}`}
         {...props}
       />

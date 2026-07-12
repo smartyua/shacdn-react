@@ -1,0 +1,193 @@
+@use '../../styles/variables.scss' as *;
+
+.group {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.bubble {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  max-width: 80%;
+  min-width: 0;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.alignEnd {
+  align-self: flex-end;
+}
+
+.variantGhost {
+  max-width: 100%;
+  border: none;
+}
+
+.content {
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  border: 1px solid transparent;
+  padding: 0.5rem 0.75rem;
+  font-size: $font-size-sm;
+  line-height: 1.25rem;
+  word-wrap: break-word;
+  font-family: $font-sans;
+
+  &:is(button, a) {
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color $transition-fast,
+      color $transition-fast,
+      border-color $transition-fast;
+    outline: none;
+
+    &:focus-visible {
+      border-color: $ring;
+      box-shadow: 0 0 0 3px hsl(var(--ring) / 0.5);
+    }
+  }
+}
+
+.bubble.alignEnd .content {
+  align-self: flex-end;
+}
+
+.variantDefault .content {
+  background-color: $primary;
+  color: $primary-foreground;
+
+  &:is(button, a):hover {
+    background-color: hsl(var(--primary) / 0.8);
+  }
+}
+
+.variantSecondary .content {
+  background-color: $secondary;
+  color: $secondary-foreground;
+
+  &:is(button, a):hover {
+    background-color: color-mix(in oklch, $secondary, $foreground 5%);
+  }
+}
+
+.variantMuted .content {
+  background-color: $muted;
+  color: $foreground;
+
+  &:is(button, a):hover {
+    background-color: color-mix(in oklch, $muted, $foreground 5%);
+  }
+}
+
+.variantTinted .content {
+  background-color: oklch(from hsl(var(--primary)) 0.93 calc(c * 0.4) h);
+  color: $foreground;
+
+  &:is(button, a):hover {
+    background-color: oklch(from hsl(var(--primary)) 0.88 calc(c * 0.5) h);
+  }
+}
+
+:root[data-theme*='dark'] .variantTinted .content {
+  background-color: oklch(from hsl(var(--primary)) 0.3 calc(c * 0.4) h);
+
+  &:is(button, a):hover {
+    background-color: oklch(from hsl(var(--primary)) 0.35 calc(c * 0.5) h);
+  }
+}
+
+.variantOutline .content {
+  border-color: $border;
+  background-color: $background;
+  color: $foreground;
+
+  &:is(button, a):hover {
+    background-color: $muted;
+    color: $foreground;
+  }
+}
+
+:root[data-theme*='dark'] .variantOutline .content {
+  &:is(button, a):hover {
+    background-color: hsl(var(--input) / 0.3);
+  }
+}
+
+.variantGhost .content {
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0;
+
+  &:is(button, a):hover {
+    background-color: $muted;
+    color: $foreground;
+  }
+}
+
+:root[data-theme*='dark'] .variantGhost .content {
+  &:is(button, a):hover {
+    background-color: hsl(var(--muted) / 0.5);
+  }
+}
+
+.variantDestructive .content {
+  background-color: hsl(var(--destructive) / 0.1);
+  color: $destructive;
+
+  &:is(button, a):hover {
+    background-color: hsl(var(--destructive) / 0.2);
+  }
+}
+
+:root[data-theme*='dark'] .variantDestructive .content {
+  background-color: hsl(var(--destructive) / 0.2);
+
+  &:is(button, a):hover {
+    background-color: hsl(var(--destructive) / 0.3);
+  }
+}
+
+.reactions {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  width: fit-content;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  border-radius: 9999px;
+  background-color: $muted;
+  padding: 0.125rem 0.375rem;
+  font-size: $font-size-sm;
+  box-shadow: 0 0 0 3px $card;
+
+  &:has(button) {
+    padding: 0;
+  }
+}
+
+.reactionSideTop {
+  top: 0;
+  transform: translateY(-75%);
+}
+
+.reactionSideBottom {
+  bottom: 0;
+  transform: translateY(75%);
+}
+
+.reactionAlignStart {
+  left: 0.75rem;
+}
+
+.reactionAlignEnd {
+  right: 0.75rem;
+}

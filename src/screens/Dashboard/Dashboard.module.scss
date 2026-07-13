@@ -1,0 +1,1230 @@
+@use '../../styles/variables.scss' as *;
+
+.shell {
+  --sidebar-width: 15rem;
+  width: 100%;
+  min-height: calc(100vh - #{$site-header-height});
+  border: none;
+  border-radius: 0;
+  background-color: $background;
+}
+
+.sidebarNav {
+  @media (max-width: 767px) {
+    &[data-collapsed='true'] {
+      width: 0 !important;
+      min-width: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+
+    &[data-collapsed='false'] {
+      position: fixed;
+      top: $site-header-height;
+      left: 0;
+      z-index: $z-sticky;
+      height: calc(100vh - #{$site-header-height});
+      box-shadow: 0 0.5rem 1.5rem hsl(0 0% 0% / 0.12);
+    }
+  }
+}
+
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+}
+
+.sidebarBrandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-sm;
+  height: $control-h-sm;
+  border-radius: $radius-md;
+  background-color: $primary;
+  color: $primary-foreground;
+  flex-shrink: 0;
+}
+
+.sidebarVersion {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.inset {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm $spacing-md;
+  padding: $spacing-sm $spacing-lg;
+  border-bottom: $border-width solid $border;
+  background-color: $background;
+}
+
+.toolbarStart {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.toolbarEnd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.searchGroup {
+  flex: 1 1 10rem;
+  max-width: 18rem;
+  min-width: 0;
+
+  @media (max-width: 639px) {
+    display: none;
+  }
+}
+
+.pageBody {
+  flex: 1;
+  overflow: auto;
+  padding: $spacing-md $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  @media (min-width: 768px) {
+    padding: $spacing-lg;
+    gap: $spacing-xl;
+  }
+
+  @media (min-width: 1024px) {
+    padding: $spacing-xl;
+  }
+}
+
+.pageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-md $spacing-lg;
+}
+
+.pageTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  flex: 1 1 16rem;
+  min-width: 0;
+  max-width: 42rem;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.25;
+  color: $foreground;
+}
+
+.pageLead {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: $muted-foreground;
+}
+
+.pageMeta {
+  margin: 0;
+  font-size: $font-size-xs;
+  line-height: 1.4;
+  color: $muted-foreground;
+}
+
+.pageActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: $spacing-lg;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.kpiCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding-bottom: 0;
+}
+
+.kpiIcon {
+  flex-shrink: 0;
+  color: $muted-foreground;
+}
+
+.kpiBody {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.kpiValue {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.2;
+}
+
+.kpiDescription {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.kpiMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.kpiTarget {
+  width: 100%;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.kpiProgress {
+  margin-top: $spacing-xs;
+}
+
+.trendUp {
+  color: hsl(142.1, 76.2%, 36.3%);
+}
+
+.trendDown {
+  color: $destructive;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  @media (min-width: 768px) {
+    gap: $spacing-lg;
+  }
+}
+
+.sectionHeading {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  color: $foreground;
+  margin: 0;
+}
+
+.sectionLead {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  margin: calc(-1 * #{$spacing-xs}) 0 0;
+  line-height: 1.5;
+  max-width: 42rem;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+
+.chartCard {
+  min-height: 20rem;
+}
+
+.chartWrap {
+  width: 100%;
+  min-width: 0;
+}
+
+.sideStack {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  min-width: 0;
+}
+
+.highlightSlide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  min-height: 5.5rem;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  background-color: color-mix(in srgb, $accent 45%, transparent);
+  text-align: center;
+}
+
+.highlightValue {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $foreground;
+}
+
+.highlightDetail {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  line-height: 1.4;
+  max-width: 14rem;
+}
+
+.tableCard {
+  overflow: hidden;
+}
+
+.tableScroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tableToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm $spacing-md;
+}
+
+.tableFilter {
+  flex: 1 1 12rem;
+  max-width: 16rem;
+  min-width: 0;
+}
+
+.tableActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.rowCheckbox {
+  width: 1rem;
+}
+
+.statusCell {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.customerCell {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  min-width: 0;
+}
+
+.customerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.customerName {
+  font-weight: 500;
+  font-size: $font-size-sm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.customerId {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.colHideMobile {
+  @media (max-width: 639px) {
+    display: none;
+  }
+}
+
+.colHideTablet {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.paginationWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-lg;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.formFull {
+  grid-column: 1 / -1;
+}
+
+.fieldRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.sliderField {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.resizableWrap {
+  min-height: 18rem;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background-color: $muted;
+
+  @media (max-width: 767px) {
+    min-height: 24rem;
+  }
+}
+
+.resizableCell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 8rem;
+  padding: $spacing-lg;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  background-color: $muted;
+  gap: $spacing-md;
+}
+
+.engagementHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-weight: 600;
+  color: $foreground;
+}
+
+.panelTitle {
+  font-weight: 600;
+  color: $foreground;
+  margin: 0;
+  font-size: $font-size-sm;
+}
+
+.engagementList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  width: 100%;
+}
+
+.activityFeed {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.scrollerFrame {
+  min-height: 18rem;
+  height: auto;
+}
+
+.scrollerCardBody {
+  padding: 0;
+  min-height: 16rem;
+  overflow: hidden;
+}
+
+.scrollerRoot {
+  height: 100%;
+  min-height: 16rem;
+}
+
+.scrollerPadding {
+  padding: $spacing-lg;
+}
+
+.notificationPopover {
+  width: min(22rem, calc(100vw - #{$spacing-xl}));
+  max-width: 22rem;
+  padding: 0;
+}
+
+.notificationPopoverHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-md $spacing-sm;
+  border-bottom: $border-width solid $border;
+}
+
+.notificationPopoverTitle {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  color: $foreground;
+}
+
+.notificationPopoverMeta {
+  flex-shrink: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  white-space: nowrap;
+}
+
+.notificationList {
+  max-height: 16rem;
+}
+
+.notificationRows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationItem {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+  padding: $spacing-md;
+  border: none;
+  border-bottom: $border-width solid $border;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  font-family: $font-sans;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: -#{$focus-ring-offset};
+    z-index: 1;
+    position: relative;
+  }
+}
+
+.notificationItemHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-md;
+  min-width: 0;
+}
+
+.notificationItemTitle {
+  flex: 1;
+  min-width: 0;
+  font-size: $font-size-sm;
+  line-height: 1.4;
+  color: $foreground;
+  overflow-wrap: anywhere;
+}
+
+.notificationItemUnread .notificationItemTitle {
+  font-weight: 600;
+  padding-left: $spacing-md;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background-color: $foreground;
+  }
+}
+
+.notificationItemRead .notificationItemTitle {
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.notificationItemTime {
+  flex-shrink: 0;
+  font-size: $font-size-xs;
+  line-height: 1.4;
+  color: $muted-foreground;
+  white-space: nowrap;
+}
+
+.notificationItemBody {
+  font-size: $font-size-xs;
+  line-height: 1.5;
+  color: $muted-foreground;
+  overflow-wrap: anywhere;
+}
+
+.notificationItemUnread .notificationItemBody {
+  padding-left: $spacing-md;
+}
+
+.notificationPopoverFooter {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md $spacing-md;
+  border-top: $border-width solid $border;
+}
+
+.notificationPopoverAction {
+  width: 100%;
+}
+
+.hoverCardName {
+  font-weight: 600;
+  font-size: $font-size-sm;
+  margin: 0;
+}
+
+.hoverCardEmail {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  margin: $spacing-xs 0 0;
+}
+
+.carouselSlide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  background-color: color-mix(in srgb, $accent 45%, transparent);
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.mediaPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, $muted 0%, $accent 100%);
+  border-radius: $radius-md;
+}
+
+.mediaCaption {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  margin-top: $spacing-sm;
+  line-height: 1.4;
+}
+
+.attachmentStack {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.collapsibleTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border: none;
+  border-radius: $radius-md;
+  background-color: $muted;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $accent;
+  }
+}
+
+.collapsibleContent {
+  padding: $spacing-lg;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  line-height: 1.6;
+}
+
+.contextTarget {
+  padding: $spacing-xl;
+  border: none;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  text-align: center;
+  line-height: 1.5;
+  cursor: context-menu;
+}
+
+.faqWrap {
+  max-width: 100%;
+}
+
+.emptyWrap {
+  min-height: 14rem;
+  padding: $spacing-lg 0;
+}
+
+.skeletonGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.directionDemo {
+  padding: $spacing-lg;
+  border-radius: $radius-md;
+  background-color: $accent;
+}
+
+.directionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.menubarWrap {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding: $spacing-sm $spacing-lg;
+  border-bottom: $border-width solid $border;
+  background-color: $background;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.dashboardMenubar {
+  border: none;
+  background: transparent;
+  padding: 0;
+  gap: $spacing-xs;
+}
+
+.navMenuWrap {
+  display: none;
+
+  @media (min-width: 1100px) {
+    display: block;
+  }
+}
+
+.badgeIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.notificationBtn {
+  position: relative;
+}
+
+.badgeCount {
+  position: absolute;
+  top: -0.3125rem;
+  right: -0.3125rem;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+  font-size: 0.625rem;
+  line-height: 1rem;
+  pointer-events: none;
+}
+
+.avatarMenuTrigger {
+  display: inline-flex;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.chartBare {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  gap: $spacing-sm;
+}
+
+.alertBanner {
+  margin-bottom: 0;
+}
+
+.tabsRoot {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.tabsList {
+  @media (max-width: 639px) {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.tabPanel {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.settingsSection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.settingsAccordionRoot {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background: transparent;
+  gap: $spacing-sm;
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+}
+
+.cardSpaced {
+  margin-top: $spacing-lg;
+}
+
+.progressList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+  max-width: 18rem;
+}
+
+.progressItem {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-md;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.metricRow {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+  padding: $spacing-sm 0;
+  border-bottom: $border-width solid $border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.metricLabel {
+  color: $muted-foreground;
+}
+
+.metricValue {
+  font-weight: 600;
+  color: $foreground;
+  white-space: nowrap;
+}
+
+// Sidebar navigation groups
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.navGroupLabel {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $muted-foreground;
+  padding: $spacing-xs $spacing-sm;
+  margin: 0;
+}
+
+.sidebarNav[data-collapsed='true'] .navGroupLabel {
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+// Borderless surfaces (spacing over boxes)
+.surfacePanel {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  min-width: 0;
+}
+
+.surfacePanelHeader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.panelDescription {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.panelFooter {
+  margin: 0;
+}
+
+.panelAction {
+  align-self: flex-start;
+  margin-top: $spacing-xs;
+}
+
+.inlineSeparator {
+  margin: $spacing-sm 0;
+}
+
+.metricTile {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  min-width: 0;
+}
+
+.metricTileHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-md;
+}
+
+.metricTileLabel {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $foreground;
+  margin: 0;
+}
+
+.metricTileBody {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.tableSurface {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: $spacing-lg;
+  }
+}
+
+.tableSearch {
+  flex: 1 1 12rem;
+  max-width: 20rem;
+  min-width: 0;
+}
+
+.tableFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.emptyTableMessage {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  padding: $spacing-lg 0;
+  margin: 0;
+  text-align: center;
+}
+
+.settingsSurface {
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background-color: $muted;
+}
+
+.settingsAccordionItem {
+  border-bottom: none;
+  border-radius: $radius-md;
+  background-color: $card;
+  overflow: hidden;
+}
+
+.scrollerSurface {
+  min-height: 18rem;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  overflow: hidden;
+}
+
+.notificationGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: $spacing-md;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.notificationCard {
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  background-color: $muted;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $accent;
+  }
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 768px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+}
+
+.teamMemberList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.teamMemberItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm 0;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.funnelGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.funnelStep {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background-color: $muted;
+}
+
+.funnelStepHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+}
+
+.funnelStepLabel {
+  color: $muted-foreground;
+}
+
+.funnelStepValue {
+  font-weight: 600;
+  color: $foreground;
+}
+
+.funnelDropoff {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.queuedLabel {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.dialogFields,
+.sheetFields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.drawerBody {
+  padding: 0 $spacing-lg;
+}
+
+.drawerSeparator {
+  margin: $spacing-md 0;
+}
+
+.toolbarTimeRange {
+  flex-shrink: 0;
+}
+
+.toolbarCommand {
+  @media (max-width: 479px) {
+    display: none;
+  }
+}
+
+.spinIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

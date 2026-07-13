@@ -25,6 +25,9 @@ export const SiteHeader = () => {
             <NavLink className={navClass} to="/components">
               {messages.siteNav.components}
             </NavLink>
+            <NavLink className={navClass} to="/dashboard">
+              {messages.siteNav.dashboard}
+            </NavLink>
             <NavLink className={navClass} to="/sessy">
               {messages.siteNav.sessy}
             </NavLink>

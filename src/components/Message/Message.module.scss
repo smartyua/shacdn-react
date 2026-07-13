@@ -59,9 +59,9 @@
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 9999px;
-  background: $muted;
+  background: transparent;
   transition: transform $transition-fast;
 }
 
@@ -100,4 +100,8 @@
   font-size: $font-size-xs;
   font-weight: 500;
   color: $muted-foreground;
+}
+
+.content > [data-slot='bubble']:has([data-slot='bubble-reactions'][data-side='bottom']) + [data-slot='message-footer'] {
+  margin-top: $spacing-md;
 }

@@ -42,6 +42,16 @@ import { RadioGroup, RadioGroupItem } from './components/RadioGroup/RadioGroup';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './components/Tooltip/Tooltip';
 import { LocaleProvider } from './components/Locale/Locale';
 import { SiteHeader } from './components/SiteHeader/SiteHeader';
+import { DashboardLayout } from './screens/Dashboard/DashboardLayout';
+import { ActivityPage } from './screens/Dashboard/pages/ActivityPage';
+import { AnalyticsPage } from './screens/Dashboard/pages/AnalyticsPage';
+import { CustomersPage } from './screens/Dashboard/pages/CustomersPage';
+import { OrdersPage } from './screens/Dashboard/pages/OrdersPage';
+import { OverviewPage } from './screens/Dashboard/pages/OverviewPage';
+import { ReportsPage } from './screens/Dashboard/pages/ReportsPage';
+import { SettingsPage } from './screens/Dashboard/pages/SettingsPage';
+import { TrafficPage } from './screens/Dashboard/pages/TrafficPage';
+import { TopologyPage } from './screens/Dashboard/pages/TopologyPage';
 import { SessyLanding } from './screens/SessyLanding/SessyLanding';
 import { ShadcnHome } from './screens/ShadcnHome/ShadcnHome';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/Accordion/Accordion';
@@ -1701,6 +1711,26 @@ const App = () => {
                 </>
               }
             />
+            <Route
+              path="/dashboard"
+              element={
+                <>
+                  <SiteHeader />
+                  <DashboardLayout />
+                </>
+              }
+            >
+              <Route index element={<Navigate to="overview" replace />} />
+              <Route path="overview" element={<OverviewPage />} />
+              <Route path="analytics" element={<AnalyticsPage />} />
+              <Route path="traffic" element={<TrafficPage />} />
+              <Route path="topology" element={<TopologyPage />} />
+              <Route path="orders" element={<OrdersPage />} />
+              <Route path="customers" element={<CustomersPage />} />
+              <Route path="reports" element={<ReportsPage />} />
+              <Route path="activity" element={<ActivityPage />} />
+              <Route path="settings" element={<SettingsPage />} />
+            </Route>
             <Route
               path="/sessy"
               element={

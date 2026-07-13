@@ -22,6 +22,24 @@
   }
 }
 
+.subtle {
+  border-color: transparent;
+  background-color: $muted;
+  color: $foreground;
+
+  > svg {
+    color: $muted-foreground;
+  }
+
+  .title {
+    color: $foreground;
+  }
+
+  .description {
+    color: $muted-foreground;
+  }
+}
+
 .destructive {
   border-color: $destructive;
   color: $destructive;

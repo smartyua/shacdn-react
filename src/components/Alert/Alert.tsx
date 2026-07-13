@@ -2,12 +2,13 @@ import { forwardRef, type HTMLAttributes } from 'react';
 import styles from './Alert.module.scss';
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'destructive';
+  variant?: 'default' | 'destructive' | 'subtle';
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ variant = 'default', className, ...props }, ref) => {
-    const variantClass = variant === 'destructive' ? styles.destructive : '';
+    const variantClass =
+      variant === 'destructive' ? styles.destructive : variant === 'subtle' ? styles.subtle : '';
     
     return (
       <div

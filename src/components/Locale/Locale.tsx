@@ -36,6 +36,7 @@ const MESSAGES = {
       ariaLabel: 'Site navigation',
       home: 'Home',
       components: 'Components',
+      dashboard: 'Dashboard',
       sessy: 'Sessy',
     },
     localeSwitcher: {
@@ -65,6 +66,7 @@ const MESSAGES = {
       ariaLabel: 'Навигация по сайту',
       home: 'Главная',
       components: 'Компоненты',
+      dashboard: 'Дашборд',
       sessy: 'Sessy',
     },
     localeSwitcher: {
@@ -94,6 +96,7 @@ const MESSAGES = {
       ariaLabel: 'Website-Navigation',
       home: 'Startseite',
       components: 'Komponenten',
+      dashboard: 'Dashboard',
       sessy: 'Sessy',
     },
     localeSwitcher: {

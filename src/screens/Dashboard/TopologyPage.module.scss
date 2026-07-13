@@ -1,0 +1,1162 @@
+@use '../../styles/variables.scss' as *;
+
+// Compact topology type scale — token-aligned, refined for diagram density
+$topology-text-micro: 0.4375rem;
+$topology-text-xs: 0.5rem;
+$topology-text-sm: 0.5625rem;
+$topology-text-md: 0.625rem;
+$topology-text-ui: 0.6875rem;
+$topology-text-panel: 0.8125rem;
+$topology-tracking-caps: 0.07em;
+$topology-tracking-stat: 0.04em;
+$topology-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+.topologyPageTitle {
+  font-size: $font-size-lg;
+  letter-spacing: $tracking-tight;
+  line-height: 1.25;
+}
+
+.topologyPageLead {
+  font-size: $font-size-xs;
+  line-height: 1.45;
+}
+
+.topologyPageMeta {
+  font-size: $topology-text-ui;
+  line-height: 1.4;
+}
+
+.topologySectionHeading {
+  font-size: $topology-text-panel;
+  letter-spacing: $tracking-tight;
+  line-height: 1.3;
+}
+
+.topologySectionLead {
+  font-size: $font-size-xs;
+  line-height: 1.45;
+}
+
+.topologySection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  min-width: 0;
+}
+
+.topologyHeaderActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+}
+
+.topologyMotionControl {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.topologyMotionLabel {
+  font-size: $topology-text-ui;
+  font-weight: 500;
+  color: $muted-foreground;
+  white-space: nowrap;
+}
+
+.topologyMotionToggle {
+  flex-shrink: 0;
+}
+
+.topologyStats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm $spacing-lg;
+}
+
+.topologyStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.topologyStatLabel {
+  margin: 0;
+  font-size: $topology-text-ui;
+  font-weight: 500;
+  color: $muted-foreground;
+  text-transform: uppercase;
+  letter-spacing: $topology-tracking-stat;
+  line-height: 1.3;
+}
+
+.topologyStatValue {
+  margin: 0;
+  font-size: $topology-text-panel;
+  font-weight: 600;
+  line-height: 1.25;
+  color: $foreground;
+  font-variant-numeric: tabular-nums;
+}
+
+.topologyStatValue[data-tone='adbreak'] {
+  color: hsl(262 83% 48%);
+}
+
+.topologyStatValue[data-tone='transcode'] {
+  color: hsl(24 95% 45%);
+}
+
+.topologyStatValue[data-tone='packets'] {
+  color: hsl(217 91% 50%);
+}
+
+.topologyStatValue[data-tone='inflight'] {
+  color: hsl(142 71% 38%);
+}
+
+.topologyCanvasWrap {
+  margin: 0;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.topologyScroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  border-radius: $radius-md;
+  background-color: $card;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.topologyMobile {
+  display: none;
+
+  @media (max-width: 1023px) {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+.topologyFlowStrip {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 56;
+  border-radius: $radius-md;
+}
+
+.topologyFlowStripBg {
+  fill: color-mix(in srgb, $muted 55%, $card);
+}
+
+.topologyFlowStripNodeAdbreak {
+  fill: color-mix(in srgb, hsl(262 70% 50%) 18%, $card);
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 55%, $border);
+  stroke-width: 1;
+}
+
+.topologyFlowStripNodeServer {
+  fill: color-mix(in srgb, $primary 14%, $card);
+  stroke: color-mix(in srgb, $primary 45%, $border);
+  stroke-width: 1;
+}
+
+.topologyFlowStripNodeTranscode {
+  fill: color-mix(in srgb, hsl(24 90% 48%) 18%, $card);
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 55%, $border);
+  stroke-width: 1;
+}
+
+.topologyFlowStripLabel {
+  font-size: $topology-text-xs;
+  font-weight: 500;
+  font-family: $font-sans;
+  fill: $muted-foreground;
+}
+
+.topologyFlowStripTrack {
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-opacity: 0.35;
+}
+
+.topologyFlowStripTrackAdbreak {
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 45%, $muted-foreground);
+}
+
+.topologyFlowStripTrackTranscode {
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 45%, $muted-foreground);
+}
+
+.topologyFlowStripFlow {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 10 8;
+  animation: topologyEdgeDash 1s linear infinite;
+}
+
+.topologyFlowStripFlowAdbreak {
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 80%, $foreground);
+}
+
+.topologyFlowStripFlowTranscode {
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 80%, $foreground);
+}
+
+.topologySvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 780 / 780;
+  vertical-align: top;
+}
+
+.topologySvgBg {
+  fill: $card;
+}
+
+.topologyGroupSurfaceAdbreak {
+  fill: color-mix(in srgb, hsl(262 70% 50%) 4%, $muted);
+}
+
+.topologyGroupSurfaceTranscode {
+  fill: color-mix(in srgb, hsl(24 90% 48%) 4%, $muted);
+}
+
+.topologyGroupLabelPlate {
+  fill: color-mix(in srgb, $card 88%, transparent);
+}
+
+.topologyNodeLabelPlate {
+  fill: color-mix(in srgb, $card 90%, transparent);
+}
+
+.topologyGroupLabel {
+  font-size: $topology-text-md;
+  font-weight: 600;
+  letter-spacing: $topology-tracking-caps;
+  text-transform: uppercase;
+  font-family: $font-sans;
+}
+
+.topologyGroupLabelAdbreak {
+  fill: color-mix(in srgb, hsl(262 70% 42%) 90%, $foreground);
+}
+
+.topologyGroupLabelTranscode {
+  fill: color-mix(in srgb, hsl(24 85% 40%) 90%, $foreground);
+}
+
+.topologyGroupLabelServer {
+  fill: color-mix(in srgb, $primary 80%, $foreground);
+}
+
+.topologyEdge {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke $transition-base, stroke-width $transition-base, stroke-opacity $transition-base;
+}
+
+.topologyEdgeAdbreak {
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 40%, $muted-foreground);
+}
+
+.topologyEdgeTranscode {
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 40%, $muted-foreground);
+}
+
+.topologyEdgeActiveAdbreak {
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 75%, $foreground);
+  stroke-opacity: 0.85;
+}
+
+.topologyEdgeActiveTranscode {
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 75%, $foreground);
+  stroke-opacity: 0.85;
+}
+
+.topologyEdgeTrack {
+  pointer-events: none;
+}
+
+.topologyEdgeFlowOverlay {
+  stroke-dasharray: 12 9;
+  stroke-linecap: round;
+  animation: topologyEdgeDash 1.1s linear infinite;
+  pointer-events: none;
+}
+
+.topologyEdgeFlowAdbreak {
+  stroke: color-mix(in srgb, hsl(262 70% 50%) 82%, $foreground);
+}
+
+.topologyEdgeFlowTranscode {
+  stroke: color-mix(in srgb, hsl(24 90% 48%) 82%, $foreground);
+}
+
+.topologyCanvasWrap[data-flow-paused='true'] {
+  .topologyEdgeFlowOverlay,
+  .topologyFlowStripFlow {
+    animation-play-state: paused !important;
+  }
+}
+
+.topologyCanvasWrap[data-motion-override='on'] {
+  .topologyEdgeFlowOverlay {
+    animation: topologyEdgeDash 1.1s linear infinite !important;
+    animation-duration: 1.1s !important;
+    animation-iteration-count: infinite !important;
+    stroke-dasharray: 12 9 !important;
+  }
+
+  .topologyFlowStripFlow {
+    animation: topologyEdgeDash 1s linear infinite !important;
+    animation-duration: 1s !important;
+    animation-iteration-count: infinite !important;
+    stroke-dasharray: 10 8 !important;
+  }
+
+  .topologyLiveDot {
+    animation: topologyLedBlink 2s ease-in-out infinite !important;
+    animation-duration: 2s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+.topologyCanvasWrap:not([data-motion-override='on']) {
+  @media (prefers-reduced-motion: reduce) {
+    .topologyEdgeFlowOverlay,
+    .topologyFlowStripFlow {
+      animation: none;
+      stroke-dasharray: none;
+    }
+
+    .topologyLedBlink,
+    .topologyLedBusy,
+    .topologyLiveDot {
+      animation: none;
+    }
+  }
+}
+
+.topologyPacketHaloOuter {
+  opacity: 0.22;
+}
+
+.topologyPacketHaloMid {
+  opacity: 0.5;
+}
+
+.topologyPacketCore {
+  stroke: $card;
+  stroke-width: 1.25;
+}
+
+.topologyPacketToneBlue {
+  fill: hsl(217 91% 60%);
+  stroke: hsl(217 91% 60%);
+}
+
+.topologyPacketToneGreen {
+  fill: hsl(142 71% 45%);
+  stroke: hsl(142 71% 45%);
+}
+
+.topologyPacketToneAmber {
+  fill: hsl(38 92% 50%);
+  stroke: hsl(38 92% 50%);
+}
+
+.topologyPacketTonePurple {
+  fill: hsl(270 70% 60%);
+  stroke: hsl(270 70% 60%);
+}
+
+.topologyPacketToneCyan {
+  fill: hsl(199 89% 48%);
+  stroke: hsl(199 89% 48%);
+}
+
+.topologyPacketToneOrange {
+  fill: hsl(24 95% 53%);
+  stroke: hsl(24 95% 53%);
+}
+
+.topologyNode {
+  cursor: pointer;
+  outline: none;
+
+  &:focus-visible {
+    .topologyNodeFocusRing {
+      stroke: $ring;
+      stroke-opacity: 1;
+    }
+
+    .topologyWorkerSlot {
+      stroke: $ring;
+      stroke-width: 1.5;
+    }
+  }
+}
+
+.topologyNodeFocusRing {
+  fill: color-mix(in srgb, $primary 6%, transparent);
+  stroke: transparent;
+  stroke-width: 1.5;
+  stroke-opacity: 0;
+  transition: stroke $transition-fast, stroke-opacity $transition-fast;
+}
+
+.topologyNodeFocusRingVisible {
+  stroke: color-mix(in srgb, $primary 35%, transparent);
+  stroke-opacity: 0.6;
+}
+
+.topologyWorkerSlot {
+  fill: color-mix(in srgb, $card 92%, transparent);
+  stroke: color-mix(in srgb, $border 80%, transparent);
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.topologyWorkerSlotSelected {
+  stroke: color-mix(in srgb, $primary 40%, $border);
+  stroke-width: 1.25;
+}
+
+.topologyStatusPill {
+  fill: color-mix(in srgb, $muted 55%, $card);
+  stroke: none;
+  pointer-events: none;
+}
+
+.topologyStatusPillSuccess {
+  fill: color-mix(in srgb, hsl(142 71% 38%) 12%, $card);
+}
+
+.topologyStatusPillWarning {
+  fill: color-mix(in srgb, hsl(38 92% 50%) 14%, $card);
+}
+
+.topologyStatusPillMuted {
+  fill: color-mix(in srgb, $muted 70%, $card);
+}
+
+.topologyStatusPillDestructive {
+  fill: color-mix(in srgb, $destructive 12%, $card);
+}
+
+.topologySlotMetric {
+  font-size: $topology-text-xs;
+  font-weight: 500;
+  font-family: $topology-mono;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.topologySlotTotalLabel {
+  font-size: $topology-text-micro;
+  fill: $muted-foreground;
+  font-family: $font-sans;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.topologySlotTotalValue {
+  font-size: $topology-text-xs;
+  font-weight: 600;
+  font-family: $topology-mono;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.topologyStatusRing {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-opacity: 0.55;
+}
+
+.topologyStatusRingSuccess {
+  stroke: hsl(142 71% 38%);
+}
+
+.topologyStatusRingWarning {
+  stroke: hsl(38 92% 50%);
+}
+
+.topologyStatusRingMuted {
+  stroke: $muted-foreground;
+  stroke-dasharray: 4 4;
+}
+
+.topologyStatusRingDestructive {
+  stroke: $destructive;
+}
+
+.topologyStatusDot {
+  stroke: color-mix(in srgb, $background 90%, transparent);
+  stroke-width: 1.5;
+}
+
+.topologyStatusDotSuccess {
+  fill: hsl(142 71% 38%);
+}
+
+.topologyStatusDotWarning {
+  fill: hsl(38 92% 50%);
+}
+
+.topologyStatusDotMuted {
+  fill: $muted-foreground;
+}
+
+.topologyStatusDotDestructive {
+  fill: $destructive;
+}
+
+.topologyNodeLabel {
+  font-family: $font-sans;
+  fill: $muted-foreground;
+  font-weight: 500;
+  transition: fill $transition-fast;
+}
+
+.topologyNodeLabelActive {
+  fill: $foreground;
+  font-weight: 600;
+}
+
+.topologyNodeLabelServer {
+  font-size: $topology-text-md;
+  font-weight: 600;
+  letter-spacing: $tracking-ui;
+}
+
+.topologyNodeLabelWorker {
+  font-size: $topology-text-xs;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.topologyNodeSub {
+  font-family: $topology-mono;
+  font-size: $topology-text-micro;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.topologyNodeSubServer {
+  fill: hsl(217 75% 42%);
+  font-family: $font-sans;
+  font-size: $topology-text-xs;
+  font-weight: 400;
+  letter-spacing: $tracking-ui;
+}
+
+.topologyNodeSubSuccess {
+  fill: hsl(142 71% 38%);
+}
+
+.topologyNodeSubWarning {
+  fill: hsl(38 92% 50%);
+}
+
+.topologyNodeSubMuted {
+  fill: $muted-foreground;
+}
+
+.topologyNodeSubDestructive {
+  fill: $destructive;
+}
+
+.topologyLedBlink {
+  animation: topologyLedBlink 1.2s ease-in-out infinite;
+}
+
+.topologyLedBusy {
+  animation: topologyLedBlink 0.5s ease-in-out infinite;
+}
+
+.topologyFooter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+
+  @media (min-width: 768px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
+  }
+}
+
+.topologyLegend {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.topologyDetail {
+  min-width: 0;
+}
+
+.topologyLegendTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $topology-text-ui;
+  font-weight: 600;
+  letter-spacing: $topology-tracking-stat;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: $muted-foreground;
+}
+
+.topologyLegendGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs $spacing-md;
+}
+
+.topologyLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $topology-text-ui;
+  font-weight: 400;
+  line-height: 1.35;
+  color: $muted-foreground;
+}
+
+.topologyLegendSwatch {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.topologyLegendSwatchBlue {
+  background-color: hsl(217 91% 60%);
+}
+
+.topologyLegendSwatchGreen {
+  background-color: hsl(142 71% 45%);
+}
+
+.topologyLegendSwatchAmber {
+  background-color: hsl(38 92% 50%);
+}
+
+.topologyLegendSwatchPurple {
+  background-color: hsl(270 70% 60%);
+}
+
+.topologyLegendSwatchCyan {
+  background-color: hsl(199 89% 48%);
+}
+
+.topologyLegendSwatchOrange {
+  background-color: hsl(24 95% 53%);
+}
+
+.topologyLegendSwatchMuted {
+  background-color: $muted-foreground;
+}
+
+.topologyLegendStatuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm $spacing-md;
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: $border-width solid color-mix(in srgb, $border 55%, transparent);
+}
+
+.topologyDetailTitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $topology-text-panel;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.3;
+  color: $foreground;
+}
+
+.topologyDetailRow {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  font-size: $topology-text-ui;
+  line-height: 1.35;
+}
+
+.topologyDetailLabel {
+  color: $muted-foreground;
+}
+
+.topologyDetailValue {
+  font-weight: 500;
+  color: $foreground;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.topologyDetailFlows {
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: $border-width solid color-mix(in srgb, $border 55%, transparent);
+}
+
+.topologyDetailFlow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+  font-size: $topology-text-ui;
+  font-family: $topology-mono;
+  line-height: 1.35;
+  color: $muted-foreground;
+}
+
+.topologyDetailFlowDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.topologyDetailMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: $border-width solid color-mix(in srgb, $border 55%, transparent);
+}
+
+.topologyDetailMetricRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.topologyDetailMetricHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: $topology-text-ui;
+  line-height: 1.35;
+}
+
+.topologyDetailMetricLabel {
+  color: $muted-foreground;
+  font-weight: 500;
+}
+
+.topologyDetailMetricValue {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.topologyDetailMetricBar {
+  height: 0.1875rem;
+  border-radius: $radius-xs;
+  background-color: color-mix(in srgb, $muted-foreground 15%, transparent);
+  overflow: hidden;
+}
+
+.topologyDetailMetricFill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width $transition-base;
+}
+
+.topologyDetailMetricFillRead {
+  background-color: hsl(199 89% 48%);
+}
+
+.topologyDetailMetricFillWrite {
+  background-color: hsl(330 70% 55%);
+}
+
+.topologyDetailEmpty {
+  margin: 0;
+  font-size: $topology-text-ui;
+  line-height: 1.4;
+  color: $muted-foreground;
+}
+
+.topologyMetricsPanel {
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.topologyMetricsBg {
+  fill: color-mix(in srgb, $card 94%, transparent);
+  stroke-width: 0.6;
+  stroke-opacity: 0.35;
+}
+
+.topologyMetricsBgAdbreak {
+  stroke: hsl(262 83% 58%);
+}
+
+.topologyMetricsBgTranscode {
+  stroke: hsl(24 95% 50%);
+}
+
+.topologyMetricsLabel {
+  font-size: 0.5rem;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.topologyMetricsLabelRead {
+  fill: hsl(199 89% 48%);
+}
+
+.topologyMetricsLabelWrite {
+  fill: hsl(330 70% 55%);
+}
+
+.topologyMetricsValue {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  fill: $foreground;
+}
+
+.topologyMetricsBarTrack {
+  fill: color-mix(in srgb, $muted-foreground 12%, transparent);
+}
+
+.topologyMetricsBarRead {
+  fill: hsl(199 89% 48%);
+  opacity: 0.7;
+}
+
+.topologyMetricsBarWrite {
+  fill: hsl(330 70% 55%);
+  opacity: 0.7;
+}
+
+.topologyMetricsTotalLabel {
+  font-size: 0.46875rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  fill: $muted-foreground;
+}
+
+.topologyMetricsTotalValueAdbreak {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  fill: hsl(262 83% 58%);
+}
+
+.topologyMetricsTotalValueTranscode {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  fill: hsl(24 95% 50%);
+}
+
+.topologyLiveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $topology-text-ui;
+  font-weight: 500;
+  line-height: 1.35;
+  color: $muted-foreground;
+}
+
+.topologyLiveDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: hsl(142 71% 38%);
+  animation: topologyLedBlink 2s ease-in-out infinite;
+}
+
+.topologyLiveDotPaused {
+  background-color: $muted-foreground;
+  animation: none;
+}
+
+.topologyMobileHub {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  min-width: 0;
+}
+
+.topologyMobileHubTitle {
+  margin: 0;
+  font-size: $topology-text-panel;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.3;
+  color: $foreground;
+}
+
+.topologyMobileHubSub {
+  margin: 0;
+  font-size: $topology-text-ui;
+  line-height: 1.35;
+  color: $muted-foreground;
+}
+
+.topologyMobileHubFlows {
+  margin-left: auto;
+  font-size: $topology-text-ui;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  color: hsl(142 71% 38%);
+}
+
+.topologyMobileGroups {
+  display: grid;
+  gap: $spacing-md;
+}
+
+.topologyMobileGroupTitleAdbreak,
+.topologyMobileGroupTitleTranscode {
+  margin: 0 0 $spacing-sm;
+  font-size: $topology-text-ui;
+  font-weight: 600;
+  letter-spacing: $topology-tracking-stat;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.topologyMobileGroupTitleAdbreak {
+  color: hsl(262 70% 42%);
+}
+
+.topologyMobileGroupTitleTranscode {
+  color: hsl(24 85% 40%);
+}
+
+.topologyMobileWorkerList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-sm;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topologyMobileWorkerCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto auto auto;
+  gap: 0.25rem $spacing-xs;
+  align-items: center;
+  width: 100%;
+  padding: $spacing-sm;
+  border: $border-width solid color-mix(in srgb, $border 65%, transparent);
+  border-radius: $radius-md;
+  background: color-mix(in srgb, $card 96%, $muted);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.topologyMobileWorkerCardSelected {
+  border-color: color-mix(in srgb, $primary 35%, $border);
+}
+
+.topologyMobileWorkerDot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  grid-row: 1;
+  align-self: center;
+}
+
+.topologyMobileDotSuccess {
+  background-color: hsl(142 71% 38%);
+}
+
+.topologyMobileDotWarning {
+  background-color: hsl(38 92% 50%);
+}
+
+.topologyMobileDotMuted {
+  background-color: $muted-foreground;
+}
+
+.topologyMobileDotDestructive {
+  background-color: $destructive;
+}
+
+.topologyMobileWorkerName {
+  font-size: $topology-text-ui;
+  font-weight: 600;
+  line-height: 1.35;
+  color: $foreground;
+}
+
+.topologyMobileWorkerStatusPill {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0.125rem 0.3125rem;
+  border-radius: $radius-sm;
+  font-size: $topology-text-sm;
+  font-weight: 600;
+  font-family: $topology-mono;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.topologyMobileWorkerMetricsRow {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  font-size: $topology-text-sm;
+  font-weight: 500;
+  font-family: $topology-mono;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.topologyMobileMetricRead {
+  color: hsl(217 91% 50%);
+}
+
+.topologyMobileMetricWrite {
+  color: hsl(330 70% 48%);
+}
+
+.topologyMobileWorkerTotalRow {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  font-size: $topology-text-sm;
+  line-height: 1.3;
+  color: $muted-foreground;
+}
+
+.topologyMobileTotalLabel {
+  font-family: $font-sans;
+  font-weight: 400;
+}
+
+.topologyMobileTotalValue {
+  font-weight: 600;
+  font-family: $topology-mono;
+  font-variant-numeric: tabular-nums;
+  color: $foreground;
+}
+
+.topologyMobileWorkerStatus {
+  font-size: $topology-text-sm;
+  font-weight: 600;
+  font-family: $topology-mono;
+}
+
+.topologyMobileStatusSuccess {
+  color: hsl(142 71% 38%);
+  background: color-mix(in srgb, hsl(142 71% 38%) 12%, $card);
+}
+
+.topologyMobileStatusWarning {
+  color: hsl(38 92% 50%);
+  background: color-mix(in srgb, hsl(38 92% 50%) 14%, $card);
+}
+
+.topologyMobileStatusMuted {
+  color: $muted-foreground;
+  background: color-mix(in srgb, $muted 70%, $card);
+}
+
+.topologyMobileStatusDestructive {
+  color: $destructive;
+  background: color-mix(in srgb, $destructive 12%, $card);
+}
+
+.topologyMobileWorkerMetrics {
+  grid-column: 1 / -1;
+  font-size: $topology-text-sm;
+  font-family: $topology-mono;
+  color: $muted-foreground;
+  font-variant-numeric: tabular-nums;
+}
+
+.topologyMobileWorkerFlows {
+  grid-column: 1 / -1;
+  font-size: $topology-text-sm;
+  font-weight: 500;
+  color: hsl(217 91% 50%);
+}
+
+@keyframes topologyEdgeDash {
+  to {
+    stroke-dashoffset: -36;
+  }
+}
+
+@keyframes topologyLedBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topologyEdge {
+    transition: none;
+  }
+
+  .topologyDetailMetricFill {
+    transition: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .topologyNode:hover .topologyNodeFocusRing {
+    stroke: color-mix(in srgb, $primary 35%, transparent);
+    stroke-opacity: 0.6;
+  }
+
+  .topologyNode:hover .topologyNodeLabel {
+    fill: $foreground;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

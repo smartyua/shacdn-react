@@ -1,0 +1,13 @@
+---
+description: Documentation and knowledge update duties
+alwaysApply: true
+---
+
+# Documentation
+
+- Human AI infra docs: `docs/ai/`
+- ADRs: `docs/adr/`
+- RAG-oriented KB: `.ai/knowledge/` (`npm run ai:knowledge:update`)
+- Prefer links to real files; never invent content
+- Unknown → `Status: Not documented yet`
+- Significant architecture choices → new ADR

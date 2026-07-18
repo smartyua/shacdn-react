@@ -1,0 +1,49 @@
+ai:
+  enabled: true
+
+  bootstrap:
+    # Opt-in: run `npm run ai:bootstrap` or the VS Code task manually (no folderOpen auto-run)
+    runOnProjectOpen: false
+    incrementalIndex: true
+    failOpen: true
+
+  memory:
+    enabled: true
+    workingMemory: true
+    episodicMemory: true
+    semanticMemory: true
+    compressionAfterIterations: 4
+    maxActiveTaskTokens: 12000
+
+  vectorStore:
+    provider: lancedb
+    collection: project-knowledge
+    namespace: shacdn
+    path: .ai/data/lancedb
+    jsonFallbackPath: .ai/data/json-index
+
+  embeddings:
+    provider: local-hash
+    fallbackProvider: null
+    dimensions: 384
+    timeoutMs: 15000
+    maxRetries: 3
+    batchSize: 32
+
+  indexing:
+    includeTests: true
+    includeDocs: true
+    includeAdr: true
+    incremental: true
+    maxChunkChars: 2400
+
+  verification:
+    requireTestsForFunctionalChanges: true
+    requireSelfReview: true
+    requireRequirementRecheck: true
+    independentReviewForCriticalChanges: true
+
+  rag:
+    topK: 12
+    maxContextChars: 12000
+    minScore: 0.05

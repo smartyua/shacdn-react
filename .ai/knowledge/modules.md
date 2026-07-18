@@ -1,0 +1,80 @@
+# Modules
+
+Generated: 2026-07-18T11:24:30.321Z
+
+## Components
+- `Accordion` → `src/components/Accordion/`
+- `Alert` → `src/components/Alert/`
+- `AlertDialog` → `src/components/AlertDialog/`
+- `AspectRatio` → `src/components/AspectRatio/`
+- `Attachment` → `src/components/Attachment/`
+- `Avatar` → `src/components/Avatar/`
+- `Badge` → `src/components/Badge/`
+- `Breadcrumb` → `src/components/Breadcrumb/`
+- `Bubble` → `src/components/Bubble/`
+- `Button` → `src/components/Button/`
+- `ButtonGroup` → `src/components/ButtonGroup/`
+- `Calendar` → `src/components/Calendar/`
+- `Card` → `src/components/Card/`
+- `Carousel` → `src/components/Carousel/`
+- `Chart` → `src/components/Chart/`
+- `Checkbox` → `src/components/Checkbox/`
+- `Collapsible` → `src/components/Collapsible/`
+- `Combobox` → `src/components/Combobox/`
+- `Command` → `src/components/Command/`
+- `ContextMenu` → `src/components/ContextMenu/`
+- `DatePicker` → `src/components/DatePicker/`
+- `Dialog` → `src/components/Dialog/`
+- `Direction` → `src/components/Direction/`
+- `Drawer` → `src/components/Drawer/`
+- `DropdownMenu` → `src/components/DropdownMenu/`
+- `Empty` → `src/components/Empty/`
+- `Field` → `src/components/Field/`
+- `Floating` → `src/components/Floating/`
+- `Form` → `src/components/Form/`
+- `HoverCard` → `src/components/HoverCard/`
+- `Input` → `src/components/Input/`
+- `InputGroup` → `src/components/InputGroup/`
+- `InputOTP` → `src/components/InputOTP/`
+- `Item` → `src/components/Item/`
+- `Kbd` → `src/components/Kbd/`
+- `Label` → `src/components/Label/`
+- `Locale` → `src/components/Locale/`
+- `Marker` → `src/components/Marker/`
+- `Menubar` → `src/components/Menubar/`
+- `Message` → `src/components/Message/`
+- `MessageScroller` → `src/components/MessageScroller/`
+- `Modal` → `src/components/Modal/`
+- `NativeSelect` → `src/components/NativeSelect/`
+- `NavigationMenu` → `src/components/NavigationMenu/`
+- `Pagination` → `src/components/Pagination/`
+- `Popover` → `src/components/Popover/`
+- `Progress` → `src/components/Progress/`
+- `RadioGroup` → `src/components/RadioGroup/`
+- `Resizable` → `src/components/Resizable/`
+- `ScrollArea` → `src/components/ScrollArea/`
+- `Select` → `src/components/Select/`
+- `Separator` → `src/components/Separator/`
+- `Sheet` → `src/components/Sheet/`
+- `Sidebar` → `src/components/Sidebar/`
+- `SiteHeader` → `src/components/SiteHeader/`
+- `Skeleton` → `src/components/Skeleton/`
+- `Slider` → `src/components/Slider/`
+- `Sonner` → `src/components/Sonner/`
+- `Spinner` → `src/components/Spinner/`
+- `Switch` → `src/components/Switch/`
+- `Table` → `src/components/Table/`
+- `Tabs` → `src/components/Tabs/`
+- `Textarea` → `src/components/Textarea/`
+- `ThemeSwitcher` → `src/components/ThemeSwitcher/`
+- `Toast` → `src/components/Toast/`
+- `Toggle` → `src/components/Toggle/`
+- `ToggleGroup` → `src/components/ToggleGroup/`
+- `Tooltip` → `src/components/Tooltip/`
+- `Typography` → `src/components/Typography/`
+
+## Other
+- Styles: `src/styles/`
+- Screens: `src/screens/`
+- MCP: `mcp/shacdn-server/`
+- AI infra: `.ai/`

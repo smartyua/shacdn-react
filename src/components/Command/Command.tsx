@@ -149,6 +149,7 @@ export const CommandItem = ({
     <button
       type="button"
       role="option"
+      aria-selected={selected === value}
       className={`${styles.item} ${className}`}
       data-selected={selected === value ? 'true' : 'false'}
       onMouseEnter={() => setSelected(value)}

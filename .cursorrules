@@ -11,6 +11,7 @@ This project uses Cursor rules for AI assistance. All rules are in `.cursor/rule
 
 ## Key Rules
 
+- **00-core.mdc** — minimal change, evidence, testing, no hallucination
 - **design-reference.mdc** - [ui.shadcn.com](https://ui.shadcn.com) as canonical design reference
 - **project-overview.mdc** - Always applies, describes project architecture
 - **design-system.mdc** - SCSS variable reference (applies to .scss files)
@@ -19,6 +20,12 @@ This project uses Cursor rules for AI assistance. All rules are in `.cursor/rule
 - **scss-conventions.mdc** - Styling patterns (applies to .scss files)
 - **component-creation.mdc** - New component checklist
 - **file-structure.mdc** - Always applies, project organization
+- **06-memory.mdc / 07-context-management.mdc** — `.ai/` memory + task compression
+- **11-mcp.mdc** — MCP servers (shadcn, shacdn, filesystem)
+
+## AI infrastructure
+
+See `docs/ai/README.md`. AI bootstrap is opt-in: `npm run ai:bootstrap` or the VS Code task **AI: Bootstrap Project**.
 
 ## Code Quality Requirements
 

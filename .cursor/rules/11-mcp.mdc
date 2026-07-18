@@ -1,0 +1,18 @@
+---
+description: MCP servers for this project
+alwaysApply: true
+---
+
+# MCP
+
+Configured in `.cursor/mcp.json`:
+- `shadcn` — official registry reference (`npx shadcn@latest mcp`)
+- `shacdn` — project export server (`mcp/shacdn-server`)
+- `filesystem` — repo-scoped file tools (when enabled)
+
+## Rules
+- Prefer project MCP for exporting SCSS components to other apps
+- Prefer official shadcn MCP for registry parity checks
+- Do not point MCP at absolute machine-specific paths in committed config
+- If `mcp/shacdn-server/dist` is missing: build that package (bootstrap attempts this)
+- See also `shacdn-mcp.mdc` and `shadcn-mcp-reference.mdc`

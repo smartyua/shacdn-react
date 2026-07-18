@@ -62,7 +62,10 @@ Open `showcase.html` in your browser to see the landing page (no dev server need
 npm run dev # Start dev server
 npm run build # Build for production
 npm run lint # Check code quality (0 errors)
+npm run test # UI + AI unit tests
+npm run ladle # Isolated component stories
 npm run preview # Preview production build
+npm run ai:bootstrap # Opt-in AI index/RAG setup
 ```
 
 ## Component catalog

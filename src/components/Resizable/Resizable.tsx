@@ -97,7 +97,9 @@ export const ResizablePanelGroup = ({
             ...acc.nodes,
             cloneElement(child, {
               key: child.key ?? `panel-${i}`,
-              style: { flex: `0 0 ${size}%`, ...child.props.style },
+              // Grow factors share leftover space after fixed handles — avoids
+              // overflow when percentage flex-basis + handle px exceed 100%.
+              style: { ...child.props.style, flex: `${size} 1 0px` },
             }),
           ],
         };
@@ -122,8 +124,7 @@ export const ResizablePanelGroup = ({
   return (
     <GroupContext.Provider value={value}>
       <div
-        role="group"
-        aria-orientation={orientation}
+        data-orientation={orientation}
         className={`${styles.group} ${styles[`group--${orientation}`]} ${className}`}
         {...props}
       >

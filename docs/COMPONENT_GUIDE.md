@@ -978,6 +978,391 @@ import { ThemeSwitcher } from './components/ThemeSwitcher/ThemeSwitcher';
 <ThemeSwitcher />
 ```
 
+### Accordion
+
+```tsx
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/Accordion/Accordion';
+
+<Accordion type="single" collapsible defaultValue="item-1">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>Yes. Keyboard and ARIA are built in.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### AspectRatio
+
+```tsx
+import { AspectRatio } from './components/AspectRatio/AspectRatio';
+
+<AspectRatio ratio={16 / 9}>
+  <img src="/hero.jpg" alt="Hero" />
+</AspectRatio>
+```
+
+### ButtonGroup
+
+```tsx
+import { ButtonGroup, ButtonGroupSeparator } from './components/ButtonGroup/ButtonGroup';
+import { Button } from './components/Button/Button';
+
+<ButtonGroup>
+  <Button variant="outline">Left</Button>
+  <ButtonGroupSeparator />
+  <Button variant="outline">Right</Button>
+</ButtonGroup>
+```
+
+### Calendar
+
+```tsx
+import { Calendar } from './components/Calendar/Calendar';
+
+const [date, setDate] = useState<Date | undefined>(new Date());
+
+<Calendar selected={date} onSelect={setDate} />
+```
+
+### Chart
+
+```tsx
+import { BarChart, ChartContainer } from './components/Chart/Chart';
+
+<ChartContainer>
+  <BarChart data={[{ label: 'Jan', value: 120 }, { label: 'Feb', value: 90 }]} />
+</ChartContainer>
+```
+
+### Collapsible
+
+```tsx
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './components/Collapsible/Collapsible';
+import { Button } from './components/Button/Button';
+
+<Collapsible>
+  <CollapsibleTrigger asChild>
+    <Button variant="outline">Toggle</Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>Hidden details</CollapsibleContent>
+</Collapsible>
+```
+
+### Combobox
+
+```tsx
+import { Combobox } from './components/Combobox/Combobox';
+
+<Combobox
+  options={[
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+  ]}
+  placeholder="Search fruit…"
+  onValueChange={(value) => console.log(value)}
+/>
+```
+
+### ContextMenu
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from './components/ContextMenu/ContextMenu';
+
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div>Right-click me</div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Paste</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### Direction
+
+```tsx
+import { DirectionProvider, useDirection } from './components/Direction/Direction';
+
+<DirectionProvider dir="rtl">
+  <App />
+</DirectionProvider>
+```
+
+### Empty
+
+```tsx
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from './components/Empty/Empty';
+
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">{/* icon */}</EmptyMedia>
+    <EmptyTitle>No results</EmptyTitle>
+    <EmptyDescription>Try a different filter.</EmptyDescription>
+  </EmptyHeader>
+  <EmptyContent>
+    <Button>Clear filters</Button>
+  </EmptyContent>
+</Empty>
+```
+
+### Field
+
+```tsx
+import { Field, FieldLabel, FieldDescription } from './components/Field/Field';
+import { Input } from './components/Input/Input';
+
+<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" type="email" />
+  <FieldDescription>We never share your email.</FieldDescription>
+</Field>
+```
+
+### Form
+
+```tsx
+import { Form, FormField } from './components/Form/Form';
+import { Input } from './components/Input/Input';
+import { Button } from './components/Button/Button';
+
+<Form onSubmit={(e) => e.preventDefault()}>
+  <FormField>
+    <Input name="name" placeholder="Name" />
+  </FormField>
+  <Button type="submit">Save</Button>
+</Form>
+```
+
+### HoverCard
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from './components/HoverCard/HoverCard';
+import { Button } from './components/Button/Button';
+
+<HoverCard>
+  <HoverCardTrigger>
+    <Button variant="link">@shacdn</Button>
+  </HoverCardTrigger>
+  <HoverCardContent>Hover card details</HoverCardContent>
+</HoverCard>
+```
+
+### InputOTP
+
+```tsx
+import { InputOTP } from './components/InputOTP/InputOTP';
+
+const [otp, setOtp] = useState('');
+
+<InputOTP value={otp} onChange={setOtp} length={6} />
+```
+
+### Item
+
+```tsx
+import { Item, ItemContent, ItemTitle, ItemDescription } from './components/Item/Item';
+
+<Item>
+  <ItemContent>
+    <ItemTitle>Notifications</ItemTitle>
+    <ItemDescription>Email digests and product updates.</ItemDescription>
+  </ItemContent>
+</Item>
+```
+
+### Locale
+
+```tsx
+import { LocaleProvider } from './components/Locale/Locale';
+
+<LocaleProvider locale="en-US">
+  <App />
+</LocaleProvider>
+```
+
+### Menubar
+
+```tsx
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+} from './components/Menubar/Menubar';
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>New</MenubarItem>
+      <MenubarItem>Open</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### NativeSelect
+
+```tsx
+import { NativeSelect } from './components/NativeSelect/NativeSelect';
+
+{/* Alias of Select — native <select> styling */}
+<NativeSelect>
+  <option value="a">A</option>
+  <option value="b">B</option>
+</NativeSelect>
+```
+
+### Popover
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from './components/Popover/Popover';
+import { Button } from './components/Button/Button';
+
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </PopoverTrigger>
+  <PopoverContent>Popover body</PopoverContent>
+</Popover>
+```
+
+### Resizable
+
+```tsx
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './components/Resizable/Resizable';
+
+<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel defaultSize={50}>Left</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>Right</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+### ScrollArea
+
+```tsx
+import { ScrollArea } from './components/ScrollArea/ScrollArea';
+
+<ScrollArea style={{ height: 200 }}>
+  {Array.from({ length: 20 }, (_, i) => (
+    <div key={i}>Row {i + 1}</div>
+  ))}
+</ScrollArea>
+```
+
+### Sheet
+
+```tsx
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from './components/Sheet/Sheet';
+
+{/* Alias of Drawer */}
+<Sheet>
+  <SheetContent side="right">
+    <SheetHeader>
+      <SheetTitle>Sheet</SheetTitle>
+      <SheetDescription>Side panel content</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+### Sidebar
+
+```tsx
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarInset,
+  SidebarTrigger,
+} from './components/Sidebar/Sidebar';
+
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader>App</SidebarHeader>
+    <SidebarContent>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton>Home</SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    Main content
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### SiteHeader
+
+```tsx
+import { SiteHeader } from './components/SiteHeader/SiteHeader';
+
+{/* Demo chrome — theme switcher + nav links */}
+<SiteHeader />
+```
+
+### Sonner
+
+```tsx
+import { SonnerToaster, useSonner } from './components/Sonner/Sonner';
+
+{/* Alias of Toast provider + useToast */}
+<SonnerToaster>
+  <App />
+</SonnerToaster>
+```
+
+### Toggle
+
+```tsx
+import { Toggle } from './components/Toggle/Toggle';
+
+<Toggle aria-label="Bold">B</Toggle>
+```
+
+### ToggleGroup
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from './components/ToggleGroup/ToggleGroup';
+
+<ToggleGroup type="single" defaultValue="center">
+  <ToggleGroupItem value="left">Left</ToggleGroupItem>
+  <ToggleGroupItem value="center">Center</ToggleGroupItem>
+  <ToggleGroupItem value="right">Right</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Typography
+
+```tsx
+import {
+  TypographyH1,
+  TypographyP,
+  TypographyLead,
+  TypographyMuted,
+} from './components/Typography/Typography';
+
+<TypographyH1>Heading</TypographyH1>
+<TypographyLead>Lead paragraph</TypographyLead>
+<TypographyP>Body copy</TypographyP>
+<TypographyMuted>Muted helper text</TypographyMuted>
+```
+
 ---
 
 ## Creating New Components

@@ -2,15 +2,18 @@
   "mcpServers": {
     "shadcn": {
       "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
+      "args": ["shadcn@latest", "mcp"]
     },
     "shacdn": {
       "command": "node",
+      "args": ["mcp/shacdn-server/dist/index.js"]
+    },
+    "filesystem": {
+      "command": "npx",
       "args": [
-        "mcp/shacdn-server/dist/index.js"
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
       ]
     }
   }

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { Server } from 'lucide-react';
 
 import {
   PACKET_OPS,
@@ -111,48 +112,49 @@ export type PipelineTopologyDiagramProps = {
 
 type WorkerSlotMetricsProps = {
   metrics: WorkerMetrics;
-  group: 'adbreak' | 'transcode';
 };
 
-const WorkerSlotMetrics = ({ metrics, group }: WorkerSlotMetricsProps) => {
-  const totalClass =
-    group === 'adbreak' ? styles.topologyMetricsTotalValueAdbreak : styles.topologyMetricsTotalValueTranscode;
-
-  return (
-    <g aria-hidden>
-      <text
-        x={-WORKER_SLOT.halfWidth + 10}
-        y={WORKER_SLOT.metricsY}
-        className={`${styles.topologySlotMetric} ${styles.topologyMetricsLabelRead}`}
-      >
-        R {formatSpeed(metrics.read)}
-      </text>
-      <text
-        x={WORKER_SLOT.halfWidth - 10}
-        y={WORKER_SLOT.metricsY}
-        textAnchor="end"
-        className={`${styles.topologySlotMetric} ${styles.topologyMetricsLabelWrite}`}
-      >
-        W {formatSpeed(metrics.write)}
-      </text>
-      <text
-        x={-WORKER_SLOT.halfWidth + 10}
-        y={WORKER_SLOT.totalY}
-        className={styles.topologySlotTotalLabel}
-      >
-        Today
-      </text>
-      <text
-        x={WORKER_SLOT.halfWidth - 10}
-        y={WORKER_SLOT.totalY}
-        textAnchor="end"
-        className={`${styles.topologySlotTotalValue} ${totalClass}`}
-      >
-        {formatTotal(metrics.total)}
-      </text>
-    </g>
-  );
-};
+const WorkerSlotMetrics = ({ metrics }: WorkerSlotMetricsProps) => (
+  <g aria-hidden>
+    <line
+      x1={-WORKER_SLOT.halfWidth + 8}
+      y1={WORKER_SLOT.metricsDividerY}
+      x2={WORKER_SLOT.halfWidth - 8}
+      y2={WORKER_SLOT.metricsDividerY}
+      className={styles.topologySlotMetricsDivider}
+    />
+    <text
+      x={-WORKER_SLOT.halfWidth + 10}
+      y={WORKER_SLOT.metricsY}
+      className={`${styles.topologySlotMetric} ${styles.topologySlotMetricRead}`}
+    >
+      R {formatSpeed(metrics.read)}
+    </text>
+    <text
+      x={WORKER_SLOT.halfWidth - 10}
+      y={WORKER_SLOT.metricsY}
+      textAnchor="end"
+      className={`${styles.topologySlotMetric} ${styles.topologySlotMetricWrite}`}
+    >
+      W {formatSpeed(metrics.write)}
+    </text>
+    <text
+      x={-WORKER_SLOT.halfWidth + 10}
+      y={WORKER_SLOT.totalY}
+      className={styles.topologySlotTotalLabel}
+    >
+      Today
+    </text>
+    <text
+      x={WORKER_SLOT.halfWidth - 10}
+      y={WORKER_SLOT.totalY}
+      textAnchor="end"
+      className={styles.topologySlotTotalValue}
+    >
+      {formatTotal(metrics.total)}
+    </text>
+  </g>
+);
 
 type StatusPillProps = {
   status: WorkerStatus;
@@ -168,19 +170,19 @@ const STATUS_PILL_CLASS: Record<string, string> = {
 
 const StatusPill = ({ status, tone }: StatusPillProps) => {
   const label = STATUS_LABELS[status];
-  const approxW = label.length * 4.6 + 12;
+  const approxW = label.length * 5.2 + 16;
 
   return (
     <g transform={`translate(0,${WORKER_SLOT.statusY})`}>
       <rect
         x={-approxW / 2}
-        y={-7}
+        y={-8}
         width={approxW}
-        height={9}
-        rx="3"
+        height={12}
+        rx="6"
         className={`${styles.topologyStatusPill} ${STATUS_PILL_CLASS[tone]}`}
       />
-      <text y={0} textAnchor="middle" className={`${styles.topologyNodeSub} ${STATUS_SUB_CLASS[tone]}`}>
+      <text y={1} textAnchor="middle" className={`${styles.topologyNodeSub} ${STATUS_SUB_CLASS[tone]}`}>
         {label}
       </text>
     </g>
@@ -255,7 +257,6 @@ export const PipelineTopologyDiagram = ({
   const { linesEnabled, packetsEnabled } = resolveFlowMotion(motionPreference, systemReducedMotion);
   const linesAnimating = linesEnabled && running;
   const packetsAnimating = packetsEnabled && running;
-  const iconReducedMotion = !packetsAnimating;
   const flowStatusLabel = getFlowStatusLabel(
     motionPreference,
     systemReducedMotion,
@@ -424,27 +425,23 @@ export const PipelineTopologyDiagram = ({
       <div className={styles.topologyStats} aria-live="polite">
         <div className={styles.topologyStat}>
           <p className={styles.topologyStatLabel}>Ad-break active</p>
-          <p className={styles.topologyStatValue} data-tone="adbreak">
+          <p className={styles.topologyStatValue}>
             {busyAdbreak} / {WORKER_Y_POSITIONS.length}
           </p>
         </div>
         <div className={styles.topologyStat}>
           <p className={styles.topologyStatLabel}>Transcode active</p>
-          <p className={styles.topologyStatValue} data-tone="transcode">
+          <p className={styles.topologyStatValue}>
             {busyTranscode} / {WORKER_Y_POSITIONS.length}
           </p>
         </div>
         <div className={styles.topologyStat}>
           <p className={styles.topologyStatLabel}>Packets</p>
-          <p className={styles.topologyStatValue} data-tone="packets">
-            {totalPackets.toLocaleString()}
-          </p>
+          <p className={styles.topologyStatValue}>{totalPackets.toLocaleString()}</p>
         </div>
         <div className={styles.topologyStat}>
           <p className={styles.topologyStatLabel}>In flight</p>
-          <p className={styles.topologyStatValue} data-tone="inflight">
-            {visiblePackets.length}
-          </p>
+          <p className={styles.topologyStatValue}>{visiblePackets.length}</p>
         </div>
         <span className={styles.topologyLiveIndicator}>
           <span
@@ -464,7 +461,9 @@ export const PipelineTopologyDiagram = ({
         <div className={styles.topologyMobile} role="region" aria-label="Pipeline topology (compact view)">
           <TopologyFlowStrip linesActive={linesEnabled} />
           <div className={`${styles.topologyMobileHub} ${dashStyles.surfacePanel}`}>
-            <TopologyNodeIcon type="server" size={32} busy={false} reducedMotion={iconReducedMotion} />
+            <span className={styles.topologyMobileHubIcon} aria-hidden>
+              <Server size={18} strokeWidth={1.75} />
+            </span>
             <div>
               <p className={styles.topologyMobileHubTitle}>Main Server</p>
               <p className={styles.topologyMobileHubSub}>Media Pipeline Hub</p>
@@ -489,16 +488,12 @@ export const PipelineTopologyDiagram = ({
                     const st = wStatus[node.id];
                     const tone = STATUS_TONES[st];
                     const metrics = wMetrics[node.id];
-                    const flows = visiblePackets.filter((p) => {
-                      const e = TOPOLOGY_EDGES.find((edge) => edge.id === p.edgeId);
-                      return e && (e.from === node.id || e.to === node.id);
-                    }).length;
 
                     return (
                       <li key={node.id}>
                         <button
                           type="button"
-                          className={`${styles.topologyMobileWorkerCard} ${dashStyles.surfacePanel} ${selectedNodeId === node.id ? styles.topologyMobileWorkerCardSelected : ''}`}
+                          className={`${styles.topologyMobileWorkerCard} ${selectedNodeId === node.id ? styles.topologyMobileWorkerCardSelected : ''}`}
                           onClick={() => setFocusNode((prev) => (prev === node.id ? null : node.id))}
                           aria-pressed={selectedNodeId === node.id}
                         >
@@ -524,9 +519,6 @@ export const PipelineTopologyDiagram = ({
                                 {formatTotal(metrics.total)}
                               </span>
                             </div>
-                          ) : null}
-                          {flows > 0 ? (
-                            <span className={styles.topologyMobileWorkerFlows}>{flows} flows</span>
                           ) : null}
                         </button>
                       </li>
@@ -589,16 +581,16 @@ export const PipelineTopologyDiagram = ({
                     d={d}
                     fill="none"
                     className={`${styles.topologyEdge} ${styles.topologyEdgeTrack} ${edgeBase} ${active ? edgeActive : ''}`}
-                    strokeWidth={active ? 1.5 : 1.15}
-                    strokeOpacity={active ? 0.42 : 0.28}
+                    strokeWidth={active ? 1.25 : 1}
+                    strokeOpacity={active ? 0.55 : 0.35}
                   />
                   {linesEnabled ? (
                     <path
                       d={d}
                       fill="none"
                       className={`${styles.topologyEdge} ${styles.topologyEdgeFlowOverlay} ${flowTone}`}
-                      strokeWidth={active ? 2 : 1.65}
-                      strokeOpacity={active ? 0.92 : 0.78}
+                      strokeWidth={active ? 1.5 : 1.25}
+                      strokeOpacity={active ? 0.7 : 0.5}
                     />
                   ) : null}
                 </g>
@@ -644,7 +636,7 @@ export const PipelineTopologyDiagram = ({
                 >
                   {node.group ? null : (
                     <circle
-                      r="34"
+                      r="30"
                       className={`${styles.topologyNodeFocusRing} ${isSelected ? styles.topologyNodeFocusRingVisible : ''}`}
                     />
                   )}
@@ -661,32 +653,18 @@ export const PipelineTopologyDiagram = ({
                   ) : null}
 
                   {node.group ? (
-                    <g transform="translate(0,-6)">
-                      <TopologyNodeIcon
-                        type={node.type}
-                        size={28}
-                        busy={st === 'busy'}
-                        reducedMotion={iconReducedMotion}
-                        ledBlinkClass={styles.topologyLedBlink}
-                        ledBusyClass={styles.topologyLedBusy}
-                      />
+                    <g transform="translate(0,-12)">
+                      <TopologyNodeIcon type={node.type} size={18} />
                     </g>
                   ) : (
-                    <TopologyNodeIcon
-                      type={node.type}
-                      size={36}
-                      busy={st === 'busy'}
-                      reducedMotion={iconReducedMotion}
-                      ledBlinkClass={styles.topologyLedBlink}
-                      ledBusyClass={styles.topologyLedBusy}
-                    />
+                    <TopologyNodeIcon type={node.type} size={22} />
                   )}
 
                   {node.group && st ? (
                     <circle
-                      cx="12"
+                      cx="14"
                       cy="-20"
-                      r="3.5"
+                      r="3"
                       className={`${styles.topologyStatusDot} ${STATUS_DOT_CLASS[tone]}`}
                     />
                   ) : null}
@@ -700,19 +678,17 @@ export const PipelineTopologyDiagram = ({
                       {node.label}
                     </text>
                   ) : (
-                    <NodeLabelBackplate y={32} text={node.label} className={labelClass} compact />
+                    <NodeLabelBackplate y={28} text={node.label} className={labelClass} compact />
                   )}
 
                   {node.group && st ? <StatusPill status={st} tone={tone} /> : null}
                   {node.type === 'server' ? (
-                    <text y="44" textAnchor="middle" className={styles.topologyNodeSubServer}>
+                    <text y="40" textAnchor="middle" className={styles.topologyNodeSubServer}>
                       {node.sub}
                     </text>
                   ) : null}
 
-                  {node.group && metrics ? (
-                    <WorkerSlotMetrics metrics={metrics} group={node.group} />
-                  ) : null}
+                  {node.group && metrics ? <WorkerSlotMetrics metrics={metrics} /> : null}
                 </g>
               );
             })}

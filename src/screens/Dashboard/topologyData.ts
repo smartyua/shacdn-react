@@ -36,18 +36,19 @@ export const PACKET_OPS: PacketOp[] = [
   { type: 'RETRY', tone: 'orange' },
 ];
 
-/** Icon-row centers — 126px pitch leaves 26px between slot rects (100px tall). */
+/** Icon-row centers — 126px pitch leaves ~16px between slots (110px tall). */
 export const WORKER_Y_POSITIONS = [58, 184, 310, 436, 562, 688] as const;
 
 export const WORKER_SLOT = {
   halfWidth: 58,
-  halfHeight: 50,
+  halfHeight: 55,
   slotTop: -32,
-  slotHeight: 100,
-  titleY: 22,
-  statusY: 34,
-  metricsY: 48,
-  totalY: 60,
+  slotHeight: 110,
+  titleY: 12,
+  statusY: 24,
+  metricsDividerY: 40,
+  metricsY: 54,
+  totalY: 66,
 } as const;
 
 export const WORKER_PITCH =

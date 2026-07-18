@@ -12,8 +12,11 @@ A comprehensive implementation guide for this React component library.
 - [Style Guide](./STYLE_GUIDE.md) - Design tokens and SCSS patterns
 - [AI Agent Guide](./AI_AGENT_GUIDE.md) - Migration and integration for AI
 - [Components AI Reference](./COMPONENTS_AI_REFERENCE.md) - Task → component matrix
+- [AI Infrastructure](./ai/README.md) - Cursor memory, RAG, bootstrap, skills
+- [ADRs](./adr/) - Architecture decision records
 - [MCP Server](../mcp/shacdn-server/README.md) - Export via Cursor MCP
 - [Project Summary](./PROJECT_SUMMARY.md) - Architecture and features
+
 
 ## Component Categories
 

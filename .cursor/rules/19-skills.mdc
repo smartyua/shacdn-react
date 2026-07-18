@@ -1,0 +1,11 @@
+---
+description: Where project skills live and when to use them
+alwaysApply: true
+---
+
+# Skills
+
+- Cursor skill: `.cursor/skills/shacdn-style-guide/`
+- AI workflow skills: `.ai/skills/*/SKILL.md`
+
+Select a skill matching the task (feature, bug, review, compress, knowledge-update, …) and follow its steps and done criteria.

@@ -1,0 +1,20 @@
+---
+description: Context compression after 3–5 iterations
+alwaysApply: true
+---
+
+# Context management
+
+After 3–5 iterations on one task (or when context is large), write compact state to:
+
+`.ai/session/current-task.md`
+
+Use skill `.ai/skills/context-compression` or:
+
+```bash
+npm run ai:compress -- --goal "..." --nextStep "..."
+```
+
+Preserve: goal, requirements, decisions, files, tests/checks results, open issues, next step, do-not-repeat.
+Drop: repeats, stale plans, huge logs, rejected hypotheses.
+Do not commit private task state (session is gitignored).

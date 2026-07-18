@@ -1,0 +1,30 @@
+---
+description: Core AI operating rules — minimal change, evidence, no hallucination
+alwaysApply: true
+---
+
+# Core AI rules
+
+## Cycle
+Understand → Plan → Implement → Test → Verify (A technical + B logical) → Review → Document.
+
+## Minimal change
+Change only what the task requires. No drive-by refactors, mass formatting, or preference-based library swaps.
+
+## Study before inventing
+Search for existing components, hooks, helpers, MCP tools, docs, and `.ai/memory` before creating new abstractions.
+
+## Evidence
+Do not claim “done / fixed / tests pass” unless the corresponding commands were actually run. If not run, say so.
+
+## No hallucination
+Do not invent file contents, APIs, config keys, or command results. Investigate the repo first.
+
+## Dependency versions
+Use APIs for installed versions (lockfile). Do not upgrade majors casually.
+
+## Testing
+Functional behavior changes require tests. Docs/comments/formatting-only changes are exempt. If tests are impossible, state why and an alternate check.
+
+## Re-check
+After significant work: re-read the request, inspect the diff, run adversarial self-review, reject unchecked assumptions.

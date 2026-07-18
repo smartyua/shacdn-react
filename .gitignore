@@ -11,10 +11,14 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/tasks.json
 .idea
 .DS_Store
 *.suo
@@ -22,3 +26,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AI infrastructure (local / ephemeral)
+.ai/logs/**
+!.ai/logs/.gitkeep
+.ai/data/**
+!.ai/data/.gitkeep
+.ai/session/**
+!.ai/session/.gitkeep
+.ai/memory/working/**
+!.ai/memory/working/.gitkeep.md
+coverage
+.vitest
+ladle-build

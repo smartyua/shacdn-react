@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "shacdn AI infrastructure config",
+  "type": "object",
+  "required": ["ai"],
+  "additionalProperties": false,
+  "properties": {
+    "ai": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "bootstrap",
+        "memory",
+        "vectorStore",
+        "embeddings",
+        "indexing",
+        "verification",
+        "rag"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "bootstrap": {
+          "type": "object",
+          "required": ["runOnProjectOpen", "incrementalIndex", "failOpen"],
+          "additionalProperties": false,
+          "properties": {
+            "runOnProjectOpen": { "type": "boolean" },
+            "incrementalIndex": { "type": "boolean" },
+            "failOpen": { "type": "boolean" }
+          }
+        },
+        "memory": {
+          "type": "object",
+          "required": [
+            "enabled",
+            "workingMemory",
+            "episodicMemory",
+            "semanticMemory",
+            "compressionAfterIterations",
+            "maxActiveTaskTokens"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "workingMemory": { "type": "boolean" },
+            "episodicMemory": { "type": "boolean" },
+            "semanticMemory": { "type": "boolean" },
+            "compressionAfterIterations": { "type": "integer", "minimum": 1 },
+            "maxActiveTaskTokens": { "type": "integer", "minimum": 1000 }
+          }
+        },
+        "vectorStore": {
+          "type": "object",
+          "required": ["provider", "collection", "namespace", "path", "jsonFallbackPath"],
+          "additionalProperties": false,
+          "properties": {
+            "provider": { "type": "string", "enum": ["lancedb", "json"] },
+            "collection": { "type": "string", "minLength": 1 },
+            "namespace": { "type": "string", "minLength": 1 },
+            "path": { "type": "string", "minLength": 1 },
+            "jsonFallbackPath": { "type": "string", "minLength": 1 }
+          }
+        },
+        "embeddings": {
+          "type": "object",
+          "required": [
+            "provider",
+            "fallbackProvider",
+            "dimensions",
+            "timeoutMs",
+            "maxRetries",
+            "batchSize"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "provider": {
+              "type": "string",
+              "enum": ["local-hash", "openai", "ollama"]
+            },
+            "fallbackProvider": {
+              "anyOf": [
+                { "type": "null" },
+                { "type": "string", "enum": ["local-hash", "openai", "ollama"] }
+              ]
+            },
+            "dimensions": { "type": "integer", "minimum": 32, "maximum": 4096 },
+            "timeoutMs": { "type": "integer", "minimum": 1000 },
+            "maxRetries": { "type": "integer", "minimum": 0, "maximum": 10 },
+            "batchSize": { "type": "integer", "minimum": 1, "maximum": 256 }
+          }
+        },
+        "indexing": {
+          "type": "object",
+          "required": [
+            "includeTests",
+            "includeDocs",
+            "includeAdr",
+            "incremental",
+            "maxChunkChars"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "includeTests": { "type": "boolean" },
+            "includeDocs": { "type": "boolean" },
+            "includeAdr": { "type": "boolean" },
+            "incremental": { "type": "boolean" },
+            "maxChunkChars": { "type": "integer", "minimum": 200 }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "required": [
+            "requireTestsForFunctionalChanges",
+            "requireSelfReview",
+            "requireRequirementRecheck",
+            "independentReviewForCriticalChanges"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "requireTestsForFunctionalChanges": { "type": "boolean" },
+            "requireSelfReview": { "type": "boolean" },
+            "requireRequirementRecheck": { "type": "boolean" },
+            "independentReviewForCriticalChanges": { "type": "boolean" }
+          }
+        },
+        "rag": {
+          "type": "object",
+          "required": ["topK", "maxContextChars", "minScore"],
+          "additionalProperties": false,
+          "properties": {
+            "topK": { "type": "integer", "minimum": 1 },
+            "maxContextChars": { "type": "integer", "minimum": 500 },
+            "minScore": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

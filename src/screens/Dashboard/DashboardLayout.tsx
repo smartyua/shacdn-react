@@ -341,9 +341,12 @@ export const DashboardLayout = () => {
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Admin User</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => setDialogOpen(true)}>Profile</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/dashboard/profile')}>Profile</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/dashboard/payments')}>Payments</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/dashboard/requests')}>Requests</DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setSheetOpen(true)}>Preferences</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setDrawerOpen(true)}>Billing</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setDrawerOpen(true)}>Quick billing</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setDialogOpen(true)}>Quick edit profile</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Sign out</DropdownMenuItem>
                   </DropdownMenuContent>

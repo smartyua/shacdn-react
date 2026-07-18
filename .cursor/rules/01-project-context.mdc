@@ -1,0 +1,16 @@
+---
+description: Thin pointer to project stack and existing overview rules
+alwaysApply: true
+---
+
+# Project context
+
+This is **shacdn**: React 19 + TypeScript + Vite + SCSS modules implementing shadcn/ui (no Tailwind, no Radix).
+
+Authoritative always-on details live in:
+- `project-overview.mdc`
+- `docs/AI_AGENT_GUIDE.md`
+- `.ai/knowledge/project-overview.md`
+- `.ai/memory/semantic/project-facts.md`
+
+AI tooling lives under `.ai/` and must not block `npm run dev` / `npm run build`.

@@ -1,0 +1,55 @@
+name: AI infrastructure
+
+on:
+  push:
+    paths:
+      - ".ai/**"
+      - ".aiignore"
+      - ".cursor/mcp.json"
+      - "docker-compose.ai.yml"
+      - "vitest.config.ts"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/ai-infra.yml"
+  pull_request:
+    paths:
+      - ".ai/**"
+      - ".aiignore"
+      - ".cursor/mcp.json"
+      - "docker-compose.ai.yml"
+      - "vitest.config.ts"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/ai-infra.yml"
+
+jobs:
+  ai-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck AI scripts
+        run: npm run typecheck:ai
+
+      - name: AI unit tests
+        run: npm run test:ai
+
+      - name: Validate AI config
+        run: npx tsx -e "import { loadConfig } from './.ai/lib/config.ts'; loadConfig(); console.log('config ok')"
+
+      - name: Validate docker compose file
+        run: docker compose -f docker-compose.ai.yml config >/dev/null
+
+      - name: Verify MCP config JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('.cursor/mcp.json','utf8')); console.log('mcp ok')"

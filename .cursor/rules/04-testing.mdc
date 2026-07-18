@@ -1,0 +1,13 @@
+---
+description: Testing requirements for functional changes
+alwaysApply: true
+---
+
+# Testing
+
+- Functional changes require tests (unit/integration/regression as applicable)
+- AI infrastructure tests: Vitest in `.ai/tests/` via `npm run test:ai`
+- Bug fixes need a regression test when feasible
+- Tests must be deterministic; do not weaken assertions to pass
+- Exempt: copy, comments, formatting, docs-only, non-runtime edits
+- If coverage is impossible, document technical reason + alternate verification

@@ -1,0 +1,54 @@
+@use '../../styles/variables.scss' as *;
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  text-align: center;
+  border-radius: $radius-lg;
+  border: 1px dashed $border;
+  background: $muted;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+}
+
+.media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $muted-foreground;
+  margin-bottom: $spacing-sm;
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $foreground;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  max-width: 28rem;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  justify-content: center;
+  margin-top: $spacing-md;
+}

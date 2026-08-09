@@ -1,0 +1,17 @@
+---
+description: Frontend pointer to existing component rules
+globs: src/**/*.{tsx,scss}
+alwaysApply: false
+---
+
+# Frontend
+
+Follow existing rules (do not duplicate detail here):
+- `react-component-patterns.mdc`
+- `scss-conventions.mdc`
+- `design-system.mdc`
+- `design-reference.mdc`
+- `component-creation.mdc`
+- `typescript-standards.mdc`
+
+Canonical UI reference: https://ui.shadcn.com

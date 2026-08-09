@@ -1,0 +1,150 @@
+@use '../../styles/variables.scss' as *;
+
+.toastViewport {
+  position: fixed;
+  z-index: $z-toast;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  width: 100%;
+  max-width: min(420px, 100vw);
+  box-sizing: border-box;
+  pointer-events: none;
+
+  @media (min-width: 640px) {
+    padding: $spacing-lg;
+  }
+
+  &.viewport--bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  &.viewport--bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.viewport--top-right {
+    top: 0;
+    right: 0;
+  }
+
+  &.viewport--top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  background: $background;
+  border: $border-width solid $border;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  box-shadow:
+    0 10px 15px -3px hsl(0 0% 0% / 0.1),
+    0 4px 6px -4px hsl(0 0% 0% / 0.1);
+
+  @media (min-width: 640px) {
+    width: auto;
+  }
+
+  &.toast--default {
+    background: $background;
+    color: $foreground;
+    border-color: $border;
+  }
+
+  &.toast--destructive {
+    background: $destructive;
+    color: $destructive-foreground;
+    border-color: $destructive;
+  }
+
+  &.toast--bottom-right,
+  &.toast--bottom-center {
+    animation: slideInFromBottom 150ms $ease-spring;
+  }
+
+  &.toast--top-right,
+  &.toast--top-center {
+    animation: slideInFromTop 150ms $ease-spring;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toastContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  min-width: 0;
+}
+
+.toastTitle {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.toastDescription {
+  font-size: $font-size-sm;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.toastClose {
+  background: transparent;
+  border: none;
+  padding: $spacing-xs;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  color: currentColor;
+  opacity: 0.7;
+  transition: opacity $transition-fast;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,126 @@
+@use '../../styles/variables.scss' as *;
+
+.toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $background;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.button,
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  height: $control-h-sm;
+  padding: 0 $control-px;
+  border: none;
+  border-radius: calc($radius-md - 2px);
+  background: transparent;
+  color: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: $muted;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+}
+
+.separator {
+  flex-shrink: 0;
+  background: $border;
+
+  &[data-orientation='horizontal'] {
+    width: 1px;
+    align-self: stretch;
+    margin-inline: $spacing-xs;
+  }
+
+  &[data-orientation='vertical'] {
+    height: 1px;
+    width: 100%;
+    margin-block: $spacing-xs;
+  }
+}
+
+.toggleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $muted;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+  }
+}
+
+.toggleItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(#{$control-h-sm} - 4px);
+  min-width: calc(#{$control-h-sm} - 4px);
+  padding: 0 $spacing-sm;
+  border: none;
+  border-radius: calc($radius-md - 2px);
+  background: transparent;
+  color: $muted-foreground;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &[data-state='on'] {
+    background: $background;
+    color: $foreground;
+  }
+
+  &:hover:not(:disabled) {
+    color: $foreground;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}

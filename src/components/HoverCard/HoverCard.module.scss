@@ -1,0 +1,19 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline-block;
+}
+
+.trigger {
+  display: inline-flex;
+}
+
+.content {
+  z-index: $z-floating;
+  width: 20rem;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+}

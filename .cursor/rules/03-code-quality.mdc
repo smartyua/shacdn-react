@@ -1,0 +1,13 @@
+---
+description: Code quality gates for AI changes
+alwaysApply: true
+---
+
+# Code quality
+
+- After every code change: `npm run lint` (mandatory — see `lint-verification.mdc`)
+- TypeScript strict; no unjustified `any`
+- Arrow functions only (`arrow-functions.mdc`)
+- For AI infra TypeScript: `npm run typecheck:ai`
+- For major changes: `npm run build`
+- Prefer existing patterns in `src/components` and `.ai/lib`

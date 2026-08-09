@@ -1,0 +1,21 @@
+---
+description: How to use .ai memory layers
+alwaysApply: true
+---
+
+# Memory
+
+Paths under `.ai/memory/`:
+- `working/` — ephemeral task state (gitignored content)
+- `episodic/` — completed task summaries (not full chats)
+- `semantic/` — stable project facts
+- `decisions/` — decision notes (sync with `docs/adr/`)
+- `patterns/` — confirmed code patterns only
+- `failures/` — symptoms, root causes, fixes
+- `preferences/` — durable preferences
+
+## Rules
+- Read semantic + failures before repeating research
+- Code beats memory when they conflict
+- Do not store secrets or full chain-of-thought
+- After task completion: clear working memory (`npm run ai:memory:cleanup`), promote durable facts

@@ -1,0 +1,11 @@
+/* Minimal shell: full-width app root. Theme and typography come from globals.scss */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}

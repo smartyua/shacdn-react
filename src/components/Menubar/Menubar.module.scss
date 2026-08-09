@@ -1,0 +1,145 @@
+@use '../../styles/variables.scss' as *;
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.25rem;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $muted;
+}
+
+.menu {
+  display: inline-flex;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $control-h-sm;
+  padding: 0 $spacing-sm;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-family: $font-sans;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $foreground;
+  cursor: pointer;
+
+  &:hover,
+  &[aria-expanded='true'] {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.content {
+  z-index: $z-floating;
+  min-width: 12rem;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  animation: menubarIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: menubarInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: menubarInBottom;
+}
+
+.content[data-side='left'] {
+  animation-name: menubarInLeft;
+}
+
+.content[data-side='right'] {
+  animation-name: menubarInRight;
+}
+
+@keyframes menubarInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menubarInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menubarInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menubarInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menubarIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.item {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+
+  &:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.separator {
+  height: 1px;
+  background: $border;
+  margin: $spacing-xs 0;
+}

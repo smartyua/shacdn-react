@@ -1,0 +1,12 @@
+---
+description: Safe git practices for agents
+alwaysApply: true
+---
+
+# Git
+
+- Check status before changing files; do not clobber unrelated user work
+- No `git reset --hard`, force push, or destructive branch deletion unless explicitly requested
+- No commits unless the user asks
+- Never commit secrets, `.env`, or `.ai/data` / `.ai/logs` / `.ai/session`
+- Keep unrelated changes out of the same commit

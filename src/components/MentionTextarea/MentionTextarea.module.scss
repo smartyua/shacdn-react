@@ -1,0 +1,230 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.field {
+  position: relative;
+  width: 100%;
+  min-height: 3.75rem;
+  border-radius: $radius-md;
+  border: $border-width solid $input;
+  background-color: $background;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+
+  &:focus-within {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &[data-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[data-invalid='true'] {
+    border-color: $destructive;
+  }
+}
+
+.backdrop,
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 3.75rem;
+  margin: 0;
+  padding: 0.5rem $control-px;
+  border: none;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: auto;
+  pointer-events: none;
+  color: $foreground;
+  background: transparent;
+}
+
+.plain {
+  color: $foreground;
+}
+
+.commandChip {
+  display: inline;
+  padding: 0.1em 0;
+  border-radius: $radius-sm;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background: var(
+    --mention-textarea-command-bg,
+    var(--mention-textarea-chip-bg, color-mix(in srgb, #{$foreground} 14%, #{$muted}))
+  );
+  color: $foreground;
+}
+
+/* Mentions use the same phantom + padded label pattern as links. */
+.mentionChip,
+.linkChip {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  color: transparent;
+  vertical-align: baseline;
+}
+
+.chipPhantom,
+.linkPhantom {
+  visibility: hidden;
+  white-space: pre-wrap;
+}
+
+.mentionLabel,
+.linkLabel {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.4em;
+  border-radius: $radius-sm;
+  border: none;
+  color: $foreground;
+  box-shadow: none;
+  font-size: $font-size-sm;
+  line-height: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.linkLabel {
+  background: var(
+    --mention-textarea-link-bg,
+    var(--mention-textarea-chip-bg, color-mix(in srgb, #{$foreground} 14%, #{$muted}))
+  );
+}
+
+.mentionLabel {
+  justify-content: center;
+  padding: 0;
+  // The chip may not be wider than the text it covers, or the caret would drift
+  // away from it. Condensing the label is what buys the inner padding.
+  font-size: 0.92em;
+  letter-spacing: -0.01em;
+  background: var(
+    --mention-textarea-mention-bg,
+    var(--mention-textarea-chip-bg, color-mix(in srgb, #{$foreground} 14%, #{$muted}))
+  );
+}
+
+/* An absorbed space is the only free width here, so it is split evenly between
+   the gap to neighbouring words and the chip's own inner padding. */
+.mentionChip[data-pad-start='true'] .mentionLabel {
+  left: 0.13em;
+}
+
+.mentionChip[data-pad-end='true'] .mentionLabel {
+  right: 0.13em;
+}
+
+.linkIcon {
+  flex-shrink: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.textarea {
+  position: relative;
+  z-index: 1;
+  display: block;
+  resize: vertical;
+  outline: none;
+  background: transparent;
+  /* Required: `color: transparent` alone often fails on textarea in WebKit/Blink. */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  caret-color: $foreground;
+
+  &::placeholder {
+    color: $muted-foreground;
+    -webkit-text-fill-color: $muted-foreground;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.list {
+  z-index: $z-floating;
+  max-height: 16rem;
+  overflow: auto;
+  margin: 0;
+  padding: $spacing-xs;
+  list-style: none;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  min-width: 12rem;
+}
+
+.option {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  text-align: left;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: $accent;
+    color: $accent-foreground;
+    outline: none;
+  }
+}
+
+.optionActive {
+  background: $accent;
+  color: $accent-foreground;
+}
+
+.optionMeta {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.optionActive .optionMeta {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.empty {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+}

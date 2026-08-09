@@ -1,0 +1,10 @@
+@use '../../../styles/variables.scss' as *;
+
+.icon {
+  pointer-events: none;
+}
+
+.iconSvg {
+  color: $foreground;
+  opacity: 0.85;
+}

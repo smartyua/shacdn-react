@@ -1,0 +1,40 @@
+@use '../../styles/variables.scss' as *;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $muted-foreground;
+  text-decoration: none;
+  border-radius: $radius-sm;
+  border-left: 2px solid transparent;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast,
+    border-color $transition-fast;
+
+  &:hover {
+    color: $foreground;
+    background: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.linkActive {
+  color: $foreground;
+  font-weight: 500;
+  border-left-color: $primary;
+  background: $accent;
+}

@@ -1,0 +1,66 @@
+---
+description: Component file organization and project structure
+alwaysApply: true
+---
+
+# File Structure
+
+## Project Organization
+
+```
+shacdn/
+├── .cursor/
+│   └── rules/              # Cursor AI rules (this folder)
+├── docs/                   # All documentation
+│   ├── COMPONENT_GUIDE.md
+│   └── PROJECT_SUMMARY.md
+├── src/
+│   ├── components/         # All UI components
+│   │   ├── Alert/
+│   │   │   ├── Alert.tsx
+│   │   │   └── Alert.module.scss
+│   │   ├── Button/
+│   │   │   ├── Button.tsx
+│   │   │   └── Button.module.scss
+│   │   └── [22 more components...]
+│   ├── styles/             # Global styles & variables
+│   │   ├── variables.scss  # Design tokens
+│   │   └── globals.scss    # Global styles
+│   ├── App.tsx             # Demo page
+│   ├── App.module.scss
+│   └── main.tsx
+├── README.md               # Quick start guide
+├── package.json
+└── vite.config.ts
+```
+
+## Component Folder Pattern
+
+Each component MUST have:
+1. `ComponentName.tsx` - React component
+2. `ComponentName.module.scss` - Scoped styles
+
+Optional:
+- Sub-components in same file (Card has CardHeader, CardContent, etc.)
+- Types can be exported from same .tsx file
+
+## Import Organization
+
+Order imports as:
+1. External libraries (React, etc.)
+2. Internal components
+3. Styles (always last)
+
+```tsx
+import { forwardRef, type HTMLAttributes } from 'react';
+import { OtherComponent } from '../OtherComponent/OtherComponent';
+import styles from './Component.module.scss';
+```
+
+## Documentation Location
+
+- `docs/COMPONENT_GUIDE.md` - Component usage guide
+- `docs/PROJECT_SUMMARY.md` - Project overview
+- `README.md` - Quick start only
+
+Do NOT create documentation outside these files.

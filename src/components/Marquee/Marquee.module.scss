@@ -1,0 +1,51 @@
+@use '../../styles/variables.scss' as *;
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    hsl(0 0% 0%) 10%,
+    hsl(0 0% 0%) 90%,
+    transparent
+  );
+}
+
+.content {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll var(--marquee-duration, 40s) linear infinite;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: $spacing-md;
+  padding-right: $spacing-md;
+}
+
+.reverse .content {
+  animation-direction: reverse;
+}
+
+.pauseOnHover:hover .content {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+}

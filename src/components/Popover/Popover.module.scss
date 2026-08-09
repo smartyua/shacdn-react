@@ -1,0 +1,90 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline-block;
+}
+
+.trigger {
+  font: inherit;
+  cursor: pointer;
+}
+
+.content {
+  z-index: $z-floating;
+  min-width: 12rem;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  animation: popIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: popInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: popInBottom;
+}
+
+.content[data-side='left'] {
+  animation-name: popInLeft;
+}
+
+.content[data-side='right'] {
+  animation-name: popInRight;
+}
+
+@keyframes popInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,77 @@
+@use '../../styles/variables.scss' as *;
+
+.alert {
+  position: relative;
+  width: 100%;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  padding: $spacing-md;
+  background-color: $background;
+  color: $foreground;
+  font-size: $font-size-sm;
+  display: flex;
+  gap: $spacing-md;
+  align-items: flex-start;
+
+  > svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.0625rem;
+    color: $foreground;
+  }
+}
+
+.subtle {
+  border-color: transparent;
+  background-color: $muted;
+  color: $foreground;
+
+  > svg {
+    color: $muted-foreground;
+  }
+
+  .title {
+    color: $foreground;
+  }
+
+  .description {
+    color: $muted-foreground;
+  }
+}
+
+.destructive {
+  border-color: $destructive;
+  color: $destructive;
+  background-color: hsl(var(--destructive) / 0.02);
+
+  > svg {
+    color: $destructive;
+  }
+
+  .title,
+  .description {
+    color: $destructive;
+  }
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+  font-size: $font-size-base;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: $spacing-xs;
+}
+
+.description {
+  margin: 0;
+  line-height: 1.5;
+  font-size: $font-size-sm;
+  color: inherit;
+}
+
+.action {
+  margin-left: auto;
+  flex-shrink: 0;
+}

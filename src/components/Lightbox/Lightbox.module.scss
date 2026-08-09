@@ -1,0 +1,101 @@
+@use '../../styles/variables.scss' as *;
+
+.lightboxRoot {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay-backdrop;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay-backdrop;
+  background-color: hsl(0 0% 0% / 0.85);
+  animation: lightboxOverlayEnter $overlay-enter;
+}
+
+.content {
+  position: relative;
+  z-index: $z-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100% - #{$spacing-xl});
+  max-height: calc(100% - #{$spacing-xl});
+  padding: $spacing-lg;
+  animation: lightboxContentEnter $content-enter;
+
+  &:focus {
+    outline: none;
+  }
+
+  :global(img),
+  :global(video) {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    border-radius: $radius-md;
+    object-fit: contain;
+  }
+}
+
+.close {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(0 0% 0% / 0.5);
+  border: none;
+  padding: $spacing-sm;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  color: $primary-foreground;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast,
+    opacity $transition-fast;
+
+  &:hover {
+    background: hsl(0 0% 0% / 0.7);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.trigger {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+@keyframes lightboxOverlayEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxContentEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

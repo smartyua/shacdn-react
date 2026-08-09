@@ -1,0 +1,174 @@
+@use '../../styles/variables.scss' as *;
+
+.steps {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: $font-sans;
+}
+
+.horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+
+  .item {
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+
+    &:last-child .connector {
+      display: none;
+    }
+  }
+
+  .indicator {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .connector {
+    flex: 1;
+    height: $border-width;
+    min-width: $spacing-sm;
+    margin: 0 $spacing-xs;
+  }
+
+  .content {
+    padding-top: $spacing-sm;
+    padding-right: $spacing-sm;
+  }
+}
+
+.vertical {
+  flex-direction: column;
+
+  .item {
+    flex-direction: row;
+
+    &:last-child .connector {
+      display: none;
+    }
+  }
+
+  .indicator {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .connector {
+    width: $border-width;
+    flex: 1;
+    min-height: $spacing-md;
+    margin: $spacing-xs 0;
+  }
+
+  .content {
+    padding-left: $spacing-md;
+    padding-bottom: $spacing-lg;
+  }
+}
+
+.item {
+  display: flex;
+  position: relative;
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+    border-radius: $radius-sm;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.indicator {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  border: $border-width solid $border;
+  background-color: $background;
+  color: $muted-foreground;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+}
+
+.connector {
+  background-color: $border;
+  transition: background-color $transition-fast;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  min-width: 0;
+}
+
+.title {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $muted-foreground;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  line-height: 1.4;
+}
+
+.current {
+  .circle {
+    border-color: $primary;
+    background-color: $primary;
+    color: $primary-foreground;
+  }
+
+  .title {
+    color: $foreground;
+  }
+}
+
+.completed {
+  .circle {
+    border-color: $primary;
+    background-color: $primary;
+    color: $primary-foreground;
+  }
+
+  .connector {
+    background-color: $primary;
+  }
+
+  .title {
+    color: $foreground;
+  }
+}
+
+.upcoming {
+  .circle {
+    border-color: $border;
+    background-color: $background;
+    color: $muted-foreground;
+  }
+}

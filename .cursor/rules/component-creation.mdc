@@ -1,0 +1,141 @@
+---
+description: Component creation workflow and new component checklist
+globs: "src/components/**/*"
+alwaysApply: false
+---
+
+# Creating New Components
+
+## Step-by-Step Workflow
+
+### 1. Create Component Directory
+
+```bash
+src/components/NewComponent/
+├── NewComponent.tsx
+└── NewComponent.module.scss
+```
+
+### 2. SCSS Module Template
+
+```scss
+@import '../../styles/variables.scss';
+
+.newComponent {
+  display: inline-flex;
+  align-items: center;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  transition: all $transition-fast;
+  
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.default {
+  background: $primary;
+  color: $primary-foreground;
+  
+  &:hover {
+    background: hsl(222.2, 47.4%, 9%);
+  }
+}
+
+.md {
+  padding: 0.5rem 1rem;
+}
+```
+
+### 3. Component Template
+
+```tsx
+import { forwardRef, type HTMLAttributes } from 'react';
+import styles from './NewComponent.module.scss';
+
+export interface NewComponentProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export const NewComponent = forwardRef<HTMLDivElement, NewComponentProps>(
+  ({ variant = 'default', size = 'md', className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`${styles.newComponent} ${styles[variant]} ${styles[size]} ${className || ''}`}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+NewComponent.displayName = 'NewComponent';
+```
+
+## Validation Checklist
+
+Before considering a component complete:
+
+- [ ] TypeScript: No errors, proper types
+- [ ] SCSS: Uses design system variables
+- [ ] forwardRef: Implemented with proper typing
+- [ ] displayName: Set for debugging
+- [ ] Accessibility: ARIA attributes where needed
+- [ ] States: Hover, focus, disabled, invalid
+- [ ] Testing: Visually verified in App.tsx
+- [ ] Lint: `npm run lint` passes
+- [ ] Build: `npm run build` succeeds
+- [ ] Variants: All variants tested
+- [ ] Props: className and ...props supported
+
+## Common Patterns
+
+### Composite Components (like Card)
+
+```tsx
+export const Card = forwardRef<HTMLDivElement, CardProps>(/* ... */);
+export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(/* ... */);
+export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(/* ... */);
+```
+
+### Context-based Components (like Tabs)
+
+```tsx
+const TabsContext = createContext<TabsContextValue | undefined>(undefined);
+
+export const Tabs = ({ children, defaultValue }) => {
+  const [value, setValue] = useState(defaultValue);
+  return (
+    <TabsContext.Provider value={{ value, setValue }}>
+      {children}
+    </TabsContext.Provider>
+  );
+};
+```
+
+### Controlled/Uncontrolled Pattern
+
+```tsx
+export const Component = ({ value, defaultValue, onValueChange }) => {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const currentValue = value !== undefined ? value : internalValue;
+  
+  const handleChange = (newValue) => {
+    setInternalValue(newValue);
+    onValueChange?.(newValue);
+  };
+  
+  return <input value={currentValue} onChange={handleChange} />;
+};
+```

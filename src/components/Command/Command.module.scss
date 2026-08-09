@@ -1,0 +1,108 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  background: $popover;
+  color: $popover-foreground;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  border-bottom: $border-width solid $border;
+  padding: 0 $spacing-md;
+}
+
+.inputIcon {
+  flex-shrink: 0;
+  color: $muted-foreground;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: $control-h-lg;
+  padding-right: $spacing-xl;
+  border: none;
+  background: transparent;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+  outline: none;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+}
+
+.list {
+  max-height: 18rem;
+  overflow-y: auto;
+  padding: $spacing-sm;
+}
+
+.empty {
+  padding: $spacing-lg $spacing-md;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+}
+
+.group {
+  padding: $spacing-xs 0;
+
+  & + & {
+    margin-top: $spacing-xs;
+  }
+}
+
+.groupHeading {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: $spacing-sm;
+  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-sm;
+  color: $foreground;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: $font-sans;
+
+  &[data-selected='true'],
+  &:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: -$focus-ring-offset;
+  }
+}
+
+.separator {
+  height: 1px;
+  margin: $spacing-xs 0;
+  background: $border;
+}
+
+.dialogContent {
+  max-width: 32rem;
+  padding: 0;
+  overflow: hidden;
+}

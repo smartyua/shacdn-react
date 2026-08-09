@@ -1,0 +1,59 @@
+---
+description: React component patterns and best practices
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Component Patterns
+
+## Component Structure
+
+Every component follows this pattern:
+
+```tsx
+import { forwardRef, type HTMLAttributes } from 'react';
+import styles from './Component.module.scss';
+
+export interface ComponentProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'secondary';
+  size?: 'sm' | 'md';
+}
+
+export const Component = forwardRef<HTMLDivElement, ComponentProps>(
+  ({ variant = 'default', size = 'md', className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`${styles.component} ${styles[variant]} ${styles[size]} ${className || ''}`}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Component.displayName = 'Component';
+```
+
+## Required Practices
+
+1. **Always use forwardRef** - for DOM element access
+2. **Add displayName** - for better debugging
+3. **Extend HTML types** - proper prop inheritance
+4. **Use SCSS modules** - import as `styles` object
+5. **Support className prop** - for custom styling
+6. **Spread ...props** - forward all HTML attributes
+
+## State Management
+
+- **Controlled/Uncontrolled**: Support both patterns with `value` and `defaultValue`
+- **Context API**: Use for complex component families (Tabs, DropdownMenu)
+- **Event handlers**: Use optional chaining for callbacks: `onChange?.(value)`
+
+## Accessibility
+
+- Add proper ARIA attributes
+- Support keyboard navigation
+- Use semantic HTML elements
+- Include focus states (`:focus-visible`)

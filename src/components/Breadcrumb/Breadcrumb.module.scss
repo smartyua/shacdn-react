@@ -1,0 +1,68 @@
+@use '../../styles/variables.scss' as *;
+
+.breadcrumb {
+  // Container
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.link {
+  color: $muted-foreground;
+  text-decoration: none;
+  transition: color $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    color: $foreground;
+  }
+}
+
+.page {
+  color: $foreground;
+  font-weight: 400;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  color: $muted-foreground;
+
+  &::before {
+    content: '/';
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &::before {
+    content: '…';
+    font-size: 1rem;
+  }
+}

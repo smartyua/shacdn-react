@@ -1,0 +1,95 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-xs;
+  width: 100%;
+  min-height: $control-h-md;
+  border-radius: $radius-md;
+  border: $border-width solid $input;
+  background-color: $background;
+  padding: $spacing-xs $control-px;
+  font-family: $font-sans;
+  cursor: text;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+
+  &:focus-within {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  max-width: 100%;
+  border-radius: $radius-sm;
+  border: $border-width solid $border;
+  background: $secondary;
+  color: $secondary-foreground;
+  padding: 0 $spacing-xs;
+  font-size: $font-size-xs;
+  line-height: 1.4;
+}
+
+.chipLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  opacity: 0.7;
+
+  &:hover:not(:disabled) {
+    opacity: 1;
+    background: color-mix(in srgb, #{$foreground} 10%, transparent);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: 1px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.input {
+  flex: 1;
+  min-width: 6rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+  outline: none;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

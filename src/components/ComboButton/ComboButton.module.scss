@@ -1,0 +1,21 @@
+@use '../../styles/variables.scss' as *;
+
+.comboButton {
+  display: inline-flex;
+}
+
+.action {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.menuTrigger {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+}
+
+.menuContent {
+  min-width: 8rem;
+}

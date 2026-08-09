@@ -1,0 +1,46 @@
+@use '../../styles/variables.scss' as *;
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
+  width: 100%;
+  font-family: $font-sans;
+}
+
+.item {
+  min-width: 0;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background-color: $card;
+  color: $card-foreground;
+  padding: $spacing-md;
+}
+
+.span1 {
+  grid-column: span 1;
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+.span3 {
+  grid-column: span 3;
+}
+
+.span4 {
+  grid-column: span 4;
+}
+
+.rowSpan1 {
+  grid-row: span 1;
+}
+
+.rowSpan2 {
+  grid-row: span 2;
+}
+
+.rowSpan3 {
+  grid-row: span 3;
+}

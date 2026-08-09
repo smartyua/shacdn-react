@@ -1,0 +1,153 @@
+@use '../../styles/variables.scss' as *;
+
+.group {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background-color: $card;
+
+  // Nested groups share the outer chrome — double borders look like stray lines.
+  .group {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+  }
+}
+
+.group--horizontal {
+  flex-direction: row;
+}
+
+.group--vertical {
+  flex-direction: column;
+}
+
+.panel {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.handle {
+  flex: 0 0 auto;
+  position: relative;
+  // The handle is a <button>: without this reset the UA draws a 2px outset border.
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  touch-action: none;
+  user-select: none;
+  background-color: $border;
+  transition: background-color $transition-fast;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: $border;
+    border-radius: $radius-xs;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover,
+  &[data-active='true'] {
+    background-color: $muted;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: 0;
+  }
+}
+
+.handle--horizontal {
+  width: 1px;
+  cursor: col-resize;
+
+  &::after {
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 2.5rem;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.handle--vertical {
+  height: 1px;
+  cursor: row-resize;
+
+  &::after {
+    top: 50%;
+    left: 50%;
+    width: 2.5rem;
+    height: 3px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* The grip variant widens the hit area, so the 1px divider is drawn separately
+   instead of using the element's own background. */
+.handle--withGrip {
+  background-color: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: $border;
+  }
+
+  &::after {
+    opacity: 1;
+    background-color: $border;
+    border: $border-width solid $border;
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.06);
+  }
+}
+
+.handle--withGrip.handle--horizontal {
+  width: 10px;
+
+  &::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+}
+
+.handle--withGrip.handle--vertical {
+  height: 10px;
+
+  &::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+}
+
+.panelInner {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}

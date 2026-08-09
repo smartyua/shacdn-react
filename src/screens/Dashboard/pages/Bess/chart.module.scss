@@ -1,0 +1,158 @@
+@use '../../../../styles/variables.scss' as *;
+
+.scroller {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.inner {
+  min-width: 700px;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grid {
+  stroke: $border;
+  stroke-width: 1;
+}
+
+.zero {
+  stroke: $muted-foreground;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.6;
+}
+
+.axisLabel {
+  fill: $muted-foreground;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.axisUnit {
+  fill: $muted-foreground;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pvArea {
+  fill: url(#bessPvGradient);
+  stroke: none;
+}
+
+.batteryArea {
+  fill: url(#bessBatteryGradient);
+  stroke: none;
+}
+
+.pvLine,
+.loadLine,
+.batteryLine,
+.evLine,
+.gridLine,
+.socLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pvLine {
+  stroke: $solar;
+  stroke-width: 2;
+}
+
+.loadLine {
+  stroke: $load;
+  stroke-width: 2;
+}
+
+.batteryLine {
+  stroke: $battery;
+  stroke-width: 1.75;
+}
+
+.evLine {
+  stroke: $ev;
+  stroke-width: 1.75;
+}
+
+.gridLine {
+  stroke: $grid;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.socLine {
+  stroke: $muted-foreground;
+  stroke-width: 1.25;
+  stroke-dasharray: 2 4;
+  opacity: 0.85;
+}
+
+.nowMarker {
+  line {
+    stroke: $foreground;
+    stroke-width: 1.25;
+    opacity: 0.55;
+  }
+
+  circle {
+    fill: $foreground;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.125rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: $font-size-xs;
+    color: $muted-foreground;
+  }
+
+  i {
+    width: 12px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: currentcolor;
+    flex-shrink: 0;
+  }
+}
+
+.solar i {
+  color: $solar;
+}
+
+.load i {
+  color: $load;
+}
+
+.battery i {
+  color: $battery;
+}
+
+.ev i {
+  color: $ev;
+}
+
+.gridSeries i {
+  color: $grid;
+}
+
+.soc i {
+  color: $muted-foreground;
+}

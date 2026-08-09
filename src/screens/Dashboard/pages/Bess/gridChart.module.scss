@@ -1,0 +1,67 @@
+@use '../../../../styles/variables.scss' as *;
+
+.scroller {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.gridLine {
+  stroke: $border;
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.axisLine {
+  stroke: $border;
+  stroke-width: 1.5;
+}
+
+.axisLabel,
+.hourLabel,
+.sideLabel {
+  fill: $muted-foreground;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sideLabel {
+  font-size: 9px;
+  letter-spacing: $tracking-ui;
+  text-transform: uppercase;
+}
+
+.importBar {
+  fill: $import-color;
+  transition: height 500ms $ease-standard, y 500ms $ease-standard;
+}
+
+.exportBar {
+  fill: $export-color;
+  transition: height 500ms $ease-standard, y 500ms $ease-standard;
+}
+
+.future {
+  opacity: 0.32;
+}
+
+.marker {
+  stroke: $foreground;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .importBar,
+  .exportBar {
+    transition: none;
+  }
+}

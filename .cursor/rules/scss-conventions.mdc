@@ -1,0 +1,90 @@
+---
+description: SCSS module conventions and patterns
+globs: "**/*.scss"
+alwaysApply: false
+---
+
+# SCSS Conventions
+
+## File Structure
+
+Each component has a `.module.scss` file:
+
+```scss
+@import '../../styles/variables.scss';
+
+.component {
+  // Base styles
+  display: flex;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.variant {
+  background: $primary;
+  &:hover {
+    background: hsl(222.2, 47.4%, 9%);
+  }
+}
+
+.sizeMd {
+  padding: 0.5rem 1rem;
+}
+```
+
+## Required Patterns
+
+### Focus States
+```scss
+&:focus-visible {
+  outline: 2px solid $ring;
+  outline-offset: 2px;
+}
+```
+
+### Disabled States
+```scss
+&:disabled,
+&[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+```
+
+### Invalid States
+```scss
+&[aria-invalid='true'] {
+  border-color: $destructive;
+}
+```
+
+### Hover Effects
+```scss
+&:hover {
+  background: hsl(222.2, 47.4%, 9%); // Exact HSL values
+}
+```
+
+## Class Naming
+
+- Use camelCase for classes: `.primaryButton`, `.sizeMd`
+- Base class matches component name: `.button`, `.input`
+- Variant classes are simple: `.primary`, `.secondary`
+- Size classes: `.xs`, `.sm`, `.md`, `.lg`, `.xl`
+
+## DO NOT
+
+- ❌ Use inline styles for design tokens
+- ❌ Duplicate color values (use variables)
+- ❌ Use global styles (except in globals.scss)
+- ❌ Mix Tailwind or other CSS frameworks

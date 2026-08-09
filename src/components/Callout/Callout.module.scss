@@ -1,0 +1,86 @@
+@use '../../styles/variables.scss' as *;
+
+.callout {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  width: 100%;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  border-left-width: 0.25rem;
+  border-left-color: $border;
+  padding: $spacing-md;
+  background-color: $muted;
+  color: $foreground;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  line-height: 1.5;
+
+  > svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    color: $muted-foreground;
+  }
+}
+
+.info {
+  border-left-color: $primary;
+  background-color: color-mix(in srgb, #{$primary} 6%, transparent);
+
+  > svg {
+    color: $primary;
+  }
+
+  .title {
+    color: $foreground;
+  }
+}
+
+.warning {
+  border-left-color: $warning;
+  background-color: color-mix(in srgb, #{$warning} 8%, transparent);
+
+  > svg {
+    color: $warning;
+  }
+}
+
+.success {
+  border-left-color: $success;
+  background-color: color-mix(in srgb, #{$success} 8%, transparent);
+
+  > svg {
+    color: $success;
+  }
+}
+
+.danger {
+  border-left-color: $destructive;
+  background-color: color-mix(in srgb, #{$destructive} 6%, transparent);
+
+  > svg {
+    color: $destructive;
+  }
+
+  .title {
+    color: $destructive;
+  }
+}
+
+.title {
+  margin: 0 0 $spacing-xs;
+  font-weight: 500;
+  font-size: $font-size-sm;
+  line-height: 1.4;
+  color: $foreground;
+}
+
+.description {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  line-height: 1.5;
+}

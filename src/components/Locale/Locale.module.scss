@@ -1,0 +1,53 @@
+@use '../../styles/variables.scss' as *;
+
+.localeSwitcher {
+  display: inline-flex;
+  align-items: center;
+}
+
+.compact {
+  .trigger {
+    min-width: $control-h-sm;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+}
+
+.trigger {
+  min-width: $control-h-md;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+}
+
+.menuLabel {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.menuCode {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: $muted-foreground;
+}
+
+.selected {
+  font-weight: 500;
+
+  .menuCode {
+    color: inherit;
+  }
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-left: auto;
+}

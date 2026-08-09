@@ -1,0 +1,16 @@
+---
+description: Multi-agent orchestration expectations
+alwaysApply: true
+---
+
+# Agent orchestration
+
+Roles: `.ai/agents/*.md` (orchestrator, architect, developer, test-engineer, reviewer, security-reviewer, documentation-agent, knowledge-agent, incident-agent).
+
+For medium/high complexity:
+1. Implementer pass
+2. Adversarial review pass (independent of implementer claims)
+3. Test-coverage pass
+4. Orchestrator compares outcomes
+
+Single-agent sessions should still simulate these passes mentally and record gaps.

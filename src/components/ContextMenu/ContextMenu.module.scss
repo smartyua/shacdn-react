@@ -1,0 +1,91 @@
+@use '../../styles/variables.scss' as *;
+
+.wrapper {
+  display: contents;
+}
+
+.trigger {
+  display: block;
+}
+
+.content {
+  z-index: $z-floating;
+  min-width: 10rem;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  animation: contextMenuIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: contextMenuInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: contextMenuInBottom;
+}
+
+@keyframes contextMenuInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contextMenuInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contextMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover:not(.itemDisabled) {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.separator {
+  height: 1px;
+  background: $border;
+  margin: $spacing-xs 0;
+}

@@ -1,0 +1,177 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  height: $control-h-md;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  border-radius: $radius-md;
+  border: $border-width solid $input;
+  background-color: $background;
+  padding: 0 $control-px;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  letter-spacing: $tracking-ui;
+  color: $foreground;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+  outline: none;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+}
+
+.triggerSm {
+  height: $control-h-sm;
+  font-size: 0.8rem;
+  border-radius: $radius-sm;
+}
+
+.triggerIcon {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: transform $transition-fast;
+
+  .trigger[data-state='open'] & {
+    transform: rotate(180deg);
+  }
+}
+
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.valuePlaceholder {
+  color: $muted-foreground;
+}
+
+.content {
+  z-index: $z-floating;
+  max-height: 18rem;
+  overflow: auto;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  outline: none;
+  animation: selectPopIn $content-enter;
+}
+
+.content[data-side='top'] {
+  animation-name: selectPopInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: selectPopInBottom;
+}
+
+@keyframes selectPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes selectPopInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes selectPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  border-radius: $radius-sm;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+
+  &[aria-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.itemActive {
+  background: $accent;
+  color: $accent-foreground;
+}
+
+.itemIndicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.itemLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group {
+  padding: 0;
+}
+
+.label {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.separator {
+  height: $border-width;
+  margin: $spacing-xs calc(-1 * #{$spacing-xs});
+  background: $border;
+}

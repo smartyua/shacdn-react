@@ -1,0 +1,254 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  width: 100%;
+}
+
+.inputFrame {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $input;
+  background-color: $background;
+  padding: 0 $spacing-xs 0 $control-px;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+  outline: none;
+
+  &:has(:focus-visible) {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+
+  &[data-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.outline {
+  background-color: $background;
+  border-color: $input;
+}
+
+.soft {
+  background-color: $muted;
+  border-color: transparent;
+}
+
+.sizeSm {
+  height: $control-h-sm;
+  border-radius: $radius-sm;
+  font-size: 0.8rem;
+}
+
+.sizeMd {
+  height: $control-h-md;
+  font-size: $font-size-sm;
+}
+
+.sizeLg {
+  height: $control-h-lg;
+  font-size: $font-size-sm;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  font-family: $font-sans;
+  letter-spacing: $tracking-ui;
+  color: $foreground;
+  outline: none;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.slot {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: $muted-foreground;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.iconButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $muted-foreground;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    color: $foreground;
+    background: color-mix(in srgb, #{$accent} 60%, transparent);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.chevron {
+  transition: transform $transition-fast;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.content {
+  z-index: $z-floating;
+  max-height: 16rem;
+  overflow: auto;
+  padding: $spacing-xs;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  outline: none;
+  animation: comboboxPopIn $content-enter;
+}
+
+.contentSm {
+  border-radius: $radius-sm;
+}
+
+.contentLg {
+  border-radius: $radius-lg;
+}
+
+.content[data-side='top'] {
+  animation-name: comboboxPopInTop;
+}
+
+.content[data-side='bottom'] {
+  animation-name: comboboxPopInBottom;
+}
+
+@keyframes comboboxPopInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes comboboxPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes comboboxPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  letter-spacing: $tracking-ui;
+  text-align: left;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: $accent;
+    color: $accent-foreground;
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.itemActive {
+  background: $accent;
+  color: $accent-foreground;
+}
+
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.check {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.empty {
+  padding: $spacing-sm;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  text-align: center;
+}

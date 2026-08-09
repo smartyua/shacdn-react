@@ -1,0 +1,17 @@
+---
+description: Official shadcn/ui design reference (https://ui.shadcn.com) for parity audits
+alwaysApply: true
+---
+
+# Design reference
+
+**Canonical reference:** [https://ui.shadcn.com](https://ui.shadcn.com)
+
+When implementing or reviewing UI in this repo:
+
+1. Compare against the matching component on ui.shadcn.com (structure, variants, sizes).
+2. Map Tailwind registry sizes to `src/styles/variables.scss` (`$control-h-sm/md/lg`, `$radius-md`, `$font-size-sm`, focus ring tokens).
+3. Use **shadcn MCP** for registry source/examples — translate to SCSS modules; do not add Tailwind.
+4. Record parity in `docs/SHADCN_PARITY_MATRIX.md`; workflow in `docs/DESIGN_REFERENCE.md`.
+
+**Coverage:** 54+ primitives in `src/components/`; blocks requiring Recharts/Embla/sidebar layouts are documented as compose-or-add-deps in the parity matrix.

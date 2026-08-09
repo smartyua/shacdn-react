@@ -1,0 +1,143 @@
+@use '../../styles/variables.scss' as *;
+
+.provider {
+  --sidebar-width: 16rem;
+  display: flex;
+  min-height: 12rem;
+  width: 100%;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background-color: $background;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background-color: $card;
+  border-right: $border-width solid $border;
+  color: $foreground;
+  transition: width $transition-base, margin $transition-base;
+}
+
+.sidebar--collapsed {
+  width: 3rem;
+}
+
+.header,
+.footer {
+  flex-shrink: 0;
+  padding: $spacing-md;
+  border-bottom: $border-width solid $border;
+}
+
+.footer {
+  border-bottom: none;
+  border-top: $border-width solid $border;
+  margin-top: auto;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  padding: $spacing-sm;
+}
+
+.inset {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+}
+
+.insetHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border-bottom: $border-width solid $border;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  width: 100%;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  height: $control-h-md;
+  padding: 0 $spacing-sm;
+  border: none;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $foreground;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+
+  &[data-active='true'] {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.menuButtonLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collapsed .menuButtonLabel {
+  display: none;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-md;
+  height: $control-h-md;
+  border: $border-width solid $border;
+  border-radius: $radius-md;
+  background-color: $background;
+  color: $foreground;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.insetBody {
+  flex: 1;
+  padding: $spacing-md;
+}

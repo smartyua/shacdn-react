@@ -1,0 +1,55 @@
+@use '../../styles/variables.scss' as *;
+
+.card {
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background-color: $card;
+  color: $card-foreground;
+}
+
+.header {
+  display: grid;
+  grid-auto-rows: min-content;
+  align-items: start;
+  gap: $spacing-xs;
+  padding: $spacing-lg;
+  position: relative;
+
+  &:has(.action) {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: $tracking-tight;
+  margin: 0;
+  color: $foreground;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.action {
+  grid-column-start: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: end;
+}
+
+.content {
+  padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+  gap: $spacing-sm;
+}

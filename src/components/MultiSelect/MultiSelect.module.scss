@@ -1,0 +1,169 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  min-height: $control-h-md;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  border-radius: $radius-md;
+  border: $border-width solid $input;
+  background-color: $background;
+  padding: $spacing-xs $control-px;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  color: $foreground;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color $transition-fast, background-color $transition-fast,
+    outline-color $transition-fast, outline-offset $transition-fast;
+  outline: none;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[data-state='open'] .chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.triggerContent {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-xs;
+  min-width: 0;
+}
+
+.placeholder {
+  color: $muted-foreground;
+}
+
+.chevron {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: transform $transition-fast;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  max-width: 100%;
+  border-radius: $radius-sm;
+  border: $border-width solid $border;
+  background: $secondary;
+  color: $secondary-foreground;
+  padding: 0 $spacing-xs;
+  font-size: $font-size-xs;
+  line-height: 1.4;
+}
+
+.chipLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    background: color-mix(in srgb, #{$foreground} 10%, transparent);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: 1px;
+  }
+}
+
+.list {
+  z-index: $z-floating;
+  max-height: 16rem;
+  overflow: auto;
+  margin: 0;
+  padding: $spacing-xs;
+  list-style: none;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $popover;
+  color: $popover-foreground;
+  animation: multiSelectPopIn $content-enter;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+@keyframes multiSelectPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  text-align: left;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled) {
+    background: $accent;
+    color: $accent-foreground;
+    outline: none;
+  }
+}
+
+.optionActive {
+  background: $accent;
+  color: $accent-foreground;
+}
+
+.optionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.optionCheckbox {
+  pointer-events: none;
+  flex-shrink: 0;
+}

@@ -1,0 +1,61 @@
+@use '../../styles/variables.scss' as *;
+
+.tabs {
+  width: 100%;
+}
+
+.list {
+  display: inline-flex;
+  align-items: center;
+  // The list shrinks to fit, so this only matters once a consumer constrains its width and
+  // lets it scroll — and there centring would push the first trigger out of reach.
+  justify-content: flex-start;
+  border-radius: $radius-md;
+  background-color: $muted;
+  padding: 0.25rem;
+  color: $muted-foreground;
+  gap: 0.25rem;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: $radius-sm;
+  padding: 0.375rem 0.75rem;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-family: $font-sans;
+  transition: background-color $transition-fast, color $transition-fast, opacity $transition-fast;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: $muted-foreground;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.triggerActive {
+  background-color: $background;
+  color: $foreground;
+}
+
+.content {
+  margin-top: 0.5rem;
+  border-radius: $radius-md;
+  outline: none;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}

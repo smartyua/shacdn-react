@@ -1,0 +1,167 @@
+@use '../../styles/variables.scss' as *;
+
+.drawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay-backdrop;
+}
+
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay-backdrop;
+  background-color: hsl(0 0% 0% / 0.5);
+  animation: shacdn-overlay-enter $overlay-enter;
+}
+
+.drawerContent {
+  position: fixed;
+  z-index: $z-overlay;
+  background: $background;
+  border: $border-width solid $border;
+  padding: $spacing-lg;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.drawerContent--right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(90vw, 24rem);
+  max-width: 24rem;
+  border-left: $border-width solid $border;
+  animation: slideInRight 200ms $ease-spring;
+}
+
+.drawerContent--left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: min(90vw, 24rem);
+  max-width: 24rem;
+  border-right: $border-width solid $border;
+  animation: slideInLeft 200ms $ease-spring;
+}
+
+.drawerContent--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  max-height: 24rem;
+  border-bottom: $border-width solid $border;
+  animation: slideInTop 200ms $ease-spring;
+}
+
+.drawerContent--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  max-height: 24rem;
+  border-top: $border-width solid $border;
+  animation: slideInBottom 200ms $ease-spring;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.drawerClose {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  background: transparent;
+  border: none;
+  padding: $spacing-xs;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  color: $muted-foreground;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast,
+    opacity $transition-fast;
+
+  &:hover {
+    color: $foreground;
+    background: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.drawerHeader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
+
+.drawerFooter {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: auto;
+  padding-top: $spacing-lg;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.drawerTitle {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  line-height: 1;
+  color: $foreground;
+  margin: 0;
+}
+
+.drawerDescription {
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  margin: 0;
+  line-height: 1.5;
+}

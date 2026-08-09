@@ -1,0 +1,399 @@
+@use '../../../../styles/variables.scss' as *;
+
+.scroller {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  flex-shrink: 0;
+}
+
+.wires {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wireBase {
+  fill: none;
+  stroke: $border;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+// The period is fixed and power is expressed through the animation's playback rate (see FlowWire).
+// Rewriting the duration per tick re-maps the elapsed time onto the new period, which makes the
+// dashes jump backwards and forwards.
+.wireFlow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 7 12;
+  animation: flowDash 1.6s linear infinite;
+  transition:
+    stroke-width 400ms $ease-standard,
+    opacity 400ms $ease-standard;
+}
+
+.reverse {
+  animation-name: flowDashReverse;
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -19;
+  }
+}
+
+@keyframes flowDashReverse {
+  to {
+    stroke-dashoffset: 19;
+  }
+}
+
+.busBar {
+  fill: none;
+  stroke: $border;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.zoneLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: currentcolor;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wireFlow {
+    animation-duration: 6s;
+  }
+}
+
+.solar {
+  --flow-tone: #{$solar};
+
+  stroke: $solar;
+  color: $solar;
+}
+
+.battery {
+  --flow-tone: #{$battery};
+
+  stroke: $battery;
+  color: $battery;
+}
+
+.grid {
+  --flow-tone: #{$grid};
+
+  stroke: $grid;
+  color: $grid;
+}
+
+.load {
+  --flow-tone: #{$load};
+
+  stroke: $load;
+  color: $load;
+}
+
+.ev {
+  --flow-tone: #{$ev};
+
+  stroke: $ev;
+  color: $ev;
+}
+
+.import {
+  --flow-tone: #{$import-color};
+
+  stroke: $import-color;
+  color: $import-color;
+}
+
+.export {
+  --flow-tone: #{$export-color};
+
+  stroke: $export-color;
+  color: $export-color;
+}
+
+.edgeLabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0.1875rem 0.5rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: var(--flow-tone, #{$foreground});
+  color: $background;
+  box-shadow: 0 1px 2px hsl(0 0% 0% / 0.18);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: $tracking-ui;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.dim {
+  opacity: 0.55;
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-sizing: border-box;
+  padding: 0.625rem 0.75rem;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background-color: $muted;
+  box-shadow: 0 1px 2px hsl(0 0% 0% / 0.08), 0 8px 20px -16px hsl(0 0% 0% / 0.55);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background-color: currentcolor;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: currentcolor;
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    em {
+      margin-left: auto;
+      font-style: normal;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.0625rem 0.375rem;
+      border-radius: 9999px;
+      background-color: $card;
+      color: $muted-foreground;
+    }
+  }
+
+  strong {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: $tracking-tight;
+    font-variant-numeric: tabular-nums;
+    color: $foreground;
+  }
+
+  footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.0625rem;
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    color: $muted-foreground;
+    font-variant-numeric: tabular-nums;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.solarNode {
+  color: $solar;
+}
+
+.busNode {
+  color: $foreground;
+
+  strong {
+    font-size: 1.125rem;
+  }
+}
+
+.gridNode {
+  color: $grid;
+}
+
+.loadNode {
+  color: $load;
+}
+
+.bessNode {
+  color: $battery;
+  gap: 0.375rem;
+}
+
+.evNode {
+  color: $ev;
+}
+
+.chargerNode {
+  color: $ev;
+  gap: 0.3125rem;
+  padding: 0.5rem 0.625rem;
+
+  strong {
+    font-size: 1.125rem;
+  }
+
+  footer {
+    font-size: 0.625rem;
+  }
+}
+
+.gridMeters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+  margin-top: 0.125rem;
+}
+
+.gridMeter {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: $muted-foreground;
+
+  span {
+    flex-shrink: 0;
+    min-width: 2.5rem;
+  }
+}
+
+// A unit that is neither charging nor discharging fades back so the active part of the plant reads
+// first.
+.nodeIdle {
+  opacity: 0.5;
+}
+
+.nodeFault {
+  background-color: hsl(var(--destructive) / 0.12);
+  border-color: hsl(var(--destructive) / 0.35);
+  animation-name: nodePulse;
+  animation-duration: 1.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes nodePulse {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// Has to sit after the rule it cancels, since both selectors weigh the same.
+@media (prefers-reduced-motion: reduce) {
+  // The destructive tint carries the fault on its own once the pulse is gone.
+  .nodeFault {
+    animation-name: none;
+  }
+}
+
+.badge-charging {
+  background-color: hsl(var(--ev) / 0.18) !important;
+  color: $ev !important;
+}
+
+.badge-idle {
+  background-color: $card !important;
+  color: $muted-foreground !important;
+}
+
+.badge-fault {
+  background-color: hsl(var(--destructive) / 0.18) !important;
+  color: $destructive !important;
+}
+
+.bessBody {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.bessSoc {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.05rem;
+  line-height: 1.05;
+  text-align: right;
+  color: $muted-foreground;
+
+  b {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: $foreground;
+  }
+
+  small {
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+}
+
+.charging {
+  background-color: hsl(var(--battery) / 0.18) !important;
+  color: $battery !important;
+}
+
+.discharging {
+  background-color: hsl(var(--solar) / 0.18) !important;
+  color: $solar !important;
+}
+
+.idle {
+  background-color: $card !important;
+  color: $muted-foreground !important;
+}

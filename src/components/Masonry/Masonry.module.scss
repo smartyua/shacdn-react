@@ -1,0 +1,48 @@
+@use '../../styles/variables.scss' as *;
+
+.masonry {
+  width: 100%;
+  font-family: $font-sans;
+}
+
+.columns2 {
+  column-count: 2;
+}
+
+.columns3 {
+  column-count: 3;
+}
+
+.columns4 {
+  column-count: 4;
+}
+
+.gapSm {
+  column-gap: $spacing-sm;
+}
+
+.gapMd {
+  column-gap: $spacing-md;
+}
+
+.gapLg {
+  column-gap: $spacing-lg;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: $spacing-md;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background-color: $card;
+  color: $card-foreground;
+  padding: $spacing-md;
+}
+
+.gapSm .item {
+  margin-bottom: $spacing-sm;
+}
+
+.gapLg .item {
+  margin-bottom: $spacing-lg;
+}

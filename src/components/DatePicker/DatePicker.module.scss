@@ -1,0 +1,98 @@
+@use '../../styles/variables.scss' as *;
+
+.datePickerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.datePickerLabel {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.datePickerContainer {
+  width: 100%;
+}
+
+.datePickerTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: $control-h-md;
+  padding: 0 $control-px;
+  font-size: $font-size-sm;
+  background: $background;
+  color: $foreground;
+  border: $border-width solid $input;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast, opacity $transition-fast;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover:not(:disabled) {
+    background: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  svg {
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+}
+
+.calendarPopover {
+  z-index: $z-floating;
+  animation: calendarPopIn $content-enter;
+}
+
+.calendarPopover[data-side='top'] {
+  animation-name: calendarPopInTop;
+}
+
+.calendarPopover[data-side='bottom'] {
+  animation-name: calendarPopInBottom;
+}
+
+@keyframes calendarPopInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes calendarPopInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes calendarPopIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

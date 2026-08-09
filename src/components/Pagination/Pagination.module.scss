@@ -1,0 +1,74 @@
+@use '../../styles/variables.scss' as *;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: $font-size-sm;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: $control-h-md;
+  height: $control-h-md;
+  padding: 0 0.5rem;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background-color: $background;
+  color: $foreground;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast,
+    opacity $transition-fast;
+  cursor: pointer;
+
+  &:hover:not([aria-disabled='true']) {
+    background-color: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &[aria-current='page'] {
+    background-color: $primary;
+    color: $primary-foreground;
+    border-color: $primary;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-md;
+  height: $control-h-md;
+
+  &::before {
+    content: '…';
+  }
+}

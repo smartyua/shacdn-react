@@ -1,0 +1,60 @@
+@use '../../styles/variables.scss' as *;
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  border: $border-width solid $input;
+  border-radius: $radius-md;
+  background-color: $background;
+  padding: $spacing-xs;
+  font-family: $font-sans;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-sm;
+  height: $control-h-sm;
+  padding: 0;
+  border: none;
+  border-radius: $radius-sm;
+  background-color: transparent;
+  color: $foreground;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover:not(:disabled) {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+.value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  padding: 0 $spacing-xs;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: $foreground;
+  user-select: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

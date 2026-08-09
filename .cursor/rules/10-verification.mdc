@@ -1,0 +1,17 @@
+---
+description: Dual verification before claiming completion
+alwaysApply: true
+---
+
+# Verification
+
+## Check A — technical
+Run what applies: lint, typecheck (`test:ai` / `typecheck:ai`), unit tests, build, `npm run ai:health`.
+
+## Check B — logical
+Re-read the request: requirements met? regressions? architecture fit? excess complexity? docs/memory updated? code/tests/docs aligned?
+
+## Critical changes
+Also run an adversarial review pass (what breaks it? edge cases? partial failure? replay?).
+
+Report which checks ran and which did not.

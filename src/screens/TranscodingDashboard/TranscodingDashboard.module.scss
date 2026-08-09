@@ -1,0 +1,297 @@
+@use '../../styles/variables.scss' as *;
+
+.page {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: $spacing-lg $spacing-lg $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.headerStatus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+}
+
+.livePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  border: $border-width solid $border;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  background: $card;
+
+  i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: $muted-foreground;
+  }
+}
+
+.liveOn {
+  color: $foreground;
+  border-color: color-mix(in srgb, #{$primary} 35%, transparent);
+
+  i {
+    background: hsl(142 71% 45%);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, hsl(142 71% 45%) 25%, transparent);
+  }
+}
+
+.clock {
+  font-variant-numeric: tabular-nums;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+}
+
+.anchorNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background: $card;
+}
+
+.anchorLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  text-decoration: none;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  scroll-margin-top: calc(#{$site-header-height} + #{$spacing-md});
+}
+
+.sectionHeading {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+}
+
+.sectionLead {
+  margin: 0;
+  color: $muted-foreground;
+  font-size: $font-size-sm;
+  max-width: 42rem;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: $spacing-md;
+}
+
+.kpiTile {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background: $card;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.kpiLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+
+  svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}
+
+.kpiValue {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpiNote {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: $spacing-md;
+}
+
+.jobList,
+.tableWrap {
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background: $card;
+  overflow: hidden;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.jobRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.8fr) minmax(5rem, 0.7fr);
+  gap: $spacing-sm $spacing-md;
+  align-items: center;
+  padding: $spacing-md;
+  border-bottom: $border-width solid $border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.jobMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.jobTitle {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jobMeta {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.progressBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  font-variant-numeric: tabular-nums;
+}
+
+.workerCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.workerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.workerName {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 600;
+}
+
+.workerHost {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.pipelineActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: $spacing-md;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.hint {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.mutedRow {
+  color: $muted-foreground;
+  font-size: $font-size-sm;
+}
+
+.cardBodyPad {
+  padding-top: $spacing-md;
+}
+
+.inlineIconHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}

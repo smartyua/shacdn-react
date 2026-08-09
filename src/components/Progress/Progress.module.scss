@@ -1,0 +1,19 @@
+@use '../../styles/variables.scss' as *;
+
+.progress {
+  position: relative;
+  height: var(--progress-height, 0.5rem);
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: $secondary;
+}
+
+.indicator {
+  height: 100%;
+  width: 100%;
+  flex: 1 1 0%;
+  background-color: var(--progress-indicator, #{$primary});
+  transition: transform $transition-base;
+  transform-origin: left;
+}

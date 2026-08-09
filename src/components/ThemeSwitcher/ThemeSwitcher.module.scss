@@ -1,0 +1,218 @@
+@use '../../styles/variables.scss' as *;
+
+.themeSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.compact {
+  gap: 0.25rem;
+
+  .themeToggle,
+  .colorSchemeToggle {
+    width: $control-h-sm;
+    height: $control-h-sm;
+    border-radius: $radius-sm;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-md;
+  height: $control-h-md;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $background;
+  color: $foreground;
+  cursor: pointer;
+  transition: background-color 100ms ease, border-color 100ms ease;
+
+  &:hover {
+    background: $accent;
+    border-color: $primary;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: $foreground;
+  }
+}
+
+.colorSchemeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-md;
+  height: $control-h-md;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background: $background;
+  color: $foreground;
+  cursor: pointer;
+  transition: opacity 100ms ease, transform 100ms ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: white;
+  }
+}
+
+.colorSchemeWrapper {
+  display: inline-flex;
+}
+
+.colorSchemeMenu {
+  z-index: $z-floating;
+  background: $card;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  padding: 0.5rem;
+  min-width: 150px;
+  animation: colorMenuIn $content-enter;
+}
+
+.colorSchemeMenu[data-side='top'] {
+  animation-name: colorMenuInTop;
+}
+
+.colorSchemeMenu[data-side='bottom'] {
+  animation-name: colorMenuInBottom;
+}
+
+.colorSchemeMenu[data-side='left'] {
+  animation-name: colorMenuInLeft;
+}
+
+.colorSchemeMenu[data-side='right'] {
+  animation-name: colorMenuInRight;
+}
+
+@keyframes colorMenuInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes colorMenuInTop {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes colorMenuInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes colorMenuInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes colorMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.colorOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: $foreground;
+  font-size: $font-size-sm;
+  font-family: $font-sans;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: background-color 100ms ease, color 100ms ease;
+  text-align: left;
+  position: relative;
+
+  &:hover {
+    background: $accent;
+  }
+
+  &.active {
+    background: $primary;
+    color: $primary-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.colorCircle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: $border-width solid $border;
+  flex-shrink: 0;
+}
+
+.checkIcon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}

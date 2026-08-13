@@ -117,6 +117,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableFoo
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs/Tabs';
 export { Textarea } from './Textarea/Textarea';
 export { ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher';
+export type { ThemeSwitcherLabels, ThemeSwitcherProps } from './ThemeSwitcher/ThemeSwitcher';
 export { ToastProvider, useToast, ToastItem, ToastViewport, ToastTitle, ToastDescription } from './Toast/Toast';
 export { Toggle } from './Toggle/Toggle';
 export { ToggleGroup, ToggleGroupItem } from './ToggleGroup/ToggleGroup';

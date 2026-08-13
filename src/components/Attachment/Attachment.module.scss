@@ -49,15 +49,15 @@
     color $transition-fast;
 
   &:focus-within {
-    box-shadow: 0 0 0 1px hsl(var(--ring) / 0.5);
+    box-shadow: 0 0 0 1px alpha($ring, 50%);
   }
 
   &:has(> a, > button):hover {
-    background-color: hsl(var(--muted) / 0.5);
+    background-color: alpha($muted, 50%);
   }
 
   &[data-state='error'] {
-    border-color: hsl(var(--destructive) / 0.3);
+    border-color: alpha($destructive, 30%);
   }
 
   &[data-state='idle'] {
@@ -187,7 +187,7 @@
 }
 
 .attachment[data-state='error'] [data-slot='attachment-media'] {
-  background-color: hsl(var(--destructive) / 0.1);
+  background-color: alpha($destructive, 10%);
   color: $destructive;
 }
 
@@ -245,7 +245,7 @@
 }
 
 .attachment[data-state='error'] [data-slot='attachment-description'] {
-  color: hsl(var(--destructive) / 0.8);
+  color: alpha($destructive, 80%);
 }
 
 .actions {

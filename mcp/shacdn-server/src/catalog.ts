@@ -7,6 +7,8 @@ export interface ComponentMeta {
   aliasOf?: string;
   requiresProvider?: string;
   npmDeps?: string[];
+  /** Demo chrome — do not copy into consumer apps. */
+  demoOnly?: boolean;
 }
 
 /** Task → component mapping from docs/COMPONENTS_AI_REFERENCE.md */
@@ -67,7 +69,7 @@ export const COMPONENT_CATALOG: ComponentMeta[] = [
   { name: 'Kbd', folder: 'Kbd', description: 'Keyboard shortcut display', tasks: ['keyboard', 'shortcut', 'kbd'], exports: ['Kbd', 'KbdGroup'] },
   { name: 'Label', folder: 'Label', description: 'Form field label', tasks: ['label', 'form'], exports: ['Label'] },
   { name: 'Lightbox', folder: 'Lightbox', description: 'Click-to-enlarge media overlay with scrim', tasks: ['lightbox', 'image overlay', 'gallery enlarge'], exports: ['Lightbox', 'LightboxTrigger', 'LightboxContent', 'LightboxClose', 'LightboxOverlay'] },
-  { name: 'Locale', folder: 'Locale', description: 'Locale provider, message catalog and language switcher for demo screens', tasks: ['locale', 'i18n', 'language switcher', 'translations'], exports: ['LocaleProvider', 'useLocale', 'LocaleSwitcher'], requiresProvider: 'LocaleProvider' },
+  { name: 'Locale', folder: 'Locale', description: 'Locale provider, message catalog and language switcher for demo screens', tasks: ['locale', 'i18n', 'language switcher', 'translations'], exports: ['LocaleProvider', 'useLocale', 'LocaleSwitcher'], requiresProvider: 'LocaleProvider', demoOnly: true },
   { name: 'Marquee', folder: 'Marquee', description: 'Endless horizontal scrolling content strip', tasks: ['marquee', 'ticker', 'infinite scroll text'], exports: ['Marquee', 'MarqueeContent'] },
   { name: 'Masonry', folder: 'Masonry', description: 'Column-packed variable-height card layout', tasks: ['masonry', 'pinterest grid', 'column layout'], exports: ['Masonry', 'MasonryItem'] },
   { name: 'Menubar', folder: 'Menubar', description: 'Desktop-style menu bar', tasks: ['menubar', 'menu bar'], exports: ['Menubar', 'MenubarMenu', 'MenubarTrigger', 'MenubarContent', 'MenubarItem'] },
@@ -93,7 +95,7 @@ export const COMPONENT_CATALOG: ComponentMeta[] = [
   { name: 'Sheet', folder: 'Sheet', description: 'Alias for Drawer API', tasks: ['sheet', 'side panel'], exports: ['Sheet', 'SheetContent', 'SheetHeader', 'SheetTitle', 'SheetDescription'], aliasOf: 'Drawer' },
   { name: 'Sidebar', folder: 'Sidebar', description: 'App sidebar layout with collapse (zero-dep)', tasks: ['sidebar', 'app shell', 'dashboard layout'], exports: ['SidebarProvider', 'Sidebar', 'SidebarHeader', 'SidebarContent', 'SidebarFooter', 'SidebarInset', 'SidebarTrigger', 'SidebarMenu', 'SidebarMenuItem', 'SidebarMenuButton'] },
   { name: 'Sonner', folder: 'Sonner', description: 'Registry alias for Toast', tasks: ['sonner', 'toast'], exports: ['SonnerToaster', 'useSonner', 'ToastItem', 'ToastTitle', 'ToastDescription'], aliasOf: 'Toast' },
-  { name: 'SiteHeader', folder: 'SiteHeader', description: 'Demo site header with theme switcher', tasks: ['header', 'navbar', 'demo'], exports: ['SiteHeader'] },
+  { name: 'SiteHeader', folder: 'SiteHeader', description: 'Demo site header with theme switcher', tasks: ['header', 'navbar', 'demo'], exports: ['SiteHeader'], demoOnly: true },
   { name: 'Skeleton', folder: 'Skeleton', description: 'Loading placeholder shimmer', tasks: ['skeleton', 'loading placeholder'], exports: ['Skeleton'] },
   { name: 'Slider', folder: 'Slider', description: 'Range slider input', tasks: ['slider', 'range'], exports: ['Slider'] },
   { name: 'Spinner', folder: 'Spinner', description: 'Circular loading indicator', tasks: ['spinner', 'loading'], exports: ['Spinner'] },
@@ -162,7 +164,7 @@ export const INTERNAL_DEPS: Record<string, string[]> = {
   Sheet: ['Drawer'],
   SiteHeader: ['Locale', 'ThemeSwitcher'],
   Sonner: ['Toast'],
-  ThemeSwitcher: ['Floating', 'Locale'],
+  ThemeSwitcher: ['Floating'],
   ToggleGroup: ['Toggle'],
   Toolbar: ['Direction', 'Floating'],
   Tooltip: ['Floating'],

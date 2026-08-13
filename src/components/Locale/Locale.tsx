@@ -10,6 +10,8 @@ import {
 } from 'react';
 import { Check } from 'lucide-react';
 import { buildEmbedUrlForLang, getEmbedContext, isEmbedLang } from '../../embed';
+import { en, loadLocaleMessages, LOCALES, isLocale, type Locale, type LocaleMessages } from '../../i18n';
+import { cn } from '../../lib/cn';
 import { Button } from '../Button/Button';
 import {
   DropdownMenu,
@@ -19,9 +21,7 @@ import {
 } from '../DropdownMenu/DropdownMenu';
 import styles from './Locale.module.scss';
 
-const LOCALES = ['en', 'ua', 'de', 'pl', 'ru'] as const;
-
-export type Locale = (typeof LOCALES)[number];
+export type { Locale, LocaleMessages };
 
 const LOCALE_STORAGE_KEY = 'locale';
 
@@ -33,190 +33,6 @@ const LOCALE_SHORT: Record<Locale, string> = {
   ru: 'RU',
 };
 
-const localeSwitcherLabels = {
-  en: 'English',
-  ua: 'Ukrainian',
-  de: 'German',
-  pl: 'Polish',
-  ru: 'Russian',
-} as const;
-
-const MESSAGES = {
-  en: {
-    siteNav: {
-      ariaLabel: 'Site navigation',
-      backToHost: '← kylypko.com',
-      home: 'Home',
-      components: 'Components',
-      dashboard: 'Dashboard',
-      bessSolar: 'BESS Solar',
-      transcoding: 'Transcoding',
-      sessy: 'Sessy',
-    },
-    localeSwitcher: {
-      ariaLabel: 'Select language',
-      ...localeSwitcherLabels,
-    },
-    themeSwitcher: {
-      toggleTheme: 'Toggle theme',
-      switchToLight: 'Switch to light theme',
-      switchToDark: 'Switch to dark theme',
-      chooseColorScheme: 'Choose color scheme',
-      colorSchemes: 'Color schemes',
-      schemes: {
-        default: 'Default',
-        blue: 'Blue',
-        green: 'Green',
-        purple: 'Purple',
-        orange: 'Orange',
-        rose: 'Rose',
-      },
-    },
-  },
-  ua: {
-    siteNav: {
-      ariaLabel: 'Навігація сайтом',
-      backToHost: '← kylypko.com',
-      home: 'Головна',
-      components: 'Компоненти',
-      dashboard: 'Дашборд',
-      bessSolar: 'BESS Solar',
-      transcoding: 'Transcoding',
-      sessy: 'Sessy',
-    },
-    localeSwitcher: {
-      ariaLabel: 'Обрати мову',
-      en: 'English',
-      ua: 'Українська',
-      de: 'Deutsch',
-      pl: 'Polski',
-      ru: 'Русский',
-    },
-    themeSwitcher: {
-      toggleTheme: 'Перемкнути тему',
-      switchToLight: 'Увімкнути світлу тему',
-      switchToDark: 'Увімкнути темну тему',
-      chooseColorScheme: 'Обрати колірну схему',
-      colorSchemes: 'Колірні схеми',
-      schemes: {
-        default: 'Стандартна',
-        blue: 'Синя',
-        green: 'Зелена',
-        purple: 'Фіолетова',
-        orange: 'Помаранчева',
-        rose: 'Рожева',
-      },
-    },
-  },
-  de: {
-    siteNav: {
-      ariaLabel: 'Website-Navigation',
-      backToHost: '← kylypko.com',
-      home: 'Startseite',
-      components: 'Komponenten',
-      dashboard: 'Dashboard',
-      bessSolar: 'BESS Solar',
-      transcoding: 'Transcoding',
-      sessy: 'Sessy',
-    },
-    localeSwitcher: {
-      ariaLabel: 'Sprache wählen',
-      en: 'English',
-      ua: 'Ukrainisch',
-      de: 'Deutsch',
-      pl: 'Polnisch',
-      ru: 'Russisch',
-    },
-    themeSwitcher: {
-      toggleTheme: 'Theme umschalten',
-      switchToLight: 'Zum hellen Theme wechseln',
-      switchToDark: 'Zum dunklen Theme wechseln',
-      chooseColorScheme: 'Farbschema wählen',
-      colorSchemes: 'Farbschemata',
-      schemes: {
-        default: 'Standard',
-        blue: 'Blau',
-        green: 'Grün',
-        purple: 'Lila',
-        orange: 'Orange',
-        rose: 'Rose',
-      },
-    },
-  },
-  pl: {
-    siteNav: {
-      ariaLabel: 'Nawigacja witryny',
-      backToHost: '← kylypko.com',
-      home: 'Strona główna',
-      components: 'Komponenty',
-      dashboard: 'Panel',
-      bessSolar: 'BESS Solar',
-      transcoding: 'Transcoding',
-      sessy: 'Sessy',
-    },
-    localeSwitcher: {
-      ariaLabel: 'Wybierz język',
-      en: 'English',
-      ua: 'Ukraiński',
-      de: 'Niemiecki',
-      pl: 'Polski',
-      ru: 'Rosyjski',
-    },
-    themeSwitcher: {
-      toggleTheme: 'Przełącz motyw',
-      switchToLight: 'Włącz jasny motyw',
-      switchToDark: 'Włącz ciemny motyw',
-      chooseColorScheme: 'Wybierz schemat kolorów',
-      colorSchemes: 'Schematy kolorów',
-      schemes: {
-        default: 'Domyślny',
-        blue: 'Niebieski',
-        green: 'Zielony',
-        purple: 'Fioletowy',
-        orange: 'Pomarańczowy',
-        rose: 'Różowy',
-      },
-    },
-  },
-  ru: {
-    siteNav: {
-      ariaLabel: 'Навигация по сайту',
-      backToHost: '← kylypko.com',
-      home: 'Главная',
-      components: 'Компоненты',
-      dashboard: 'Дашборд',
-      bessSolar: 'BESS Solar',
-      transcoding: 'Transcoding',
-      sessy: 'Sessy',
-    },
-    localeSwitcher: {
-      ariaLabel: 'Выбрать язык',
-      en: 'English',
-      ua: 'Украинский',
-      de: 'Deutsch',
-      pl: 'Polski',
-      ru: 'Русский',
-    },
-    themeSwitcher: {
-      toggleTheme: 'Переключить тему',
-      switchToLight: 'Переключить на светлую тему',
-      switchToDark: 'Переключить на тёмную тему',
-      chooseColorScheme: 'Выбрать цветовую схему',
-      colorSchemes: 'Цветовые схемы',
-      schemes: {
-        default: 'Стандартная',
-        blue: 'Синяя',
-        green: 'Зелёная',
-        purple: 'Фиолетовая',
-        orange: 'Оранжевая',
-        rose: 'Розовая',
-      },
-    },
-  },
-} as const;
-
-export type LocaleMessages = (typeof MESSAGES)[Locale];
-
 type LocaleContextValue = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
@@ -225,15 +41,11 @@ type LocaleContextValue = {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
-const isLocale = (value: string | null | undefined): value is Locale =>
-  value !== null && value !== undefined && (LOCALES as readonly string[]).includes(value);
-
 const normalizeLocale = (input: string | null | undefined): Locale | null => {
   if (!input) {
     return null;
   }
   const base = input.trim().toLowerCase().split('-')[0];
-  // kylypko / browsers may send `uk` for Ukrainian
   if (base === 'uk') {
     return 'ua';
   }
@@ -318,9 +130,22 @@ export type LocaleProviderProps = {
 
 export const LocaleProvider = ({ children, defaultLocale }: LocaleProviderProps) => {
   const [locale, setLocaleState] = useState<Locale>(() => resolveInitialLocale(defaultLocale));
+  const [messages, setMessages] = useState<LocaleMessages>(en);
 
   useEffect(() => {
     syncDocumentLang(locale);
+  }, [locale]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void loadLocaleMessages(locale).then(next => {
+      if (!cancelled) {
+        setMessages(next);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [locale]);
 
   const setLocale = useCallback((next: Locale) => {
@@ -337,23 +162,18 @@ export const LocaleProvider = ({ children, defaultLocale }: LocaleProviderProps)
     (): LocaleContextValue => ({
       locale,
       setLocale,
-      messages: MESSAGES[locale],
+      messages,
     }),
-    [locale, setLocale]
+    [locale, setLocale, messages]
   );
 
-  return (
-    <LocaleContext.Provider value={value}>
-      {children}
-    </LocaleContext.Provider>
-  );
+  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
 };
 
 LocaleProvider.displayName = 'LocaleProvider';
 
 export interface LocaleSwitcherProps {
   className?: string;
-  /** Smaller trigger — for compact site header */
   variant?: 'default' | 'compact';
 }
 
@@ -364,7 +184,7 @@ export const LocaleSwitcher = forwardRef<HTMLDivElement, LocaleSwitcherProps>(
     return (
       <div
         ref={ref}
-        className={`${styles.localeSwitcher}${variant === 'compact' ? ` ${styles.compact}` : ''} ${className}`.trim()}
+        className={cn(styles.localeSwitcher, variant === 'compact' && styles.compact, className)}
         data-slot="locale-switcher"
       >
         <DropdownMenu>
@@ -386,7 +206,7 @@ export const LocaleSwitcher = forwardRef<HTMLDivElement, LocaleSwitcherProps>(
                   key={option}
                   role="menuitemradio"
                   aria-checked={selected}
-                  className={`${styles.menuItem}${selected ? ` ${styles.selected}` : ''}`}
+                  className={cn(styles.menuItem, selected && styles.selected)}
                   onClick={() => setLocale(option)}
                 >
                   <span className={styles.menuLabel}>{messages.localeSwitcher[option]}</span>

@@ -52,7 +52,7 @@ export const SiteHeader = () => {
         </nav>
         <div className={styles.actions} data-slot="site-header-actions">
           <LocaleSwitcher variant="compact" />
-          <ThemeSwitcher variant="compact" />
+          <ThemeSwitcher variant="compact" labels={messages.themeSwitcher} />
         </div>
       </div>
     </header>

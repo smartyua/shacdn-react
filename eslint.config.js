@@ -22,6 +22,7 @@ export default defineConfig([
       'vitest.config.ts',
       'mcp/**/*.{ts,tsx}',
       'src/test/**/*.{ts,tsx}',
+      'packages/**/*.{ts,tsx}',
     ],
     extends: [
       js.configs.recommended,
@@ -54,7 +55,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['.ai/**/*.{ts,tsx}', 'vitest.config.ts', 'mcp/**/*.{ts,tsx}'],
+    files: ['.ai/**/*.{ts,tsx}', 'vitest.config.ts', 'mcp/**/*.{ts,tsx}', 'packages/**/*.{ts,tsx}'],
     extends: [js.configs.recommended, tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,

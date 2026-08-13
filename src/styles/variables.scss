@@ -118,3 +118,9 @@ $load: hsl(var(--load));
 $ev: hsl(var(--ev));
 $import-color: hsl(var(--import));
 $export-color: hsl(var(--export));
+
+/// Mix a token with transparency. Use this instead of `hsl(var(--token) / 0.5)` —
+/// dark-mode `--border` / `--input` already include alpha, so composing more `/` is invalid CSS.
+@function alpha($color, $amount) {
+  @return color-mix(in srgb, #{$color} $amount, transparent);
+}

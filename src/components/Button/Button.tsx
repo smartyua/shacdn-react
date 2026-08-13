@@ -4,6 +4,7 @@ import {
   type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,
 } from 'react';
+import { cn } from '../../lib/cn';
 import styles from './Button.module.scss';
 
 interface BaseButtonShared {
@@ -31,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
   ) => {
     const variantClass = styles[variant as ButtonVariant];
     const sizeClass = styles[size as ButtonSize];
-    const classes = `${styles.button} ${variantClass} ${sizeClass} ${className || ''}`;
+    const classes = cn(styles.button, variantClass, sizeClass, className);
 
     if ('href' in props && props.href !== undefined) {
       const { href, ...anchorRest } = props;

@@ -1,13 +1,17 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// SHACDN_BASE=/shacdn-assets/ when building for kylypko.com embed
 const base = process.env.SHACDN_BASE || '/'
 
-// https://vite.dev/config/
 export default defineConfig({
   base,
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   server: {
     port: 8080,
     strictPort: true,

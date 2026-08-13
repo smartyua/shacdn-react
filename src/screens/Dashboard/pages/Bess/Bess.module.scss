@@ -29,7 +29,7 @@
 
 .liveOn {
   color: $success;
-  border-color: hsl(var(--success) / 0.35);
+  border-color: alpha($success, 35%);
 
   i {
     background-color: $success;
@@ -240,7 +240,7 @@
   }
 
   &[data-status='fault'] {
-    background-color: hsl(var(--destructive) / 0.12);
+    background-color: alpha($destructive, 12%);
 
     &::before {
       background-color: $destructive;
@@ -248,7 +248,7 @@
   }
 
   &[data-status='derated'] {
-    background-color: hsl(var(--warning) / 0.12);
+    background-color: alpha($warning, 12%);
 
     &::before {
       background-color: $warning;
@@ -437,7 +437,7 @@
   }
 
   &[data-status='fault'] {
-    background-color: hsl(var(--destructive) / 0.12);
+    background-color: alpha($destructive, 12%);
 
     &::before {
       background-color: $destructive;
@@ -445,7 +445,7 @@
   }
 
   &[data-status='charging'] {
-    background-color: hsl(var(--ev) / 0.1);
+    background-color: alpha($ev, 10%);
 
     &::before {
       background-color: $ev;
@@ -490,12 +490,12 @@
   min-width: 0;
 
   &[data-status='fault'] .connectorId {
-    background-color: hsl(var(--destructive) / 0.18);
+    background-color: alpha($destructive, 18%);
     color: $destructive;
   }
 
   &[data-status='charging'] .connectorId {
-    background-color: hsl(var(--ev) / 0.18);
+    background-color: alpha($ev, 18%);
     color: $ev;
   }
 }
@@ -652,22 +652,22 @@
 }
 
 .matrixCell[data-health='good'] {
-  background-color: hsl(var(--battery) / 0.16);
+  background-color: alpha($battery, 16%);
   color: $battery;
 }
 
 .matrixCell[data-health='fair'] {
-  background-color: hsl(var(--solar) / 0.16);
+  background-color: alpha($solar, 16%);
   color: $solar;
 }
 
 .matrixCell[data-health='watch'] {
-  background-color: hsl(var(--warning) / 0.18);
+  background-color: alpha($warning, 18%);
   color: $warning;
 }
 
 .matrixCell[data-health='poor'] {
-  background-color: hsl(var(--destructive) / 0.18);
+  background-color: alpha($destructive, 18%);
   color: $destructive;
 }
 
@@ -705,61 +705,61 @@
 
 .toneSolar {
   --progress-indicator: #{$solar};
-  --tone-surface: hsl(var(--solar) / 0.14);
+  --tone-surface: alpha($solar, 14%);
   --tone-foreground: #{$solar};
 }
 
 .toneBattery {
   --progress-indicator: #{$battery};
-  --tone-surface: hsl(var(--battery) / 0.14);
+  --tone-surface: alpha($battery, 14%);
   --tone-foreground: #{$battery};
 }
 
 .toneGrid {
   --progress-indicator: #{$grid};
-  --tone-surface: hsl(var(--grid) / 0.14);
+  --tone-surface: alpha($grid, 14%);
   --tone-foreground: #{$grid};
 }
 
 .toneLoad {
   --progress-indicator: #{$load};
-  --tone-surface: hsl(var(--load) / 0.14);
+  --tone-surface: alpha($load, 14%);
   --tone-foreground: #{$load};
 }
 
 .toneEv {
   --progress-indicator: #{$ev};
-  --tone-surface: hsl(var(--ev) / 0.14);
+  --tone-surface: alpha($ev, 14%);
   --tone-foreground: #{$ev};
 }
 
 .toneImport {
   --progress-indicator: #{$import-color};
-  --tone-surface: hsl(var(--import) / 0.14);
+  --tone-surface: alpha($import-color, 14%);
   --tone-foreground: #{$import-color};
 }
 
 .toneExport {
   --progress-indicator: #{$export-color};
-  --tone-surface: hsl(var(--export) / 0.14);
+  --tone-surface: alpha($export-color, 14%);
   --tone-foreground: #{$export-color};
 }
 
 .toneSuccess {
   --progress-indicator: #{$success};
-  --tone-surface: hsl(var(--success) / 0.14);
+  --tone-surface: alpha($success, 14%);
   --tone-foreground: #{$success};
 }
 
 .toneWarning {
   --progress-indicator: #{$warning};
-  --tone-surface: hsl(var(--warning) / 0.14);
+  --tone-surface: alpha($warning, 14%);
   --tone-foreground: #{$warning};
 }
 
 .toneDestructive {
   --progress-indicator: #{$destructive};
-  --tone-surface: hsl(var(--destructive) / 0.14);
+  --tone-surface: alpha($destructive, 14%);
   --tone-foreground: #{$destructive};
 }
 

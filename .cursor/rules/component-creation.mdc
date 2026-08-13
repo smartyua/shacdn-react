@@ -19,7 +19,7 @@ src/components/NewComponent/
 ### 2. SCSS Module Template
 
 ```scss
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as *;
 
 .newComponent {
   display: inline-flex;

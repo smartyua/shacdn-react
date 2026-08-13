@@ -19,10 +19,22 @@ export const buildIntegrationGuide = (options?: {
 
   return `# shacdn Integration Guide
 
+## Fastest path — install into a project folder
+
+From the **shacdn** repo:
+
+\`\`\`bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components ${components.join(',')}
+\`\`\`
+
+Or call MCP tool \`install_to_project\` with \`targetDir\`. This copies \`src/styles/\` (tokens + theme) and optional components, then patches the app entry to import them.
+
 ## Stack
 - React 19 + TypeScript (strict)
 - SCSS Modules — **no Tailwind**
 - Design tokens via \`src/styles/variables.scss\` + CSS variables in \`globals.scss\`
+- Theme helpers: \`src/styles/theme.ts\` + \`theme-init.ts\` (applies \`data-theme\` from localStorage)
 
 ## 1. Install dependencies
 
@@ -37,10 +49,13 @@ Optional: \`${NPM_DEPENDENCIES.optional.join('`, `')}\` — ${NPM_DEPENDENCIES.n
 
 1. \`src/styles/variables.scss\`
 2. \`src/styles/globals.scss\`
+3. \`src/styles/theme.ts\`
+4. \`src/styles/theme-init.ts\`
 
-Import in entry (\`main.tsx\` or \`App.tsx\`):
+Import in entry (\`main.tsx\` or \`App.tsx\`) **before** other UI:
 
 \`\`\`tsx
+import './styles/theme-init';
 import './styles/globals.scss';
 \`\`\`
 
@@ -52,6 +67,8 @@ Full dependency tree (copy in this order):
 
 ${tree.map((n, i) => `${i + 1}. \`${consumerCopyPaths(n).tsx}\` + \`${consumerCopyPaths(n).scss}\``).join('\n')}
 
+Copy **every runtime file** in the folder (not only \`Name.tsx\` + \`Name.module.scss\`) — aliases such as Modal also ship \`modalLayer.tsx\`.
+
 ## 4. Import pattern
 
 \`\`\`tsx
@@ -59,7 +76,7 @@ import { Button } from '${consumerImportPath('Button')}';
 import { Card, CardHeader, CardTitle, CardContent } from '${consumerImportPath('Card')}';
 \`\`\`
 
-**No barrel exports** — import directly from component folder.
+**No barrel exports required** — import directly from the component folder. A barrel at \`src/components/index.ts\` is optional.
 
 ## 5. Providers (if needed)
 
@@ -80,10 +97,10 @@ import { TooltipProvider } from './components/Tooltip/Tooltip';
 
 ## 6. Theming
 
-Set on \`<html>\`:
+Set on \`<html>\` (or import \`theme-init\` and use \`ThemeSwitcher\`):
 
 \`\`\`ts
-document.documentElement.setAttribute('data-theme', 'light'); // or 'dark', 'light blue', etc.
+document.documentElement.setAttribute('data-theme', 'light'); // or 'dark', 'dark blue', etc.
 \`\`\`
 
 Schemes: default, blue, green, purple, orange, rose.
@@ -96,7 +113,7 @@ Each \`*.module.scss\` uses:
 @use '../../styles/variables.scss' as *;
 \`\`\`
 
-Adjust relative path if your folder depth differs.
+Adjust relative path if your folder depth differs. Never hardcode hex — use \`$primary\`, \`$border\`, \`$control-h-md\`, etc.
 
 ## 8. Verify
 
@@ -106,7 +123,7 @@ npm run build
 \`\`\`
 
 ## Docs in shacdn repo
-- \`docs/AI_AGENT_GUIDE.md\` — full migration guide
+- \`docs/INTEGRATION_GUIDE.md\` — full consumer setup
 - \`docs/STYLE_GUIDE.md\` — tokens & patterns
 - \`docs/COMPONENTS_AI_REFERENCE.md\` — task → component matrix
 `;
@@ -117,8 +134,9 @@ export const formatComponentList = (): string => {
   const lines = COMPONENT_CATALOG.map((c) => {
     const inRepo = folders.includes(c.folder) ? '✓' : '✗';
     const alias = c.aliasOf ? ` (alias → ${c.aliasOf})` : '';
+    const demo = c.demoOnly ? ' [demo-only]' : '';
     const provider = c.requiresProvider ? ` [needs ${c.requiresProvider}]` : '';
-    return `- ${inRepo} **${c.name}**${alias}${provider}: ${c.description}`;
+    return `- ${inRepo} **${c.name}**${alias}${demo}${provider}: ${c.description}`;
   });
   return `# shacdn Components (${COMPONENT_CATALOG.length})\n\n${lines.join('\n')}`;
 };
@@ -152,11 +170,21 @@ export const formatComponentBundle = (names: string[]): string => {
     if (files.scss) {
       sections.push(`\n### ${files.scssPath}\n\`\`\`scss\n${files.scss}\n\`\`\``);
     }
+    for (const extra of files.extras) {
+      const lang = extra.path.endsWith('.scss') ? 'scss' : extra.path.endsWith('.ts') ? 'ts' : 'tsx';
+      sections.push(`\n### ${extra.path}\n\`\`\`${lang}\n${extra.content}\n\`\`\``);
+    }
   }
 
   const providers = getProvidersForComponents(tree);
   if (providers.length > 0) {
     sections.push(`\n## Required providers\n${providers.map((p) => `- ${p}`).join('\n')}`);
+  }
+
+  if (tree.includes('ThemeSwitcher')) {
+    sections.push(
+      '\n## Design system required\nThemeSwitcher imports `src/styles/theme.ts`. Copy `src/styles/` first (or use `install_to_project`).',
+    );
   }
 
   return sections.join('\n');

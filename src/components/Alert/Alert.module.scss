@@ -43,7 +43,7 @@
 .destructive {
   border-color: $destructive;
   color: $destructive;
-  background-color: hsl(var(--destructive) / 0.02);
+  background-color: alpha($destructive, 2%);
 
   > svg {
     color: $destructive;

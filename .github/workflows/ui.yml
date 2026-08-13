@@ -50,5 +50,8 @@ jobs:
       - name: Unit tests
         run: npm run test
 
-      - name: Build
+      - name: Build UI
         run: npm run build
+
+      - name: Build MCP server
+        run: npm run build:mcp

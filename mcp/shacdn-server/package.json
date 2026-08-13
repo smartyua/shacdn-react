@@ -5,7 +5,8 @@
   "type": "module",
   "description": "MCP server for shacdn — export SCSS-based shadcn/ui components to other React projects",
   "bin": {
-    "shacdn-mcp": "./dist/index.js"
+    "shacdn-mcp": "./dist/index.js",
+    "shacdn": "./dist/cli.js"
   },
   "scripts": {
     "start": "tsx src/index.ts",
@@ -14,7 +15,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^25.7.0",

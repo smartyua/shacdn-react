@@ -308,8 +308,8 @@
 }
 
 .nodeFault {
-  background-color: hsl(var(--destructive) / 0.12);
-  border-color: hsl(var(--destructive) / 0.35);
+  background-color: alpha($destructive, 12%);
+  border-color: alpha($destructive, 35%);
   animation-name: nodePulse;
   animation-duration: 1.4s;
   animation-timing-function: ease-in-out;
@@ -336,7 +336,7 @@
 }
 
 .badge-charging {
-  background-color: hsl(var(--ev) / 0.18) !important;
+  background-color: alpha($ev, 18%) !important;
   color: $ev !important;
 }
 
@@ -346,7 +346,7 @@
 }
 
 .badge-fault {
-  background-color: hsl(var(--destructive) / 0.18) !important;
+  background-color: alpha($destructive, 18%) !important;
   color: $destructive !important;
 }
 
@@ -384,12 +384,12 @@
 }
 
 .charging {
-  background-color: hsl(var(--battery) / 0.18) !important;
+  background-color: alpha($battery, 18%) !important;
   color: $battery !important;
 }
 
 .discharging {
-  background-color: hsl(var(--solar) / 0.18) !important;
+  background-color: alpha($solar, 18%) !important;
   color: $solar !important;
 }
 

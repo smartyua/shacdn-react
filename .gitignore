@@ -27,9 +27,12 @@ dist-ssr
 *.sln
 *.sw?
 
-# AI infrastructure (local / ephemeral)
-.ai
-docs
+# AI infrastructure — keep tooling if present; ignore ephemeral local state
+.ai/data
+.ai/logs
+.ai/session
+.ai/memory/working
+docs/archive
 coverage
 .vitest
 ladle-build

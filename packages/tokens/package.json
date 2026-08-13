@@ -1,0 +1,13 @@
+{
+  "name": "@shacdn/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "shacdn design tokens — SCSS variables, CSS themes, and theme helpers",
+  "exports": {
+    "./variables.scss": "./variables.scss",
+    "./globals.scss": "./globals.scss",
+    "./theme": "./theme.ts",
+    "./theme-init": "./theme-init.ts"
+  }
+}

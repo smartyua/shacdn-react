@@ -11,10 +11,17 @@ npm install
 npm run dev            # http://localhost:5173
 ```
 
-The MCP export server is a separate package and is not covered by the root install:
+Workspaces cover the MCP server (`@shacdn/mcp-server`) and tokens (`@shacdn/tokens`). After `npm install`:
 
 ```bash
-cd mcp/shacdn-server && npm install && npm run build
+npm run build:mcp
+```
+
+Copy the style guide into another project:
+
+```bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components Button,Card,Input
 ```
 
 `npm run ai:bootstrap` does this for you, along with the rest of the `.ai/` tooling.
@@ -27,6 +34,7 @@ Run these before calling any task finished, and report which ones actually ran:
 npm run lint           # must be clean — no new warnings either
 npm test               # ui + mcp + ai projects
 npm run build          # for anything beyond a trivial change
+npm run build:mcp      # MCP server (also part of `npm run verify`)
 ```
 
 Behavioural changes need tests. Docs, comments and formatting are exempt.
@@ -37,7 +45,9 @@ Behavioural changes need tests. Docs, comments and formatting are exempt.
 |---|---|
 | Components (one folder each: `Name.tsx` + `Name.module.scss`) | `src/components/` |
 | Public export surface | `src/components/index.ts` |
-| Design tokens | `src/styles/variables.scss`, `src/styles/globals.scss` |
+| Design tokens | `src/styles/` (source of truth); workspace package `@shacdn/tokens` |
+| ClassName helper | `src/lib/cn.ts` (`cn()`); app-only alias `@/` → `src/` |
+| Demo i18n | `src/i18n/` (lazy dictionaries; `Locale` is demo-only) |
 | Demo screens | `src/screens/` |
 | BESS Solar demo | `src/screens/Dashboard/pages/Bess/` → `/dashboard/bess` (header nav) |
 | MCP export server | `mcp/shacdn-server/` |
@@ -56,8 +66,8 @@ Behavioural changes need tests. Docs, comments and formatting are exempt.
 ## Two traps worth knowing
 
 1. **`--border` and `--input` carry alpha in dark mode** (`0 0% 100% / 0.1`). Composing more
-   alpha with `hsl(var(--border) / 0.5)` produces invalid CSS. Use
-   `color-mix(in srgb, #{$border} 50%, transparent)`.
+   alpha with `hsl(var(--border) / 0.5)` produces invalid CSS. Use `alpha($border, 50%)`.
+   Do not use the `@/` alias inside copyable component folders — consumers get relative imports.
 2. **jsdom performs no layout**, so floating surfaces stay `visibility: hidden` and drop out
    of the accessibility tree, breaking `getByRole`. Use `useStubbedLayout()` from
    `src/test/layout.ts` when testing anything portaled.

@@ -42,23 +42,26 @@ jobs:
         run: npm run lint
 
       - name: Typecheck AI scripts
+        if: hashFiles('.ai/tsconfig.json') != ''
         run: npm run typecheck:ai
 
       - name: AI unit tests
+        if: hashFiles('.ai/tsconfig.json') != ''
         run: npm run test:ai
 
       - name: Validate AI config
+        if: hashFiles('.ai/lib/config.ts') != ''
         run: npx tsx -e "import { loadConfig } from './.ai/lib/config.ts'; loadConfig(); console.log('config ok')"
 
       - name: Validate docker compose file
+        if: hashFiles('docker-compose.ai.yml') != ''
         run: docker compose -f docker-compose.ai.yml config >/dev/null
 
       - name: Verify MCP config JSON
         run: node -e "JSON.parse(require('fs').readFileSync('.cursor/mcp.json','utf8')); console.log('mcp ok')"
 
       - name: Build shacdn MCP server
-        run: npm ci && npm run build
-        working-directory: mcp/shacdn-server
+        run: npm run build -w @shacdn/mcp-server
 
       - name: Smoke-test shacdn MCP server
         run: |

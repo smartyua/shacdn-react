@@ -112,4 +112,12 @@ describe('MCP component catalog', () => {
       expect(resolveDependencyTree([component])).toContain('Floating');
     }
   });
+
+  it('marks showcase chrome as demo-only', () => {
+    expect(
+      COMPONENT_CATALOG.filter(entry => entry.demoOnly)
+        .map(entry => entry.folder)
+        .sort()
+    ).toEqual(['Locale', 'SiteHeader']);
+  });
 });

@@ -21,23 +21,24 @@ The official **`shadcn`** MCP (Tailwind registry) is for **parity audits** only 
 
 | Tool | Purpose |
 |------|---------|
-| `list_components` | All 51 components with aliases and providers |
+| `list_components` | All components with aliases and providers |
 | `search_components` | Find by task: modal, form, toast, table… |
 | `get_component` | Single component TSX + SCSS source |
 | `get_component_bundle` | Component + internal deps in copy order |
-| `get_design_system` | `variables.scss` + `globals.scss` |
+| `get_design_system` | `variables.scss` + `globals.scss` + theme helpers |
 | `get_integration_guide` | Step-by-step consumer project setup |
+| `install_to_project` | Write tokens (+ optional components) into `targetDir` |
 | `list_screen_patterns` | Available screen compositions |
 | `get_screen_pattern` | Full screen + required component bundle |
 
 ## Recommended workflow for AI agents
 
 1. `search_components` or `list_components` — pick controls
-2. `get_integration_guide` with planned component list
-3. `get_design_system` — copy tokens **first**
-4. `get_component_bundle` — copy components in order
-5. Optional: `get_screen_pattern` for landing layouts
-6. In consumer project: `npm run lint` + `npm run build`
+2. `install_to_project` with the consumer `targetDir` (styles first; pass `components` to copy UI)
+3. Optional: `get_screen_pattern` for landing layouts
+4. In consumer project: `npm run lint` + `npm run build`
+
+CLI equivalent from this repo: `npm run shacdn:install -- /path/to/app --components Button,Card`
 
 ## Build / run
 

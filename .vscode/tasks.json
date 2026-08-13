@@ -43,6 +43,15 @@
       "problemMatcher": []
     },
     {
+      "label": "shacdn: Install tokens into a project",
+      "type": "shell",
+      "command": "npm run shacdn:install -- ${input:shacdnTarget}",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Ladle: Component Stories",
       "type": "shell",
       "command": "npm run ladle",
@@ -51,6 +60,13 @@
       },
       "problemMatcher": [],
       "isBackground": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "shacdnTarget",
+      "type": "promptString",
+      "description": "Consumer project folder (absolute or relative path)"
     }
   ]
 }

@@ -11,6 +11,7 @@ import {
   formatSearchResults,
   readDesignSystemFile,
 } from './guide.js';
+import { formatInstallResult, installToProject } from './lib/install.js';
 
 const server = new McpServer({
   name: 'shacdn',
@@ -66,7 +67,7 @@ server.tool(
   'Get design tokens (variables.scss) and/or theme globals (globals.scss). Copy these BEFORE components into consumer projects.',
   {
     files: z
-      .enum(['variables', 'globals', 'both'])
+      .enum(['variables', 'globals', 'theme', 'both'])
       .default('both')
       .describe('Which design system files to return'),
   },
@@ -79,7 +80,7 @@ server.tool(
       content: [
         {
           type: 'text',
-          text: `# shacdn Design System\n\nImport \`globals.scss\` in app entry. Use \`variables.scss\` in every component module via \`@use '../../styles/variables.scss' as *;\`\n\n${sections.join('\n\n')}`,
+          text: `# shacdn Design System\n\nCopy the whole \`src/styles/\` folder first (or run \`install_to_project\`).\nImport \`theme-init\` then \`globals.scss\` in the app entry. Use \`variables.scss\` in every component module via \`@use '../../styles/variables.scss' as *;\`\n\n${sections.join('\n\n')}`,
         },
       ],
     };
@@ -98,6 +99,44 @@ server.tool(
   async ({ components }) => ({
     content: [{ type: 'text', text: buildIntegrationGuide({ components }) }],
   }),
+);
+
+server.tool(
+  'install_to_project',
+  'Write shacdn design tokens (style guide) and optional components into another project folder. Prefer this over manually copying get_design_system output. Does not overwrite existing files unless force is true.',
+  {
+    targetDir: z
+      .string()
+      .describe('Absolute or relative path to the consumer project root (must exist)'),
+    components: z
+      .array(z.string())
+      .optional()
+      .describe('Components to copy in addition to the design system. Omit for styles/tokens only.'),
+    force: z
+      .boolean()
+      .optional()
+      .default(false)
+      .describe('Overwrite existing files that differ'),
+    dryRun: z
+      .boolean()
+      .optional()
+      .default(false)
+      .describe('List files that would be written without writing'),
+    srcDir: z
+      .string()
+      .optional()
+      .default('src')
+      .describe('Source directory inside the target project (default: src)'),
+  },
+  async ({ targetDir, components, force, dryRun, srcDir }) => {
+    try {
+      const result = installToProject({ targetDir, components, force, dryRun, srcDir });
+      return { content: [{ type: 'text', text: formatInstallResult(result) }] };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      return { content: [{ type: 'text', text: `Install failed: ${message}` }], isError: true };
+    }
+  },
 );
 
 server.tool(

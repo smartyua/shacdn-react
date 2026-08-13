@@ -20,8 +20,9 @@ MCP server for AI agents to integrate **shacdn** (React + SCSS shadcn/ui) into o
 | `search_components` | Search by name/task |
 | `get_component` | TSX + SCSS for one component |
 | `get_component_bundle` | Component + dependencies (copy order) |
-| `get_design_system` | `variables.scss` / `globals.scss` |
+| `get_design_system` | `variables.scss` / `globals.scss` / `theme.ts` |
 | `get_integration_guide` | Bootstrap guide for consumer project |
+| `install_to_project` | **Write** tokens (+ optional components) into a target folder |
 | `list_screen_patterns` | Landing/showcase patterns |
 | `get_screen_pattern` | Screen source + component bundle |
 
@@ -29,15 +30,24 @@ MCP server for AI agents to integrate **shacdn** (React + SCSS shadcn/ui) into o
 
 ```
 search_components("login form")
-  → get_integration_guide(["Button","Input","Label","Card"])
-  → get_design_system("both")
-  → get_component_bundle(["Button","Input","Label","Card"])
+  → install_to_project({ targetDir: "/path/to/app", components: ["Button","Input","Label","Card"] })
+```
+
+Or copy-only (no writes): `get_design_system` then `get_component_bundle`.
+
+## CLI (same installer)
+
+From the shacdn repo root:
+
+```bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components Button,Card --dry-run
 ```
 
 ## Related docs
 
 - `docs/INTEGRATION_GUIDE.md` — main integration guide for other projects
-- `docs/AI_AGENT_GUIDE.md` — migration patterns
+- `docs/STYLE_GUIDE.md` — tokens & patterns
 - `.cursor/rules/shacdn-mcp.mdc` — Cursor rule for agents
 
 ## vs official shadcn MCP

@@ -12,30 +12,48 @@ import {
   useFloatingPosition,
   useInitialMenuFocus,
 } from '../Floating/Floating';
-import { useLocale } from '../Locale/Locale';
+import {
+  applyTheme,
+  COLOR_SCHEMES,
+  COLOR_SCHEME_SWATCHES,
+  persistTheme,
+  readStoredTheme,
+  type ColorScheme,
+  type Theme,
+} from '../../styles/theme';
 import styles from './ThemeSwitcher.module.scss';
+
+export interface ThemeSwitcherLabels {
+  toggleTheme: string;
+  switchToLight: string;
+  switchToDark: string;
+  chooseColorScheme: string;
+  colorSchemes: string;
+  schemes: Record<ColorScheme, string>;
+}
 
 export interface ThemeSwitcherProps {
   className?: string;
-  /** Меньшие кнопки и отступы — для компактной шапки */
+  /** Smaller controls — for compact headers */
   variant?: 'default' | 'compact';
+  /** Optional i18n labels. Defaults to English so LocaleProvider is not required. */
+  labels?: ThemeSwitcherLabels;
 }
 
-type Theme = 'light' | 'dark';
-type ColorScheme = 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'rose';
-
-const COLOR_SCHEMES: ColorScheme[] = ['default', 'blue', 'green', 'purple', 'orange', 'rose'];
-
-const getColorSchemeColor = (scheme: ColorScheme): string => {
-  const colors: Record<ColorScheme, string> = {
-    default: 'hsl(222.2, 47.4%, 11.2%)',
-    blue: 'hsl(221.2, 83.2%, 53.3%)',
-    green: 'hsl(142.1, 76.2%, 36.3%)',
-    purple: 'hsl(262.1, 83.3%, 57.8%)',
-    orange: 'hsl(24.6, 95%, 53.1%)',
-    rose: 'hsl(346.8, 77.2%, 49.8%)',
-  };
-  return colors[scheme];
+const DEFAULT_LABELS: ThemeSwitcherLabels = {
+  toggleTheme: 'Toggle theme',
+  switchToLight: 'Switch to light theme',
+  switchToDark: 'Switch to dark theme',
+  chooseColorScheme: 'Choose color scheme',
+  colorSchemes: 'Color schemes',
+  schemes: {
+    default: 'Default',
+    blue: 'Blue',
+    green: 'Green',
+    purple: 'Purple',
+    orange: 'Orange',
+    rose: 'Rose',
+  },
 };
 
 const getEnabledMenuItems = (menu: HTMLDivElement | null): HTMLButtonElement[] => {
@@ -55,44 +73,16 @@ const focusMenuItem = (menu: HTMLDivElement | null, index: number): void => {
 };
 
 export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
-  ({ className = '', variant = 'default' }, ref) => {
-    const { messages } = useLocale();
-    const themeMessages = messages.themeSwitcher;
-
-    const [theme, setTheme] = useState<Theme>(() => {
-      return (localStorage.getItem('theme') as Theme) || 'light';
-    });
-    const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
-      return (localStorage.getItem('colorScheme') as ColorScheme) || 'default';
-    });
+  ({ className = '', variant = 'default', labels = DEFAULT_LABELS }, ref) => {
+    const [theme, setTheme] = useState<Theme>(() => readStoredTheme().theme);
+    const [colorScheme, setColorScheme] = useState<ColorScheme>(() => readStoredTheme().colorScheme);
     const [isOpen, setIsOpen] = useState(false);
     const triggerRef = useRef<HTMLButtonElement | null>(null);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
-    const applyTheme = (newTheme: Theme, newColor: ColorScheme) => {
-      const root = document.documentElement;
-
-      root.removeAttribute('data-theme');
-
-      const themeClasses: string[] = [];
-
-      if (newTheme === 'dark') {
-        themeClasses.push('dark');
-      }
-
-      if (newColor !== 'default') {
-        themeClasses.push(newColor);
-      }
-
-      if (themeClasses.length > 0) {
-        root.setAttribute('data-theme', themeClasses.join(' '));
-      }
-    };
-
     useEffect(() => {
       applyTheme(theme, colorScheme);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [theme, colorScheme]);
 
     const closeMenu = useCallback(() => {
       setIsOpen(false);
@@ -129,14 +119,12 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
     const toggleTheme = () => {
       const newTheme = theme === 'light' ? 'dark' : 'light';
       setTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-      applyTheme(newTheme, colorScheme);
+      persistTheme(newTheme, colorScheme);
     };
 
     const changeColorScheme = (newColor: ColorScheme) => {
       setColorScheme(newColor);
-      localStorage.setItem('colorScheme', newColor);
-      applyTheme(theme, newColor);
+      persistTheme(theme, newColor);
       closeMenu();
     };
 
@@ -183,10 +171,11 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
         className={`${styles.themeSwitcher}${variant === 'compact' ? ` ${styles.compact}` : ''} ${className}`}
       >
         <button
+          type="button"
           className={styles.themeToggle}
           onClick={toggleTheme}
-          aria-label={themeMessages.toggleTheme}
-          title={theme === 'light' ? themeMessages.switchToDark : themeMessages.switchToLight}
+          aria-label={labels.toggleTheme}
+          title={theme === 'light' ? labels.switchToDark : labels.switchToLight}
         >
           {theme === 'light' ? (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -214,11 +203,11 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
             className={styles.colorSchemeToggle}
             onClick={() => setIsOpen(current => !current)}
             onKeyDown={handleTriggerKeyDown}
-            aria-label={themeMessages.chooseColorScheme}
+            aria-label={labels.chooseColorScheme}
             aria-haspopup="menu"
             aria-expanded={isOpen}
-            title={themeMessages.colorSchemes}
-            style={{ backgroundColor: getColorSchemeColor(colorScheme) }}
+            title={labels.colorSchemes}
+            style={{ backgroundColor: COLOR_SCHEME_SWATCHES[colorScheme] }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
@@ -234,7 +223,7 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
               <div
                 ref={menuRef}
                 role="menu"
-                aria-label={themeMessages.colorSchemes}
+                aria-label={labels.colorSchemes}
                 className={styles.colorSchemeMenu}
                 style={style}
                 onKeyDown={handleMenuKeyDown}
@@ -258,9 +247,9 @@ export const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(
                   >
                     <span
                       className={styles.colorCircle}
-                      style={{ background: getColorSchemeColor(scheme) }}
+                      style={{ background: COLOR_SCHEME_SWATCHES[scheme] }}
                     />
-                    {themeMessages.schemes[scheme]}
+                    {labels.schemes[scheme]}
                     {colorScheme === scheme && (
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.checkIcon}>
                         <polyline points="20 6 9 17 4 12"/>

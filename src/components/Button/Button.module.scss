@@ -36,7 +36,7 @@
   color: $primary-foreground;
 
   &:hover {
-    background-color: hsl(var(--primary) / 0.9);
+    background-color: alpha($primary, 90%);
   }
 }
 
@@ -45,7 +45,7 @@
   color: $secondary-foreground;
 
   &:hover {
-    background-color: hsl(var(--secondary) / 0.8);
+    background-color: alpha($secondary, 80%);
   }
 }
 
@@ -75,7 +75,7 @@
   color: $destructive-foreground;
 
   &:hover {
-    background-color: hsl(var(--destructive) / 0.9);
+    background-color: alpha($destructive, 90%);
   }
 }
 

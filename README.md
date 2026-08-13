@@ -12,15 +12,24 @@ shacdn is designed to be **copied into your app** — not installed as an npm pa
 
 **Start here:** [docs/INTEGRATION_GUIDE.md](./docs/INTEGRATION_GUIDE.md)
 
-Quick steps:
+From this repo, point at the other project folder:
 
-1. `npm install sass` in your project
-2. Copy `src/styles/globals.scss` + `variables.scss`
-3. Copy component folders (`Button/`, `Card/`, …) with their `.module.scss`
-4. `import './styles/globals.scss'` in `main.tsx`
-5. Use MCP **`shacdn`** in Cursor for AI-assisted export (`get_component_bundle`, `get_design_system`)
+```bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components Button,Card,Input,Label
+```
 
-See also: [STYLE_GUIDE.md](./docs/STYLE_GUIDE.md) · [AI_AGENT_GUIDE.md](./docs/AI_AGENT_GUIDE.md) · [mcp/shacdn-server/](./mcp/shacdn-server/)
+That copies `src/styles/` (tokens, globals, theme helpers) and optional components, then wires `globals.scss` into the app entry.
+
+Manual steps (if you prefer):
+
+1. `npm install -D sass` in your project
+2. Copy `src/styles/` (`globals.scss`, `variables.scss`, `theme.ts`, `theme-init.ts`)
+3. Copy component folders (`Button/`, `Card/`, …) including sibling runtime files
+4. `import './styles/theme-init'` and `import './styles/globals.scss'` in `main.tsx`
+5. Or use MCP **`shacdn`** → `install_to_project` / `get_component_bundle`
+
+See also: [STYLE_GUIDE.md](./docs/STYLE_GUIDE.md) · [mcp/shacdn-server/](./mcp/shacdn-server/)
 
 ## Features
 
@@ -66,6 +75,7 @@ npm run lint # Check code quality (0 errors)
 npm run test # UI + AI unit tests
 npm run ladle # Isolated component stories
 npm run preview # Preview production build
+npm run shacdn:install -- ../other-app # Copy tokens (+ optional components)
 npm run ai:bootstrap # Opt-in AI index/RAG setup
 ```
 

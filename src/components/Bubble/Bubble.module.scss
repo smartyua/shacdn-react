@@ -50,7 +50,7 @@
 
     &:focus-visible {
       border-color: $ring;
-      box-shadow: 0 0 0 3px hsl(var(--ring) / 0.5);
+      box-shadow: 0 0 0 3px alpha($ring, 50%);
     }
   }
 }
@@ -64,7 +64,7 @@
   color: $primary-foreground;
 
   &:is(button, a):hover {
-    background-color: hsl(var(--primary) / 0.8);
+    background-color: alpha($primary, 80%);
   }
 }
 
@@ -138,24 +138,24 @@
 
 :root[data-theme*='dark'] .variantGhost .content {
   &:is(button, a):hover {
-    background-color: hsl(var(--muted) / 0.5);
+    background-color: alpha($muted, 50%);
   }
 }
 
 .variantDestructive .content {
-  background-color: hsl(var(--destructive) / 0.1);
+  background-color: alpha($destructive, 10%);
   color: $destructive;
 
   &:is(button, a):hover {
-    background-color: hsl(var(--destructive) / 0.2);
+    background-color: alpha($destructive, 20%);
   }
 }
 
 :root[data-theme*='dark'] .variantDestructive .content {
-  background-color: hsl(var(--destructive) / 0.2);
+  background-color: alpha($destructive, 20%);
 
   &:is(button, a):hover {
-    background-color: hsl(var(--destructive) / 0.3);
+    background-color: alpha($destructive, 30%);
   }
 }
 

@@ -6,6 +6,8 @@ Registry reference: [ui.shadcn.com](https://ui.shadcn.com). Status is for **this
 |-----------|--------|--------|
 | Accordion, Alert, Alert Dialog, Aspect Ratio, Avatar, Badge, Breadcrumb, Button, Button Group, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, Command, Context Menu, Dialog, Drawer, Dropdown Menu, Empty, Field, Form, Hover Card, Input, Input Group, Input OTP, Item, Kbd, Label, Menubar, Native Select, Navigation Menu, Pagination, Popover, Progress, Radio Group, Resizable, Scroll Area, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Spinner, Switch, Table, Tabs, Textarea, Toast, Toggle, Toggle Group, Tooltip, Typography | **Implemented** | Sheet → Drawer; Sonner → Toast; Modal → Dialog |
 | Date Picker | **Implemented** (extra) | Not always a separate registry item |
+| Radio Cards, Checkbox Cards, Checkbox Group, Data List, Tab Nav | **Implemented** (extra) | Radix Themes patterns; not in shadcn `registry:ui` |
+| Dropdown Menu compound parts | **Implemented** | CheckboxItem, RadioGroup/RadioItem, Sub/SubTrigger/SubContent, Shortcut, Group, Label, Portal |
 | Chat suite (Attachment, Bubble, Marker, Message, MessageScroller) | **Implemented** (extra) | |
 | ThemeSwitcher, Direction, Locale, SiteHeader | Extra / demo | Locale + SiteHeader are **demo-only** |
 | Blocks that need Recharts / Embla / full app shells | **Compose** | Use Chart/Carousel/Sidebar here, or add those deps in the consumer app |

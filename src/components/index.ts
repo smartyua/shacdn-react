@@ -21,6 +21,8 @@ export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 export { Carousel, CarouselViewport, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots, CarouselSlide } from './Carousel/Carousel';
 export { ChartContainer, BarChart } from './Chart/Chart';
 export { Checkbox } from './Checkbox/Checkbox';
+export { CheckboxCards, CheckboxCardsItem } from './CheckboxCards/CheckboxCards';
+export { CheckboxGroup, CheckboxGroupItem } from './CheckboxGroup/CheckboxGroup';
 export { Chip } from './Chip/Chip';
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './Collapsible/Collapsible';
 export { ColorPicker } from './ColorPicker/ColorPicker';
@@ -41,11 +43,28 @@ export type {
 } from './Combobox/Combobox';
 export { Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator } from './Command/Command';
 export { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from './ContextMenu/ContextMenu';
+export { DataList, DataListItem, DataListLabel, DataListValue } from './DataList/DataList';
 export { DatePicker } from './DatePicker/DatePicker';
 export { Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from './Dialog/Dialog';
 export { DirectionProvider, useDirection } from './Direction/Direction';
 export { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from './Drawer/Drawer';
-export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from './DropdownMenu/DropdownMenu';
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuGroup,
+  DropdownMenuShortcut,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
+} from './DropdownMenu/DropdownMenu';
 export { Empty } from './Empty/Empty';
 export { Field, FieldLabel, FieldDescription } from './Field/Field';
 export { FloatingPortal, useFloatingPosition, useDismissLayer, useInitialMenuFocus, computeFloatingPosition, composeRefs } from './Floating/Floating';
@@ -87,6 +106,7 @@ export {
 export { Popover, PopoverTrigger, PopoverContent } from './Popover/Popover';
 export { Progress } from './Progress/Progress';
 export { ProgressRing } from './ProgressRing/ProgressRing';
+export { RadioCards, RadioCardsItem } from './RadioCards/RadioCards';
 export { RadioGroup, RadioGroupItem } from './RadioGroup/RadioGroup';
 export { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './Resizable/Resizable';
 export { ScrollArea } from './ScrollArea/ScrollArea';
@@ -114,6 +134,7 @@ export {
 } from './Timeline/Timeline';
 export type { TimelineStatus } from './Timeline/Timeline';
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableFooter, TableCaption } from './Table/Table';
+export { TabNav, TabNavLink } from './TabNav/TabNav';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs/Tabs';
 export { Textarea } from './Textarea/Textarea';
 export { ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher';

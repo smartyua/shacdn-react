@@ -10,14 +10,16 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Text field | `Input`, `Textarea`, `InputGroup`, `InputOTP` | |
 | Label / field chrome | `Label`, `Field`, `Form` | |
 | Select | `Select`, `NativeSelect`, `Combobox`, `MultiSelect` | Select needs `Floating` |
-| Checkbox / radio / switch | `Checkbox`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup` | |
+| Checkbox / radio / switch | `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup` | |
+| Choice cards | `RadioCards`, `CheckboxCards` | Radix Themes pattern; not in shadcn registry |
+| Key / value rows | `DataList` | Radix Themes; definition list |
 | Date | `Calendar`, `DatePicker` | DatePicker → Calendar + Floating |
 | Modal / confirm | `Dialog`, `AlertDialog`, `Modal` (alias) | copies `Modal/modalLayer.tsx` |
 | Side panel | `Drawer`, `Sheet` (alias) | |
-| Menu | `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu` | Floating |
+| Menu | `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu` | DropdownMenu: CheckboxItem, RadioItem, Sub, Shortcut |
 | Overlay hint | `Tooltip`, `HoverCard`, `Popover` | TooltipProvider for Tooltip |
 | Toast | `Toast`, `Sonner` (alias) | `ToastProvider` |
-| Layout | `Card`, `Separator`, `Tabs`, `Accordion`, `Collapsible`, `Resizable`, `ScrollArea`, `Sidebar` | |
+| Layout | `Card`, `Separator`, `Tabs`, `TabNav`, `Accordion`, `Collapsible`, `Resizable`, `ScrollArea`, `Sidebar` | TabNav is links, not panels |
 | Feedback | `Alert`, `Banner`, `Callout`, `Progress`, `ProgressRing`, `Spinner`, `Skeleton`, `Empty` | |
 | Data | `Table`, `Pagination`, `Chart` | Chart is zero-dep SVG; Recharts optional in apps |
 | Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea` | |

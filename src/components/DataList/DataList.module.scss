@@ -1,0 +1,39 @@
+@use '../../styles/variables.scss' as *;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin: 0;
+  font-family: $font-sans;
+}
+
+.item {
+  display: grid;
+  gap: $spacing-xs $spacing-md;
+  align-items: baseline;
+  margin: 0;
+}
+
+.horizontal {
+  grid-template-columns: minmax(6rem, 10rem) minmax(0, 1fr);
+}
+
+.vertical {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.125rem;
+}
+
+.label {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.value {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $foreground;
+  min-width: 0;
+}

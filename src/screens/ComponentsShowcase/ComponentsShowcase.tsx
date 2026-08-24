@@ -6,10 +6,14 @@ import { Input } from '../../components/Input/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../../components/Card/Card';
 import { Badge } from '../../components/Badge/Badge';
 import { Checkbox } from '../../components/Checkbox/Checkbox';
+import { CheckboxCards, CheckboxCardsItem } from '../../components/CheckboxCards/CheckboxCards';
+import { CheckboxGroup, CheckboxGroupItem } from '../../components/CheckboxGroup/CheckboxGroup';
+import { DataList, DataListItem, DataListLabel, DataListValue } from '../../components/DataList/DataList';
 import { Alert, AlertTitle, AlertDescription } from '../../components/Alert/Alert';
 import { Textarea } from '../../components/Textarea/Textarea';
 import { MentionTextarea } from '../../components/MentionTextarea/MentionTextarea';
 import { Slider } from '../../components/Slider/Slider';
+import { TabNav, TabNavLink } from '../../components/TabNav/TabNav';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/Tabs/Tabs';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table/Table';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '../../components/Breadcrumb/Breadcrumb';
@@ -38,7 +42,22 @@ import {
 } from '../../components/Modal/Modal';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from '../../components/AlertDialog/AlertDialog';
 import { Drawer, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from '../../components/Drawer/Drawer';
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel } from '../../components/DropdownMenu/DropdownMenu';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from '../../components/DropdownMenu/DropdownMenu';
 import { InputGroup, InputGroupAddon } from '../../components/InputGroup/InputGroup';
 import { DatePicker } from '../../components/DatePicker/DatePicker';
 import { Avatar, AvatarFallback, AvatarBadge, AvatarGroup, AvatarGroupCount } from '../../components/Avatar/Avatar';
@@ -46,6 +65,7 @@ import { Label } from '../../components/Label/Label';
 import { Separator } from '../../components/Separator/Separator';
 import { Skeleton } from '../../components/Skeleton/Skeleton';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { RadioCards, RadioCardsItem } from '../../components/RadioCards/RadioCards';
 import { RadioGroup, RadioGroupItem } from '../../components/RadioGroup/RadioGroup';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../../components/Tooltip/Tooltip';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../components/Accordion/Accordion';
@@ -237,13 +257,13 @@ const COMBO_OPTIONS = [
 const COMPONENTS_NAV = [
   'Accordion', 'Alert', 'Alert Dialog', 'Attachment', 'Aspect Ratio', 'Avatar', 'Badge', 'Banner', 'Bento',
   'Breadcrumb', 'Button', 'Button Group', 'Bubble', 'Calendar', 'Callout', 'Card', 'Carousel', 'Chart',
-  'Checkbox', 'Chip', 'Collapsible', 'Color Picker', 'Combo Button', 'Combobox', 'Command', 'Context Menu',
-  'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty', 'Field', 'Form', 'Hover Card',
+  'Checkbox', 'Checkbox Cards', 'Checkbox Group', 'Chip', 'Collapsible', 'Color Picker', 'Combo Button', 'Combobox', 'Command', 'Context Menu',
+  'Data List', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty', 'Field', 'Form', 'Hover Card',
   'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label', 'Lightbox', 'Marker', 'Marquee', 'Masonry',
   'Menubar', 'Mention Textarea', 'Message', 'Message Scroller', 'Modal', 'Multi Select', 'Native Select', 'Navigation Menu',
-  'Pagination', 'Popover', 'Progress', 'Progress Ring', 'RadioGroup', 'Resizable', 'Scroll Area', 'Scrollspy',
+  'Pagination', 'Popover', 'Progress', 'Progress Ring', 'Radio Cards', 'RadioGroup', 'Resizable', 'Scroll Area', 'Scrollspy',
   'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton', 'Slider', 'Sonner', 'Spinner', 'Stepper', 'Steps',
-  'Switch', 'Table', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
+  'Switch', 'Table', 'Tab Nav', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
   'Typography',
 ] as const;
 
@@ -588,6 +608,97 @@ const MentionTextareaDemo = () => {
         }}
       />
       {lastCommand ? <p>Last command: /{lastCommand}</p> : null}
+    </div>
+  );
+};
+
+const DropdownMenuDemo = () => {
+  const [statusBar, setStatusBar] = useState(true);
+  const [panel, setPanel] = useState('bottom');
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>Open Menu</DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            Profile
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Settings
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem checked={statusBar} onCheckedChange={setStatusBar}>
+          Status bar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={panel} onValueChange={setPanel}>
+          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem>Email</DropdownMenuItem>
+            <DropdownMenuItem>Message</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>More…</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Logout</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const TabNavDemo = () => {
+  const [page, setPage] = useState('account');
+
+  return (
+    <div className={styles.demoStack}>
+      <TabNav aria-label="Account sections">
+        <TabNavLink
+          href="#account"
+          active={page === 'account'}
+          onClick={e => {
+            e.preventDefault();
+            setPage('account');
+          }}
+        >
+          Account
+        </TabNavLink>
+        <TabNavLink
+          href="#documents"
+          active={page === 'documents'}
+          onClick={e => {
+            e.preventDefault();
+            setPage('documents');
+          }}
+        >
+          Documents
+        </TabNavLink>
+        <TabNavLink
+          href="#settings"
+          active={page === 'settings'}
+          onClick={e => {
+            e.preventDefault();
+            setPage('settings');
+          }}
+        >
+          Settings
+        </TabNavLink>
+        <TabNavLink href="#billing" disabled>
+          Billing
+        </TabNavLink>
+      </TabNav>
+      <p>Current page: {page}</p>
     </div>
   );
 };
@@ -982,6 +1093,51 @@ export const ComponentsShowcase = () => {
           </div>
         </section>
 
+        <section id="checkbox-cards" className={styles.section}>
+          <h2>Checkbox Cards</h2>
+          <CheckboxCards defaultValue={['keyboard']} columns={3} aria-label="Peripherals">
+            <CheckboxCardsItem value="keyboard">
+              Keyboard
+              <span>US layout, mechanical</span>
+            </CheckboxCardsItem>
+            <CheckboxCardsItem value="mouse">
+              Mouse
+              <span>Zero-lag wireless</span>
+            </CheckboxCardsItem>
+            <CheckboxCardsItem value="monitor">
+              Monitor
+              <span>27&quot; 4K, USB-C</span>
+            </CheckboxCardsItem>
+          </CheckboxCards>
+        </section>
+
+        <section id="checkbox-group" className={styles.section}>
+          <h2>Checkbox Group</h2>
+          <CheckboxGroup defaultValue={['email']} aria-label="Alert channels">
+            <CheckboxGroupItem value="email">Email</CheckboxGroupItem>
+            <CheckboxGroupItem value="sms">SMS</CheckboxGroupItem>
+            <CheckboxGroupItem value="push">Push notifications</CheckboxGroupItem>
+          </CheckboxGroup>
+        </section>
+
+        <section id="data-list" className={styles.section}>
+          <h2>Data List</h2>
+          <DataList>
+            <DataListItem>
+              <DataListLabel>Status</DataListLabel>
+              <DataListValue>Active</DataListValue>
+            </DataListItem>
+            <DataListItem>
+              <DataListLabel>Region</DataListLabel>
+              <DataListValue>eu-west-1</DataListValue>
+            </DataListItem>
+            <DataListItem>
+              <DataListLabel>Plan</DataListLabel>
+              <DataListValue>Pro</DataListValue>
+            </DataListItem>
+          </DataList>
+        </section>
+
         <section id="date-picker" className={styles.section}>
           <h2>Date Picker</h2>
           <div style={{ maxWidth: '300px' }}>
@@ -1008,17 +1164,7 @@ export const ComponentsShowcase = () => {
 
         <section id="dropdown-menu" className={styles.section}>
           <h2>Dropdown Menu</h2>
-          <DropdownMenu>
-            <DropdownMenuTrigger>Open Menu</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DropdownMenuDemo />
         </section>
 
         <section id="input" className={styles.section}>
@@ -1336,6 +1482,11 @@ export const ComponentsShowcase = () => {
           </Table>
         </section>
 
+        <section id="tab-nav" className={styles.section}>
+          <h2>Tab Nav</h2>
+          <TabNavDemo />
+        </section>
+
         <section id="tabs" className={styles.section}>
           <h2>Tabs</h2>
           <Tabs defaultValue="account" style={{ maxWidth: '500px' }}>
@@ -1402,6 +1553,24 @@ export const ComponentsShowcase = () => {
         </section>
 
         <ToastSection />
+
+        <section id="radio-cards" className={styles.section}>
+          <h2>Radio Cards</h2>
+          <RadioCards defaultValue="pro" columns={3} aria-label="Plan">
+            <RadioCardsItem value="free">
+              Free
+              <span>Hobby projects</span>
+            </RadioCardsItem>
+            <RadioCardsItem value="pro">
+              Pro
+              <span>Unlimited projects</span>
+            </RadioCardsItem>
+            <RadioCardsItem value="team" disabled>
+              Team
+              <span>Coming soon</span>
+            </RadioCardsItem>
+          </RadioCards>
+        </section>
 
         <section id="radiogroup" className={styles.section}>
           <h2>RadioGroup</h2>

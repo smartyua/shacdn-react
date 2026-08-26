@@ -4,10 +4,14 @@
   width: 100%;
   max-width: 72rem;
   margin: 0 auto;
-  padding: $spacing-lg $spacing-lg $spacing-xl;
+  padding: $spacing-md $spacing-md $spacing-xl;
   display: flex;
   flex-direction: column;
   gap: $spacing-xl;
+
+  @media (min-width: 768px) {
+    padding: $spacing-lg $spacing-lg $spacing-xl;
+  }
 }
 
 .headerStatus {
@@ -88,7 +92,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
-  scroll-margin-top: calc(#{$site-header-height} + #{$spacing-md});
+  scroll-margin-top: calc(var(--site-header-height, #{$site-header-height}) + #{$spacing-md});
 }
 
 .sectionHeading {

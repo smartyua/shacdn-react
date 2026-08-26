@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { getHostHomeUrl } from '../../embed';
@@ -13,10 +14,31 @@ export const SiteHeader = () => {
   const { messages } = useLocale();
   const hostHomeUrl = getHostHomeUrl();
   const { pathname } = useLocation();
+  const headerRef = useRef<HTMLElement>(null);
   const dashboardActive = pathname.startsWith('/dashboard') && !pathname.startsWith('/dashboard/bess');
 
+  useLayoutEffect(() => {
+    const node = headerRef.current;
+    if (!node) return;
+    const sync = () => {
+      document.documentElement.style.setProperty('--site-header-height', `${node.offsetHeight}px`);
+    };
+    sync();
+    if (typeof ResizeObserver === 'undefined') {
+      return () => {
+        document.documentElement.style.removeProperty('--site-header-height');
+      };
+    }
+    const observer = new ResizeObserver(sync);
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty('--site-header-height');
+    };
+  }, []);
+
   return (
-    <header className={styles.wrap} data-slot="site-header">
+    <header ref={headerRef} className={styles.wrap} data-slot="site-header">
       <div className={styles.inner}>
         <div className={styles.brandCluster}>
           {hostHomeUrl ? (
@@ -44,6 +66,9 @@ export const SiteHeader = () => {
             </NavLink>
             <NavLink className={navClass} to="/transcoding">
               {messages.siteNav.transcoding}
+            </NavLink>
+            <NavLink className={navClass} to="/crm">
+              {messages.siteNav.crm}
             </NavLink>
             <NavLink className={navClass} to="/sessy">
               {messages.siteNav.sessy}

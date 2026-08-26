@@ -9,6 +9,7 @@ export const pl: LocaleMessages = {
     dashboard: 'Panel',
     bessSolar: 'BESS Solar',
     transcoding: 'Transcoding',
+    crm: 'CRM',
     sessy: 'Sessy',
   },
   localeSwitcher: {

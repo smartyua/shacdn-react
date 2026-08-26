@@ -17,7 +17,7 @@ $preview-radius: $radius-lg;
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - #{$site-header-height});
+  min-height: calc(100vh - var(--site-header-height, #{$site-header-height}));
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
@@ -36,7 +36,7 @@ $preview-radius: $radius-lg;
   flex-shrink: 0;
   position: relative;
   width: 100%;
-  max-height: min(40vh, 280px);
+  max-height: min(32vh, 220px);
   overflow-y: auto;
   overscroll-behavior: contain;
   background-color: transparent;
@@ -48,8 +48,8 @@ $preview-radius: $radius-lg;
   @media (min-width: 901px) {
     position: fixed;
     left: 0;
-    top: $site-header-height;
-    height: calc(100vh - #{$site-header-height});
+    top: var(--site-header-height, #{$site-header-height});
+    height: calc(100vh - var(--site-header-height, #{$site-header-height}));
     width: 250px;
     max-height: none;
     border-right: $border-width solid color-mix(in srgb, #{$border} 55%, transparent);
@@ -221,7 +221,7 @@ $preview-radius: $radius-lg;
 
 .section {
   margin-bottom: 2.75rem;
-  scroll-margin-top: calc(#{$site-header-height} + 1.25rem);
+  scroll-margin-top: calc(var(--site-header-height, #{$site-header-height}) + 1.25rem);
 
   h2 {
     font-size: 1.5rem;

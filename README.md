@@ -62,6 +62,7 @@ Open in your browser: **http://localhost:5173**
 - **Real Components** - Click buttons, open dialogs, use sliders
 - **All Variants** - Sizes, colors, states, disabled options
 - **BESS Solar** - `/dashboard/bess` (header link) — hybrid plant monitoring demo using Card, Badge, Progress, Tabs, Table, Dialog
+- **CRM / ERP** - `/crm` (header link) — pipeline, quotes, orders, inventory and collections command center
 
 ### Alternative: Static Showcase
 Open `showcase.html` in your browser to see the landing page (no dev server needed).

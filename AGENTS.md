@@ -50,6 +50,7 @@ Behavioural changes need tests. Docs, comments and formatting are exempt.
 | Demo i18n | `src/i18n/` (lazy dictionaries; `Locale` is demo-only) |
 | Demo screens | `src/screens/` |
 | BESS Solar demo | `src/screens/Dashboard/pages/Bess/` → `/dashboard/bess` (header nav) |
+| CRM / ERP demo | `src/screens/CrmErp/` → `/crm` (header nav) |
 | MCP export server | `mcp/shacdn-server/` |
 | AI tooling, memory, skills | `.ai/` |
 | Current docs | `docs/` (one-off historical reports live in `docs/archive/` — do not treat them as current) |

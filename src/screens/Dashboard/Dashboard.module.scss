@@ -3,7 +3,7 @@
 .shell {
   --sidebar-width: 15rem;
   width: 100%;
-  min-height: calc(100vh - #{$site-header-height});
+  min-height: calc(100vh - var(--site-header-height, #{$site-header-height}));
   border: none;
   border-radius: 0;
   background-color: $background;
@@ -20,10 +20,10 @@
 
     &[data-collapsed='false'] {
       position: fixed;
-      top: $site-header-height;
+      top: var(--site-header-height, #{$site-header-height});
       left: 0;
       z-index: $z-sticky;
-      height: calc(100vh - #{$site-header-height});
+      height: calc(100vh - var(--site-header-height, #{$site-header-height}));
       box-shadow: 0 0.5rem 1.5rem hsl(0 0% 0% / 0.12);
     }
   }
@@ -65,9 +65,13 @@
   flex-wrap: wrap;
   align-items: center;
   gap: $spacing-sm $spacing-md;
-  padding: $spacing-sm $spacing-lg;
+  padding: $spacing-sm $spacing-md;
   border-bottom: $border-width solid $border;
   background-color: $background;
+
+  @media (min-width: 768px) {
+    padding: $spacing-sm $spacing-lg;
+  }
 }
 
 .toolbarStart {

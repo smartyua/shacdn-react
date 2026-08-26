@@ -103,7 +103,7 @@
 }
 
 .subtitle {
-  font-size: $font-size-xl;
+  font-size: clamp($font-size-sm, 3.6vw, $font-size-xl);
   line-height: 1.55;
   color: $muted-foreground;
   max-width: 44rem;

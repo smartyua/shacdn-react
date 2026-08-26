@@ -5,6 +5,7 @@
 // 1:1 to the registry's oklch ramp: 0.985→98%, 0.97→96.1%, 0.922→89.8%, 0.708→63.1%,
 // 0.556→45.1%, 0.371→26.7%, 0.269→14.9%, 0.205→9%, 0.145→3.9%.
 :root {
+  --site-header-height: #{$site-header-height};
   --background: 0 0% 100%;
   --foreground: 0 0% 3.9%;
 

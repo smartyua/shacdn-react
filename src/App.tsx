@@ -71,6 +71,9 @@ const TranscodingDashboard = lazy(() =>
     default: m.TranscodingDashboard,
   }))
 );
+const CrmErp = lazy(() =>
+  import('./screens/CrmErp/CrmErp').then((m) => ({ default: m.CrmErp }))
+);
 
 const RouteFallback = () => (
   <div
@@ -128,6 +131,7 @@ const App = () => {
             </Route>
             <Route path="/sessy" element={withShell(<SessyLanding />)} />
             <Route path="/transcoding" element={withShell(<TranscodingDashboard />)} />
+            <Route path="/crm" element={withShell(<CrmErp />)} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>

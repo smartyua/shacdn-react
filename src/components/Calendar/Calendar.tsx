@@ -20,22 +20,20 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   disabled?: CalendarDisabledMatcher;
 }
 
-function getDaysInMonth(date: Date): number {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-}
+const getDaysInMonth = (date: Date): number =>
+  new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
-function getFirstDayOfMonth(date: Date): number {
-  return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-}
+const getFirstDayOfMonth = (date: Date): number =>
+  new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
-function isSameDay(a: Date | undefined, b: Date): boolean {
+const isSameDay = (a: Date | undefined, b: Date): boolean => {
   if (!a) return false;
   return (
     a.getDate() === b.getDate() &&
     a.getMonth() === b.getMonth() &&
     a.getFullYear() === b.getFullYear()
   );
-}
+};
 
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
   (

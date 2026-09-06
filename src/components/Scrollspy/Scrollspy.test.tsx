@@ -59,7 +59,7 @@ describe('Scrollspy', () => {
             isIntersecting: true,
             target: target!,
             boundingClientRect: { top: 10 } as DOMRectReadOnly,
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );

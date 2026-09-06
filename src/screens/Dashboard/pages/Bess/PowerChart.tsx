@@ -67,12 +67,12 @@ export const PowerChart = memo<Props>(({ series, currentMinute }) => {
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className={styles.svg} role="img" aria-label={t('_BESS_CHART_TITLE')}>
           <defs>
             <linearGradient id="bessPvGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--solar) / 0.42)" />
-              <stop offset="100%" stopColor="hsl(var(--solar) / 0.02)" />
+              <stop offset="0%" stopColor="hsl(var(--solar))" stopOpacity="0.42" />
+              <stop offset="100%" stopColor="hsl(var(--solar))" stopOpacity="0.02" />
             </linearGradient>
             <linearGradient id="bessBatteryGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--battery) / 0.3)" />
-              <stop offset="100%" stopColor="hsl(var(--battery) / 0.05)" />
+              <stop offset="0%" stopColor="hsl(var(--battery))" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="hsl(var(--battery))" stopOpacity="0.05" />
             </linearGradient>
           </defs>
 

@@ -30,12 +30,12 @@ export default defineConfig({
         },
       },
       {
-        plugins: [react()],
         test: {
           name: 'ui',
           include: ['src/**/*.test.{ts,tsx}'],
           environment: 'jsdom',
           setupFiles: ['./src/test/setup.ts'],
+          pool: 'vmThreads',
           css: true,
           testTimeout: 15000,
         },

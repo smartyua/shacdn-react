@@ -6,6 +6,7 @@ import {
   type LiHTMLAttributes,
   type OlHTMLAttributes,
   type ReactNode,
+  type TimeHTMLAttributes,
 } from 'react';
 import { Check } from 'lucide-react';
 import styles from './Timeline.module.scss';
@@ -142,7 +143,7 @@ export const TimelineDescription = forwardRef<HTMLParagraphElement, TimelineDesc
 
 TimelineDescription.displayName = 'TimelineDescription';
 
-export type TimelineTimeProps = HTMLAttributes<HTMLTimeElement>;
+export type TimelineTimeProps = TimeHTMLAttributes<HTMLTimeElement>;
 
 export const TimelineTime = forwardRef<HTMLTimeElement, TimelineTimeProps>(
   ({ className = '', ...props }, ref) => (

@@ -18,13 +18,13 @@ type Ctx = {
 
 const ToggleGroupContext = createContext<Ctx | null>(null);
 
-function useToggleGroup(): Ctx {
+const useToggleGroup = (): Ctx => {
   const c = useContext(ToggleGroupContext);
   if (!c) {
     throw new Error('ToggleGroupItem must be used within ToggleGroup');
   }
   return c;
-}
+};
 
 export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
   type?: 'single' | 'multiple';
@@ -34,7 +34,7 @@ export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function ToggleGroup({
+export const ToggleGroup = ({
   type = 'single',
   value: valueControlled,
   defaultValue,
@@ -42,7 +42,7 @@ export function ToggleGroup({
   className = '',
   children,
   ...props
-}: ToggleGroupProps) {
+}: ToggleGroupProps) => {
   const [internal, setInternal] = useState<string | string[]>(() => {
     if (type === 'multiple') {
       if (Array.isArray(defaultValue)) return defaultValue;
@@ -99,7 +99,7 @@ export type ToggleGroupItemProps = Omit<ToggleProps, 'pressed' | 'defaultPressed
   value: string;
 };
 
-export function ToggleGroupItem({ value: itemValue, ...toggleProps }: ToggleGroupItemProps) {
+export const ToggleGroupItem = ({ value: itemValue, ...toggleProps }: ToggleGroupItemProps) => {
   const { type, value, toggleItem } = useToggleGroup();
   const pressed =
     type === 'single'

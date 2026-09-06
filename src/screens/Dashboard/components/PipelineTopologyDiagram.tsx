@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Server } from 'lucide-react';
 
 import {
@@ -247,6 +247,166 @@ const NodeLabelBackplate = ({ y, text, className, compact }: NodeLabelBackplateP
   );
 };
 
+type TopologyPacketsLayerProps = {
+  running: boolean;
+  packetsEnabled: boolean;
+  wStatus: Record<string, WorkerStatus>;
+  selectedNodeId: string | null;
+  onTotalPacketsChange: (updater: (prev: number) => number) => void;
+  onInFlightChange: (count: number) => void;
+  onActiveEdgeSetChange: (edgeSet: Set<string>) => void;
+  onHoverFlowsChange: (flows: TopologyPacket[]) => void;
+};
+
+const TopologyPacketsLayer = ({
+  running,
+  packetsEnabled,
+  wStatus,
+  selectedNodeId,
+  onTotalPacketsChange,
+  onInFlightChange,
+  onActiveEdgeSetChange,
+  onHoverFlowsChange,
+}: TopologyPacketsLayerProps) => {
+  const [packets, setPackets] = useState<TopologyPacket[]>([]);
+  const rafRef = useRef<number | null>(null);
+  const lastRef = useRef<number | null>(null);
+  const spawnRef = useRef(0);
+  const pktsRef = useRef<TopologyPacket[]>([]);
+  const runRef = useRef(running);
+  const wStatusRef = useRef(wStatus);
+  const selectedNodeRef = useRef(selectedNodeId);
+  const onTotalPacketsChangeRef = useRef(onTotalPacketsChange);
+  const onInFlightChangeRef = useRef(onInFlightChange);
+  const onActiveEdgeSetChangeRef = useRef(onActiveEdgeSetChange);
+  const onHoverFlowsChangeRef = useRef(onHoverFlowsChange);
+  const lastActiveEdgesKeyRef = useRef('');
+  const lastInFlightCountRef = useRef(-1);
+
+  useEffect(() => {
+    onTotalPacketsChangeRef.current = onTotalPacketsChange;
+  }, [onTotalPacketsChange]);
+
+  useEffect(() => {
+    onInFlightChangeRef.current = onInFlightChange;
+  }, [onInFlightChange]);
+
+  useEffect(() => {
+    onActiveEdgeSetChangeRef.current = onActiveEdgeSetChange;
+  }, [onActiveEdgeSetChange]);
+
+  useEffect(() => {
+    onHoverFlowsChangeRef.current = onHoverFlowsChange;
+  }, [onHoverFlowsChange]);
+
+  useEffect(() => {
+    runRef.current = running;
+  }, [running]);
+
+  useEffect(() => {
+    wStatusRef.current = wStatus;
+  }, [wStatus]);
+
+  useEffect(() => {
+    selectedNodeRef.current = selectedNodeId;
+  }, [selectedNodeId]);
+
+  useEffect(() => {
+    if (!packetsEnabled) {
+      pktsRef.current = [];
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      lastRef.current = null;
+      return;
+    }
+
+    const tick = (ts: number) => {
+      if (!lastRef.current) lastRef.current = ts;
+      const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+      lastRef.current = ts;
+
+      if (runRef.current) {
+        pktsRef.current = pktsRef.current
+          .map((p) => ({ ...p, progress: p.progress + p.speed * dt }))
+          .filter((p) => (p.reverse ? p.progress > -0.05 : p.progress < 1.05));
+
+        spawnRef.current += dt;
+        if (spawnRef.current > 0.18) {
+          spawnRef.current = 0;
+          const count = Math.random() < 0.5 ? 2 : 1;
+          for (let i = 0; i < count; i += 1) {
+            if (pktsRef.current.length < 60) {
+              const edge = randomEdge();
+              const pkt = spawnPacket(edge, wStatusRef.current);
+              if (pkt) {
+                pktsRef.current.push(pkt);
+                onTotalPacketsChangeRef.current((t) => t + 1);
+              }
+            }
+          }
+        }
+
+        const inFlight = pktsRef.current.length;
+        if (inFlight !== lastInFlightCountRef.current) {
+          lastInFlightCountRef.current = inFlight;
+          onInFlightChangeRef.current(inFlight);
+        }
+
+        const activeSet = new Set<string>();
+        pktsRef.current.forEach((p) => activeSet.add(p.edgeId));
+        const activeKey = Array.from(activeSet).sort().join(',');
+        if (activeKey !== lastActiveEdgesKeyRef.current) {
+          lastActiveEdgesKeyRef.current = activeKey;
+          onActiveEdgeSetChangeRef.current(activeSet);
+        }
+
+        const selNode = selectedNodeRef.current;
+        if (selNode) {
+          const flows = pktsRef.current.filter((p) => {
+            const e = TOPOLOGY_EDGES.find((edge) => edge.id === p.edgeId);
+            return e && (e.from === selNode || e.to === selNode);
+          });
+          onHoverFlowsChangeRef.current(flows);
+        }
+
+        setPackets([...pktsRef.current]);
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      onInFlightChangeRef.current(0);
+      onActiveEdgeSetChangeRef.current(new Set());
+      onHoverFlowsChangeRef.current([]);
+    };
+  }, [packetsEnabled]);
+
+  return (
+    <g aria-hidden>
+      {packets.map((pkt) => {
+        const edge = TOPOLOGY_EDGES.find((e) => e.id === pkt.edgeId);
+        if (!edge) return null;
+        const t = Math.max(0, Math.min(1, Math.abs(pkt.progress)));
+        const pos = pointOnEdge(edge, pkt.reverse ? 1 - t : t);
+        const toneClass = PACKET_TONE_CLASS[pkt.op.tone];
+
+        return (
+          <g key={pkt.id} transform={`translate(${pos.x},${pos.y})`}>
+            <circle r="10" className={`${toneClass} ${styles.topologyPacketHaloOuter}`} />
+            <circle r="6" className={`${toneClass} ${styles.topologyPacketHaloMid}`} />
+            <circle r="3.5" className={`${toneClass} ${styles.topologyPacketCore}`} />
+          </g>
+        );
+      })}
+    </g>
+  );
+};
+
 export const PipelineTopologyDiagram = ({
   running,
   motionPreference,
@@ -263,7 +423,9 @@ export const PipelineTopologyDiagram = ({
     running,
     linesEnabled
   );
-  const [packets, setPackets] = useState<TopologyPacket[]>([]);
+  const [inFlightCount, setInFlightCount] = useState(0);
+  const [activeEdgeSet, setActiveEdgeSet] = useState<Set<string>>(() => new Set());
+  const [hoverFlows, setHoverFlows] = useState<TopologyPacket[]>([]);
   const [hoverNode, setHoverNode] = useState<string | null>(null);
   const [focusNode, setFocusNode] = useState<string | null>(null);
   const [wStatus, setWStatus] = useState<Record<string, WorkerStatus>>(() => {
@@ -281,22 +443,7 @@ export const PipelineTopologyDiagram = ({
     return m;
   });
 
-  const rafRef = useRef<number | null>(null);
-  const lastRef = useRef<number | null>(null);
-  const spawnRef = useRef(0);
-  const pktsRef = useRef<TopologyPacket[]>([]);
-  const runRef = useRef(running);
   const wStatusRef = useRef(wStatus);
-
-  const onTotalPacketsChangeRef = useRef(onTotalPacketsChange);
-
-  useEffect(() => {
-    onTotalPacketsChangeRef.current = onTotalPacketsChange;
-  }, [onTotalPacketsChange]);
-
-  useEffect(() => {
-    runRef.current = running;
-  }, [running]);
 
   useEffect(() => {
     wStatusRef.current = wStatus;
@@ -337,75 +484,8 @@ export const PipelineTopologyDiagram = ({
     return () => window.clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    if (!packetsEnabled) {
-      pktsRef.current = [];
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      lastRef.current = null;
-      return;
-    }
-
-    const tick = (ts: number) => {
-      if (!lastRef.current) lastRef.current = ts;
-      const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
-      lastRef.current = ts;
-
-      if (runRef.current) {
-        pktsRef.current = pktsRef.current
-          .map((p) => ({ ...p, progress: p.progress + p.speed * dt }))
-          .filter((p) => (p.reverse ? p.progress > -0.05 : p.progress < 1.05));
-
-        spawnRef.current += dt;
-        if (spawnRef.current > 0.18) {
-          spawnRef.current = 0;
-          const count = Math.random() < 0.5 ? 2 : 1;
-          for (let i = 0; i < count; i += 1) {
-            if (pktsRef.current.length < 60) {
-              const edge = randomEdge();
-              const pkt = spawnPacket(edge, wStatusRef.current);
-              if (pkt) {
-                pktsRef.current.push(pkt);
-                onTotalPacketsChangeRef.current((t) => t + 1);
-              }
-            }
-          }
-        }
-        setPackets([...pktsRef.current]);
-      }
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, [packetsEnabled]);
-
-  const visiblePackets = useMemo(
-    () => (packetsAnimating ? packets : []),
-    [packetsAnimating, packets]
-  );
-
-  const activeEdgeSet = useMemo(() => {
-    const s = new Set<string>();
-    visiblePackets.forEach((p) => s.add(p.edgeId));
-    return s;
-  }, [visiblePackets]);
-
   const selectedNodeId = focusNode ?? hoverNode;
   const selectedNode = selectedNodeId ? TOPOLOGY_NODES.find((n) => n.id === selectedNodeId) : null;
-
-  const hoverFlows = useMemo(() => {
-    if (!selectedNodeId) return [];
-    return visiblePackets.filter((p) => {
-      const e = TOPOLOGY_EDGES.find((edge) => edge.id === p.edgeId);
-      return e && (e.from === selectedNodeId || e.to === selectedNodeId);
-    });
-  }, [visiblePackets, selectedNodeId]);
 
   const busyAdbreak = Object.entries(wStatus).filter(([k, v]) => k.startsWith('ab') && v !== 'idle').length;
   const busyTranscode = Object.entries(wStatus).filter(([k, v]) => k.startsWith('tc') && v !== 'idle').length;
@@ -441,7 +521,7 @@ export const PipelineTopologyDiagram = ({
         </div>
         <div className={styles.topologyStat}>
           <p className={styles.topologyStatLabel}>In flight</p>
-          <p className={styles.topologyStatValue}>{visiblePackets.length}</p>
+          <p className={styles.topologyStatValue}>{inFlightCount}</p>
         </div>
         <span className={styles.topologyLiveIndicator}>
           <span
@@ -469,7 +549,7 @@ export const PipelineTopologyDiagram = ({
               <p className={styles.topologyMobileHubSub}>Media Pipeline Hub</p>
             </div>
             <span className={styles.topologyMobileHubFlows}>
-              {visiblePackets.length} in flight
+              {inFlightCount} in flight
             </span>
           </div>
 
@@ -597,21 +677,18 @@ export const PipelineTopologyDiagram = ({
               );
             })}
 
-            {visiblePackets.map((pkt) => {
-              const edge = TOPOLOGY_EDGES.find((e) => e.id === pkt.edgeId);
-              if (!edge) return null;
-              const t = Math.max(0, Math.min(1, Math.abs(pkt.progress)));
-              const pos = pointOnEdge(edge, pkt.reverse ? 1 - t : t);
-              const toneClass = PACKET_TONE_CLASS[pkt.op.tone];
-
-              return (
-                <g key={pkt.id} transform={`translate(${pos.x},${pos.y})`} aria-hidden>
-                  <circle r="10" className={`${toneClass} ${styles.topologyPacketHaloOuter}`} />
-                  <circle r="6" className={`${toneClass} ${styles.topologyPacketHaloMid}`} />
-                  <circle r="3.5" className={`${toneClass} ${styles.topologyPacketCore}`} />
-                </g>
-              );
-            })}
+            {packetsAnimating ? (
+              <TopologyPacketsLayer
+                running={running}
+                packetsEnabled={packetsEnabled}
+                wStatus={wStatus}
+                selectedNodeId={selectedNodeId}
+                onTotalPacketsChange={onTotalPacketsChange}
+                onInFlightChange={setInFlightCount}
+                onActiveEdgeSetChange={setActiveEdgeSet}
+                onHoverFlowsChange={setHoverFlows}
+              />
+            ) : null}
 
             {TOPOLOGY_NODES.map((node) => {
               const isSelected = selectedNodeId === node.id;

@@ -19,13 +19,13 @@ type AccordionContextValue = {
 
 const AccordionContext = createContext<AccordionContextValue | null>(null);
 
-function useAccordionContext(component: string): AccordionContextValue {
+const useAccordionContext = (component: string): AccordionContextValue => {
   const ctx = useContext(AccordionContext);
   if (!ctx) {
     throw new Error(`${component} must be used within <Accordion>`);
   }
   return ctx;
-}
+};
 
 type ItemContextValue = { value: string };
 const ItemContext = createContext<ItemContextValue | null>(null);
@@ -39,7 +39,7 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function Accordion({
+export const Accordion = ({
   type = 'single',
   value: valueControlled,
   defaultValue,
@@ -48,7 +48,7 @@ export function Accordion({
   className = '',
   children,
   ...props
-}: AccordionProps) {
+}: AccordionProps) => {
   const [internal, setInternal] = useState<string | string[] | undefined>(() => {
     if (type === 'multiple') {
       if (Array.isArray(defaultValue)) return defaultValue;
@@ -102,13 +102,13 @@ export function Accordion({
       </div>
     </AccordionContext.Provider>
   );
-}
+};
 
 export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-export function AccordionItem({ value: itemValue, className = '', children, ...props }: AccordionItemProps) {
+export const AccordionItem = ({ value: itemValue, className = '', children, ...props }: AccordionItemProps) => {
   const accordion = useAccordionContext('AccordionItem');
 
   const open =
@@ -128,11 +128,11 @@ export function AccordionItem({ value: itemValue, className = '', children, ...p
       </Collapsible>
     </ItemContext.Provider>
   );
-}
+};
 
 export type AccordionTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function AccordionTrigger({ className = '', children, ...props }: AccordionTriggerProps) {
+export const AccordionTrigger = ({ className = '', children, ...props }: AccordionTriggerProps) => {
   const ctx = useContext(ItemContext);
   if (!ctx) {
     throw new Error('AccordionTrigger must be inside AccordionItem');
@@ -150,19 +150,19 @@ export function AccordionTrigger({ className = '', children, ...props }: Accordi
       <ChevronIcon className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`} />
     </CollapsibleTrigger>
   );
-}
+};
 
 export type AccordionContentProps = HTMLAttributes<HTMLDivElement>;
 
-export function AccordionContent({ className = '', children, ...props }: AccordionContentProps) {
+export const AccordionContent = ({ className = '', children, ...props }: AccordionContentProps) => {
   return (
     <CollapsibleContent className={`${styles.content} ${className}`} {...props}>
       {children}
     </CollapsibleContent>
   );
-}
+};
 
-function ChevronIcon({ className }: { className?: string }) {
+const ChevronIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       className={className}
@@ -177,4 +177,4 @@ function ChevronIcon({ className }: { className?: string }) {
       <path d="m6 9 6 6 6-6" />
     </svg>
   );
-}
+};

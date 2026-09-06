@@ -18,13 +18,13 @@ type CollapsibleContextValue = {
 
 const CollapsibleContext = createContext<CollapsibleContextValue | null>(null);
 
-function useCollapsibleContext(component: string): CollapsibleContextValue {
+const useCollapsibleContext = (component: string): CollapsibleContextValue => {
   const ctx = useContext(CollapsibleContext);
   if (!ctx) {
     throw new Error(`${component} must be used within <Collapsible>`);
   }
   return ctx;
-}
+};
 
 export interface CollapsibleProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -33,14 +33,14 @@ export interface CollapsibleProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function Collapsible({
+export const Collapsible = ({
   open: openControlled,
   defaultOpen = false,
   onOpenChange,
   className = '',
   children,
   ...props
-}: CollapsibleProps) {
+}: CollapsibleProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const contentId = useId();
   const open = openControlled ?? internalOpen;
@@ -64,13 +64,13 @@ export function Collapsible({
       </div>
     </CollapsibleContext.Provider>
   );
-}
+};
 
 export interface CollapsibleTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-export function CollapsibleTrigger({ className = '', children, ...props }: CollapsibleTriggerProps) {
+export const CollapsibleTrigger = ({ className = '', children, ...props }: CollapsibleTriggerProps) => {
   const { open, setOpen, contentId } = useCollapsibleContext('CollapsibleTrigger');
   return (
     <button
@@ -85,11 +85,11 @@ export function CollapsibleTrigger({ className = '', children, ...props }: Colla
       {children}
     </button>
   );
-}
+};
 
 export type CollapsibleContentProps = HTMLAttributes<HTMLDivElement>;
 
-export function CollapsibleContent({ className = '', children, ...props }: CollapsibleContentProps) {
+export const CollapsibleContent = ({ className = '', children, ...props }: CollapsibleContentProps) => {
   const { open, contentId } = useCollapsibleContext('CollapsibleContent');
   if (!open) {
     return null;
@@ -99,4 +99,4 @@ export function CollapsibleContent({ className = '', children, ...props }: Colla
       {children}
     </div>
   );
-}
+};

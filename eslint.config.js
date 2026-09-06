@@ -1,10 +1,10 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js';
+import globals from 'globals';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
   globalIgnores([
@@ -39,6 +39,7 @@ export default defineConfig([
     },
     rules: {
       'prefer-arrow-callback': 'error',
+      'func-style': ['error', 'expression'],
       // Focused a11y gate (eslint-plugin-jsx-a11y peers eslint<=9; used via legacy-peer-deps)
       'jsx-a11y/alt-text': 'error',
       'jsx-a11y/aria-props': 'error',
@@ -55,7 +56,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['.ai/**/*.{ts,tsx}', 'vitest.config.ts', 'mcp/**/*.{ts,tsx}', 'packages/**/*.{ts,tsx}'],
+    files: ['.ai/**/*.{ts,tsx}', 'vitest.config.ts', 'mcp/**/*.{ts,tsx}', 'packages/**/*.{ts,tsx}', 'src/test/**/*.{ts,tsx}'],
     extends: [js.configs.recommended, tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,
@@ -63,6 +64,7 @@ export default defineConfig([
     },
     rules: {
       'prefer-arrow-callback': 'error',
+      'func-style': ['error', 'expression'],
     },
   },
-])
+]);

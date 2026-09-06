@@ -123,22 +123,29 @@ export const useLocale = (): LocaleContextValue => {
   return context;
 };
 
+const messageCache: Partial<Record<Locale, LocaleMessages>> = { en };
+
 export type LocaleProviderProps = {
   children: ReactNode;
   defaultLocale?: Locale;
 };
 
 export const LocaleProvider = ({ children, defaultLocale }: LocaleProviderProps) => {
-  const [locale, setLocaleState] = useState<Locale>(() => resolveInitialLocale(defaultLocale));
-  const [messages, setMessages] = useState<LocaleMessages>(en);
+  const initialLocale = resolveInitialLocale(defaultLocale);
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
+  const [messages, setMessages] = useState<LocaleMessages>(() => messageCache[initialLocale] ?? en);
 
   useEffect(() => {
     syncDocumentLang(locale);
   }, [locale]);
 
   useEffect(() => {
+    if (messageCache[locale]) {
+      return;
+    }
     let cancelled = false;
     void loadLocaleMessages(locale).then(next => {
+      messageCache[locale] = next;
       if (!cancelled) {
         setMessages(next);
       }
@@ -152,6 +159,9 @@ export const LocaleProvider = ({ children, defaultLocale }: LocaleProviderProps)
     if (navigateEmbedLocale(next)) {
       persistLocale(next);
       return;
+    }
+    if (messageCache[next]) {
+      setMessages(messageCache[next]!);
     }
     setLocaleState(next);
     persistLocale(next);

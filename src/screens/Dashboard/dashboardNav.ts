@@ -13,6 +13,7 @@ import {
   Settings,
   UserRound,
   Users,
+  Wallet,
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
@@ -38,6 +39,12 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
         label: 'Overview',
         icon: LayoutDashboard,
         description: 'KPIs, revenue trends, and recent activity',
+      },
+      {
+        path: '/dashboard/finance',
+        label: 'Finance',
+        icon: Wallet,
+        description: 'Balance, income mix, expenses, and wallet activity',
       },
       {
         path: '/dashboard/patterns',

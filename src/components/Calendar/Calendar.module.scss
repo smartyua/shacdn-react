@@ -133,3 +133,37 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.dayInRange {
+  background-color: $accent;
+  border-radius: 0;
+  color: $accent-foreground;
+
+  &:hover:not(:disabled) {
+    background-color: $accent;
+  }
+}
+
+.dayRangeStart {
+  background-color: $primary;
+  color: $primary-foreground;
+  border-radius: $radius-sm 0 0 $radius-sm;
+
+  &:hover:not(:disabled) {
+    background-color: $primary;
+    color: $primary-foreground;
+    opacity: 0.92;
+  }
+}
+
+.dayRangeEnd {
+  background-color: $primary;
+  color: $primary-foreground;
+  border-radius: 0 $radius-sm $radius-sm 0;
+
+  &:hover:not(:disabled) {
+    background-color: $primary;
+    color: $primary-foreground;
+    opacity: 0.92;
+  }
+}

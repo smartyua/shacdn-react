@@ -1,0 +1,46 @@
+---
+description: LAN RAG search before answers; ingest after every code change
+alwaysApply: true
+---
+
+# LAN RAG (slug: `shacdn`)
+
+Collection `proj_shacdn`. MCP server `lan-rag`. API `http://192.168.2.172:8100`, MCP `/mcp`, UI `:8101`.
+Never print or log `RAG_API_KEY`.
+
+## Before writing or explaining code
+
+1. `list_projects`
+2. `search` with `project="shacdn"` and a concrete query
+3. `query` with `generate=false` if you only need chunks
+4. If there are no hits, say so — do not invent repo structure
+
+## After ANY code / docs / rules / catalog change (mandatory)
+
+The task is **not done** until RAG is updated. Do not skip because the change is small.
+Skip only generated junk: `node_modules`, `dist`, `.git`, media, `.ai/data`, `.ai/logs`, `.ai/session`, secrets.
+
+### Daily path — `ingest_files`
+
+Push the changed files from this Mac via MCP `ingest_files`:
+
+- `project`: `shacdn`
+- `path`: relative to repo root (same paths as in the index)
+- `content`: **full** file text (never a stub or excerpt)
+- max 50 files per call; split into several calls if needed
+
+Do **not** call `ingest` with `replace=true` after Mac edits. Host sources live only at
+`/Users/llm/rag/sources/shacdn` on `llm@192.168.2.172` and will wipe the index if stale.
+
+### Full sync + reindex (when the host tree / index is badly stale)
+
+```bash
+rsync -a --delete \
+  --exclude node_modules --exclude .git --exclude dist --exclude dist-ssr \
+  --exclude coverage --exclude .ai/data --exclude .ai/logs --exclude .ai/session \
+  /Users/smarty/shacdn/ llm@192.168.2.172:/Users/llm/rag/sources/shacdn/
+```
+
+Then MCP `ingest` `{ "project": "shacdn", "path": "/Users/llm/rag/sources/shacdn", "replace": true }`.
+
+Verify with `ingest_status` and `search` for the files you just changed.

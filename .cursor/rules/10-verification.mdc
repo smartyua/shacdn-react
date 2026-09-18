@@ -9,7 +9,7 @@ alwaysApply: true
 Run what applies: lint, typecheck (`test:ai` / `typecheck:ai`), unit tests, build, `npm run ai:health`.
 
 ## Check B — logical
-Re-read the request: requirements met? regressions? architecture fit? excess complexity? docs/memory updated? code/tests/docs aligned?
+Re-read the request: requirements met? regressions? architecture fit? excess complexity? docs/memory updated? code/tests/docs aligned? RAG ingested (`99-lan-rag.mdc`)?
 
 ## Critical changes
 Also run an adversarial review pass (what breaks it? edge cases? partial failure? replay?).

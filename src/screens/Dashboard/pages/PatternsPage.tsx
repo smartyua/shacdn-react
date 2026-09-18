@@ -8,6 +8,7 @@ import {
   ScrollText,
   Table2,
   UserRound,
+  Wallet,
 } from 'lucide-react';
 
 import { Alert, AlertDescription, AlertTitle } from '../../../components/Alert/Alert';
@@ -70,6 +71,12 @@ const RECIPE_LINKS = [
     description: 'Bulk select + Combobox filters + AlertDialog',
     path: '/dashboard/orders',
     icon: Table2,
+  },
+  {
+    title: 'Finance dashboard',
+    description: 'KPI tiles + donut + grouped bars + wallet cards',
+    path: '/dashboard/finance',
+    icon: Wallet,
   },
 ] as const;
 

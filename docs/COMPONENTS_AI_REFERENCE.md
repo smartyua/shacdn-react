@@ -13,7 +13,7 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Checkbox / radio / switch | `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup` | |
 | Choice cards | `RadioCards`, `CheckboxCards` | Radix Themes pattern; not in shadcn registry |
 | Key / value rows | `DataList` | Radix Themes; definition list |
-| Date | `Calendar`, `DatePicker` | DatePicker → Calendar + Floating |
+| Date | `Calendar`, `DatePicker`, `DateRangePicker` | DatePicker / DateRangePicker → Calendar + Floating |
 | Modal / confirm | `Dialog`, `AlertDialog`, `Modal` (alias) | copies `Modal/modalLayer.tsx` |
 | Side panel | `Drawer`, `Sheet` (alias) | |
 | Menu | `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu` | DropdownMenu: CheckboxItem, RadioItem, Sub, Shortcut |
@@ -21,7 +21,7 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Toast | `Toast`, `Sonner` (alias) | `ToastProvider` |
 | Layout | `Card`, `Separator`, `Tabs`, `TabNav`, `Accordion`, `Collapsible`, `Resizable`, `ScrollArea`, `Sidebar` | TabNav is links, not panels |
 | Feedback | `Alert`, `Banner`, `Callout`, `Progress`, `ProgressRing`, `Spinner`, `Skeleton`, `Empty` | |
-| Data | `Table`, `Pagination`, `Chart` | Chart is zero-dep SVG; Recharts optional in apps |
+| Data | `Table`, `Pagination`, `Chart` | Chart: bar, grouped bar, donut, sparkline (zero-dep SVG) |
 | Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea` | |
 | Theme | `ThemeSwitcher` | needs `src/styles/theme.ts`; no LocaleProvider |
 | Demo chrome | `Locale`, `SiteHeader` | **demo-only** |

@@ -1,0 +1,480 @@
+@use '../../../../styles/variables.scss' as *;
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: $spacing-lg;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.kpiCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.kpiIntro {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.iconTile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.toneSuccess {
+  background-color: alpha($success, 16%);
+  color: $success;
+}
+
+.toneInfo {
+  background-color: alpha($load, 16%);
+  color: $load;
+}
+
+.toneWarning {
+  background-color: alpha($warning, 18%);
+  color: $warning;
+}
+
+.toneCaution {
+  background-color: alpha($solar, 18%);
+  color: $solar;
+}
+
+.kpiLabel {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.kpiValue {
+  margin: $spacing-sm 0 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  line-height: 1.2;
+  color: $foreground;
+}
+
+.kpiHint {
+  margin: $spacing-xs 0 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.kpiActions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.sparkline {
+  margin-top: $spacing-md;
+}
+
+.chartsRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: $spacing-lg;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.bottomRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: $spacing-lg;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  min-width: 0;
+}
+
+.cardFill {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.incomeBody {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  align-items: center;
+}
+
+.incomeChart {
+  --chart-1: 0 0% 9%;
+  --chart-2: 0 0% 32%;
+  --chart-3: 0 0% 55%;
+  --chart-4: 0 0% 78%;
+  display: flex;
+  justify-content: center;
+}
+
+:global(:root[data-theme*='dark']) .incomeChart {
+  --chart-1: 0 0% 96%;
+  --chart-2: 0 0% 72%;
+  --chart-3: 0 0% 52%;
+  --chart-4: 0 0% 32%;
+}
+
+.donutCenterValue {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+  color: $foreground;
+}
+
+.donutCenterLabel {
+  margin: $spacing-xs 0 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.incomeLegend {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 0;
+  width: 100%;
+}
+
+.incomeLegendHead {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+}
+
+.incomeTotalLabel {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.incomeTotalValue {
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+}
+
+.incomeLegendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+.incomeLegendName {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $foreground;
+  min-width: 0;
+}
+
+.swatch {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--chart-color, #{$foreground});
+  flex-shrink: 0;
+}
+
+.incomeLegendAmount {
+  color: $muted-foreground;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.expensesBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: $spacing-lg;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.8fr);
+    align-items: start;
+  }
+}
+
+.expensesChart {
+  --chart-1: 0 0% 9%;
+  --chart-2: 0 0% 72%;
+  min-width: 0;
+}
+
+:global(:root[data-theme*='dark']) .expensesChart {
+  --chart-1: 0 0% 96%;
+  --chart-2: 0 0% 42%;
+}
+
+.chartFoot {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+}
+
+.chartFootTitle {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.chartFootHint {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.summaryTitle {
+  margin: 0 0 $spacing-md;
+  font-size: $font-size-sm;
+  font-weight: 600;
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.summaryRow {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.summaryMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+.summaryBar {
+  display: flex;
+  height: 0.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: $secondary;
+}
+
+.summaryFill {
+  height: 100%;
+  background-color: $foreground;
+  border-radius: 9999px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.party {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.partyName {
+  font-weight: 500;
+  color: $foreground;
+}
+
+.amountIncome {
+  color: $success;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.amountExpense {
+  color: $foreground;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.savingBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  text-align: center;
+}
+
+.savingAmount {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+}
+
+.savingCaption {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+}
+
+.savingTarget {
+  color: $muted-foreground;
+  font-weight: 500;
+}
+
+.walletList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.walletRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border-radius: $radius-md;
+  border: $border-width solid $border;
+  background-color: $card;
+  min-width: 0;
+}
+
+.walletCardFace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 2.15rem;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+}
+
+.walletDark {
+  background-color: $foreground;
+  color: $background;
+}
+
+.walletMuted {
+  background-color: $muted;
+  color: $foreground;
+}
+
+.walletAccent {
+  background-color: $secondary;
+  color: $foreground;
+  border: $border-width solid $border;
+}
+
+.walletPrimary {
+  background-color: $primary;
+  color: $primary-foreground;
+}
+
+.walletMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.walletName {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 500;
+}
+
+.walletNumber {
+  margin: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+  font-variant-numeric: tabular-nums;
+}
+
+.walletBalance {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.networkMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.mastercard {
+  position: relative;
+  width: 1.35rem;
+  height: 0.85rem;
+}
+
+.mastercardCircle {
+  position: absolute;
+  top: 0;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 9999px;
+  opacity: 0.92;
+}
+
+.mastercardCircle:first-child {
+  left: 0;
+  background-color: currentColor;
+  opacity: 0.55;
+}
+
+.mastercardCircle:last-child {
+  right: 0;
+  background-color: currentColor;
+}

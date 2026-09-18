@@ -63,6 +63,9 @@ const RequestsPage = lazy(() =>
 const BessPage = lazy(() =>
   import('./screens/Dashboard/pages/Bess/BessPage').then((m) => ({ default: m.BessPage }))
 );
+const FinancePage = lazy(() =>
+  import('./screens/Dashboard/pages/Finance/FinancePage').then((m) => ({ default: m.FinancePage }))
+);
 const SessyLanding = lazy(() =>
   import('./screens/SessyLanding/SessyLanding').then((m) => ({ default: m.SessyLanding }))
 );
@@ -127,6 +130,7 @@ const App = () => {
               <Route path="audit-log" element={<LazyPage><AuditLogPage /></LazyPage>} />
               <Route path="requests" element={<LazyPage><RequestsPage /></LazyPage>} />
               <Route path="bess" element={<LazyPage><BessPage /></LazyPage>} />
+              <Route path="finance" element={<LazyPage><FinancePage /></LazyPage>} />
               <Route path="settings" element={<LazyPage><SettingsPage /></LazyPage>} />
             </Route>
             <Route path="/sessy" element={withShell(<SessyLanding />)} />

@@ -2,7 +2,7 @@ import { forwardRef, type HTMLAttributes } from 'react';
 import styles from './Badge.module.scss';
 
 export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'secondary' | 'outline' | 'destructive' | 'ghost';
+  variant?: 'default' | 'secondary' | 'outline' | 'destructive' | 'ghost' | 'success';
 }
 
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(

@@ -15,12 +15,14 @@ describe('Badge', () => {
         <Badge variant="secondary">Secondary</Badge>
         <Badge variant="outline">Outline</Badge>
         <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="success">Success</Badge>
       </div>
     );
 
     expect(screen.getByText('Secondary')).toBeInTheDocument();
     expect(screen.getByText('Outline')).toBeInTheDocument();
     expect(screen.getByText('Destructive')).toBeInTheDocument();
+    expect(screen.getByText('Success')).toBeInTheDocument();
   });
 
   it('has no serious accessibility violations', async () => {

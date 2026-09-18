@@ -22,6 +22,7 @@ This project uses Cursor rules for AI assistance. All rules are in `.cursor/rule
 - **file-structure.mdc** - Always applies, project organization
 - **06-memory.mdc / 07-context-management.mdc** — `.ai/` memory + task compression
 - **11-mcp.mdc** — MCP servers (shadcn, shacdn, filesystem)
+- **99-lan-rag.mdc** — search RAG before answers; ingest after every code change
 
 ## AI infrastructure
 
@@ -60,4 +61,5 @@ Visit http://localhost:5173
 2. **Run `npm run lint`** ✅ REQUIRED
 3. Fix any errors
 4. Test in browser
-5. Commit when lint passes
+5. **Ingest changed files into LAN RAG** (`ingest_files`, project `shacdn`) — required, see `99-lan-rag.mdc`
+6. Commit when lint passes

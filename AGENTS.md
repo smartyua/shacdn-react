@@ -37,7 +37,9 @@ npm run build          # for anything beyond a trivial change
 npm run build:mcp      # MCP server (also part of `npm run verify`)
 ```
 
-Behavioural changes need tests. Docs, comments and formatting are exempt.
+After **any** code/docs/rules change, ingest into LAN RAG (`ingest_files`, project `shacdn`) before calling the task done — see `.cursor/rules/99-lan-rag.mdc`. Skip only generated junk (`node_modules`, `dist`, `.git`).
+
+Behavioural changes need tests. Docs, comments and formatting are exempt from tests, **not** from RAG ingest.
 
 ## Where things live
 

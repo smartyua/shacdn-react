@@ -64,3 +64,9 @@
     background-color: $accent;
   }
 }
+
+.success {
+  background-color: alpha($success, 16%);
+  color: $success;
+  border-color: transparent;
+}

@@ -1,0 +1,100 @@
+@use '../../styles/variables.scss' as *;
+
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: auto;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.container {
+  width: auto;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $spacing-sm;
+  min-height: $control-h-md;
+  padding: 0 $control-px;
+  font-size: $font-size-sm;
+  background: $background;
+  color: $foreground;
+  border: $border-width solid $input;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast, opacity $transition-fast;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  font-family: $font-sans;
+
+  svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  &:hover:not(:disabled) {
+    background: $accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.popover {
+  z-index: $z-floating;
+  animation: popIn $content-enter;
+}
+
+.popover[data-side='top'] {
+  animation-name: popInTop;
+}
+
+.popover[data-side='bottom'] {
+  animation-name: popInBottom;
+}
+
+@keyframes popInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popInTop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

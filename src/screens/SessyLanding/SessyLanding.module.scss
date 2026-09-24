@@ -300,6 +300,8 @@
   border: 1px solid $border;
   padding: $spacing-lg;
   background-color: $card;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .comparisonLegend {
@@ -334,6 +336,7 @@
   font-size: $font-size-sm;
   line-height: 1.65;
   border: 1px solid $border;
+  max-width: 100%;
   overflow-x: auto;
 
   span {

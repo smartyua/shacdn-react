@@ -115,10 +115,13 @@
 
 .toolbarEnd {
   display: flex;
+  flex: 1 1 16rem;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: $spacing-sm;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .searchGroup {

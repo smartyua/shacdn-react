@@ -20,6 +20,8 @@ describe('Resizable', () => {
     expect(sizedPanels).toHaveLength(2);
     expect(sizedPanels[0]).toHaveStyle({ flex: '50 1 0px' });
     expect(sizedPanels[1]).toHaveStyle({ flex: '50 1 0px' });
+    expect(sizedPanels[0]).not.toHaveAttribute('defaultSize');
+    expect(sizedPanels[1]).not.toHaveAttribute('defaultSize');
     expect(screen.getByRole('button', { name: 'Resize panel' })).toBeInTheDocument();
   });
 

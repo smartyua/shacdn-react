@@ -25,6 +25,10 @@ describe('CrmErp', () => {
     expect(screen.getByRole('list', { name: 'Opportunity board' })).toBeInTheDocument();
     expect(screen.getByLabelText('Record inspector')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Evaporator train upgrade' })).toBeVisible();
+    const inspector = screen.getByLabelText('Record inspector');
+    const accountTrigger = inspector.querySelector('[data-slot="hover-card-trigger"]');
+    expect(accountTrigger).not.toBeNull();
+    expect(accountTrigger?.closest('p')).toBeNull();
     expect(screen.getByText(/Iberia Pharma is on credit hold/)).toBeVisible();
     expect(screen.getByLabelText('Desk menus')).toBeInTheDocument();
   });

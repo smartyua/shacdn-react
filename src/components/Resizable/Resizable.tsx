@@ -140,7 +140,14 @@ export type ResizablePanelProps = HTMLAttributes<HTMLDivElement> & {
   defaultSize?: string | number;
 };
 
-export const ResizablePanel = ({ className = '', children, ...props }: ResizablePanelProps) => {
+export const ResizablePanel = ({
+  className = '',
+  children,
+  defaultSize,
+  ...props
+}: ResizablePanelProps) => {
+  void defaultSize;
+
   return (
     <div className={`${styles.panel} ${className}`} {...props}>
       <div className={styles.panelInner}>{children}</div>

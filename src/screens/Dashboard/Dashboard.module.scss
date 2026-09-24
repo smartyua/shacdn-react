@@ -462,8 +462,30 @@
   overflow: hidden;
   background-color: $muted;
 
+  // Percentage splits need a fixed height. On a phone that height cuts the
+  // charts in half, so the groups stack and size to their content instead.
   @media (max-width: 767px) {
-    height: 28rem;
+    height: auto;
+    overflow: visible;
+
+    [data-orientation] {
+      flex-direction: column;
+      height: auto;
+      overflow: visible;
+    }
+
+    [data-orientation] > div,
+    [data-orientation] > div > div {
+      flex: 1 1 auto !important;
+      height: auto;
+      overflow: visible;
+    }
+
+    [data-orientation] > button {
+      width: 100%;
+      height: 1px;
+      pointer-events: none;
+    }
   }
 }
 
@@ -950,6 +972,11 @@
   font-weight: 600;
   color: $foreground;
   white-space: nowrap;
+
+  @media (max-width: 767px) {
+    white-space: normal;
+    text-align: right;
+  }
 }
 
 // Sidebar navigation groups

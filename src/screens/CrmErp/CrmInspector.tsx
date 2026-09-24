@@ -276,11 +276,11 @@ const DealInspector = ({ deal }: { deal: Deal }) => {
       <header className={styles.inspectorHead}>
         <p className={styles.inspectorKicker}>Opportunity · {deal.id.toUpperCase()}</p>
         <h2 className={styles.inspectorTitle}>{deal.title}</h2>
-        <p className={styles.inspectorSub}>
+        <div className={styles.inspectorSub}>
           <AccountHover accountId={deal.accountId} />
           {' · '}
           {formatEur(deal.value)}
-        </p>
+        </div>
         <div className={styles.inspectorActions}>
           <Badge variant="outline">{DEAL_STAGE_META[deal.stage].label}</Badge>
           <ComboButton size="sm">
@@ -479,9 +479,9 @@ const QuoteInspector = ({ quote }: { quote: Quote }) => {
       <header className={styles.inspectorHead}>
         <p className={styles.inspectorKicker}>Quote</p>
         <h2 className={styles.inspectorTitle}>{quote.number}</h2>
-        <p className={styles.inspectorSub}>
+        <div className={styles.inspectorSub}>
           <AccountHover accountId={quote.accountId} /> · {formatEur(quote.value)}
-        </p>
+        </div>
         <div className={styles.inspectorActions}>
           <Badge variant={quote.status === 'expired' ? 'destructive' : 'secondary'}>{quoteStatusLabel[quote.status]}</Badge>
           <Badge variant="outline">{quote.margin}% margin</Badge>
@@ -531,9 +531,9 @@ const OrderInspector = ({ order }: { order: Order }) => {
       <header className={styles.inspectorHead}>
         <p className={styles.inspectorKicker}>Sales order</p>
         <h2 className={styles.inspectorTitle}>{order.number}</h2>
-        <p className={styles.inspectorSub}>
+        <div className={styles.inspectorSub}>
           <AccountHover accountId={order.accountId} /> · {formatEur(order.value)}
-        </p>
+        </div>
         <Badge variant={order.status === 'hold' ? 'destructive' : 'secondary'}>{orderStatusLabel[order.status]}</Badge>
       </header>
       <div className={styles.inspectorBody}>
@@ -725,9 +725,9 @@ const InvoiceInspector = ({ invoice }: { invoice: Invoice }) => {
       <header className={styles.inspectorHead}>
         <p className={styles.inspectorKicker}>Receivable</p>
         <h2 className={styles.inspectorTitle}>{invoice.number}</h2>
-        <p className={styles.inspectorSub}>
+        <div className={styles.inspectorSub}>
           <AccountHover accountId={invoice.accountId} /> · {formatEur(invoice.amount)}
-        </p>
+        </div>
         <Badge variant={invoice.status === 'overdue' || invoice.status === 'disputed' ? 'destructive' : 'secondary'}>
           {invoiceStatusLabel[invoice.status]}
         </Badge>

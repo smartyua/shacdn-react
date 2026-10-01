@@ -56,6 +56,7 @@ Behavioural changes need tests. Docs, comments and formatting are exempt from te
 | MCP export server | `mcp/shacdn-server/` |
 | AI tooling, memory, skills | `.ai/` |
 | Current docs | `docs/` (one-off historical reports live in `docs/archive/` — do not treat them as current) |
+| UI contract for agents | [`design.md`](./design.md) — tokens, layout, component choice |
 
 ## Conventions that are enforced
 

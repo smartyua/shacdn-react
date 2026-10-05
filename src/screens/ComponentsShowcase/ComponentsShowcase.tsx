@@ -153,6 +153,7 @@ import { BarChart, ChartContainer } from '../../components/Chart/Chart';
 import { TypographyH1, TypographyLead, TypographyMuted, TypographyP } from '../../components/Typography/Typography';
 import { DirectionProvider } from '../../components/Direction/Direction';
 import { NativeSelect } from '../../components/NativeSelect/NativeSelect';
+import { MotionSections } from './MotionSections';
 import { NameThatUiSections } from './NameThatUiSections';
 import {
   Attachment,
@@ -265,6 +266,8 @@ const COMPONENTS_NAV = [
   'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton', 'Slider', 'Sonner', 'Spinner', 'Stepper', 'Steps',
   'Switch', 'Table', 'Tab Nav', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
   'Typography',
+  'Animated List', 'Animated Text', 'Apple Dock', 'Code Block', 'File Upload', 'Input Mask', 'Number Ticker',
+  'Orbiting Circles', 'Questionnaire', 'Rating', 'Shine Border', 'Sortable', 'Spinning Text',
 ] as const;
 
 const CHART_DEMO_DATA = [
@@ -2091,6 +2094,7 @@ export const ComponentsShowcase = () => {
         </section>
 
         <NameThatUiSections />
+        <MotionSections />
 
         <a href="#" className={styles.backToTop}>↑ Back to Top</a>
       </div>

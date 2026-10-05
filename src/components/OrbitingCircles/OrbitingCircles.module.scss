@@ -1,0 +1,54 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--orbit-size, 16rem);
+  height: var(--orbit-size, 16rem);
+}
+
+.item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  animation: orbitSpin var(--orbit-duration, 20s) linear infinite;
+  animation-delay: var(--orbit-delay, 0s);
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+.path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  border: $border-width dashed $border;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@keyframes orbitSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    animation: none;
+    transform: translate(-50%, -50%) translateX(var(--orbit-radius));
+  }
+}

@@ -3,6 +3,9 @@
 // Sonner re-exports Toast internals, so only its unique bindings are surfaced here.
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './Accordion/Accordion';
+export { AnimatedList } from './AnimatedList/AnimatedList';
+export { AnimatedText } from './AnimatedText/AnimatedText';
+export type { AnimatedTextBy, AnimatedTextVariant } from './AnimatedText/AnimatedText';
 export { Alert, AlertTitle, AlertDescription } from './Alert/Alert';
 export { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from './AlertDialog/AlertDialog';
 export { AspectRatio } from './AspectRatio/AspectRatio';
@@ -41,6 +44,8 @@ export type {
   ComboboxSize,
   ComboboxVariant,
 } from './Combobox/Combobox';
+export { CodeBlock } from './CodeBlock/CodeBlock';
+export type { CodeBlockFile } from './CodeBlock/CodeBlock';
 export { Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator } from './Command/Command';
 export { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from './ContextMenu/ContextMenu';
 export { DataList, DataListItem, DataListLabel, DataListValue } from './DataList/DataList';
@@ -48,6 +53,7 @@ export { DatePicker } from './DatePicker/DatePicker';
 export { DateRangePicker } from './DateRangePicker/DateRangePicker';
 export type { DateRange } from './DateRangePicker/DateRangePicker';
 export { Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from './Dialog/Dialog';
+export { Dock, DockItem } from './Dock/Dock';
 export { DirectionProvider, useDirection } from './Direction/Direction';
 export { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from './Drawer/Drawer';
 export {
@@ -69,11 +75,13 @@ export {
 } from './DropdownMenu/DropdownMenu';
 export { Empty } from './Empty/Empty';
 export { Field, FieldLabel, FieldDescription } from './Field/Field';
+export { FileUpload } from './FileUpload/FileUpload';
 export { FloatingPortal, useFloatingPosition, useDismissLayer, useInitialMenuFocus, computeFloatingPosition, composeRefs } from './Floating/Floating';
 export { Form, FormField, FormItem, FormLabel, FormDescription, FormMessage } from './Form/Form';
 export { HoverCard, HoverCardTrigger, HoverCardContent } from './HoverCard/HoverCard';
 export { Input } from './Input/Input';
 export { InputGroup, InputGroupAddon } from './InputGroup/InputGroup';
+export { InputMask } from './InputMask/InputMask';
 export { InputOTP } from './InputOTP/InputOTP';
 export { Item } from './Item/Item';
 export { Kbd, KbdGroup } from './Kbd/Kbd';
@@ -97,7 +105,9 @@ export { MessageScrollerProvider, MessageScroller, MessageScrollerViewport, Mess
 export { Modal, ModalContent, ModalHeader, ModalFooter, ModalTitle, ModalDescription } from './Modal/Modal';
 export { MultiSelect } from './MultiSelect/MultiSelect';
 export { NativeSelect } from './NativeSelect/NativeSelect';
+export { NumberTicker } from './NumberTicker/NumberTicker';
 export { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuContentLink } from './NavigationMenu/NavigationMenu';
+export { OrbitingCircles, OrbitingCirclesItem } from './OrbitingCircles/OrbitingCircles';
 export { Pagination, PaginationList, PaginationItem, PaginationLink, PaginationButton, PaginationEllipsis } from './Pagination/Pagination';
 export {
   PasswordToggleField,
@@ -107,8 +117,11 @@ export {
 } from './PasswordToggleField/PasswordToggleField';
 export { Popover, PopoverTrigger, PopoverContent } from './Popover/Popover';
 export { Progress } from './Progress/Progress';
+export { Questionnaire } from './Questionnaire/Questionnaire';
+export type { QuestionnaireOption, QuestionnaireQuestion } from './Questionnaire/Questionnaire';
 export { ProgressRing } from './ProgressRing/ProgressRing';
 export { RadioCards, RadioCardsItem } from './RadioCards/RadioCards';
+export { Rating } from './Rating/Rating';
 export { RadioGroup, RadioGroupItem } from './RadioGroup/RadioGroup';
 export { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './Resizable/Resizable';
 export { ScrollArea } from './ScrollArea/ScrollArea';
@@ -116,11 +129,14 @@ export { Scrollspy, ScrollspyLink } from './Scrollspy/Scrollspy';
 export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator } from './Select/Select';
 export { Separator } from './Separator/Separator';
 export { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from './Sheet/Sheet';
+export { ShineBorder } from './ShineBorder/ShineBorder';
 export { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarInset, SidebarTrigger, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from './Sidebar/Sidebar';
 export { SiteHeader } from './SiteHeader/SiteHeader';
 export { Skeleton } from './Skeleton/Skeleton';
 export { Slider } from './Slider/Slider';
 export { SonnerToaster, useSonner } from './Sonner/Sonner';
+export { Sortable, SortableItem } from './Sortable/Sortable';
+export { SpinningText } from './SpinningText/SpinningText';
 export { Spinner } from './Spinner/Spinner';
 export { Stepper } from './Stepper/Stepper';
 export { Steps, StepsItem } from './Steps/Steps';

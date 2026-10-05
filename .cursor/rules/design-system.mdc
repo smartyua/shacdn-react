@@ -46,6 +46,10 @@ $ring: hsl(222.2, 84%, 4.9%);
 - `$transition-base`: 180ms
 - `$transition-slow`: 260ms
 
+## Links
+- A link styled as a button (`Button` with `href`, every variant except `link`) has `text-decoration: none` at rest, on hover, and on focus. Do not underline it.
+- A text link (prose `<a>`, or `Button` `variant="link"`) changes color on hover: `$primary` to `$muted-foreground`, with `color $transition-fast`. An underline may stay. Dropping the underline is not the hover.
+
 ## Usage Rule
 Always import variables with `@use` (not `@import`):
 

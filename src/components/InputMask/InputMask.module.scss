@@ -1,0 +1,33 @@
+@use '../../styles/variables.scss' as *;
+
+.input {
+  display: flex;
+  width: 100%;
+  height: $control-h-md;
+  padding: 0 $control-px;
+  border: $border-width solid $input;
+  border-radius: $radius-md;
+  background: $background;
+  color: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  outline: none;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $destructive;
+  }
+}

@@ -15,4 +15,17 @@ Registry reference: [ui.shadcn.com](https://ui.shadcn.com). Status is for **this
 
 Aliases in this repo: `Modal` = Dialog, `Sheet` = Drawer, `Sonner` = Toast.
 
+## shadcnspace categories
+
+Compared with the category index on [shadcnspace.com/components](https://shadcnspace.com/components). That catalog counts visual variants (456+). This repo ships one primitive per category, themed with the SCSS tokens, and does not clone premium skins.
+
+| shadcnspace category | Here |
+|---|---|
+| Animated List, Animated Text, Apple Dock, Number Ticker, Orbiting Circles, Shine Border, Spinning Text | `AnimatedList`, `AnimatedText`, `Dock`, `NumberTicker`, `OrbitingCircles`, `ShineBorder`, `SpinningText` |
+| Marquee | `Marquee` |
+| Code Block, File Upload, Input Mask, Questionnaire, Rating, Sortable | `CodeBlock`, `FileUpload`, `InputMask`, `Questionnaire`, `Rating`, `Sortable` |
+| Autocomplete | `Combobox` |
+| Navbar, Topbar | `NavigationMenu`, `SiteHeader` (demo chrome) |
+| Remaining registry categories (Accordion through Tooltip) | Matching folder in `src/components/` |
+
 When a registry component gains a variant this matrix does not list, add a row rather than silently diverging.

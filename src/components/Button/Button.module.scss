@@ -16,6 +16,13 @@
   border: none;
   font-family: $font-sans;
   outline: none;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
 
   &:focus-visible {
     outline: $focus-ring-width solid $ring;
@@ -83,10 +90,13 @@
   background-color: transparent;
   color: $primary;
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: $spacing-xs;
 
-  &:hover {
-    text-decoration: none;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $muted-foreground;
+    text-decoration: underline;
   }
 }
 

@@ -1,0 +1,48 @@
+@use '../../styles/variables.scss' as *;
+
+.frame {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--shine-width, 1px);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: -60%;
+  z-index: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    $primary 40deg,
+    $chart-2 90deg,
+    transparent 140deg
+  );
+  animation: shineSpin var(--shine-duration, 8s) linear infinite;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(#{$radius-lg} - var(--shine-width, 1px));
+  background: $card;
+  color: $card-foreground;
+}
+
+@keyframes shineSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame::before {
+    animation: none;
+    transform: none;
+  }
+}

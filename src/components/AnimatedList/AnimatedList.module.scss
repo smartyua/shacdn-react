@@ -1,0 +1,29 @@
+@use '../../styles/variables.scss' as *;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.item {
+  animation: animatedListIn 420ms $ease-spring both;
+}
+
+@keyframes animatedListIn {
+  from {
+    opacity: 0;
+    transform: translateY($spacing-sm);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    animation: none;
+  }
+}

@@ -1,0 +1,55 @@
+@use '../../styles/variables.scss' as *;
+
+.block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background: $card;
+  color: $card-foreground;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  border-bottom: $border-width solid $border;
+  background: $muted;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+.language {
+  font-family: $font-sans;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.pre {
+  margin: 0;
+  padding: $spacing-md;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+}
+
+.line {
+  display: block;
+  padding: 0 $spacing-xs;
+  border-radius: $radius-xs;
+  white-space: pre;
+}
+
+.highlighted {
+  background: $accent;
+  color: $accent-foreground;
+}

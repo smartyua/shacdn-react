@@ -1,0 +1,94 @@
+@use '../../styles/variables.scss' as *;
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  width: 100%;
+}
+
+.drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  min-height: 7rem;
+  padding: $spacing-lg;
+  border: $border-width dashed $border;
+  border-radius: $radius-lg;
+  background: $background;
+  color: $muted-foreground;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  text-align: center;
+  cursor: pointer;
+
+  &:focus-within {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &[data-active='true'] {
+    border-color: $ring;
+    background: $accent;
+    color: $accent-foreground;
+  }
+
+  &[data-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hint {
+  color: $foreground;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  border: $border-width solid $border;
+  border-radius: $radius-md;
+  background: $card;
+}
+
+.preview {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  border-radius: $radius-sm;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: $font-size-sm;
+  color: $foreground;
+}

@@ -29,6 +29,8 @@ Color schemes (`blue`, `green`, `purple`, `orange`, `rose`) only recolor `--prim
 8. Icons are `lucide-react`, 1rem (16px) inside controls, 1.25rem in alerts. Do not introduce another icon set.
 9. External and in-app CTAs that navigate use `Button` with `href` (it renders an anchor). Do not wrap a button in an `<a>`.
 10. Do not copy demo chrome (`Locale`, `SiteHeader`) into consumer apps.
+11. A link drawn as a button (`Button` with `href` in `default`, `secondary`, `outline`, `ghost`, or `destructive`, and any other anchor using button chrome) has `text-decoration: none` at rest, on hover, and on focus. Do not underline it.
+12. A text link — a prose `<a>`, or `Button` with `variant="link"` — changes `color` on `:hover`. Resting color is `$primary`, hover color is `$muted-foreground`, transition is `color $transition-fast`. An underline may stay. Removing the underline does not replace the color change.
 
 ## Color
 
@@ -99,7 +101,7 @@ Button variants, in order of emphasis:
 | `outline` | Default for most buttons in a toolbar or dialog footer |
 | `ghost` | Icon buttons, row actions, low-emphasis |
 | `destructive` | Confirm delete or other irreversible commit |
-| `link` | Inline navigation that should look like text |
+| `link` | Inline text link. Underlined. Hover changes color from `$primary` to `$muted-foreground`. No button fill |
 
 Sizes: `xs`, `sm`, `md` (default), `lg`, plus square `icon`, `iconSm`, `iconLg`. Icon buttons need an accessible name (`aria-label`).
 
@@ -220,7 +222,9 @@ Example.displayName = 'Example';
 ## Do not
 
 - Add Tailwind, Radix, or another component library.
-- Hardcode a hover color. Solid variants use `alpha($token, 90%)` or `80%`.
+- Hardcode a hover color. Solid variants use `alpha($token, 90%)` or `80%`. Text links hover from `$primary` to `$muted-foreground`.
+- Underline a link that is styled as a button.
+- Ship a text link whose hover does not change color.
 - Put marketing hero type, gradients, or glassmorphism on product screens.
 - Open a second dialog on top of a dialog. Use a sheet, or close the first.
 - Use `$destructive` as a brand color.

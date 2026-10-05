@@ -1,0 +1,33 @@
+@use '../../styles/variables.scss' as *;
+
+.svg {
+  display: block;
+  width: var(--spin-size, 8rem);
+  height: var(--spin-size, 8rem);
+  overflow: visible;
+  animation: spinText var(--spin-duration, 12s) linear infinite;
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+.text {
+  fill: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-xs;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@keyframes spinText {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svg {
+    animation: none;
+  }
+}

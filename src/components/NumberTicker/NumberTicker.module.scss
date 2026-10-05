@@ -1,0 +1,7 @@
+@use '../../styles/variables.scss' as *;
+
+.ticker {
+  font-variant-numeric: tabular-nums;
+  font-family: $font-sans;
+  color: $foreground;
+}

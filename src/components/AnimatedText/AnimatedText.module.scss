@@ -1,0 +1,111 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline;
+}
+
+.unit {
+  display: inline-block;
+  white-space: pre;
+  animation-duration: var(--text-duration, 600ms);
+  animation-fill-mode: both;
+  animation-timing-function: $ease-spring;
+}
+
+.fade .unit {
+  animation-name: textFade;
+}
+
+.blur .unit {
+  animation-name: textBlur;
+}
+
+.slide .unit {
+  animation-name: textSlide;
+}
+
+.gradient {
+  background-image: linear-gradient(
+    90deg,
+    $foreground,
+    $primary,
+    $chart-2,
+    $foreground
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
+  animation: textGradient var(--text-duration, 4s) linear infinite;
+}
+
+.highlight {
+  background-image: linear-gradient($primary, $primary);
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0 35%;
+  animation: textHighlight var(--text-duration, 800ms) $ease-spring forwards;
+}
+
+.rotateWord {
+  display: inline-block;
+  animation: textFade var(--text-duration, 400ms) $ease-spring;
+}
+
+@keyframes textFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes textBlur {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes textSlide {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textGradient {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes textHighlight {
+  to {
+    background-size: 100% 35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .unit,
+  .gradient,
+  .highlight,
+  .rotateWord {
+    animation: none;
+    color: $foreground;
+    background: none;
+    filter: none;
+    transform: none;
+  }
+}

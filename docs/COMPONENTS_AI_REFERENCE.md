@@ -21,6 +21,8 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Toast | `Toast`, `Sonner` (alias) | `ToastProvider` |
 | Layout | `Card`, `Separator`, `Tabs`, `TabNav`, `Accordion`, `Collapsible`, `Resizable`, `ScrollArea`, `Sidebar` | TabNav is links, not panels |
 | Feedback | `Alert`, `Banner`, `Callout`, `Progress`, `ProgressRing`, `Spinner`, `Skeleton`, `Empty` | |
+| Motion | `AnimatedList`, `AnimatedText`, `Dock`, `Marquee`, `NumberTicker`, `OrbitingCircles`, `ShineBorder`, `SpinningText` | CSS motion; no animation library |
+| Extra inputs | `InputMask`, `FileUpload`, `Rating`, `Sortable`, `CodeBlock`, `Questionnaire` | shadcnspace categories that are not registry primitives |
 | Data | `Table`, `Pagination`, `Chart` | Chart: bar, grouped bar, donut, sparkline (zero-dep SVG) |
 | Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea` | |
 | Theme | `ThemeSwitcher` | needs `src/styles/theme.ts`; no LocaleProvider |

@@ -22,7 +22,7 @@ export { Calendar } from './Calendar/Calendar';
 export { Callout, CalloutTitle, CalloutDescription } from './Callout/Callout';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './Card/Card';
 export { Carousel, CarouselViewport, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots, CarouselSlide } from './Carousel/Carousel';
-export { ChartContainer, BarChart, GroupedBarChart, DonutChart, Sparkline } from './Chart/Chart';
+export { ChartContainer, BarChart, GroupedBarChart, DonutChart, Sparkline, DivergingBarChart } from './Chart/Chart';
 export { Checkbox } from './Checkbox/Checkbox';
 export { CheckboxCards, CheckboxCardsItem } from './CheckboxCards/CheckboxCards';
 export { CheckboxGroup, CheckboxGroupItem } from './CheckboxGroup/CheckboxGroup';
@@ -75,6 +75,8 @@ export {
 } from './DropdownMenu/DropdownMenu';
 export { Empty } from './Empty/Empty';
 export { Field, FieldLabel, FieldDescription } from './Field/Field';
+export { FinancialTable } from './FinancialTable/FinancialTable';
+export type { FinancialCell, FinancialColumn, FinancialRow, FinancialTone } from './FinancialTable/FinancialTable';
 export { FileUpload } from './FileUpload/FileUpload';
 export { FloatingPortal, useFloatingPosition, useDismissLayer, useInitialMenuFocus, computeFloatingPosition, composeRefs } from './Floating/Floating';
 export { Form, FormField, FormItem, FormLabel, FormDescription, FormMessage } from './Form/Form';

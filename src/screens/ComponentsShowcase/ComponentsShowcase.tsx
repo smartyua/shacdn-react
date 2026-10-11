@@ -16,6 +16,7 @@ import { Slider } from '../../components/Slider/Slider';
 import { TabNav, TabNavLink } from '../../components/TabNav/TabNav';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/Tabs/Tabs';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table/Table';
+import { FinancialTable } from '../../components/FinancialTable/FinancialTable';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '../../components/Breadcrumb/Breadcrumb';
 import { Progress } from '../../components/Progress/Progress';
 import { Kbd } from '../../components/Kbd/Kbd';
@@ -149,7 +150,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '../../components/Sidebar/Sidebar';
-import { BarChart, ChartContainer } from '../../components/Chart/Chart';
+import { BarChart, ChartContainer, DivergingBarChart } from '../../components/Chart/Chart';
 import { TypographyH1, TypographyLead, TypographyMuted, TypographyP } from '../../components/Typography/Typography';
 import { DirectionProvider } from '../../components/Direction/Direction';
 import { NativeSelect } from '../../components/NativeSelect/NativeSelect';
@@ -264,7 +265,7 @@ const COMPONENTS_NAV = [
   'Menubar', 'Mention Textarea', 'Message', 'Message Scroller', 'Modal', 'Multi Select', 'Native Select', 'Navigation Menu',
   'Pagination', 'Popover', 'Progress', 'Progress Ring', 'Radio Cards', 'RadioGroup', 'Resizable', 'Scroll Area', 'Scrollspy',
   'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton', 'Slider', 'Sonner', 'Spinner', 'Stepper', 'Steps',
-  'Switch', 'Table', 'Tab Nav', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
+  'Switch', 'Table', 'Financial Table', 'Tab Nav', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
   'Typography',
   'Animated List', 'Animated Text', 'Apple Dock', 'Code Block', 'File Upload', 'Input Mask', 'Number Ticker',
   'Orbiting Circles', 'Questionnaire', 'Rating', 'Shine Border', 'Sortable', 'Spinning Text',
@@ -277,6 +278,53 @@ const CHART_DEMO_DATA = [
   { label: 'Apr', value: 273 },
   { label: 'May', value: 209 },
 ] as const;
+
+const CASHFLOW_BEFORE = [
+  { label: '26', value: -267 },
+  { label: '27', value: -307 },
+  { label: '28', value: -307 },
+  { label: '29', value: -147 },
+  { label: '30', value: -147 },
+  { label: '31', value: -147 },
+  { label: '32', value: 29 },
+  { label: '33', value: 29 },
+  { label: '34', value: 29 },
+  { label: '35', value: 223 },
+] as const;
+
+const CASHFLOW_AFTER = [
+  { label: '26', value: 446 },
+  { label: '27', value: 325 },
+  { label: '28', value: 283 },
+  { label: '29', value: 327 },
+  { label: '30', value: 287 },
+  { label: '31', value: 248 },
+  { label: '32', value: 304 },
+  { label: '33', value: 268 },
+  { label: '34', value: 232 },
+  { label: '35', value: 300 },
+] as const;
+
+const TAX_IMPACT = [
+  { label: '26', value: 7588 },
+  { label: '27', value: 7080 },
+  { label: '28', value: 5684 },
+  { label: '29', value: 5207 },
+  { label: '30', value: 4744 },
+  { label: '31', value: 4283 },
+  { label: '32', value: 3302 },
+  { label: '33', value: 2865 },
+  { label: '34', value: 2439 },
+  { label: '35', value: 930 },
+] as const;
+
+const formatEuroAxis = (value: number): string => {
+  const abs = Math.abs(value);
+  const body = abs >= 1000 ? `${(abs / 1000).toFixed(1).replace(/\.0$/, '')}k` : `${Math.round(abs)}`;
+  if (value < 0) return `−${body}`;
+  if (value > 0) return `+${body}`;
+  return '0';
+};
 
 const SCROLL_AREA_LINES = Array.from({ length: 20 }, (_, index) => index + 1);
 
@@ -1485,6 +1533,60 @@ export const ComponentsShowcase = () => {
           </Table>
         </section>
 
+        <section id="financial-table" className={styles.section}>
+          <h2>Financial Table</h2>
+          <FinancialTable
+            cornerLabel="Over the hold"
+            activeColumnId="y10"
+            caption="The accent column is the scenario in focus. Positive amounts use the success token, negative amounts the destructive token."
+            columns={[
+              { id: 'y10', label: '10 years' },
+              { id: 'y15', label: '15 years' },
+              { id: 'y20', label: '20 years' },
+            ]}
+            rows={[
+              {
+                id: 'rent',
+                label: 'Rent collected',
+                cells: {
+                  y10: { value: 164604, tone: 'neutral' },
+                  y15: { value: 267696, tone: 'neutral' },
+                  y20: { value: 390060, tone: 'neutral' },
+                },
+              },
+              {
+                id: 'before',
+                label: 'Cashflow before tax benefits',
+                cells: { y10: -20776, y15: -10374, y20: 19300 },
+              },
+              {
+                id: 'tax',
+                label: 'Tax back',
+                cells: {
+                  y10: { value: 38439, tone: 'positive' },
+                  y15: { value: 37916, tone: 'positive' },
+                  y20: { value: 24234, tone: 'positive' },
+                },
+              },
+              {
+                id: 'after',
+                label: 'Cashflow after tax benefits',
+                cells: { y10: 17663, y15: 27542, y20: 43534 },
+              },
+              {
+                id: 'wealth',
+                label: 'Wealth up',
+                emphasis: true,
+                cells: {
+                  y10: { value: 137335, tone: 'neutral' },
+                  y15: { value: 254849, tone: 'neutral' },
+                  y20: { value: 398261, tone: 'neutral' },
+                },
+              },
+            ]}
+          />
+        </section>
+
         <section id="tab-nav" className={styles.section}>
           <h2>Tab Nav</h2>
           <TabNavDemo />
@@ -1724,6 +1826,39 @@ export const ComponentsShowcase = () => {
           <div style={{ maxWidth: '28rem' }}>
             <ChartContainer title="Monthly total" description="SVG bar chart — zero-dep (Recharts optional in apps)">
               <BarChart data={[...CHART_DEMO_DATA]} />
+            </ChartContainer>
+          </div>
+          <div className={styles.subsection}>
+            <h3>Signed cashflow</h3>
+            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, 1fr))' }}>
+              <ChartContainer title="Cashflow before tax benefits" description="Per month · rent minus loan and costs">
+                <DivergingBarChart aria-label="Cashflow before tax benefits" data={[...CASHFLOW_BEFORE]} formatValue={formatEuroAxis} />
+              </ChartContainer>
+              <ChartContainer title="Cashflow after tax benefits" description="Per month · including the tax refund">
+                <DivergingBarChart aria-label="Cashflow after tax benefits" data={[...CASHFLOW_AFTER]} formatValue={formatEuroAxis} />
+              </ChartContainer>
+              <ChartContainer title="Tax impact" description="Per year · income tax saved">
+                <DivergingBarChart
+                  aria-label="Tax impact"
+                  tone="single"
+                  seriesLabel="Tax refund"
+                  data={[...TAX_IMPACT]}
+                  formatValue={formatEuroAxis}
+                />
+              </ChartContainer>
+            </div>
+          </div>
+          <div className={styles.subsection}>
+            <h3>Bars with a comparison line</h3>
+            <ChartContainer title="Monthly cashflow" description="After-tax bars, before-tax line">
+              <DivergingBarChart
+                aria-label="Monthly cashflow"
+                data={[...CASHFLOW_AFTER]}
+                comparison={[...CASHFLOW_BEFORE]}
+                comparisonLabel="Before tax benefits"
+                positiveLabel="After tax benefits"
+                formatValue={formatEuroAxis}
+              />
             </ChartContainer>
           </div>
         </section>

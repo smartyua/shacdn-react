@@ -1,0 +1,48 @@
+@use '../../styles/variables.scss' as *;
+
+.table {
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  text-align: left;
+}
+
+.numeric {
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+th.rowLabel {
+  text-align: left;
+  font-weight: 500;
+  color: $muted-foreground;
+}
+
+.emphasis {
+  font-weight: 700;
+}
+
+th.emphasisLabel {
+  text-align: left;
+  font-weight: 700;
+  color: $foreground;
+}
+
+th.active {
+  background-color: $accent;
+  color: $accent-foreground;
+}
+
+td.active {
+  background-color: $accent;
+}
+
+.positive {
+  color: $success;
+}
+
+.negative {
+  color: $destructive;
+}

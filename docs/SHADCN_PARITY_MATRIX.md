@@ -8,6 +8,7 @@ Registry reference: [ui.shadcn.com](https://ui.shadcn.com). Status is for **this
 | Date Picker | **Implemented** (extra) | Not always a separate registry item |
 | Date Range Picker | **Implemented** (extra) | Calendar `mode="range"` + popup trigger |
 | Radio Cards, Checkbox Cards, Checkbox Group, Data List, Tab Nav | **Implemented** (extra) | Radix Themes patterns; not in shadcn `registry:ui` |
+| Diverging bar chart, financial comparison table | **Implemented** (extra) | `DivergingBarChart`, `FinancialTable`. Signed cashflow bars and period columns use success/destructive/accent tokens |
 | Dropdown Menu compound parts | **Implemented** | CheckboxItem, RadioGroup/RadioItem, Sub/SubTrigger/SubContent, Shortcut, Group, Label, Portal |
 | Chat suite (Attachment, Bubble, Marker, Message, MessageScroller) | **Implemented** (extra) | |
 | ThemeSwitcher, Direction, Locale, SiteHeader | Extra / demo | Locale + SiteHeader are **demo-only** |

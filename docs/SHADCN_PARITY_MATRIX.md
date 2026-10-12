@@ -10,7 +10,7 @@ Registry reference: [ui.shadcn.com](https://ui.shadcn.com). Status is for **this
 | Radio Cards, Checkbox Cards, Checkbox Group, Data List, Tab Nav | **Implemented** (extra) | Radix Themes patterns; not in shadcn `registry:ui` |
 | Diverging bar chart, financial comparison table | **Implemented** (extra) | `DivergingBarChart`, `FinancialTable`. Signed cashflow bars and period columns use success/destructive/accent tokens |
 | Dropdown Menu compound parts | **Implemented** | CheckboxItem, RadioGroup/RadioItem, Sub/SubTrigger/SubContent, Shortcut, Group, Label, Portal |
-| Chat suite (Attachment, Bubble, Marker, Message, MessageScroller) | **Implemented** (extra) | |
+| Chat suite (Attachment, Bubble, Marker, Message, MessageScroller, ThinkingLoader, ToolCallCard) | **Implemented** (extra) | ThinkingLoader is the phase pill; ToolCallCard / ToolCallGroup is the agent tool log |
 | ThemeSwitcher, Direction, Locale, SiteHeader | Extra / demo | Locale + SiteHeader are **demo-only** |
 | Blocks that need Recharts / Embla / full app shells | **Compose** | Use Chart/Carousel/Sidebar here, or add those deps in the consumer app |
 

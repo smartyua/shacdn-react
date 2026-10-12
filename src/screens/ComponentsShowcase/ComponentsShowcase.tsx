@@ -66,6 +66,8 @@ import { Label } from '../../components/Label/Label';
 import { Separator } from '../../components/Separator/Separator';
 import { Skeleton } from '../../components/Skeleton/Skeleton';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { ThinkingLoader } from '../../components/ThinkingLoader/ThinkingLoader';
+import { ToolCallCard, ToolCallGroup } from '../../components/ToolCallCard/ToolCallCard';
 import { RadioCards, RadioCardsItem } from '../../components/RadioCards/RadioCards';
 import { RadioGroup, RadioGroupItem } from '../../components/RadioGroup/RadioGroup';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../../components/Tooltip/Tooltip';
@@ -262,7 +264,7 @@ const COMPONENTS_NAV = [
   'Checkbox', 'Checkbox Cards', 'Checkbox Group', 'Chip', 'Collapsible', 'Color Picker', 'Combo Button', 'Combobox', 'Command', 'Context Menu',
   'Data List', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty', 'Field', 'Form', 'Hover Card',
   'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label', 'Lightbox', 'Marker', 'Marquee', 'Masonry',
-  'Menubar', 'Mention Textarea', 'Message', 'Message Scroller', 'Modal', 'Multi Select', 'Native Select', 'Navigation Menu',
+  'Menubar', 'Mention Textarea', 'Message', 'Message Scroller', 'Thinking Loader', 'Tool Call Card', 'Modal', 'Multi Select', 'Native Select', 'Navigation Menu',
   'Pagination', 'Popover', 'Progress', 'Progress Ring', 'Radio Cards', 'RadioGroup', 'Resizable', 'Scroll Area', 'Scrollspy',
   'Select', 'Separator', 'Sheet', 'Sidebar', 'Skeleton', 'Slider', 'Sonner', 'Spinner', 'Stepper', 'Steps',
   'Switch', 'Table', 'Financial Table', 'Tab Nav', 'Tabs', 'Textarea', 'Timeline', 'Toast', 'Toggle', 'Toggle Group', 'Token Field', 'Tooltip',
@@ -2107,6 +2109,39 @@ export const ComponentsShowcase = () => {
             Interactive thread in a fixed-height card — scroll up to reveal jump buttons, then add messages to test auto-scroll anchoring.
           </p>
           <MessageScrollerDemo />
+        </section>
+
+        <section id="thinking-loader" className={styles.section}>
+          <h2>Thinking Loader</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem' }}>
+            <ThinkingLoader />
+            <ThinkingLoader variant="plain" size="sm" phases={['Thinking']} />
+            <ThinkingLoader done doneLabel="Thought for 4s" phases={['Thinking']} />
+          </div>
+        </section>
+
+        <section id="tool-call-card" className={styles.section}>
+          <h2>Tool Call Card</h2>
+          <div style={{ maxWidth: '36rem' }}>
+            <ToolCallGroup defaultOpen>
+              <ToolCallCard
+                name="search_web"
+                status="success"
+                summary="Searched the web for 'CRM pricing 2026'"
+                duration={1500}
+                args={{ query: 'CRM pricing 2026', max_results: 5 }}
+                result={{ total: 5, cached: false }}
+              />
+              <ToolCallCard
+                name="kb.fetch"
+                status="error"
+                summary="Could not read the refund policy"
+                args={{ id: 'doc_381' }}
+                error="403 – the agent has no access to this space"
+                onRetry={() => undefined}
+              />
+            </ToolCallGroup>
+          </div>
         </section>
 
         <section id="popover" className={styles.section}>

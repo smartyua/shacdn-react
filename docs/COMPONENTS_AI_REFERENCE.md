@@ -24,7 +24,7 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Motion | `AnimatedList`, `AnimatedText`, `Dock`, `Marquee`, `NumberTicker`, `OrbitingCircles`, `ShineBorder`, `SpinningText` | CSS motion; no animation library |
 | Extra inputs | `InputMask`, `FileUpload`, `Rating`, `Sortable`, `CodeBlock`, `Questionnaire` | shadcnspace categories that are not registry primitives |
 | Data | `Table`, `Pagination`, `Chart` | Chart: bar, grouped bar, donut, sparkline (zero-dep SVG) |
-| Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea` | |
+| Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea`, `ThinkingLoader`, `ToolCallCard` | Tool calls: `ToolCallGroup` wraps `ToolCallCard` |
 | Theme | `ThemeSwitcher` | needs `src/styles/theme.ts`; no LocaleProvider |
 | Demo chrome | `Locale`, `SiteHeader` | **demo-only** |
 

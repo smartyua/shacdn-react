@@ -157,11 +157,15 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableFoo
 export { TabNav, TabNavLink } from './TabNav/TabNav';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs/Tabs';
 export { Textarea } from './Textarea/Textarea';
+export { ThinkingLoader } from './ThinkingLoader/ThinkingLoader';
+export type { ThinkingLoaderProps } from './ThinkingLoader/ThinkingLoader';
 export { ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher';
 export type { ThemeSwitcherLabels, ThemeSwitcherProps } from './ThemeSwitcher/ThemeSwitcher';
 export { ToastProvider, useToast, ToastItem, ToastViewport, ToastTitle, ToastDescription } from './Toast/Toast';
 export { Toggle } from './Toggle/Toggle';
 export { ToggleGroup, ToggleGroupItem } from './ToggleGroup/ToggleGroup';
+export { ToolCallCard, ToolCallGroup } from './ToolCallCard/ToolCallCard';
+export type { ToolCallCardProps, ToolCallGroupProps, ToolCallStatus } from './ToolCallCard/ToolCallCard';
 export { TokenField } from './TokenField/TokenField';
 export {
   Toolbar,

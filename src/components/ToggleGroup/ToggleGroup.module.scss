@@ -15,8 +15,23 @@
   border-radius: calc($radius-md - 2px);
   box-shadow: none;
   border: none !important;
+  background: transparent;
+  color: $muted-foreground;
+}
+
+// The track is $muted, and the default theme sets --accent equal to --muted,
+// so Toggle's accent "on" fill disappears into the track.
+.group > *[data-state='on'] {
+  background: $background;
+  color: $foreground;
 }
 
 .group > *[data-state='off']:hover:not(:disabled) {
+  background: alpha($foreground, 6%);
+  color: $foreground;
+}
+
+.group > *[data-state='on']:hover:not(:disabled) {
   background: $background;
+  color: $foreground;
 }

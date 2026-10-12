@@ -1,0 +1,411 @@
+@use '../../styles/variables.scss' as *;
+
+$font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+.card,
+.group {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  color: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  letter-spacing: $tracking-ui;
+}
+
+.card {
+  border: $border-width solid $border;
+  border-radius: $radius-md;
+  background: $card;
+}
+
+.grouped {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+
+  & + & {
+    border-top: $border-width solid $border;
+  }
+}
+
+.group {
+  border: $border-width solid $border;
+  border-radius: $radius-md;
+  background: $card;
+  overflow: hidden;
+}
+
+.header,
+.groupHeader,
+.iconButton,
+.textButton {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+
+  &:focus-visible {
+    outline: 2px solid $ring;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.header,
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  min-height: $control-h-lg;
+  padding: $spacing-xs $spacing-sm;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: $muted;
+  }
+}
+
+.tile,
+.stackTile {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: $muted-foreground;
+  background: $muted;
+}
+
+.tile {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: $radius-sm;
+}
+
+.iconStack {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.stackTile {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  border: $border-width solid $background;
+  background: $secondary;
+
+  & + & {
+    margin-left: -0.35rem;
+  }
+}
+
+.headline {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.name {
+  flex: none;
+  max-width: 40%;
+  overflow: hidden;
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.summary,
+.groupLabel,
+.groupLabelShimmer {
+  min-width: 0;
+  overflow: hidden;
+  color: $muted-foreground;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.groupLabel,
+.groupLabelShimmer {
+  flex: 1;
+  text-align: left;
+}
+
+.groupLabelShimmer {
+  background-image: linear-gradient(
+    100deg,
+    $muted-foreground 0%,
+    $muted-foreground 35%,
+    $foreground 50%,
+    $muted-foreground 65%,
+    $muted-foreground 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.status,
+.groupTime {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+  color: $muted-foreground;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  animation: statusIn $transition-base both;
+}
+
+.card[data-status='error'] .status {
+  color: $destructive;
+}
+
+.chevron {
+  flex: none;
+  color: $muted-foreground;
+  transition: transform $transition-fast;
+}
+
+.card[data-state='open'] .chevron,
+.group[data-state='open'] .chevron {
+  transform: rotate(180deg);
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows $transition-base,
+    opacity $transition-fast;
+}
+
+.bodyOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.bodyInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.block {
+  padding: 0 $spacing-sm $spacing-sm;
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.blockTitle {
+  margin: 0;
+  color: $muted-foreground;
+  font-size: $font-size-xs;
+  font-weight: 500;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $control-h-sm;
+  height: $control-h-sm;
+  border-radius: $radius-sm;
+  color: $muted-foreground;
+  cursor: pointer;
+
+  &:hover {
+    background: $muted;
+    color: $foreground;
+  }
+
+  &[data-invalid='true'] {
+    color: $destructive;
+  }
+}
+
+.code {
+  margin: 0;
+  overflow: auto;
+  padding: $spacing-sm;
+  border-radius: $radius-sm;
+  background: $muted;
+  color: $foreground;
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.capped {
+  overflow: hidden;
+}
+
+.textButton {
+  margin-top: $spacing-xs;
+  padding: 0;
+  color: $muted-foreground;
+  font-size: $font-size-xs;
+  cursor: pointer;
+
+  &:hover {
+    color: $foreground;
+  }
+}
+
+.errorBox {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-xs;
+  margin: 0 $spacing-sm $spacing-sm;
+  color: $destructive;
+  font-size: $font-size-xs;
+
+  p {
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.errorIcon {
+  color: $destructive;
+}
+
+.waiting {
+  margin: 0;
+  padding: 0 $spacing-sm $spacing-sm;
+  color: $muted-foreground;
+  font-size: $font-size-xs;
+}
+
+.spin {
+  width: 0.875rem;
+  height: 0.875rem;
+  animation: spin 0.8s linear infinite;
+
+  circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    opacity: 0.25;
+  }
+
+  path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+  }
+}
+
+.miniCheck {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: $success;
+
+  path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16;
+    stroke-dashoffset: 16;
+    animation: draw 280ms $ease-standard forwards;
+  }
+}
+
+.key {
+  color: $foreground;
+}
+
+.string {
+  color: $success;
+}
+
+.number {
+  color: $primary;
+}
+
+.literal {
+  color: $muted-foreground;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes statusIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body,
+  .chevron,
+  .status,
+  .spin,
+  .groupLabelShimmer,
+  .miniCheck path {
+    animation: none;
+    transition: none;
+    filter: none;
+    stroke-dashoffset: 0;
+  }
+
+  .groupLabelShimmer {
+    color: $muted-foreground;
+    background: none;
+  }
+}

@@ -41,6 +41,8 @@ $control-px: 0.625rem; // px-2.5 — horizontal padding in h-8 controls (shadcn 
 // Switch — shadcn w-9 × h-5 (independent of button h-8 default)
 $switch-track-w: 2.25rem; // 36px
 $switch-track-h: 1.25rem; // 20px
+// Checkbox box — shadcn rounded-[4px]; $radius-sm on a 1rem box renders a circle (reads as a radio)
+$checkbox-radius: 0.25rem;
 
 // Transitions — calm, decisive (closer to platform default easing)
 $ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);

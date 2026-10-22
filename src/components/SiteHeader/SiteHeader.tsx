@@ -58,6 +58,9 @@ export const SiteHeader = () => {
             <NavLink className={navClass} to="/components">
               {messages.siteNav.components}
             </NavLink>
+            <NavLink className={navClass} to="/docs/ai">
+              {messages.siteNav.docs}
+            </NavLink>
             <NavLink className={() => navClass({ isActive: dashboardActive })} to="/dashboard">
               {messages.siteNav.dashboard}
             </NavLink>

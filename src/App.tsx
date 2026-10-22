@@ -74,6 +74,9 @@ const TranscodingDashboard = lazy(() =>
     default: m.TranscodingDashboard,
   }))
 );
+const AiDocs = lazy(() =>
+  import('./screens/Docs/AiDocs').then((m) => ({ default: m.AiDocs }))
+);
 const CrmErp = lazy(() =>
   import('./screens/CrmErp/CrmErp').then((m) => ({ default: m.CrmErp }))
 );
@@ -114,6 +117,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={withShell(<ShadcnHome />)} />
             <Route path="/components" element={withShell(<ComponentsShowcase />)} />
+            <Route path="/docs" element={<Navigate to="/docs/ai" replace />} />
+            <Route path="/docs/ai" element={withShell(<AiDocs />)} />
             <Route path="/dashboard" element={withShell(<DashboardLayout />)}>
               <Route index element={<Navigate to="overview" replace />} />
               <Route path="overview" element={<LazyPage><OverviewPage /></LazyPage>} />

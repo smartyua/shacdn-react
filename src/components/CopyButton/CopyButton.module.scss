@@ -1,0 +1,123 @@
+@use '../../styles/variables.scss' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  border-radius: $radius-md;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  letter-spacing: $tracking-ui;
+  white-space: nowrap;
+  color: $foreground;
+  cursor: pointer;
+  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast,
+    transform $transition-fast;
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &[data-state='copied'] .icon {
+    color: $success;
+  }
+
+  &[data-state='failed'] .icon {
+    color: $destructive;
+  }
+}
+
+.outline {
+  border: $border-width solid $input;
+  background-color: $background;
+
+  &:hover {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+}
+
+.ghost {
+  border: $border-width solid transparent;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+}
+
+.md {
+  height: $control-h-md;
+  padding: 0 $control-px;
+}
+
+.sm {
+  height: $control-h-sm;
+  padding: 0 $spacing-sm;
+  font-size: $font-size-xs;
+}
+
+.iconOnly.md {
+  width: $control-h-md;
+  padding: 0;
+}
+
+.iconOnly.sm {
+  width: $control-h-sm;
+  padding: 0;
+}
+
+.icon {
+  display: inline-flex;
+  animation: iconIn $transition-base;
+}
+
+.label {
+  font-variant-numeric: tabular-nums;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes iconIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    animation: none;
+  }
+
+  .button:active:not(:disabled) {
+    transform: none;
+  }
+}

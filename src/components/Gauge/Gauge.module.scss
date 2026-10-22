@@ -1,0 +1,74 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  --gauge-color: #{$primary};
+
+  position: relative;
+  display: inline-block;
+  font-family: $font-sans;
+  color: $foreground;
+
+  &[data-tone='success'] {
+    --gauge-color: #{$success};
+  }
+
+  &[data-tone='warning'] {
+    --gauge-color: #{$warning};
+  }
+
+  &[data-tone='destructive'] {
+    --gauge-color: #{$destructive};
+  }
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.track,
+.indicator {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: $muted;
+}
+
+.indicator {
+  stroke: var(--gauge-color);
+  transition: stroke-dashoffset $transition-slow, stroke $transition-base;
+}
+
+.readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8%;
+  pointer-events: none;
+}
+
+.value {
+  font-size: $font-size-xl * 1.4;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: $tracking-tight;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicator {
+    transition: none;
+  }
+}

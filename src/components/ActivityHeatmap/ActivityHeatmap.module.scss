@@ -1,0 +1,83 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  --cell: 0.6875rem;
+  --gap: 3px;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  font-family: $font-sans;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.scroller {
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.months {
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), var(--cell));
+  gap: var(--gap);
+  margin-bottom: $spacing-xs;
+  white-space: nowrap;
+
+  span {
+    overflow: visible;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, var(--cell));
+  grid-template-columns: repeat(var(--weeks), var(--cell));
+  gap: var(--gap);
+  width: max-content;
+}
+
+.cell {
+  display: block;
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 2px;
+  background-color: $muted;
+  box-shadow: inset 0 0 0 $border-width alpha($foreground, 4%);
+
+  &[data-level='1'] {
+    background-color: alpha($success, 30%);
+  }
+
+  &[data-level='2'] {
+    background-color: alpha($success, 55%);
+  }
+
+  &[data-level='3'] {
+    background-color: alpha($success, 78%);
+  }
+
+  &[data-level='4'] {
+    background-color: $success;
+  }
+
+  &[data-outside] {
+    visibility: hidden;
+  }
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap);
+
+  > span:first-child {
+    margin-right: $spacing-xs;
+  }
+
+  > span:last-child {
+    margin-left: $spacing-xs;
+  }
+}

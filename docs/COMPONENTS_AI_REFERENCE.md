@@ -4,6 +4,8 @@ Use this when picking a shacdn primitive. Copy folders whole (`tsx` + `module.sc
 
 Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_project`.
 
+Agent setup (MCP clients, skill, install, `llms.txt`) is documented on the demo page `/docs/ai`. `public/llms.txt`, `public/llms-full.txt` and `public/catalog.json` are generated from the MCP catalog with `npm run shacdn:llms`; `mcp/shacdn-server/llms.test.ts` fails when they are stale.
+
 | Task | Component | Notes |
 |------|-----------|--------|
 | Button / CTA / link | `Button` | `href` → `<a>` |
@@ -24,6 +26,11 @@ Tokens first: `npm run shacdn:install -- /path/to/app` or MCP `install_to_projec
 | Motion | `AnimatedList`, `AnimatedText`, `Dock`, `Marquee`, `NumberTicker`, `OrbitingCircles`, `ShineBorder`, `SpinningText` | CSS motion; no animation library |
 | Extra inputs | `InputMask`, `FileUpload`, `Rating`, `Sortable`, `CodeBlock`, `Questionnaire` | shadcnspace categories that are not registry primitives |
 | Data | `Table`, `Pagination`, `Chart` | Chart: bar, grouped bar, donut, sparkline (zero-dep SVG) |
+| Metrics | `MetricCard`, `Gauge`, `UsageMeter`, `ActivityHeatmap` | MetricCard → Chart (Sparkline) |
+| Inspect data | `TreeView`, `JsonViewer`, `ImageCompare` | |
+| Precise inputs | `NumberField`, `TimePicker`, `SegmentedControl`, `InlineEdit`, `PasswordStrength` | NumberField / TimePicker format with `Intl` |
+| Safe actions | `CopyButton`, `HoldToConfirm` | HoldToConfirm also works with Space / Enter held |
+| Text effects | `ExpandableText`, `TextShimmer`, `Countdown` | Respect `prefers-reduced-motion` |
 | Chat | `Message`, `MessageScroller`, `Bubble`, `Marker`, `Attachment`, `MentionTextarea`, `ThinkingLoader`, `ToolCallCard` | Tool calls: `ToolCallGroup` wraps `ToolCallCard` |
 | Theme | `ThemeSwitcher` | needs `src/styles/theme.ts`; no LocaleProvider |
 | Demo chrome | `Locale`, `SiteHeader` | **demo-only** |

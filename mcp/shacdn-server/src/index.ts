@@ -2,7 +2,9 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { SCREEN_PATTERNS } from './catalog.js';
+import { SCREEN_PATTERNS, getComponentMeta } from './catalog.js';
+import { resolveDependencyTree } from './lib/deps.js';
+import { installCommand } from './lib/llms.js';
 import {
   buildIntegrationGuide,
   formatComponentBundle,
@@ -60,6 +62,34 @@ server.tool(
   async ({ components }) => ({
     content: [{ type: 'text', text: formatComponentBundle(components) }],
   }),
+);
+
+server.tool(
+  'get_install_command',
+  'Get the one-line CLI command that installs shacdn tokens plus the given components (internal dependencies resolved) into another project, with the copy order and required providers.',
+  {
+    components: z
+      .array(z.string())
+      .default([])
+      .describe('Component names, e.g. ["DatePicker", "Card"]. Empty for design tokens only.'),
+  },
+  async ({ components }) => {
+    const unknown = components.filter((name) => !getComponentMeta(name));
+    const tree = resolveDependencyTree(components);
+    const providers = tree
+      .map((name) => getComponentMeta(name)?.requiresProvider)
+      .filter((provider): provider is string => Boolean(provider));
+    const lines = [
+      '```bash',
+      installCommand(components),
+      '```',
+      '',
+      `Copy order: ${tree.length > 0 ? tree.join(' → ') : 'design system only'}`,
+      providers.length > 0 ? `Providers: ${[...new Set(providers)].join(', ')}` : 'Providers: none',
+      unknown.length > 0 ? `Unknown components (ignored by the installer): ${unknown.join(', ')}` : '',
+    ];
+    return { content: [{ type: 'text', text: lines.filter(Boolean).join('\n') }] };
+  },
 );
 
 server.tool(

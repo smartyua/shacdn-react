@@ -4,6 +4,7 @@ export const en = {
     backToHost: '← kylypko.com',
     home: 'Home',
     components: 'Components',
+    docs: 'Docs',
     dashboard: 'Dashboard',
     bessSolar: 'BESS Solar',
     transcoding: 'Transcoding',

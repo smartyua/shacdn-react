@@ -1,0 +1,105 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  --usage-1: #{$chart-1};
+  --usage-2: #{$chart-2};
+  --usage-3: #{$chart-3};
+  --usage-4: #{$chart-4};
+  --usage-5: #{$chart-5};
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  color: $foreground;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $spacing-md;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.total {
+  font-variant-numeric: tabular-nums;
+  color: $muted-foreground;
+
+  strong {
+    font-weight: 600;
+    color: $foreground;
+  }
+
+  .root[data-tone='warn'] & strong {
+    color: $warning;
+  }
+
+  .root[data-tone='over'] & strong {
+    color: $destructive;
+  }
+}
+
+.track {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: $muted;
+}
+
+.segment {
+  height: 100%;
+  background-color: var(--segment-color);
+  transition: width $transition-slow;
+}
+
+.limitMark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: $destructive;
+  box-shadow: 0 0 0 1px $background;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs $spacing-md;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.swatch {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background-color: var(--segment-color);
+}
+
+.legendValue {
+  font-variant-numeric: tabular-nums;
+  color: $foreground;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segment {
+    transition: none;
+  }
+}

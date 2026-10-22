@@ -1,0 +1,60 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  height: $control-h-md;
+  padding: 0 $control-px;
+  border: $border-width solid $input;
+  border-radius: $radius-md;
+  background-color: $background;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  font-variant-numeric: tabular-nums;
+  color: $foreground;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus-within {
+    border-color: $ring;
+    box-shadow: 0 0 0 3px alpha($ring, 30%);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.icon {
+  margin-right: $spacing-xs;
+  color: $muted-foreground;
+}
+
+.segment {
+  padding: 1px 2px;
+  border-radius: $radius-xs;
+  caret-color: transparent;
+  outline: none;
+  cursor: default;
+  user-select: none;
+  transition: background-color $transition-fast;
+
+  &[data-placeholder] {
+    color: $muted-foreground;
+  }
+
+  &:focus {
+    background-color: $primary;
+    color: $primary-foreground;
+  }
+
+}
+
+.period {
+  margin-left: $spacing-xs;
+}
+
+.separator {
+  color: $muted-foreground;
+}

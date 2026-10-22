@@ -1,0 +1,114 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline-flex;
+  align-items: stretch;
+  gap: $spacing-sm;
+  font-family: $font-sans;
+  color: $foreground;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  min-width: 3.5rem;
+  padding: $spacing-sm $spacing-sm $spacing-xs;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background-color: $card;
+  overflow: hidden;
+}
+
+.value {
+  display: block;
+  font-size: $font-size-xl * 1.4;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: $tracking-tight;
+  font-variant-numeric: tabular-nums;
+  animation: roll $transition-slow;
+}
+
+.label {
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+.sm {
+  .unit {
+    min-width: 2.75rem;
+    padding: $spacing-xs $spacing-xs 2px;
+  }
+
+  .value {
+    font-size: $font-size-lg;
+  }
+
+  .label {
+    font-size: 0.625rem;
+  }
+}
+
+.lg .value {
+  font-size: $font-size-xl * 2;
+}
+
+.complete {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  border-radius: 999px;
+  background-color: alpha($success, 12%);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $success;
+  animation: pop $transition-slow;
+
+  &::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: pulse 1.6s $ease-standard infinite;
+  }
+}
+
+@keyframes roll {
+  from {
+    opacity: 0;
+    transform: translateY(-40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .value,
+  .complete,
+  .complete::before {
+    animation: none;
+  }
+}

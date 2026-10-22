@@ -156,6 +156,7 @@ import { BarChart, ChartContainer, DivergingBarChart } from '../../components/Ch
 import { TypographyH1, TypographyLead, TypographyMuted, TypographyP } from '../../components/Typography/Typography';
 import { DirectionProvider } from '../../components/Direction/Direction';
 import { NativeSelect } from '../../components/NativeSelect/NativeSelect';
+import { ArcSections } from './ArcSections';
 import { MotionSections } from './MotionSections';
 import { NameThatUiSections } from './NameThatUiSections';
 import {
@@ -271,6 +272,9 @@ const COMPONENTS_NAV = [
   'Typography',
   'Animated List', 'Animated Text', 'Apple Dock', 'Code Block', 'File Upload', 'Input Mask', 'Number Ticker',
   'Orbiting Circles', 'Questionnaire', 'Rating', 'Shine Border', 'Sortable', 'Spinning Text',
+  'Activity Heatmap', 'Copy Button', 'Countdown', 'Expandable Text', 'Gauge', 'Hold To Confirm',
+  'Image Compare', 'Inline Edit', 'Json Viewer', 'Metric Card', 'Number Field', 'Password Strength',
+  'Segmented Control', 'Text Shimmer', 'Time Picker', 'Tree View', 'Usage Meter',
 ] as const;
 
 const CHART_DEMO_DATA = [
@@ -2265,6 +2269,7 @@ export const ComponentsShowcase = () => {
 
         <NameThatUiSections />
         <MotionSections />
+        <ArcSections />
 
         <a href="#" className={styles.backToTop}>↑ Back to Top</a>
       </div>

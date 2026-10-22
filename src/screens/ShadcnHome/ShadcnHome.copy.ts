@@ -12,6 +12,7 @@ export type ShadcnHomeCopy = {
     leadBeforeRhythm: string;
     leadAfterRhythm: string;
     viewComponents: string;
+    forAiAgents: string;
     openCatalog: string;
   };
   payment: {
@@ -214,6 +215,7 @@ const EN_COPY = {
       'A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code. This playground follows the same rhythm as ',
     leadAfterRhythm: ', rebuilt with SCSS modules in this repo.',
     viewComponents: 'View components',
+    forAiAgents: 'For AI agents',
     openCatalog: 'Open catalog',
   },
   payment: {
@@ -448,6 +450,7 @@ const RU_COPY = {
       'Набор красиво оформленных компонентов, которые можно настраивать, расширять и развивать. Начните здесь и сделайте их своими. Открытый исходный код. Открытая реализация. Эта площадка следует тому же ритму, что и ',
     leadAfterRhythm: ', но пересобрана с SCSS modules в этом репозитории.',
     viewComponents: 'Смотреть компоненты',
+    forAiAgents: 'Для AI-агентов',
     openCatalog: 'Открыть каталог',
   },
   payment: {
@@ -683,6 +686,7 @@ const DE_COPY = {
       'Eine Sammlung schön gestalteter Komponenten, die Sie anpassen, erweitern und weiterentwickeln können. Starten Sie hier und machen Sie sie zu Ihren eigenen. Open Source. Open Code. Dieser Playground folgt dem gleichen Rhythmus wie ',
     leadAfterRhythm: ', neu aufgebaut mit SCSS modules in diesem Repository.',
     viewComponents: 'Komponenten ansehen',
+    forAiAgents: 'Für KI-Agenten',
     openCatalog: 'Katalog öffnen',
   },
   payment: {
@@ -919,6 +923,7 @@ const UA_COPY = {
       'Набір красиво оформлених компонентів, які можна налаштовувати, розширювати й розвивати. Почніть тут і зробіть їх своїми. Відкритий вихідний код. Відкрита реалізація. Цей майданчик дотримується того ж ритму, що й ',
     leadAfterRhythm: ', але перезібраний з SCSS modules у цьому репозиторії.',
     viewComponents: 'Переглянути компоненти',
+    forAiAgents: 'Для AI-агентів',
     openCatalog: 'Відкрити каталог',
   },
   payment: {
@@ -1154,6 +1159,7 @@ const PL_COPY = {
       'Zestaw pięknie zaprojektowanych komponentów, które możesz dostosować, rozszerzyć i rozwijać. Zacznij tutaj, a potem uczyń je własnymi. Open Source. Open Code. To playground podąża za tym samym rytmem co ',
     leadAfterRhythm: ', przebudowany z SCSS modules w tym repozytorium.',
     viewComponents: 'Zobacz komponenty',
+    forAiAgents: 'Dla agentów AI',
     openCatalog: 'Otwórz katalog',
   },
   payment: {

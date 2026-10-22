@@ -1,0 +1,2363 @@
+{
+  "name": "shacdn",
+  "components": [
+    {
+      "name": "Accordion",
+      "folder": "Accordion",
+      "description": "Expandable FAQ / disclosure sections",
+      "tasks": [
+        "faq",
+        "accordion",
+        "collapse",
+        "expand"
+      ],
+      "exports": [
+        "Accordion",
+        "AccordionItem",
+        "AccordionTrigger",
+        "AccordionContent"
+      ],
+      "dependencies": [
+        "Collapsible"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Accordion"
+    },
+    {
+      "name": "ActivityHeatmap",
+      "folder": "ActivityHeatmap",
+      "description": "Year-at-a-glance contribution grid, one square per day",
+      "tasks": [
+        "activity heatmap",
+        "contribution graph",
+        "calendar heatmap",
+        "streak"
+      ],
+      "exports": [
+        "ActivityHeatmap"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ActivityHeatmap"
+    },
+    {
+      "name": "Alert",
+      "folder": "Alert",
+      "description": "Inline status banner on page",
+      "tasks": [
+        "alert",
+        "banner",
+        "message",
+        "warning",
+        "error"
+      ],
+      "exports": [
+        "Alert",
+        "AlertTitle",
+        "AlertDescription"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Alert"
+    },
+    {
+      "name": "AlertDialog",
+      "folder": "AlertDialog",
+      "description": "Blocking confirmation for destructive actions",
+      "tasks": [
+        "confirm",
+        "delete",
+        "destructive",
+        "modal"
+      ],
+      "exports": [
+        "AlertDialog",
+        "AlertDialogContent",
+        "AlertDialogHeader",
+        "AlertDialogFooter",
+        "AlertDialogTitle",
+        "AlertDialogDescription",
+        "AlertDialogAction",
+        "AlertDialogCancel"
+      ],
+      "dependencies": [
+        "Dialog",
+        "Modal"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components AlertDialog"
+    },
+    {
+      "name": "AnimatedList",
+      "folder": "AnimatedList",
+      "description": "Staggered fade-and-rise entrance for a vertical list",
+      "tasks": [
+        "animated list",
+        "stagger",
+        "activity feed"
+      ],
+      "exports": [
+        "AnimatedList"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components AnimatedList"
+    },
+    {
+      "name": "AnimatedText",
+      "folder": "AnimatedText",
+      "description": "Text motion: fade, blur, slide, typewriter, gradient, scramble, word rotate, highlight",
+      "tasks": [
+        "animated text",
+        "typewriter",
+        "gradient text",
+        "scramble"
+      ],
+      "exports": [
+        "AnimatedText"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components AnimatedText"
+    },
+    {
+      "name": "AspectRatio",
+      "folder": "AspectRatio",
+      "description": "Fixed aspect ratio container for media",
+      "tasks": [
+        "aspect",
+        "ratio",
+        "image",
+        "video"
+      ],
+      "exports": [
+        "AspectRatio"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components AspectRatio"
+    },
+    {
+      "name": "Attachment",
+      "folder": "Attachment",
+      "description": "File/image attachment preview with upload states and actions",
+      "tasks": [
+        "attachment",
+        "file upload",
+        "chat composer",
+        "media preview"
+      ],
+      "exports": [
+        "AttachmentGroup",
+        "Attachment",
+        "AttachmentMedia",
+        "AttachmentContent",
+        "AttachmentTitle",
+        "AttachmentDescription",
+        "AttachmentActions",
+        "AttachmentAction",
+        "AttachmentTrigger"
+      ],
+      "dependencies": [
+        "Button"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Attachment"
+    },
+    {
+      "name": "Avatar",
+      "folder": "Avatar",
+      "description": "User avatar with fallback initials, badge and overlapping group",
+      "tasks": [
+        "avatar",
+        "profile",
+        "user",
+        "avatar group"
+      ],
+      "exports": [
+        "Avatar",
+        "AvatarImage",
+        "AvatarFallback",
+        "AvatarBadge",
+        "AvatarGroup",
+        "AvatarGroupCount"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Avatar"
+    },
+    {
+      "name": "Badge",
+      "folder": "Badge",
+      "description": "Status tag or label chip",
+      "tasks": [
+        "badge",
+        "tag",
+        "status",
+        "label"
+      ],
+      "exports": [
+        "Badge"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Badge"
+    },
+    {
+      "name": "Banner",
+      "folder": "Banner",
+      "description": "Full-width page-level notice, optionally dismissible",
+      "tasks": [
+        "banner",
+        "page notice",
+        "announcement"
+      ],
+      "exports": [
+        "Banner",
+        "BannerTitle",
+        "BannerAction"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Banner"
+    },
+    {
+      "name": "Bento",
+      "folder": "Bento",
+      "description": "Mixed-span CSS grid layout (bento box)",
+      "tasks": [
+        "bento",
+        "bento grid",
+        "dashboard tiles"
+      ],
+      "exports": [
+        "Bento",
+        "BentoItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Bento"
+    },
+    {
+      "name": "Breadcrumb",
+      "folder": "Breadcrumb",
+      "description": "Page hierarchy navigation",
+      "tasks": [
+        "breadcrumb",
+        "navigation",
+        "hierarchy"
+      ],
+      "exports": [
+        "Breadcrumb",
+        "BreadcrumbList",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Breadcrumb"
+    },
+    {
+      "name": "Bubble",
+      "folder": "Bubble",
+      "description": "Chat message bubble with variants and reactions slot",
+      "tasks": [
+        "bubble",
+        "chat message",
+        "conversation",
+        "reactions"
+      ],
+      "exports": [
+        "BubbleGroup",
+        "Bubble",
+        "BubbleContent",
+        "BubbleReactions"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Bubble"
+    },
+    {
+      "name": "Button",
+      "folder": "Button",
+      "description": "Action button or link CTA (supports href)",
+      "tasks": [
+        "button",
+        "cta",
+        "link",
+        "submit"
+      ],
+      "exports": [
+        "Button"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Button"
+    },
+    {
+      "name": "ButtonGroup",
+      "folder": "ButtonGroup",
+      "description": "Grouped buttons with shared border",
+      "tasks": [
+        "button group",
+        "segmented buttons"
+      ],
+      "exports": [
+        "ButtonGroup"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ButtonGroup"
+    },
+    {
+      "name": "Calendar",
+      "folder": "Calendar",
+      "description": "Month grid date picker with single and range selection",
+      "tasks": [
+        "calendar",
+        "date",
+        "date range"
+      ],
+      "exports": [
+        "Calendar"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Calendar"
+    },
+    {
+      "name": "Callout",
+      "folder": "Callout",
+      "description": "In-content notice with accent border (info/warning/success/danger)",
+      "tasks": [
+        "callout",
+        "inline alert",
+        "note",
+        "tip"
+      ],
+      "exports": [
+        "Callout",
+        "CalloutTitle",
+        "CalloutDescription"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Callout"
+    },
+    {
+      "name": "Card",
+      "folder": "Card",
+      "description": "Content card with header/footer",
+      "tasks": [
+        "card",
+        "panel",
+        "container"
+      ],
+      "exports": [
+        "Card",
+        "CardHeader",
+        "CardTitle",
+        "CardDescription",
+        "CardAction",
+        "CardContent",
+        "CardFooter"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Card"
+    },
+    {
+      "name": "Carousel",
+      "folder": "Carousel",
+      "description": "Horizontal scroll-snap carousel (no Embla)",
+      "tasks": [
+        "carousel",
+        "slider gallery",
+        "slides"
+      ],
+      "exports": [
+        "Carousel",
+        "CarouselViewport",
+        "CarouselContent",
+        "CarouselItem",
+        "CarouselPrevious",
+        "CarouselNext",
+        "CarouselDots",
+        "CarouselSlide"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Carousel"
+    },
+    {
+      "name": "Chart",
+      "folder": "Chart",
+      "description": "Zero-dep SVG charts: bar, grouped bar, diverging bar, donut, sparkline",
+      "tasks": [
+        "chart",
+        "graph",
+        "analytics",
+        "donut",
+        "sparkline",
+        "cashflow"
+      ],
+      "exports": [
+        "ChartContainer",
+        "BarChart",
+        "GroupedBarChart",
+        "DonutChart",
+        "Sparkline",
+        "DivergingBarChart"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Chart"
+    },
+    {
+      "name": "Checkbox",
+      "folder": "Checkbox",
+      "description": "Boolean checkbox input",
+      "tasks": [
+        "checkbox",
+        "check",
+        "form"
+      ],
+      "exports": [
+        "Checkbox"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Checkbox"
+    },
+    {
+      "name": "CheckboxCards",
+      "folder": "CheckboxCards",
+      "description": "Selectable cards for multiple choices (plans, add-ons, peripherals)",
+      "tasks": [
+        "checkbox cards",
+        "multi select cards",
+        "plan picker",
+        "addon cards"
+      ],
+      "exports": [
+        "CheckboxCards",
+        "CheckboxCardsItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components CheckboxCards"
+    },
+    {
+      "name": "CheckboxGroup",
+      "folder": "CheckboxGroup",
+      "description": "Labeled checkbox list with shared value array",
+      "tasks": [
+        "checkbox group",
+        "checkbox list",
+        "settings checkboxes"
+      ],
+      "exports": [
+        "CheckboxGroup",
+        "CheckboxGroupItem"
+      ],
+      "dependencies": [
+        "Checkbox"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components CheckboxGroup"
+    },
+    {
+      "name": "Chip",
+      "folder": "Chip",
+      "description": "Interactive removable or selectable label",
+      "tasks": [
+        "chip",
+        "tag",
+        "pill",
+        "removable tag"
+      ],
+      "exports": [
+        "Chip"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Chip"
+    },
+    {
+      "name": "CodeBlock",
+      "folder": "CodeBlock",
+      "description": "Code sample with copy, highlighted lines, and file tabs",
+      "tasks": [
+        "code block",
+        "snippet",
+        "copy code"
+      ],
+      "exports": [
+        "CodeBlock"
+      ],
+      "dependencies": [
+        "Button"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components CodeBlock"
+    },
+    {
+      "name": "Collapsible",
+      "folder": "Collapsible",
+      "description": "Show/hide content region",
+      "tasks": [
+        "collapsible",
+        "toggle content"
+      ],
+      "exports": [
+        "Collapsible",
+        "CollapsibleTrigger",
+        "CollapsibleContent"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Collapsible"
+    },
+    {
+      "name": "ColorPicker",
+      "folder": "ColorPicker",
+      "description": "Swatch trigger with color and hex inputs",
+      "tasks": [
+        "color picker",
+        "color well",
+        "swatch"
+      ],
+      "exports": [
+        "ColorPicker"
+      ],
+      "dependencies": [
+        "Input",
+        "Popover"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ColorPicker"
+    },
+    {
+      "name": "Combobox",
+      "folder": "Combobox",
+      "description": "Searchable select: compound Input/Content/List/Item (Appica-style) + legacy options API",
+      "tasks": [
+        "combobox",
+        "autocomplete",
+        "search select",
+        "clearable"
+      ],
+      "exports": [
+        "Combobox",
+        "ComboboxInput",
+        "ComboboxContent",
+        "ComboboxList",
+        "ComboboxItem",
+        "ComboboxEmpty"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Combobox"
+    },
+    {
+      "name": "ComboButton",
+      "folder": "ComboButton",
+      "description": "Primary action joined to a related-actions menu",
+      "tasks": [
+        "combo button",
+        "split button",
+        "action menu"
+      ],
+      "exports": [
+        "ComboButton",
+        "ComboButtonAction",
+        "ComboButtonMenu"
+      ],
+      "dependencies": [
+        "Button",
+        "ButtonGroup",
+        "DropdownMenu"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ComboButton"
+    },
+    {
+      "name": "Command",
+      "folder": "Command",
+      "description": "Command palette with search filter",
+      "tasks": [
+        "command",
+        "command palette",
+        "cmdk",
+        "search menu"
+      ],
+      "exports": [
+        "Command",
+        "CommandDialog",
+        "CommandInput",
+        "CommandList",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandItem",
+        "CommandSeparator"
+      ],
+      "dependencies": [
+        "Dialog"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Command"
+    },
+    {
+      "name": "ContextMenu",
+      "folder": "ContextMenu",
+      "description": "Right-click context menu",
+      "tasks": [
+        "context menu",
+        "right click"
+      ],
+      "exports": [
+        "ContextMenu",
+        "ContextMenuTrigger",
+        "ContextMenuContent",
+        "ContextMenuItem",
+        "ContextMenuSeparator"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ContextMenu"
+    },
+    {
+      "name": "CopyButton",
+      "folder": "CopyButton",
+      "description": "Copies a value to the clipboard with an in-place confirmation",
+      "tasks": [
+        "copy button",
+        "copy to clipboard",
+        "copy link",
+        "copy token"
+      ],
+      "exports": [
+        "CopyButton"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components CopyButton"
+    },
+    {
+      "name": "Countdown",
+      "folder": "Countdown",
+      "description": "Launch countdown with rolling digits that turns into a live state at zero",
+      "tasks": [
+        "countdown",
+        "timer",
+        "launch",
+        "deadline"
+      ],
+      "exports": [
+        "Countdown"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Countdown"
+    },
+    {
+      "name": "DataList",
+      "folder": "DataList",
+      "description": "Key/value definition list for detail and settings rows",
+      "tasks": [
+        "data list",
+        "definition list",
+        "key value",
+        "dl"
+      ],
+      "exports": [
+        "DataList",
+        "DataListItem",
+        "DataListLabel",
+        "DataListValue"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components DataList"
+    },
+    {
+      "name": "DatePicker",
+      "folder": "DatePicker",
+      "description": "Date input with calendar popup",
+      "tasks": [
+        "date picker",
+        "date input",
+        "calendar"
+      ],
+      "exports": [
+        "DatePicker"
+      ],
+      "dependencies": [
+        "Calendar",
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components DatePicker"
+    },
+    {
+      "name": "DateRangePicker",
+      "folder": "DateRangePicker",
+      "description": "Start/end date input with range calendar popup",
+      "tasks": [
+        "date range",
+        "range picker",
+        "period"
+      ],
+      "exports": [
+        "DateRangePicker"
+      ],
+      "dependencies": [
+        "Calendar",
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components DateRangePicker"
+    },
+    {
+      "name": "Dialog",
+      "folder": "Dialog",
+      "description": "Modal dialog overlay",
+      "tasks": [
+        "dialog",
+        "modal",
+        "overlay",
+        "popup"
+      ],
+      "exports": [
+        "Dialog",
+        "DialogContent",
+        "DialogHeader",
+        "DialogFooter",
+        "DialogTitle",
+        "DialogDescription"
+      ],
+      "dependencies": [
+        "Button",
+        "Modal"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Dialog"
+    },
+    {
+      "name": "Direction",
+      "folder": "Direction",
+      "description": "RTL/LTR direction provider",
+      "tasks": [
+        "rtl",
+        "direction",
+        "i18n"
+      ],
+      "exports": [
+        "DirectionProvider",
+        "useDirection"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Direction"
+    },
+    {
+      "name": "Dock",
+      "folder": "Dock",
+      "description": "macOS-style dock with pointer magnification",
+      "tasks": [
+        "dock",
+        "apple dock",
+        "magnify"
+      ],
+      "exports": [
+        "Dock",
+        "DockItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Dock"
+    },
+    {
+      "name": "Drawer",
+      "folder": "Drawer",
+      "description": "Side panel / sheet overlay",
+      "tasks": [
+        "drawer",
+        "sidebar",
+        "sheet",
+        "panel"
+      ],
+      "exports": [
+        "Drawer",
+        "DrawerContent",
+        "DrawerHeader",
+        "DrawerTitle",
+        "DrawerDescription"
+      ],
+      "dependencies": [
+        "Modal"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Drawer"
+    },
+    {
+      "name": "DropdownMenu",
+      "folder": "DropdownMenu",
+      "description": "Dropdown action menu with checkbox, radio, shortcut and nested submenu parts",
+      "tasks": [
+        "dropdown",
+        "menu",
+        "actions",
+        "context actions"
+      ],
+      "exports": [
+        "DropdownMenu",
+        "DropdownMenuTrigger",
+        "DropdownMenuContent",
+        "DropdownMenuItem",
+        "DropdownMenuSeparator",
+        "DropdownMenuLabel",
+        "DropdownMenuGroup",
+        "DropdownMenuShortcut",
+        "DropdownMenuCheckboxItem",
+        "DropdownMenuRadioGroup",
+        "DropdownMenuRadioItem",
+        "DropdownMenuSub",
+        "DropdownMenuSubTrigger",
+        "DropdownMenuSubContent",
+        "DropdownMenuPortal"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components DropdownMenu"
+    },
+    {
+      "name": "Empty",
+      "folder": "Empty",
+      "description": "Empty state placeholder",
+      "tasks": [
+        "empty",
+        "no data",
+        "placeholder"
+      ],
+      "exports": [
+        "Empty"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Empty"
+    },
+    {
+      "name": "ExpandableText",
+      "folder": "ExpandableText",
+      "description": "Line-clamped text with a fade and Read more / Show less, shown only on overflow",
+      "tasks": [
+        "expandable text",
+        "read more",
+        "truncate",
+        "line clamp"
+      ],
+      "exports": [
+        "ExpandableText"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ExpandableText"
+    },
+    {
+      "name": "Field",
+      "folder": "Field",
+      "description": "Form field wrapper with label/description",
+      "tasks": [
+        "field",
+        "form field"
+      ],
+      "exports": [
+        "Field",
+        "FieldLabel",
+        "FieldDescription"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Field"
+    },
+    {
+      "name": "FileUpload",
+      "folder": "FileUpload",
+      "description": "Drag-and-drop file picker with type filter and previews",
+      "tasks": [
+        "file upload",
+        "dropzone",
+        "drag and drop"
+      ],
+      "exports": [
+        "FileUpload"
+      ],
+      "dependencies": [
+        "Button"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components FileUpload"
+    },
+    {
+      "name": "FinancialTable",
+      "folder": "FinancialTable",
+      "description": "Comparison table for signed amounts, with an accent column for the active scenario",
+      "tasks": [
+        "financial table",
+        "cashflow table",
+        "signed amounts"
+      ],
+      "exports": [
+        "FinancialTable"
+      ],
+      "dependencies": [
+        "Table"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components FinancialTable"
+    },
+    {
+      "name": "Floating",
+      "folder": "Floating",
+      "description": "Positioning primitives shared by every popup surface (portal, collision-aware placement, dismiss layer)",
+      "tasks": [
+        "floating",
+        "positioning",
+        "portal",
+        "popup internals"
+      ],
+      "exports": [
+        "FloatingPortal",
+        "useFloatingPosition",
+        "useDismissLayer",
+        "useInitialMenuFocus",
+        "computeFloatingPosition",
+        "composeRefs"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Floating"
+    },
+    {
+      "name": "Form",
+      "folder": "Form",
+      "description": "Form composition helpers",
+      "tasks": [
+        "form"
+      ],
+      "exports": [
+        "Form",
+        "FormField",
+        "FormItem",
+        "FormLabel",
+        "FormDescription",
+        "FormMessage"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Form"
+    },
+    {
+      "name": "Gauge",
+      "folder": "Gauge",
+      "description": "Arc gauge showing a value against a range with threshold tones",
+      "tasks": [
+        "gauge",
+        "meter",
+        "speedometer",
+        "kpi dial"
+      ],
+      "exports": [
+        "Gauge"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Gauge"
+    },
+    {
+      "name": "HoldToConfirm",
+      "folder": "HoldToConfirm",
+      "description": "Destructive action confirmed by press-and-hold (pointer or Space/Enter)",
+      "tasks": [
+        "hold to confirm",
+        "long press",
+        "destructive confirm",
+        "delete"
+      ],
+      "exports": [
+        "HoldToConfirm"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components HoldToConfirm"
+    },
+    {
+      "name": "HoverCard",
+      "folder": "HoverCard",
+      "description": "Rich preview on hover",
+      "tasks": [
+        "hover card",
+        "preview"
+      ],
+      "exports": [
+        "HoverCard",
+        "HoverCardTrigger",
+        "HoverCardContent"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components HoverCard"
+    },
+    {
+      "name": "ImageCompare",
+      "folder": "ImageCompare",
+      "description": "Before/after image slider with a draggable, keyboard-operable divider",
+      "tasks": [
+        "image compare",
+        "before after",
+        "comparison slider"
+      ],
+      "exports": [
+        "ImageCompare"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ImageCompare"
+    },
+    {
+      "name": "InlineEdit",
+      "folder": "InlineEdit",
+      "description": "Rename in place: text turns into a field without moving; Enter commits, Escape cancels",
+      "tasks": [
+        "inline edit",
+        "rename",
+        "editable text",
+        "click to edit"
+      ],
+      "exports": [
+        "InlineEdit"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components InlineEdit"
+    },
+    {
+      "name": "Input",
+      "folder": "Input",
+      "description": "Single-line text input",
+      "tasks": [
+        "input",
+        "text field",
+        "email",
+        "password",
+        "search"
+      ],
+      "exports": [
+        "Input"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Input"
+    },
+    {
+      "name": "InputGroup",
+      "folder": "InputGroup",
+      "description": "Input with prefix/suffix addon",
+      "tasks": [
+        "input group",
+        "prefix",
+        "suffix"
+      ],
+      "exports": [
+        "InputGroup",
+        "InputGroupAddon"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components InputGroup"
+    },
+    {
+      "name": "InputMask",
+      "folder": "InputMask",
+      "description": "Masked text input for phones, dates, and codes",
+      "tasks": [
+        "input mask",
+        "phone mask",
+        "pattern"
+      ],
+      "exports": [
+        "InputMask"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components InputMask"
+    },
+    {
+      "name": "InputOTP",
+      "folder": "InputOTP",
+      "description": "One-time password / PIN input",
+      "tasks": [
+        "otp",
+        "pin",
+        "verification code"
+      ],
+      "exports": [
+        "InputOTP"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components InputOTP"
+    },
+    {
+      "name": "Item",
+      "folder": "Item",
+      "description": "List item row pattern",
+      "tasks": [
+        "list item",
+        "row"
+      ],
+      "exports": [
+        "Item"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Item"
+    },
+    {
+      "name": "JsonViewer",
+      "folder": "JsonViewer",
+      "description": "Collapsible JSON tree with paging for long arrays and copy value / path",
+      "tasks": [
+        "json viewer",
+        "json tree",
+        "inspect payload",
+        "object explorer"
+      ],
+      "exports": [
+        "JsonViewer"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components JsonViewer"
+    },
+    {
+      "name": "Kbd",
+      "folder": "Kbd",
+      "description": "Keyboard shortcut display",
+      "tasks": [
+        "keyboard",
+        "shortcut",
+        "kbd"
+      ],
+      "exports": [
+        "Kbd",
+        "KbdGroup"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Kbd"
+    },
+    {
+      "name": "Label",
+      "folder": "Label",
+      "description": "Form field label",
+      "tasks": [
+        "label",
+        "form"
+      ],
+      "exports": [
+        "Label"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Label"
+    },
+    {
+      "name": "Lightbox",
+      "folder": "Lightbox",
+      "description": "Click-to-enlarge media overlay with scrim",
+      "tasks": [
+        "lightbox",
+        "image overlay",
+        "gallery enlarge"
+      ],
+      "exports": [
+        "Lightbox",
+        "LightboxTrigger",
+        "LightboxContent",
+        "LightboxClose",
+        "LightboxOverlay"
+      ],
+      "dependencies": [
+        "Modal"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Lightbox"
+    },
+    {
+      "name": "Marker",
+      "folder": "Marker",
+      "description": "Chat status chip or date/unread separator",
+      "tasks": [
+        "marker",
+        "chat separator",
+        "date divider",
+        "delivery status"
+      ],
+      "exports": [
+        "Marker",
+        "MarkerIcon",
+        "MarkerContent"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Marker"
+    },
+    {
+      "name": "Marquee",
+      "folder": "Marquee",
+      "description": "Endless horizontal scrolling content strip",
+      "tasks": [
+        "marquee",
+        "ticker",
+        "infinite scroll text"
+      ],
+      "exports": [
+        "Marquee",
+        "MarqueeContent"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Marquee"
+    },
+    {
+      "name": "Masonry",
+      "folder": "Masonry",
+      "description": "Column-packed variable-height card layout",
+      "tasks": [
+        "masonry",
+        "pinterest grid",
+        "column layout"
+      ],
+      "exports": [
+        "Masonry",
+        "MasonryItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Masonry"
+    },
+    {
+      "name": "MentionTextarea",
+      "folder": "MentionTextarea",
+      "description": "Composer textarea with @mentions, /commands autosuggest, and shortened link chips",
+      "tasks": [
+        "mention",
+        "slash command",
+        "composer",
+        "autosuggest",
+        "link chip"
+      ],
+      "exports": [
+        "MentionTextarea"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components MentionTextarea"
+    },
+    {
+      "name": "Menubar",
+      "folder": "Menubar",
+      "description": "Desktop-style menu bar",
+      "tasks": [
+        "menubar",
+        "menu bar"
+      ],
+      "exports": [
+        "Menubar",
+        "MenubarMenu",
+        "MenubarTrigger",
+        "MenubarContent",
+        "MenubarItem"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Menubar"
+    },
+    {
+      "name": "Message",
+      "folder": "Message",
+      "description": "Chat message row: avatar slot + content + header/footer",
+      "tasks": [
+        "message",
+        "chat row",
+        "conversation thread"
+      ],
+      "exports": [
+        "MessageGroup",
+        "Message",
+        "MessageAvatar",
+        "MessageContent",
+        "MessageHeader",
+        "MessageFooter"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Message"
+    },
+    {
+      "name": "MessageScroller",
+      "folder": "MessageScroller",
+      "description": "Scrollable message list with auto-scroll and jump buttons (zero-dep; no @shadcn/react)",
+      "tasks": [
+        "message scroller",
+        "chat scroll",
+        "auto scroll",
+        "conversation list"
+      ],
+      "exports": [
+        "MessageScrollerProvider",
+        "MessageScroller",
+        "MessageScrollerViewport",
+        "MessageScrollerContent",
+        "MessageScrollerItem",
+        "MessageScrollerButton",
+        "useMessageScroller",
+        "useMessageScrollerScrollable",
+        "useMessageScrollerVisibility"
+      ],
+      "dependencies": [],
+      "providers": [
+        "MessageScrollerProvider"
+      ],
+      "install": "npm run shacdn:install -- /path/to/your-app --components MessageScroller"
+    },
+    {
+      "name": "MetricCard",
+      "folder": "MetricCard",
+      "description": "KPI card: value, signed delta with sentiment, optional sparkline",
+      "tasks": [
+        "metric card",
+        "kpi",
+        "stat card",
+        "dashboard tile"
+      ],
+      "exports": [
+        "MetricCard"
+      ],
+      "dependencies": [
+        "Chart"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components MetricCard"
+    },
+    {
+      "name": "Modal",
+      "folder": "Modal",
+      "description": "Alias for Dialog API",
+      "tasks": [
+        "modal"
+      ],
+      "exports": [
+        "Modal",
+        "ModalContent",
+        "ModalHeader",
+        "ModalFooter",
+        "ModalTitle",
+        "ModalDescription"
+      ],
+      "dependencies": [
+        "Dialog"
+      ],
+      "providers": [],
+      "aliasOf": "Dialog",
+      "install": "npm run shacdn:install -- /path/to/your-app --components Modal"
+    },
+    {
+      "name": "MultiSelect",
+      "folder": "MultiSelect",
+      "description": "Multi-value select with chips and checkbox listbox",
+      "tasks": [
+        "multi select",
+        "multiselect",
+        "checkbox dropdown",
+        "tags select"
+      ],
+      "exports": [
+        "MultiSelect"
+      ],
+      "dependencies": [
+        "Checkbox",
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components MultiSelect"
+    },
+    {
+      "name": "NativeSelect",
+      "folder": "NativeSelect",
+      "description": "Styled native <select> element for simple or mobile-first forms",
+      "tasks": [
+        "native select",
+        "native-select",
+        "form select"
+      ],
+      "exports": [
+        "NativeSelect"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components NativeSelect"
+    },
+    {
+      "name": "NavigationMenu",
+      "folder": "NavigationMenu",
+      "description": "Site navigation with dropdown panels",
+      "tasks": [
+        "navigation menu",
+        "navbar",
+        "mega menu",
+        "topbar"
+      ],
+      "exports": [
+        "NavigationMenu",
+        "NavigationMenuList",
+        "NavigationMenuItem",
+        "NavigationMenuTrigger",
+        "NavigationMenuContent",
+        "NavigationMenuLink",
+        "NavigationMenuContentLink"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components NavigationMenu"
+    },
+    {
+      "name": "NumberField",
+      "folder": "NumberField",
+      "description": "Bounded number input with +/- buttons, arrow/Page/Home/End keys and locale formatting",
+      "tasks": [
+        "number field",
+        "number input",
+        "quantity",
+        "spinbutton"
+      ],
+      "exports": [
+        "NumberField"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components NumberField"
+    },
+    {
+      "name": "NumberTicker",
+      "folder": "NumberTicker",
+      "description": "Animated count toward a number, with prefix, suffix, and decimals",
+      "tasks": [
+        "number ticker",
+        "count up",
+        "stat"
+      ],
+      "exports": [
+        "NumberTicker"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components NumberTicker"
+    },
+    {
+      "name": "OrbitingCircles",
+      "folder": "OrbitingCircles",
+      "description": "Icons traveling on circular orbits around a center",
+      "tasks": [
+        "orbiting circles",
+        "orbit",
+        "logo cloud"
+      ],
+      "exports": [
+        "OrbitingCircles",
+        "OrbitingCirclesItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components OrbitingCircles"
+    },
+    {
+      "name": "Pagination",
+      "folder": "Pagination",
+      "description": "Page navigation controls",
+      "tasks": [
+        "pagination",
+        "pages"
+      ],
+      "exports": [
+        "Pagination",
+        "PaginationList",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationButton",
+        "PaginationEllipsis"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Pagination"
+    },
+    {
+      "name": "PasswordStrength",
+      "folder": "PasswordStrength",
+      "description": "Live password strength meter with a rules checklist",
+      "tasks": [
+        "password strength",
+        "password meter",
+        "signup password"
+      ],
+      "exports": [
+        "PasswordStrength"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components PasswordStrength"
+    },
+    {
+      "name": "PasswordToggleField",
+      "folder": "PasswordToggleField",
+      "description": "Password input with show/hide toggle",
+      "tasks": [
+        "password",
+        "password toggle",
+        "show password",
+        "hide password"
+      ],
+      "exports": [
+        "PasswordToggleField",
+        "PasswordToggleFieldInput",
+        "PasswordToggleFieldToggle",
+        "PasswordToggleFieldIcon"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components PasswordToggleField"
+    },
+    {
+      "name": "Popover",
+      "folder": "Popover",
+      "description": "Floating content panel",
+      "tasks": [
+        "popover",
+        "floating"
+      ],
+      "exports": [
+        "Popover",
+        "PopoverTrigger",
+        "PopoverContent"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Popover"
+    },
+    {
+      "name": "Progress",
+      "folder": "Progress",
+      "description": "Linear progress bar",
+      "tasks": [
+        "progress",
+        "loading bar"
+      ],
+      "exports": [
+        "Progress"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Progress"
+    },
+    {
+      "name": "ProgressRing",
+      "folder": "ProgressRing",
+      "description": "Circular determinate progress indicator",
+      "tasks": [
+        "progress ring",
+        "circular progress",
+        "donut progress"
+      ],
+      "exports": [
+        "ProgressRing"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ProgressRing"
+    },
+    {
+      "name": "Questionnaire",
+      "folder": "Questionnaire",
+      "description": "Multi-step question flow with progress and a completion state",
+      "tasks": [
+        "questionnaire",
+        "survey",
+        "quiz"
+      ],
+      "exports": [
+        "Questionnaire"
+      ],
+      "dependencies": [
+        "Button",
+        "Progress"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Questionnaire"
+    },
+    {
+      "name": "RadioCards",
+      "folder": "RadioCards",
+      "description": "Selectable cards for a single choice (plan, shipping, billing)",
+      "tasks": [
+        "radio cards",
+        "plan cards",
+        "choice cards",
+        "shipping method"
+      ],
+      "exports": [
+        "RadioCards",
+        "RadioCardsItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components RadioCards"
+    },
+    {
+      "name": "RadioGroup",
+      "folder": "RadioGroup",
+      "description": "Single choice from group",
+      "tasks": [
+        "radio",
+        "single choice"
+      ],
+      "exports": [
+        "RadioGroup",
+        "RadioGroupItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components RadioGroup"
+    },
+    {
+      "name": "Rating",
+      "folder": "Rating",
+      "description": "Star rating with keyboard, half steps, and read-only display",
+      "tasks": [
+        "rating",
+        "stars",
+        "review"
+      ],
+      "exports": [
+        "Rating"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Rating"
+    },
+    {
+      "name": "Resizable",
+      "folder": "Resizable",
+      "description": "Drag-to-resize panel groups (zero-dep)",
+      "tasks": [
+        "resizable",
+        "split pane",
+        "panel resize"
+      ],
+      "exports": [
+        "ResizablePanelGroup",
+        "ResizablePanel",
+        "ResizableHandle"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Resizable"
+    },
+    {
+      "name": "ScrollArea",
+      "folder": "ScrollArea",
+      "description": "Custom styled scroll container",
+      "tasks": [
+        "scroll",
+        "overflow"
+      ],
+      "exports": [
+        "ScrollArea"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ScrollArea"
+    },
+    {
+      "name": "Scrollspy",
+      "folder": "Scrollspy",
+      "description": "On-this-page nav that tracks the visible section",
+      "tasks": [
+        "scrollspy",
+        "table of contents",
+        "on this page"
+      ],
+      "exports": [
+        "Scrollspy",
+        "ScrollspyLink"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Scrollspy"
+    },
+    {
+      "name": "SegmentedControl",
+      "folder": "SegmentedControl",
+      "description": "Single-choice segmented control with a sliding selection indicator",
+      "tasks": [
+        "segmented control",
+        "view switcher",
+        "tabs toggle",
+        "billing toggle"
+      ],
+      "exports": [
+        "SegmentedControl"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components SegmentedControl"
+    },
+    {
+      "name": "Select",
+      "folder": "Select",
+      "description": "Custom listbox select with popup, groups and keyboard navigation",
+      "tasks": [
+        "select",
+        "dropdown",
+        "listbox",
+        "choose option"
+      ],
+      "exports": [
+        "Select",
+        "SelectTrigger",
+        "SelectValue",
+        "SelectContent",
+        "SelectItem",
+        "SelectGroup",
+        "SelectLabel",
+        "SelectSeparator"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Select"
+    },
+    {
+      "name": "Separator",
+      "folder": "Separator",
+      "description": "Visual divider line",
+      "tasks": [
+        "separator",
+        "divider"
+      ],
+      "exports": [
+        "Separator"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Separator"
+    },
+    {
+      "name": "Sheet",
+      "folder": "Sheet",
+      "description": "Alias for Drawer API",
+      "tasks": [
+        "sheet",
+        "side panel"
+      ],
+      "exports": [
+        "Sheet",
+        "SheetContent",
+        "SheetHeader",
+        "SheetTitle",
+        "SheetDescription"
+      ],
+      "dependencies": [
+        "Drawer"
+      ],
+      "providers": [],
+      "aliasOf": "Drawer",
+      "install": "npm run shacdn:install -- /path/to/your-app --components Sheet"
+    },
+    {
+      "name": "ShineBorder",
+      "folder": "ShineBorder",
+      "description": "Animated conic-gradient border around any content",
+      "tasks": [
+        "shine border",
+        "gradient border",
+        "animated border"
+      ],
+      "exports": [
+        "ShineBorder"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ShineBorder"
+    },
+    {
+      "name": "Sidebar",
+      "folder": "Sidebar",
+      "description": "App sidebar layout with collapse (zero-dep)",
+      "tasks": [
+        "sidebar",
+        "app shell",
+        "dashboard layout"
+      ],
+      "exports": [
+        "SidebarProvider",
+        "Sidebar",
+        "SidebarHeader",
+        "SidebarContent",
+        "SidebarFooter",
+        "SidebarInset",
+        "SidebarTrigger",
+        "SidebarMenu",
+        "SidebarMenuItem",
+        "SidebarMenuButton"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Sidebar"
+    },
+    {
+      "name": "Skeleton",
+      "folder": "Skeleton",
+      "description": "Loading placeholder shimmer",
+      "tasks": [
+        "skeleton",
+        "loading placeholder"
+      ],
+      "exports": [
+        "Skeleton"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Skeleton"
+    },
+    {
+      "name": "Slider",
+      "folder": "Slider",
+      "description": "Range slider input",
+      "tasks": [
+        "slider",
+        "range"
+      ],
+      "exports": [
+        "Slider"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Slider"
+    },
+    {
+      "name": "Sonner",
+      "folder": "Sonner",
+      "description": "Registry alias for Toast",
+      "tasks": [
+        "sonner",
+        "toast"
+      ],
+      "exports": [
+        "SonnerToaster",
+        "useSonner",
+        "ToastItem",
+        "ToastTitle",
+        "ToastDescription"
+      ],
+      "dependencies": [
+        "Toast"
+      ],
+      "providers": [
+        "ToastProvider"
+      ],
+      "aliasOf": "Toast",
+      "install": "npm run shacdn:install -- /path/to/your-app --components Sonner"
+    },
+    {
+      "name": "Sortable",
+      "folder": "Sortable",
+      "description": "Pointer and keyboard reorderable list",
+      "tasks": [
+        "sortable",
+        "drag reorder",
+        "reorder list"
+      ],
+      "exports": [
+        "Sortable",
+        "SortableItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Sortable"
+    },
+    {
+      "name": "Spinner",
+      "folder": "Spinner",
+      "description": "Circular loading indicator",
+      "tasks": [
+        "spinner",
+        "loading"
+      ],
+      "exports": [
+        "Spinner"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Spinner"
+    },
+    {
+      "name": "SpinningText",
+      "folder": "SpinningText",
+      "description": "Text set on a circle that rotates",
+      "tasks": [
+        "spinning text",
+        "circular text"
+      ],
+      "exports": [
+        "SpinningText"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components SpinningText"
+    },
+    {
+      "name": "Stepper",
+      "folder": "Stepper",
+      "description": "Compact increment/decrement value control",
+      "tasks": [
+        "stepper",
+        "number stepper",
+        "increment"
+      ],
+      "exports": [
+        "Stepper"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Stepper"
+    },
+    {
+      "name": "Steps",
+      "folder": "Steps",
+      "description": "Wizard / checkout step indicator",
+      "tasks": [
+        "steps",
+        "stepper wizard",
+        "checkout steps",
+        "wizard"
+      ],
+      "exports": [
+        "Steps",
+        "StepsItem"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Steps"
+    },
+    {
+      "name": "Switch",
+      "folder": "Switch",
+      "description": "Toggle switch control",
+      "tasks": [
+        "switch",
+        "toggle setting"
+      ],
+      "exports": [
+        "Switch"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Switch"
+    },
+    {
+      "name": "Table",
+      "folder": "Table",
+      "description": "Data table with semantic parts",
+      "tasks": [
+        "table",
+        "data grid",
+        "list"
+      ],
+      "exports": [
+        "Table",
+        "TableHeader",
+        "TableBody",
+        "TableRow",
+        "TableHead",
+        "TableCell",
+        "TableFooter",
+        "TableCaption"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Table"
+    },
+    {
+      "name": "TabNav",
+      "folder": "TabNav",
+      "description": "Link-based navigation that looks like tabs (no panels)",
+      "tasks": [
+        "tab nav",
+        "tab navigation",
+        "page tabs",
+        "settings nav"
+      ],
+      "exports": [
+        "TabNav",
+        "TabNavLink"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components TabNav"
+    },
+    {
+      "name": "Tabs",
+      "folder": "Tabs",
+      "description": "Tabbed panel navigation",
+      "tasks": [
+        "tabs",
+        "panels"
+      ],
+      "exports": [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsContent"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Tabs"
+    },
+    {
+      "name": "Textarea",
+      "folder": "Textarea",
+      "description": "Multi-line text input",
+      "tasks": [
+        "textarea",
+        "multiline"
+      ],
+      "exports": [
+        "Textarea"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Textarea"
+    },
+    {
+      "name": "TextShimmer",
+      "folder": "TextShimmer",
+      "description": "Calm light sweep across text to signal ongoing work",
+      "tasks": [
+        "text shimmer",
+        "loading text",
+        "ai thinking",
+        "shimmer"
+      ],
+      "exports": [
+        "TextShimmer"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components TextShimmer"
+    },
+    {
+      "name": "ThemeSwitcher",
+      "folder": "ThemeSwitcher",
+      "description": "Light/dark + color scheme picker",
+      "tasks": [
+        "theme",
+        "dark mode",
+        "color scheme"
+      ],
+      "exports": [
+        "ThemeSwitcher"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ThemeSwitcher"
+    },
+    {
+      "name": "ThinkingLoader",
+      "folder": "ThinkingLoader",
+      "description": "Compact AI working pill that walks through phases and settles on a check",
+      "tasks": [
+        "thinking loader",
+        "ai status",
+        "agent working",
+        "streaming wait"
+      ],
+      "exports": [
+        "ThinkingLoader"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ThinkingLoader"
+    },
+    {
+      "name": "Timeline",
+      "folder": "Timeline",
+      "description": "Vertical status timeline for order tracking and event history",
+      "tasks": [
+        "timeline",
+        "order tracking",
+        "status history",
+        "shipment track"
+      ],
+      "exports": [
+        "Timeline",
+        "TimelineItem",
+        "TimelineIndicator",
+        "TimelineContent",
+        "TimelineTitle",
+        "TimelineDescription",
+        "TimelineTime"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Timeline"
+    },
+    {
+      "name": "TimePicker",
+      "folder": "TimePicker",
+      "description": "Segmented time field (12/24h) with typing, arrows and AM/PM",
+      "tasks": [
+        "time picker",
+        "time input",
+        "hour minute",
+        "schedule"
+      ],
+      "exports": [
+        "TimePicker"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components TimePicker"
+    },
+    {
+      "name": "Toast",
+      "folder": "Toast",
+      "description": "Transient corner notifications",
+      "tasks": [
+        "toast",
+        "notification",
+        "snackbar"
+      ],
+      "exports": [
+        "ToastProvider",
+        "useToast",
+        "ToastItem",
+        "ToastViewport",
+        "ToastTitle",
+        "ToastDescription"
+      ],
+      "dependencies": [],
+      "providers": [
+        "ToastProvider"
+      ],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Toast"
+    },
+    {
+      "name": "Toggle",
+      "folder": "Toggle",
+      "description": "Pressable toggle button",
+      "tasks": [
+        "toggle",
+        "pressed state"
+      ],
+      "exports": [
+        "Toggle"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Toggle"
+    },
+    {
+      "name": "ToggleGroup",
+      "folder": "ToggleGroup",
+      "description": "Group of toggle buttons",
+      "tasks": [
+        "toggle group",
+        "segmented control"
+      ],
+      "exports": [
+        "ToggleGroup",
+        "ToggleGroupItem"
+      ],
+      "dependencies": [
+        "Toggle"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ToggleGroup"
+    },
+    {
+      "name": "TokenField",
+      "folder": "TokenField",
+      "description": "Text input that commits values as removable tokens",
+      "tasks": [
+        "token field",
+        "tags input",
+        "chip input"
+      ],
+      "exports": [
+        "TokenField"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components TokenField"
+    },
+    {
+      "name": "Toolbar",
+      "folder": "Toolbar",
+      "description": "Accessible toolbar with roving focus for grouped controls",
+      "tasks": [
+        "toolbar",
+        "formatting bar",
+        "editor toolbar"
+      ],
+      "exports": [
+        "Toolbar",
+        "ToolbarButton",
+        "ToolbarLink",
+        "ToolbarSeparator",
+        "ToolbarToggleGroup",
+        "ToolbarToggleItem"
+      ],
+      "dependencies": [
+        "Direction",
+        "Floating"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Toolbar"
+    },
+    {
+      "name": "ToolCallCard",
+      "folder": "ToolCallCard",
+      "description": "Agent tool-call row with timer, arguments, result, copy, and retry",
+      "tasks": [
+        "tool call",
+        "function call",
+        "agent tools",
+        "tool call card"
+      ],
+      "exports": [
+        "ToolCallCard",
+        "ToolCallGroup"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ToolCallCard"
+    },
+    {
+      "name": "Tooltip",
+      "folder": "Tooltip",
+      "description": "Hover/focus tooltip hint",
+      "tasks": [
+        "tooltip",
+        "hint",
+        "help"
+      ],
+      "exports": [
+        "TooltipProvider",
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent"
+      ],
+      "dependencies": [
+        "Floating"
+      ],
+      "providers": [
+        "TooltipProvider"
+      ],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Tooltip"
+    },
+    {
+      "name": "TreeView",
+      "folder": "TreeView",
+      "description": "WAI-ARIA tree for nested folders with roving focus and expand/select",
+      "tasks": [
+        "tree view",
+        "file tree",
+        "folder tree",
+        "hierarchy"
+      ],
+      "exports": [
+        "TreeView"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components TreeView"
+    },
+    {
+      "name": "Typography",
+      "folder": "Typography",
+      "description": "Prose typography primitives (h1–h4, p, lead, muted, blockquote, list)",
+      "tasks": [
+        "typography",
+        "prose",
+        "heading"
+      ],
+      "exports": [
+        "Typography",
+        "TypographyH1",
+        "TypographyH2",
+        "TypographyH3",
+        "TypographyH4",
+        "TypographyP",
+        "TypographyLead",
+        "TypographyMuted",
+        "TypographyList",
+        "TypographyTable"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Typography"
+    },
+    {
+      "name": "UsageMeter",
+      "folder": "UsageMeter",
+      "description": "Stacked allowance meter with legend and warning/over-limit tones",
+      "tasks": [
+        "usage meter",
+        "quota",
+        "storage usage",
+        "plan limit"
+      ],
+      "exports": [
+        "UsageMeter"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components UsageMeter"
+    }
+  ]
+}

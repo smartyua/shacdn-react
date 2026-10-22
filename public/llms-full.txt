@@ -1,0 +1,1785 @@
+# shacdn
+
+> shacdn is a React 19 + TypeScript implementation of shadcn/ui built on SCSS modules: no Tailwind, no Radix, no external UI libraries. Components are copied into your project (you own the source), share one token file (`src/styles/variables.scss`), and support light/dark themes with six color schemes.
+
+## Install
+
+From the shacdn repo, copy the design system and any components (internal dependencies are resolved for you):
+
+```bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components Button,Card,Input
+```
+
+Required npm packages: react, react-dom, sass. Optional: lucide-react.
+Import `src/styles/theme-init` and `src/styles/globals.scss` once in the app entry, then import each component from its folder (`./components/Button/Button`).
+
+## MCP server
+
+Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_components, get_component, get_component_bundle, get_install_command, get_design_system, get_integration_guide, install_to_project, list_screen_patterns, get_screen_pattern.
+
+## Rules for agents
+
+- Use tokens from `variables.scss` (`$primary`, `$border`, `$control-h-md`, …); never hardcode colors.
+- `--border` and `--input` carry alpha in dark mode: use `alpha($border, 50%)`, not `hsl(var(--border) / 0.5)`.
+- Components use relative imports only; keep the folder layout `components/Name/Name.tsx`.
+- Arrow functions, `forwardRef`, `displayName`, and correct ARIA roles are part of every component.
+
+## Components
+
+### Accordion
+
+Expandable FAQ / disclosure sections.
+
+- Use for: faq, accordion, collapse, expand
+- Exports: `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent`
+- Folder: `src/components/Accordion/`
+- Depends on: Collapsible
+- Install: `npm run shacdn:install -- /path/to/your-app --components Accordion`
+
+```tsx
+import { Accordion } from './components/Accordion/Accordion';
+```
+
+### ActivityHeatmap
+
+Year-at-a-glance contribution grid, one square per day.
+
+- Use for: activity heatmap, contribution graph, calendar heatmap, streak
+- Exports: `ActivityHeatmap`
+- Folder: `src/components/ActivityHeatmap/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ActivityHeatmap`
+
+```tsx
+import { ActivityHeatmap } from './components/ActivityHeatmap/ActivityHeatmap';
+```
+
+### Alert
+
+Inline status banner on page.
+
+- Use for: alert, banner, message, warning, error
+- Exports: `Alert`, `AlertTitle`, `AlertDescription`
+- Folder: `src/components/Alert/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Alert`
+
+```tsx
+import { Alert } from './components/Alert/Alert';
+```
+
+### AlertDialog
+
+Blocking confirmation for destructive actions.
+
+- Use for: confirm, delete, destructive, modal
+- Exports: `AlertDialog`, `AlertDialogContent`, `AlertDialogHeader`, `AlertDialogFooter`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogAction`, `AlertDialogCancel`
+- Folder: `src/components/AlertDialog/`
+- Depends on: Dialog, Modal
+- Install: `npm run shacdn:install -- /path/to/your-app --components AlertDialog`
+
+```tsx
+import { AlertDialog } from './components/AlertDialog/AlertDialog';
+```
+
+### AnimatedList
+
+Staggered fade-and-rise entrance for a vertical list.
+
+- Use for: animated list, stagger, activity feed
+- Exports: `AnimatedList`
+- Folder: `src/components/AnimatedList/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components AnimatedList`
+
+```tsx
+import { AnimatedList } from './components/AnimatedList/AnimatedList';
+```
+
+### AnimatedText
+
+Text motion: fade, blur, slide, typewriter, gradient, scramble, word rotate, highlight.
+
+- Use for: animated text, typewriter, gradient text, scramble
+- Exports: `AnimatedText`
+- Folder: `src/components/AnimatedText/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components AnimatedText`
+
+```tsx
+import { AnimatedText } from './components/AnimatedText/AnimatedText';
+```
+
+### AspectRatio
+
+Fixed aspect ratio container for media.
+
+- Use for: aspect, ratio, image, video
+- Exports: `AspectRatio`
+- Folder: `src/components/AspectRatio/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components AspectRatio`
+
+```tsx
+import { AspectRatio } from './components/AspectRatio/AspectRatio';
+```
+
+### Attachment
+
+File/image attachment preview with upload states and actions.
+
+- Use for: attachment, file upload, chat composer, media preview
+- Exports: `AttachmentGroup`, `Attachment`, `AttachmentMedia`, `AttachmentContent`, `AttachmentTitle`, `AttachmentDescription`, `AttachmentActions`, `AttachmentAction`, `AttachmentTrigger`
+- Folder: `src/components/Attachment/`
+- Depends on: Button
+- Install: `npm run shacdn:install -- /path/to/your-app --components Attachment`
+
+```tsx
+import { AttachmentGroup } from './components/Attachment/Attachment';
+```
+
+### Avatar
+
+User avatar with fallback initials, badge and overlapping group.
+
+- Use for: avatar, profile, user, avatar group
+- Exports: `Avatar`, `AvatarImage`, `AvatarFallback`, `AvatarBadge`, `AvatarGroup`, `AvatarGroupCount`
+- Folder: `src/components/Avatar/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Avatar`
+
+```tsx
+import { Avatar } from './components/Avatar/Avatar';
+```
+
+### Badge
+
+Status tag or label chip.
+
+- Use for: badge, tag, status, label
+- Exports: `Badge`
+- Folder: `src/components/Badge/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Badge`
+
+```tsx
+import { Badge } from './components/Badge/Badge';
+```
+
+### Banner
+
+Full-width page-level notice, optionally dismissible.
+
+- Use for: banner, page notice, announcement
+- Exports: `Banner`, `BannerTitle`, `BannerAction`
+- Folder: `src/components/Banner/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Banner`
+
+```tsx
+import { Banner } from './components/Banner/Banner';
+```
+
+### Bento
+
+Mixed-span CSS grid layout (bento box).
+
+- Use for: bento, bento grid, dashboard tiles
+- Exports: `Bento`, `BentoItem`
+- Folder: `src/components/Bento/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Bento`
+
+```tsx
+import { Bento } from './components/Bento/Bento';
+```
+
+### Breadcrumb
+
+Page hierarchy navigation.
+
+- Use for: breadcrumb, navigation, hierarchy
+- Exports: `Breadcrumb`, `BreadcrumbList`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbPage`, `BreadcrumbSeparator`
+- Folder: `src/components/Breadcrumb/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Breadcrumb`
+
+```tsx
+import { Breadcrumb } from './components/Breadcrumb/Breadcrumb';
+```
+
+### Bubble
+
+Chat message bubble with variants and reactions slot.
+
+- Use for: bubble, chat message, conversation, reactions
+- Exports: `BubbleGroup`, `Bubble`, `BubbleContent`, `BubbleReactions`
+- Folder: `src/components/Bubble/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Bubble`
+
+```tsx
+import { BubbleGroup } from './components/Bubble/Bubble';
+```
+
+### Button
+
+Action button or link CTA (supports href).
+
+- Use for: button, cta, link, submit
+- Exports: `Button`
+- Folder: `src/components/Button/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Button`
+
+```tsx
+import { Button } from './components/Button/Button';
+```
+
+### ButtonGroup
+
+Grouped buttons with shared border.
+
+- Use for: button group, segmented buttons
+- Exports: `ButtonGroup`
+- Folder: `src/components/ButtonGroup/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ButtonGroup`
+
+```tsx
+import { ButtonGroup } from './components/ButtonGroup/ButtonGroup';
+```
+
+### Calendar
+
+Month grid date picker with single and range selection.
+
+- Use for: calendar, date, date range
+- Exports: `Calendar`
+- Folder: `src/components/Calendar/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Calendar`
+
+```tsx
+import { Calendar } from './components/Calendar/Calendar';
+```
+
+### Callout
+
+In-content notice with accent border (info/warning/success/danger).
+
+- Use for: callout, inline alert, note, tip
+- Exports: `Callout`, `CalloutTitle`, `CalloutDescription`
+- Folder: `src/components/Callout/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Callout`
+
+```tsx
+import { Callout } from './components/Callout/Callout';
+```
+
+### Card
+
+Content card with header/footer.
+
+- Use for: card, panel, container
+- Exports: `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, `CardFooter`
+- Folder: `src/components/Card/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Card`
+
+```tsx
+import { Card } from './components/Card/Card';
+```
+
+### Carousel
+
+Horizontal scroll-snap carousel (no Embla).
+
+- Use for: carousel, slider gallery, slides
+- Exports: `Carousel`, `CarouselViewport`, `CarouselContent`, `CarouselItem`, `CarouselPrevious`, `CarouselNext`, `CarouselDots`, `CarouselSlide`
+- Folder: `src/components/Carousel/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Carousel`
+
+```tsx
+import { Carousel } from './components/Carousel/Carousel';
+```
+
+### Chart
+
+Zero-dep SVG charts: bar, grouped bar, diverging bar, donut, sparkline.
+
+- Use for: chart, graph, analytics, donut, sparkline, cashflow
+- Exports: `ChartContainer`, `BarChart`, `GroupedBarChart`, `DonutChart`, `Sparkline`, `DivergingBarChart`
+- Folder: `src/components/Chart/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Chart`
+
+```tsx
+import { ChartContainer } from './components/Chart/Chart';
+```
+
+### Checkbox
+
+Boolean checkbox input.
+
+- Use for: checkbox, check, form
+- Exports: `Checkbox`
+- Folder: `src/components/Checkbox/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Checkbox`
+
+```tsx
+import { Checkbox } from './components/Checkbox/Checkbox';
+```
+
+### CheckboxCards
+
+Selectable cards for multiple choices (plans, add-ons, peripherals).
+
+- Use for: checkbox cards, multi select cards, plan picker, addon cards
+- Exports: `CheckboxCards`, `CheckboxCardsItem`
+- Folder: `src/components/CheckboxCards/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components CheckboxCards`
+
+```tsx
+import { CheckboxCards } from './components/CheckboxCards/CheckboxCards';
+```
+
+### CheckboxGroup
+
+Labeled checkbox list with shared value array.
+
+- Use for: checkbox group, checkbox list, settings checkboxes
+- Exports: `CheckboxGroup`, `CheckboxGroupItem`
+- Folder: `src/components/CheckboxGroup/`
+- Depends on: Checkbox
+- Install: `npm run shacdn:install -- /path/to/your-app --components CheckboxGroup`
+
+```tsx
+import { CheckboxGroup } from './components/CheckboxGroup/CheckboxGroup';
+```
+
+### Chip
+
+Interactive removable or selectable label.
+
+- Use for: chip, tag, pill, removable tag
+- Exports: `Chip`
+- Folder: `src/components/Chip/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Chip`
+
+```tsx
+import { Chip } from './components/Chip/Chip';
+```
+
+### CodeBlock
+
+Code sample with copy, highlighted lines, and file tabs.
+
+- Use for: code block, snippet, copy code
+- Exports: `CodeBlock`
+- Folder: `src/components/CodeBlock/`
+- Depends on: Button
+- Install: `npm run shacdn:install -- /path/to/your-app --components CodeBlock`
+
+```tsx
+import { CodeBlock } from './components/CodeBlock/CodeBlock';
+```
+
+### Collapsible
+
+Show/hide content region.
+
+- Use for: collapsible, toggle content
+- Exports: `Collapsible`, `CollapsibleTrigger`, `CollapsibleContent`
+- Folder: `src/components/Collapsible/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Collapsible`
+
+```tsx
+import { Collapsible } from './components/Collapsible/Collapsible';
+```
+
+### ColorPicker
+
+Swatch trigger with color and hex inputs.
+
+- Use for: color picker, color well, swatch
+- Exports: `ColorPicker`
+- Folder: `src/components/ColorPicker/`
+- Depends on: Input, Popover
+- Install: `npm run shacdn:install -- /path/to/your-app --components ColorPicker`
+
+```tsx
+import { ColorPicker } from './components/ColorPicker/ColorPicker';
+```
+
+### Combobox
+
+Searchable select: compound Input/Content/List/Item (Appica-style) + legacy options API.
+
+- Use for: combobox, autocomplete, search select, clearable
+- Exports: `Combobox`, `ComboboxInput`, `ComboboxContent`, `ComboboxList`, `ComboboxItem`, `ComboboxEmpty`
+- Folder: `src/components/Combobox/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components Combobox`
+
+```tsx
+import { Combobox } from './components/Combobox/Combobox';
+```
+
+### ComboButton
+
+Primary action joined to a related-actions menu.
+
+- Use for: combo button, split button, action menu
+- Exports: `ComboButton`, `ComboButtonAction`, `ComboButtonMenu`
+- Folder: `src/components/ComboButton/`
+- Depends on: Button, ButtonGroup, DropdownMenu
+- Install: `npm run shacdn:install -- /path/to/your-app --components ComboButton`
+
+```tsx
+import { ComboButton } from './components/ComboButton/ComboButton';
+```
+
+### Command
+
+Command palette with search filter.
+
+- Use for: command, command palette, cmdk, search menu
+- Exports: `Command`, `CommandDialog`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandItem`, `CommandSeparator`
+- Folder: `src/components/Command/`
+- Depends on: Dialog
+- Install: `npm run shacdn:install -- /path/to/your-app --components Command`
+
+```tsx
+import { Command } from './components/Command/Command';
+```
+
+### ContextMenu
+
+Right-click context menu.
+
+- Use for: context menu, right click
+- Exports: `ContextMenu`, `ContextMenuTrigger`, `ContextMenuContent`, `ContextMenuItem`, `ContextMenuSeparator`
+- Folder: `src/components/ContextMenu/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components ContextMenu`
+
+```tsx
+import { ContextMenu } from './components/ContextMenu/ContextMenu';
+```
+
+### CopyButton
+
+Copies a value to the clipboard with an in-place confirmation.
+
+- Use for: copy button, copy to clipboard, copy link, copy token
+- Exports: `CopyButton`
+- Folder: `src/components/CopyButton/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components CopyButton`
+
+```tsx
+import { CopyButton } from './components/CopyButton/CopyButton';
+```
+
+### Countdown
+
+Launch countdown with rolling digits that turns into a live state at zero.
+
+- Use for: countdown, timer, launch, deadline
+- Exports: `Countdown`
+- Folder: `src/components/Countdown/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Countdown`
+
+```tsx
+import { Countdown } from './components/Countdown/Countdown';
+```
+
+### DataList
+
+Key/value definition list for detail and settings rows.
+
+- Use for: data list, definition list, key value, dl
+- Exports: `DataList`, `DataListItem`, `DataListLabel`, `DataListValue`
+- Folder: `src/components/DataList/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components DataList`
+
+```tsx
+import { DataList } from './components/DataList/DataList';
+```
+
+### DatePicker
+
+Date input with calendar popup.
+
+- Use for: date picker, date input, calendar
+- Exports: `DatePicker`
+- Folder: `src/components/DatePicker/`
+- Depends on: Calendar, Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components DatePicker`
+
+```tsx
+import { DatePicker } from './components/DatePicker/DatePicker';
+```
+
+### DateRangePicker
+
+Start/end date input with range calendar popup.
+
+- Use for: date range, range picker, period
+- Exports: `DateRangePicker`
+- Folder: `src/components/DateRangePicker/`
+- Depends on: Calendar, Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components DateRangePicker`
+
+```tsx
+import { DateRangePicker } from './components/DateRangePicker/DateRangePicker';
+```
+
+### Dialog
+
+Modal dialog overlay.
+
+- Use for: dialog, modal, overlay, popup
+- Exports: `Dialog`, `DialogContent`, `DialogHeader`, `DialogFooter`, `DialogTitle`, `DialogDescription`
+- Folder: `src/components/Dialog/`
+- Depends on: Button, Modal
+- Install: `npm run shacdn:install -- /path/to/your-app --components Dialog`
+
+```tsx
+import { Dialog } from './components/Dialog/Dialog';
+```
+
+### Direction
+
+RTL/LTR direction provider.
+
+- Use for: rtl, direction, i18n
+- Exports: `DirectionProvider`, `useDirection`
+- Folder: `src/components/Direction/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Direction`
+
+```tsx
+import { DirectionProvider } from './components/Direction/Direction';
+```
+
+### Dock
+
+macOS-style dock with pointer magnification.
+
+- Use for: dock, apple dock, magnify
+- Exports: `Dock`, `DockItem`
+- Folder: `src/components/Dock/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Dock`
+
+```tsx
+import { Dock } from './components/Dock/Dock';
+```
+
+### Drawer
+
+Side panel / sheet overlay.
+
+- Use for: drawer, sidebar, sheet, panel
+- Exports: `Drawer`, `DrawerContent`, `DrawerHeader`, `DrawerTitle`, `DrawerDescription`
+- Folder: `src/components/Drawer/`
+- Depends on: Modal
+- Install: `npm run shacdn:install -- /path/to/your-app --components Drawer`
+
+```tsx
+import { Drawer } from './components/Drawer/Drawer';
+```
+
+### DropdownMenu
+
+Dropdown action menu with checkbox, radio, shortcut and nested submenu parts.
+
+- Use for: dropdown, menu, actions, context actions
+- Exports: `DropdownMenu`, `DropdownMenuTrigger`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuLabel`, `DropdownMenuGroup`, `DropdownMenuShortcut`, `DropdownMenuCheckboxItem`, `DropdownMenuRadioGroup`, `DropdownMenuRadioItem`, `DropdownMenuSub`, `DropdownMenuSubTrigger`, `DropdownMenuSubContent`, `DropdownMenuPortal`
+- Folder: `src/components/DropdownMenu/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components DropdownMenu`
+
+```tsx
+import { DropdownMenu } from './components/DropdownMenu/DropdownMenu';
+```
+
+### Empty
+
+Empty state placeholder.
+
+- Use for: empty, no data, placeholder
+- Exports: `Empty`
+- Folder: `src/components/Empty/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Empty`
+
+```tsx
+import { Empty } from './components/Empty/Empty';
+```
+
+### ExpandableText
+
+Line-clamped text with a fade and Read more / Show less, shown only on overflow.
+
+- Use for: expandable text, read more, truncate, line clamp
+- Exports: `ExpandableText`
+- Folder: `src/components/ExpandableText/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ExpandableText`
+
+```tsx
+import { ExpandableText } from './components/ExpandableText/ExpandableText';
+```
+
+### Field
+
+Form field wrapper with label/description.
+
+- Use for: field, form field
+- Exports: `Field`, `FieldLabel`, `FieldDescription`
+- Folder: `src/components/Field/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Field`
+
+```tsx
+import { Field } from './components/Field/Field';
+```
+
+### FileUpload
+
+Drag-and-drop file picker with type filter and previews.
+
+- Use for: file upload, dropzone, drag and drop
+- Exports: `FileUpload`
+- Folder: `src/components/FileUpload/`
+- Depends on: Button
+- Install: `npm run shacdn:install -- /path/to/your-app --components FileUpload`
+
+```tsx
+import { FileUpload } from './components/FileUpload/FileUpload';
+```
+
+### FinancialTable
+
+Comparison table for signed amounts, with an accent column for the active scenario.
+
+- Use for: financial table, cashflow table, signed amounts
+- Exports: `FinancialTable`
+- Folder: `src/components/FinancialTable/`
+- Depends on: Table
+- Install: `npm run shacdn:install -- /path/to/your-app --components FinancialTable`
+
+```tsx
+import { FinancialTable } from './components/FinancialTable/FinancialTable';
+```
+
+### Floating
+
+Positioning primitives shared by every popup surface (portal, collision-aware placement, dismiss layer).
+
+- Use for: floating, positioning, portal, popup internals
+- Exports: `FloatingPortal`, `useFloatingPosition`, `useDismissLayer`, `useInitialMenuFocus`, `computeFloatingPosition`, `composeRefs`
+- Folder: `src/components/Floating/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Floating`
+
+```tsx
+import { FloatingPortal } from './components/Floating/Floating';
+```
+
+### Form
+
+Form composition helpers.
+
+- Use for: form
+- Exports: `Form`, `FormField`, `FormItem`, `FormLabel`, `FormDescription`, `FormMessage`
+- Folder: `src/components/Form/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Form`
+
+```tsx
+import { Form } from './components/Form/Form';
+```
+
+### Gauge
+
+Arc gauge showing a value against a range with threshold tones.
+
+- Use for: gauge, meter, speedometer, kpi dial
+- Exports: `Gauge`
+- Folder: `src/components/Gauge/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Gauge`
+
+```tsx
+import { Gauge } from './components/Gauge/Gauge';
+```
+
+### HoldToConfirm
+
+Destructive action confirmed by press-and-hold (pointer or Space/Enter).
+
+- Use for: hold to confirm, long press, destructive confirm, delete
+- Exports: `HoldToConfirm`
+- Folder: `src/components/HoldToConfirm/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components HoldToConfirm`
+
+```tsx
+import { HoldToConfirm } from './components/HoldToConfirm/HoldToConfirm';
+```
+
+### HoverCard
+
+Rich preview on hover.
+
+- Use for: hover card, preview
+- Exports: `HoverCard`, `HoverCardTrigger`, `HoverCardContent`
+- Folder: `src/components/HoverCard/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components HoverCard`
+
+```tsx
+import { HoverCard } from './components/HoverCard/HoverCard';
+```
+
+### ImageCompare
+
+Before/after image slider with a draggable, keyboard-operable divider.
+
+- Use for: image compare, before after, comparison slider
+- Exports: `ImageCompare`
+- Folder: `src/components/ImageCompare/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ImageCompare`
+
+```tsx
+import { ImageCompare } from './components/ImageCompare/ImageCompare';
+```
+
+### InlineEdit
+
+Rename in place: text turns into a field without moving; Enter commits, Escape cancels.
+
+- Use for: inline edit, rename, editable text, click to edit
+- Exports: `InlineEdit`
+- Folder: `src/components/InlineEdit/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components InlineEdit`
+
+```tsx
+import { InlineEdit } from './components/InlineEdit/InlineEdit';
+```
+
+### Input
+
+Single-line text input.
+
+- Use for: input, text field, email, password, search
+- Exports: `Input`
+- Folder: `src/components/Input/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Input`
+
+```tsx
+import { Input } from './components/Input/Input';
+```
+
+### InputGroup
+
+Input with prefix/suffix addon.
+
+- Use for: input group, prefix, suffix
+- Exports: `InputGroup`, `InputGroupAddon`
+- Folder: `src/components/InputGroup/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components InputGroup`
+
+```tsx
+import { InputGroup } from './components/InputGroup/InputGroup';
+```
+
+### InputMask
+
+Masked text input for phones, dates, and codes.
+
+- Use for: input mask, phone mask, pattern
+- Exports: `InputMask`
+- Folder: `src/components/InputMask/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components InputMask`
+
+```tsx
+import { InputMask } from './components/InputMask/InputMask';
+```
+
+### InputOTP
+
+One-time password / PIN input.
+
+- Use for: otp, pin, verification code
+- Exports: `InputOTP`
+- Folder: `src/components/InputOTP/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components InputOTP`
+
+```tsx
+import { InputOTP } from './components/InputOTP/InputOTP';
+```
+
+### Item
+
+List item row pattern.
+
+- Use for: list item, row
+- Exports: `Item`
+- Folder: `src/components/Item/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Item`
+
+```tsx
+import { Item } from './components/Item/Item';
+```
+
+### JsonViewer
+
+Collapsible JSON tree with paging for long arrays and copy value / path.
+
+- Use for: json viewer, json tree, inspect payload, object explorer
+- Exports: `JsonViewer`
+- Folder: `src/components/JsonViewer/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components JsonViewer`
+
+```tsx
+import { JsonViewer } from './components/JsonViewer/JsonViewer';
+```
+
+### Kbd
+
+Keyboard shortcut display.
+
+- Use for: keyboard, shortcut, kbd
+- Exports: `Kbd`, `KbdGroup`
+- Folder: `src/components/Kbd/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Kbd`
+
+```tsx
+import { Kbd } from './components/Kbd/Kbd';
+```
+
+### Label
+
+Form field label.
+
+- Use for: label, form
+- Exports: `Label`
+- Folder: `src/components/Label/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Label`
+
+```tsx
+import { Label } from './components/Label/Label';
+```
+
+### Lightbox
+
+Click-to-enlarge media overlay with scrim.
+
+- Use for: lightbox, image overlay, gallery enlarge
+- Exports: `Lightbox`, `LightboxTrigger`, `LightboxContent`, `LightboxClose`, `LightboxOverlay`
+- Folder: `src/components/Lightbox/`
+- Depends on: Modal
+- Install: `npm run shacdn:install -- /path/to/your-app --components Lightbox`
+
+```tsx
+import { Lightbox } from './components/Lightbox/Lightbox';
+```
+
+### Marker
+
+Chat status chip or date/unread separator.
+
+- Use for: marker, chat separator, date divider, delivery status
+- Exports: `Marker`, `MarkerIcon`, `MarkerContent`
+- Folder: `src/components/Marker/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Marker`
+
+```tsx
+import { Marker } from './components/Marker/Marker';
+```
+
+### Marquee
+
+Endless horizontal scrolling content strip.
+
+- Use for: marquee, ticker, infinite scroll text
+- Exports: `Marquee`, `MarqueeContent`
+- Folder: `src/components/Marquee/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Marquee`
+
+```tsx
+import { Marquee } from './components/Marquee/Marquee';
+```
+
+### Masonry
+
+Column-packed variable-height card layout.
+
+- Use for: masonry, pinterest grid, column layout
+- Exports: `Masonry`, `MasonryItem`
+- Folder: `src/components/Masonry/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Masonry`
+
+```tsx
+import { Masonry } from './components/Masonry/Masonry';
+```
+
+### MentionTextarea
+
+Composer textarea with @mentions, /commands autosuggest, and shortened link chips.
+
+- Use for: mention, slash command, composer, autosuggest, link chip
+- Exports: `MentionTextarea`
+- Folder: `src/components/MentionTextarea/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components MentionTextarea`
+
+```tsx
+import { MentionTextarea } from './components/MentionTextarea/MentionTextarea';
+```
+
+### Menubar
+
+Desktop-style menu bar.
+
+- Use for: menubar, menu bar
+- Exports: `Menubar`, `MenubarMenu`, `MenubarTrigger`, `MenubarContent`, `MenubarItem`
+- Folder: `src/components/Menubar/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components Menubar`
+
+```tsx
+import { Menubar } from './components/Menubar/Menubar';
+```
+
+### Message
+
+Chat message row: avatar slot + content + header/footer.
+
+- Use for: message, chat row, conversation thread
+- Exports: `MessageGroup`, `Message`, `MessageAvatar`, `MessageContent`, `MessageHeader`, `MessageFooter`
+- Folder: `src/components/Message/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Message`
+
+```tsx
+import { MessageGroup } from './components/Message/Message';
+```
+
+### MessageScroller
+
+Scrollable message list with auto-scroll and jump buttons (zero-dep; no @shadcn/react).
+
+- Use for: message scroller, chat scroll, auto scroll, conversation list
+- Exports: `MessageScrollerProvider`, `MessageScroller`, `MessageScrollerViewport`, `MessageScrollerContent`, `MessageScrollerItem`, `MessageScrollerButton`, `useMessageScroller`, `useMessageScrollerScrollable`, `useMessageScrollerVisibility`
+- Folder: `src/components/MessageScroller/`
+- Depends on: nothing else in shacdn
+- Requires provider: MessageScrollerProvider
+- Install: `npm run shacdn:install -- /path/to/your-app --components MessageScroller`
+
+```tsx
+import { MessageScrollerProvider } from './components/MessageScroller/MessageScroller';
+```
+
+### MetricCard
+
+KPI card: value, signed delta with sentiment, optional sparkline.
+
+- Use for: metric card, kpi, stat card, dashboard tile
+- Exports: `MetricCard`
+- Folder: `src/components/MetricCard/`
+- Depends on: Chart
+- Install: `npm run shacdn:install -- /path/to/your-app --components MetricCard`
+
+```tsx
+import { MetricCard } from './components/MetricCard/MetricCard';
+```
+
+### Modal
+
+Alias for Dialog API.
+
+- Use for: modal
+- Exports: `Modal`, `ModalContent`, `ModalHeader`, `ModalFooter`, `ModalTitle`, `ModalDescription`
+- Folder: `src/components/Modal/`
+- Depends on: Dialog
+- Alias of: Dialog
+- Install: `npm run shacdn:install -- /path/to/your-app --components Modal`
+
+```tsx
+import { Modal } from './components/Modal/Modal';
+```
+
+### MultiSelect
+
+Multi-value select with chips and checkbox listbox.
+
+- Use for: multi select, multiselect, checkbox dropdown, tags select
+- Exports: `MultiSelect`
+- Folder: `src/components/MultiSelect/`
+- Depends on: Checkbox, Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components MultiSelect`
+
+```tsx
+import { MultiSelect } from './components/MultiSelect/MultiSelect';
+```
+
+### NativeSelect
+
+Styled native <select> element for simple or mobile-first forms.
+
+- Use for: native select, native-select, form select
+- Exports: `NativeSelect`
+- Folder: `src/components/NativeSelect/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components NativeSelect`
+
+```tsx
+import { NativeSelect } from './components/NativeSelect/NativeSelect';
+```
+
+### NavigationMenu
+
+Site navigation with dropdown panels.
+
+- Use for: navigation menu, navbar, mega menu, topbar
+- Exports: `NavigationMenu`, `NavigationMenuList`, `NavigationMenuItem`, `NavigationMenuTrigger`, `NavigationMenuContent`, `NavigationMenuLink`, `NavigationMenuContentLink`
+- Folder: `src/components/NavigationMenu/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components NavigationMenu`
+
+```tsx
+import { NavigationMenu } from './components/NavigationMenu/NavigationMenu';
+```
+
+### NumberField
+
+Bounded number input with +/- buttons, arrow/Page/Home/End keys and locale formatting.
+
+- Use for: number field, number input, quantity, spinbutton
+- Exports: `NumberField`
+- Folder: `src/components/NumberField/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components NumberField`
+
+```tsx
+import { NumberField } from './components/NumberField/NumberField';
+```
+
+### NumberTicker
+
+Animated count toward a number, with prefix, suffix, and decimals.
+
+- Use for: number ticker, count up, stat
+- Exports: `NumberTicker`
+- Folder: `src/components/NumberTicker/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components NumberTicker`
+
+```tsx
+import { NumberTicker } from './components/NumberTicker/NumberTicker';
+```
+
+### OrbitingCircles
+
+Icons traveling on circular orbits around a center.
+
+- Use for: orbiting circles, orbit, logo cloud
+- Exports: `OrbitingCircles`, `OrbitingCirclesItem`
+- Folder: `src/components/OrbitingCircles/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components OrbitingCircles`
+
+```tsx
+import { OrbitingCircles } from './components/OrbitingCircles/OrbitingCircles';
+```
+
+### Pagination
+
+Page navigation controls.
+
+- Use for: pagination, pages
+- Exports: `Pagination`, `PaginationList`, `PaginationItem`, `PaginationLink`, `PaginationButton`, `PaginationEllipsis`
+- Folder: `src/components/Pagination/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Pagination`
+
+```tsx
+import { Pagination } from './components/Pagination/Pagination';
+```
+
+### PasswordStrength
+
+Live password strength meter with a rules checklist.
+
+- Use for: password strength, password meter, signup password
+- Exports: `PasswordStrength`
+- Folder: `src/components/PasswordStrength/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components PasswordStrength`
+
+```tsx
+import { PasswordStrength } from './components/PasswordStrength/PasswordStrength';
+```
+
+### PasswordToggleField
+
+Password input with show/hide toggle.
+
+- Use for: password, password toggle, show password, hide password
+- Exports: `PasswordToggleField`, `PasswordToggleFieldInput`, `PasswordToggleFieldToggle`, `PasswordToggleFieldIcon`
+- Folder: `src/components/PasswordToggleField/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components PasswordToggleField`
+
+```tsx
+import { PasswordToggleField } from './components/PasswordToggleField/PasswordToggleField';
+```
+
+### Popover
+
+Floating content panel.
+
+- Use for: popover, floating
+- Exports: `Popover`, `PopoverTrigger`, `PopoverContent`
+- Folder: `src/components/Popover/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components Popover`
+
+```tsx
+import { Popover } from './components/Popover/Popover';
+```
+
+### Progress
+
+Linear progress bar.
+
+- Use for: progress, loading bar
+- Exports: `Progress`
+- Folder: `src/components/Progress/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Progress`
+
+```tsx
+import { Progress } from './components/Progress/Progress';
+```
+
+### ProgressRing
+
+Circular determinate progress indicator.
+
+- Use for: progress ring, circular progress, donut progress
+- Exports: `ProgressRing`
+- Folder: `src/components/ProgressRing/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ProgressRing`
+
+```tsx
+import { ProgressRing } from './components/ProgressRing/ProgressRing';
+```
+
+### Questionnaire
+
+Multi-step question flow with progress and a completion state.
+
+- Use for: questionnaire, survey, quiz
+- Exports: `Questionnaire`
+- Folder: `src/components/Questionnaire/`
+- Depends on: Button, Progress
+- Install: `npm run shacdn:install -- /path/to/your-app --components Questionnaire`
+
+```tsx
+import { Questionnaire } from './components/Questionnaire/Questionnaire';
+```
+
+### RadioCards
+
+Selectable cards for a single choice (plan, shipping, billing).
+
+- Use for: radio cards, plan cards, choice cards, shipping method
+- Exports: `RadioCards`, `RadioCardsItem`
+- Folder: `src/components/RadioCards/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components RadioCards`
+
+```tsx
+import { RadioCards } from './components/RadioCards/RadioCards';
+```
+
+### RadioGroup
+
+Single choice from group.
+
+- Use for: radio, single choice
+- Exports: `RadioGroup`, `RadioGroupItem`
+- Folder: `src/components/RadioGroup/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components RadioGroup`
+
+```tsx
+import { RadioGroup } from './components/RadioGroup/RadioGroup';
+```
+
+### Rating
+
+Star rating with keyboard, half steps, and read-only display.
+
+- Use for: rating, stars, review
+- Exports: `Rating`
+- Folder: `src/components/Rating/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Rating`
+
+```tsx
+import { Rating } from './components/Rating/Rating';
+```
+
+### Resizable
+
+Drag-to-resize panel groups (zero-dep).
+
+- Use for: resizable, split pane, panel resize
+- Exports: `ResizablePanelGroup`, `ResizablePanel`, `ResizableHandle`
+- Folder: `src/components/Resizable/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Resizable`
+
+```tsx
+import { ResizablePanelGroup } from './components/Resizable/Resizable';
+```
+
+### ScrollArea
+
+Custom styled scroll container.
+
+- Use for: scroll, overflow
+- Exports: `ScrollArea`
+- Folder: `src/components/ScrollArea/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ScrollArea`
+
+```tsx
+import { ScrollArea } from './components/ScrollArea/ScrollArea';
+```
+
+### Scrollspy
+
+On-this-page nav that tracks the visible section.
+
+- Use for: scrollspy, table of contents, on this page
+- Exports: `Scrollspy`, `ScrollspyLink`
+- Folder: `src/components/Scrollspy/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Scrollspy`
+
+```tsx
+import { Scrollspy } from './components/Scrollspy/Scrollspy';
+```
+
+### SegmentedControl
+
+Single-choice segmented control with a sliding selection indicator.
+
+- Use for: segmented control, view switcher, tabs toggle, billing toggle
+- Exports: `SegmentedControl`
+- Folder: `src/components/SegmentedControl/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components SegmentedControl`
+
+```tsx
+import { SegmentedControl } from './components/SegmentedControl/SegmentedControl';
+```
+
+### Select
+
+Custom listbox select with popup, groups and keyboard navigation.
+
+- Use for: select, dropdown, listbox, choose option
+- Exports: `Select`, `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`
+- Folder: `src/components/Select/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components Select`
+
+```tsx
+import { Select } from './components/Select/Select';
+```
+
+### Separator
+
+Visual divider line.
+
+- Use for: separator, divider
+- Exports: `Separator`
+- Folder: `src/components/Separator/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Separator`
+
+```tsx
+import { Separator } from './components/Separator/Separator';
+```
+
+### Sheet
+
+Alias for Drawer API.
+
+- Use for: sheet, side panel
+- Exports: `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetDescription`
+- Folder: `src/components/Sheet/`
+- Depends on: Drawer
+- Alias of: Drawer
+- Install: `npm run shacdn:install -- /path/to/your-app --components Sheet`
+
+```tsx
+import { Sheet } from './components/Sheet/Sheet';
+```
+
+### ShineBorder
+
+Animated conic-gradient border around any content.
+
+- Use for: shine border, gradient border, animated border
+- Exports: `ShineBorder`
+- Folder: `src/components/ShineBorder/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ShineBorder`
+
+```tsx
+import { ShineBorder } from './components/ShineBorder/ShineBorder';
+```
+
+### Sidebar
+
+App sidebar layout with collapse (zero-dep).
+
+- Use for: sidebar, app shell, dashboard layout
+- Exports: `SidebarProvider`, `Sidebar`, `SidebarHeader`, `SidebarContent`, `SidebarFooter`, `SidebarInset`, `SidebarTrigger`, `SidebarMenu`, `SidebarMenuItem`, `SidebarMenuButton`
+- Folder: `src/components/Sidebar/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Sidebar`
+
+```tsx
+import { SidebarProvider } from './components/Sidebar/Sidebar';
+```
+
+### Skeleton
+
+Loading placeholder shimmer.
+
+- Use for: skeleton, loading placeholder
+- Exports: `Skeleton`
+- Folder: `src/components/Skeleton/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Skeleton`
+
+```tsx
+import { Skeleton } from './components/Skeleton/Skeleton';
+```
+
+### Slider
+
+Range slider input.
+
+- Use for: slider, range
+- Exports: `Slider`
+- Folder: `src/components/Slider/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Slider`
+
+```tsx
+import { Slider } from './components/Slider/Slider';
+```
+
+### Sonner
+
+Registry alias for Toast.
+
+- Use for: sonner, toast
+- Exports: `SonnerToaster`, `useSonner`, `ToastItem`, `ToastTitle`, `ToastDescription`
+- Folder: `src/components/Sonner/`
+- Depends on: Toast
+- Requires provider: ToastProvider
+- Alias of: Toast
+- Install: `npm run shacdn:install -- /path/to/your-app --components Sonner`
+
+```tsx
+import { SonnerToaster } from './components/Sonner/Sonner';
+```
+
+### Sortable
+
+Pointer and keyboard reorderable list.
+
+- Use for: sortable, drag reorder, reorder list
+- Exports: `Sortable`, `SortableItem`
+- Folder: `src/components/Sortable/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Sortable`
+
+```tsx
+import { Sortable } from './components/Sortable/Sortable';
+```
+
+### Spinner
+
+Circular loading indicator.
+
+- Use for: spinner, loading
+- Exports: `Spinner`
+- Folder: `src/components/Spinner/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Spinner`
+
+```tsx
+import { Spinner } from './components/Spinner/Spinner';
+```
+
+### SpinningText
+
+Text set on a circle that rotates.
+
+- Use for: spinning text, circular text
+- Exports: `SpinningText`
+- Folder: `src/components/SpinningText/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components SpinningText`
+
+```tsx
+import { SpinningText } from './components/SpinningText/SpinningText';
+```
+
+### Stepper
+
+Compact increment/decrement value control.
+
+- Use for: stepper, number stepper, increment
+- Exports: `Stepper`
+- Folder: `src/components/Stepper/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Stepper`
+
+```tsx
+import { Stepper } from './components/Stepper/Stepper';
+```
+
+### Steps
+
+Wizard / checkout step indicator.
+
+- Use for: steps, stepper wizard, checkout steps, wizard
+- Exports: `Steps`, `StepsItem`
+- Folder: `src/components/Steps/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Steps`
+
+```tsx
+import { Steps } from './components/Steps/Steps';
+```
+
+### Switch
+
+Toggle switch control.
+
+- Use for: switch, toggle setting
+- Exports: `Switch`
+- Folder: `src/components/Switch/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Switch`
+
+```tsx
+import { Switch } from './components/Switch/Switch';
+```
+
+### Table
+
+Data table with semantic parts.
+
+- Use for: table, data grid, list
+- Exports: `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableFooter`, `TableCaption`
+- Folder: `src/components/Table/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Table`
+
+```tsx
+import { Table } from './components/Table/Table';
+```
+
+### TabNav
+
+Link-based navigation that looks like tabs (no panels).
+
+- Use for: tab nav, tab navigation, page tabs, settings nav
+- Exports: `TabNav`, `TabNavLink`
+- Folder: `src/components/TabNav/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components TabNav`
+
+```tsx
+import { TabNav } from './components/TabNav/TabNav';
+```
+
+### Tabs
+
+Tabbed panel navigation.
+
+- Use for: tabs, panels
+- Exports: `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`
+- Folder: `src/components/Tabs/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Tabs`
+
+```tsx
+import { Tabs } from './components/Tabs/Tabs';
+```
+
+### Textarea
+
+Multi-line text input.
+
+- Use for: textarea, multiline
+- Exports: `Textarea`
+- Folder: `src/components/Textarea/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Textarea`
+
+```tsx
+import { Textarea } from './components/Textarea/Textarea';
+```
+
+### TextShimmer
+
+Calm light sweep across text to signal ongoing work.
+
+- Use for: text shimmer, loading text, ai thinking, shimmer
+- Exports: `TextShimmer`
+- Folder: `src/components/TextShimmer/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components TextShimmer`
+
+```tsx
+import { TextShimmer } from './components/TextShimmer/TextShimmer';
+```
+
+### ThemeSwitcher
+
+Light/dark + color scheme picker.
+
+- Use for: theme, dark mode, color scheme
+- Exports: `ThemeSwitcher`
+- Folder: `src/components/ThemeSwitcher/`
+- Depends on: Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components ThemeSwitcher`
+
+```tsx
+import { ThemeSwitcher } from './components/ThemeSwitcher/ThemeSwitcher';
+```
+
+### ThinkingLoader
+
+Compact AI working pill that walks through phases and settles on a check.
+
+- Use for: thinking loader, ai status, agent working, streaming wait
+- Exports: `ThinkingLoader`
+- Folder: `src/components/ThinkingLoader/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ThinkingLoader`
+
+```tsx
+import { ThinkingLoader } from './components/ThinkingLoader/ThinkingLoader';
+```
+
+### Timeline
+
+Vertical status timeline for order tracking and event history.
+
+- Use for: timeline, order tracking, status history, shipment track
+- Exports: `Timeline`, `TimelineItem`, `TimelineIndicator`, `TimelineContent`, `TimelineTitle`, `TimelineDescription`, `TimelineTime`
+- Folder: `src/components/Timeline/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Timeline`
+
+```tsx
+import { Timeline } from './components/Timeline/Timeline';
+```
+
+### TimePicker
+
+Segmented time field (12/24h) with typing, arrows and AM/PM.
+
+- Use for: time picker, time input, hour minute, schedule
+- Exports: `TimePicker`
+- Folder: `src/components/TimePicker/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components TimePicker`
+
+```tsx
+import { TimePicker } from './components/TimePicker/TimePicker';
+```
+
+### Toast
+
+Transient corner notifications.
+
+- Use for: toast, notification, snackbar
+- Exports: `ToastProvider`, `useToast`, `ToastItem`, `ToastViewport`, `ToastTitle`, `ToastDescription`
+- Folder: `src/components/Toast/`
+- Depends on: nothing else in shacdn
+- Requires provider: ToastProvider
+- Install: `npm run shacdn:install -- /path/to/your-app --components Toast`
+
+```tsx
+import { ToastProvider } from './components/Toast/Toast';
+```
+
+### Toggle
+
+Pressable toggle button.
+
+- Use for: toggle, pressed state
+- Exports: `Toggle`
+- Folder: `src/components/Toggle/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Toggle`
+
+```tsx
+import { Toggle } from './components/Toggle/Toggle';
+```
+
+### ToggleGroup
+
+Group of toggle buttons.
+
+- Use for: toggle group, segmented control
+- Exports: `ToggleGroup`, `ToggleGroupItem`
+- Folder: `src/components/ToggleGroup/`
+- Depends on: Toggle
+- Install: `npm run shacdn:install -- /path/to/your-app --components ToggleGroup`
+
+```tsx
+import { ToggleGroup } from './components/ToggleGroup/ToggleGroup';
+```
+
+### TokenField
+
+Text input that commits values as removable tokens.
+
+- Use for: token field, tags input, chip input
+- Exports: `TokenField`
+- Folder: `src/components/TokenField/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components TokenField`
+
+```tsx
+import { TokenField } from './components/TokenField/TokenField';
+```
+
+### Toolbar
+
+Accessible toolbar with roving focus for grouped controls.
+
+- Use for: toolbar, formatting bar, editor toolbar
+- Exports: `Toolbar`, `ToolbarButton`, `ToolbarLink`, `ToolbarSeparator`, `ToolbarToggleGroup`, `ToolbarToggleItem`
+- Folder: `src/components/Toolbar/`
+- Depends on: Direction, Floating
+- Install: `npm run shacdn:install -- /path/to/your-app --components Toolbar`
+
+```tsx
+import { Toolbar } from './components/Toolbar/Toolbar';
+```
+
+### ToolCallCard
+
+Agent tool-call row with timer, arguments, result, copy, and retry.
+
+- Use for: tool call, function call, agent tools, tool call card
+- Exports: `ToolCallCard`, `ToolCallGroup`
+- Folder: `src/components/ToolCallCard/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ToolCallCard`
+
+```tsx
+import { ToolCallCard } from './components/ToolCallCard/ToolCallCard';
+```
+
+### Tooltip
+
+Hover/focus tooltip hint.
+
+- Use for: tooltip, hint, help
+- Exports: `TooltipProvider`, `Tooltip`, `TooltipTrigger`, `TooltipContent`
+- Folder: `src/components/Tooltip/`
+- Depends on: Floating
+- Requires provider: TooltipProvider
+- Install: `npm run shacdn:install -- /path/to/your-app --components Tooltip`
+
+```tsx
+import { TooltipProvider } from './components/Tooltip/Tooltip';
+```
+
+### TreeView
+
+WAI-ARIA tree for nested folders with roving focus and expand/select.
+
+- Use for: tree view, file tree, folder tree, hierarchy
+- Exports: `TreeView`
+- Folder: `src/components/TreeView/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components TreeView`
+
+```tsx
+import { TreeView } from './components/TreeView/TreeView';
+```
+
+### Typography
+
+Prose typography primitives (h1–h4, p, lead, muted, blockquote, list).
+
+- Use for: typography, prose, heading
+- Exports: `Typography`, `TypographyH1`, `TypographyH2`, `TypographyH3`, `TypographyH4`, `TypographyP`, `TypographyLead`, `TypographyMuted`, `TypographyList`, `TypographyTable`
+- Folder: `src/components/Typography/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components Typography`
+
+```tsx
+import { Typography } from './components/Typography/Typography';
+```
+
+### UsageMeter
+
+Stacked allowance meter with legend and warning/over-limit tones.
+
+- Use for: usage meter, quota, storage usage, plan limit
+- Exports: `UsageMeter`
+- Folder: `src/components/UsageMeter/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components UsageMeter`
+
+```tsx
+import { UsageMeter } from './components/UsageMeter/UsageMeter';
+```

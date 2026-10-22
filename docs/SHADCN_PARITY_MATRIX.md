@@ -30,3 +30,24 @@ Compared with the category index on [shadcnspace.com/components](https://shadcns
 | Remaining registry categories (Accordion through Tooltip) | Matching folder in `src/components/` |
 
 When a registry component gains a variant this matrix does not list, add a row rather than silently diverging.
+
+## uiarc.dev (Arc) free components
+
+Compared with the free (MIT) catalog on [uiarc.dev/components](https://uiarc.dev/components/button). Arc ships Tailwind + motion. These are clean SCSS re-implementations built from the public behaviour, not ports of the source. **Arc Pro items are licensed and are not reconstructed here.**
+
+| Arc component | Here |
+|---|---|
+| Copy button, hold to confirm, inline edit, password strength, number input, segmented control, time picker | `CopyButton`, `HoldToConfirm`, `InlineEdit`, `PasswordStrength`, `NumberField`, `SegmentedControl`, `TimePicker` |
+| Expandable text, countdown, text shimmer | `ExpandableText`, `Countdown`, `TextShimmer` |
+| Usage meter, metric / stat card, gauge, activity heatmap | `UsageMeter`, `MetricCard` (uses `Chart` Sparkline), `Gauge`, `ActivityHeatmap` |
+| File tree, JSON viewer, image compare | `TreeView`, `JsonViewer`, `ImageCompare` |
+| Button, input, select, dialog, tabs, accordion, toast, avatar, badge, calendar, etc. | Already covered by the shadcn primitives above |
+
+Not implemented yet (backlog, free items only):
+
+- **Buttons and actions:** floating/expanding button group, icon morph, confirm morph, swipe actions, reactions, user menu, eclipse/split/rise theme switch variants.
+- **Inputs:** search field, expanding search, money input, phone input, scrub input, shortcut recorder, morph select, chip group, billing toggle (compose from `SegmentedControl`), elastic slider, range histogram slider, rich text editor, signature pad.
+- **Surfaces:** expandable card, bottom sheet, announcement bar, cookie consent, onboarding checklist, card stack.
+- **Charts:** line, streamgraph, brush, waffle, slope, ridgeline, treemap.
+- **Data and collaboration:** sortable data table, filter toolbar, comment thread, chat thread.
+- **Text motion:** in-view title, text morph, slot text.

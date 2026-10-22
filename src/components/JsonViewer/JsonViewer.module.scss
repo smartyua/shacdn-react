@@ -1,0 +1,153 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  overflow: auto;
+  padding: $spacing-sm $spacing-md;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background-color: $card;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: $font-size-xs;
+  line-height: 1.7;
+  color: $foreground;
+}
+
+.children {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .children {
+    padding-left: 1.25rem;
+    border-left: $border-width solid alpha($border, 70%);
+    margin-left: 0.4rem;
+  }
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding-right: $spacing-xs;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: alpha($accent, 70%);
+
+    .actions {
+      opacity: 1;
+    }
+  }
+}
+
+.closing {
+  padding-left: 1rem;
+}
+
+.toggle,
+.spacer {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.toggle {
+  padding: 0;
+  border: none;
+  border-radius: $radius-xs;
+  background: none;
+  color: $muted-foreground;
+  cursor: pointer;
+
+  svg {
+    transition: transform $transition-fast;
+
+    &[data-open] {
+      transform: rotate(90deg);
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+  }
+}
+
+.key {
+  color: $chart-1;
+}
+
+.index {
+  color: $muted-foreground;
+}
+
+.colon,
+.bracket {
+  color: $muted-foreground;
+}
+
+.preview {
+  margin: 0 $spacing-xs;
+  font-style: italic;
+  color: $muted-foreground;
+}
+
+.string {
+  color: $success;
+}
+
+.number {
+  color: $chart-2;
+}
+
+.boolean {
+  color: $chart-4;
+}
+
+.null {
+  color: $muted-foreground;
+}
+
+.actions {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: auto;
+  padding-left: $spacing-md;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  &:focus-within {
+    opacity: 1;
+  }
+}
+
+.action,
+.more {
+  display: inline-flex;
+  align-items: center;
+  height: 1.25rem;
+  padding: 0 $spacing-xs;
+  border: none;
+  border-radius: $radius-xs;
+  background: none;
+  font: inherit;
+  color: $muted-foreground;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $muted;
+    color: $foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+  }
+}
+
+.more {
+  margin-left: 1rem;
+  color: $primary;
+}

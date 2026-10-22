@@ -1,0 +1,100 @@
+@use '../../styles/variables.scss' as *;
+
+.tree {
+  --tree-indent: 1rem;
+  --tree-pad: #{$spacing-xs};
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  color: $foreground;
+}
+
+.group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  outline: none;
+
+  &:focus-visible > .row {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: -$focus-ring-width;
+  }
+
+  &[aria-selected='true'] > .row {
+    background-color: $accent;
+    color: $accent-foreground;
+    font-weight: 500;
+  }
+
+  &[aria-disabled='true'] > .row {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  height: $control-h-md;
+  padding-inline-end: $spacing-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: alpha($accent, 70%);
+  }
+}
+
+.chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  color: $muted-foreground;
+  transition: transform $transition-base;
+
+  &[data-open] {
+    transform: rotate(90deg);
+  }
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: $muted-foreground;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.label {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  flex-shrink: 0;
+  font-size: $font-size-xs;
+  color: $muted-foreground;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

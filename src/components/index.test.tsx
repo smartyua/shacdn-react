@@ -38,6 +38,38 @@ const STANDALONE: Array<[string, () => React.ReactElement]> = [
   ],
 ];
 
+/** Arc parity components rendered with the minimum props they need. */
+const WITH_PROPS: Array<[string, () => React.ReactElement]> = [
+  ['CopyButton', () => <library.CopyButton value="npm i" label="Copy" />],
+  ['HoldToConfirm', () => <library.HoldToConfirm onConfirm={() => undefined}>Delete</library.HoldToConfirm>],
+  ['PasswordStrength', () => <library.PasswordStrength value="Abc123!" />],
+  ['InlineEdit', () => <library.InlineEdit aria-label="Name" defaultValue="Apollo" />],
+  ['NumberField', () => <library.NumberField aria-label="Seats" defaultValue={3} />],
+  [
+    'SegmentedControl',
+    () => (
+      <library.SegmentedControl
+        aria-label="View"
+        options={[
+          { value: 'list', label: 'List' },
+          { value: 'grid', label: 'Grid' },
+        ]}
+      />
+    ),
+  ],
+  ['TimePicker', () => <library.TimePicker aria-label="Start time" defaultValue="09:30" />],
+  ['UsageMeter', () => <library.UsageMeter label="Storage" limit={10} segments={[{ label: 'Files', value: 4 }]} />],
+  ['MetricCard', () => <library.MetricCard label="Revenue" value="$1,200" delta={4} />],
+  ['Gauge', () => <library.Gauge value={40} label="CPU" />],
+  ['TreeView', () => <library.TreeView aria-label="Files" items={[{ id: 'a', label: 'a.ts' }]} />],
+  ['JsonViewer', () => <library.JsonViewer data={{ ok: true }} />],
+  [
+    'ImageCompare',
+    () => <library.ImageCompare beforeSrc="a.jpg" afterSrc="b.jpg" beforeAlt="Before" afterAlt="After" />,
+  ],
+  ['ActivityHeatmap', () => <library.ActivityHeatmap data={[]} weeks={4} endDate={new Date(2026, 0, 1)} />],
+];
+
 describe('components barrel', () => {
   it('exports only React-usable bindings', () => {
     const invalid = Object.entries(library)
@@ -57,7 +89,7 @@ describe('components barrel', () => {
     expect(container).not.toBeEmptyDOMElement();
   });
 
-  it.each(STANDALONE)('renders %s without serious a11y violations', async (_name, renderComponent) => {
+  it.each([...STANDALONE, ...WITH_PROPS])('renders %s without serious a11y violations', async (_name, renderComponent) => {
     const { container } = render(renderComponent());
     const results = await axe(container);
 

@@ -1,0 +1,197 @@
+@use '../../styles/variables.scss' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 46rem) 12rem;
+  justify-content: center;
+  gap: $spacing-xl;
+  padding: $spacing-xl $spacing-lg 6rem;
+  font-family: $font-sans;
+  color: $foreground;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 12rem minmax(0, 1fr);
+
+    .toc {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: $spacing-lg;
+
+    .sidebar {
+      display: none;
+    }
+  }
+}
+
+.sidebar,
+.toc {
+  position: sticky;
+  top: calc(var(--site-header-height, #{$site-header-height}) + #{$spacing-lg});
+  align-self: start;
+}
+
+.sidebarTitle,
+.tocTitle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: $muted-foreground;
+}
+
+.sidebarList {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebarLink {
+  display: block;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+  text-decoration: none;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background-color: $accent;
+    color: $accent-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.sidebarLinkActive {
+  background-color: $accent;
+  font-weight: 500;
+  color: $foreground;
+}
+
+.article {
+  min-width: 0;
+}
+
+.header {
+  margin-bottom: $spacing-xl;
+}
+
+.eyebrow {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-sm;
+  color: $muted-foreground;
+}
+
+.title {
+  margin: 0 0 $spacing-md;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: $tracking-tight;
+}
+
+.lead {
+  margin: 0 0 $spacing-md;
+  font-size: $font-size-lg;
+  line-height: 1.6;
+  color: $muted-foreground;
+}
+
+.section {
+  display: grid;
+  gap: $spacing-md;
+  padding-top: $spacing-xl;
+  scroll-margin-top: calc(var(--site-header-height, #{$site-header-height}) + #{$spacing-md});
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin: 0;
+  padding-bottom: $spacing-sm;
+  border-bottom: $border-width solid $border;
+  font-size: $font-size-xl * 1.2;
+  font-weight: 600;
+  letter-spacing: $tracking-tight;
+
+  svg {
+    color: $muted-foreground;
+  }
+}
+
+.text {
+  margin: 0;
+  font-size: $font-size-sm;
+  line-height: 1.7;
+}
+
+.note {
+  margin: 0;
+  font-size: $font-size-xs;
+  line-height: 1.6;
+  color: $muted-foreground;
+}
+
+.code {
+  padding: 1px $spacing-xs;
+  border-radius: $radius-xs;
+  background-color: $muted;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.fileList,
+.resourceList {
+  display: grid;
+  gap: $spacing-sm;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+    color: $muted-foreground;
+  }
+}
+
+.resource {
+  padding: $spacing-sm $spacing-md;
+  border: $border-width solid $border;
+  border-radius: $radius-lg;
+  background-color: $card;
+}
+
+.resourceLink {
+  font-weight: 500;
+  color: $primary;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $muted-foreground;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+    border-radius: $radius-xs;
+  }
+}

@@ -6,6 +6,7 @@ export const de: LocaleMessages = {
     backToHost: '← kylypko.com',
     home: 'Startseite',
     components: 'Komponenten',
+    docs: 'Doku',
     dashboard: 'Dashboard',
     bessSolar: 'BESS Solar',
     transcoding: 'Transcoding',

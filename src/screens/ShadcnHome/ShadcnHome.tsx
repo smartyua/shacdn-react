@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {
   Bell,
   BookOpen,
+  Bot,
   Check,
   Command,
   GitBranch,
@@ -112,6 +113,10 @@ export const ShadcnHome = () => {
               </Button>
               <Button variant="outline" size="md" type="button" onClick={() => navigate('/components')}>
                 {copy.hero.openCatalog}
+              </Button>
+              <Button variant="ghost" size="md" type="button" onClick={() => navigate('/docs/ai')}>
+                <Bot size={16} aria-hidden />
+                {copy.hero.forAiAgents}
               </Button>
             </div>
           </section>

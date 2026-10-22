@@ -1,5 +1,9 @@
 #!/usr/bin/env node
+import { join } from 'node:path';
 import { formatInstallResult, INSTALL_USAGE, installToProject, parseInstallArgs } from './lib/install.js';
+import { writeLlmsFiles } from './lib/llms.js';
+import { toRepoRelative } from './lib/fs.js';
+import { REPO_ROOT } from './lib/paths.js';
 
 const main = (): void => {
   const argv = process.argv.slice(2);
@@ -8,6 +12,12 @@ const main = (): void => {
   if (!command || command === '--help' || command === '-h') {
     process.stdout.write(INSTALL_USAGE);
     process.exit(command ? 0 : 1);
+  }
+
+  if (command === 'llms') {
+    const written = writeLlmsFiles(join(REPO_ROOT, 'public'));
+    process.stdout.write(`Wrote ${written.map(toRepoRelative).join(', ')}\n`);
+    return;
   }
 
   if (command !== 'install' && command !== 'init') {

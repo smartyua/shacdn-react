@@ -6,6 +6,7 @@ export const ua: LocaleMessages = {
     backToHost: '← kylypko.com',
     home: 'Головна',
     components: 'Компоненти',
+    docs: 'Документація',
     dashboard: 'Дашборд',
     bessSolar: 'BESS Solar',
     transcoding: 'Transcoding',

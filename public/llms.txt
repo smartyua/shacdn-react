@@ -1,0 +1,149 @@
+# shacdn
+
+> shacdn is a React 19 + TypeScript implementation of shadcn/ui built on SCSS modules: no Tailwind, no Radix, no external UI libraries. Components are copied into your project (you own the source), share one token file (`src/styles/variables.scss`), and support light/dark themes with six color schemes.
+
+This is the short index. More: [llms-full.txt](/llms-full.txt) (every component with exports, dependencies and usage), [catalog.json](/catalog.json) (machine-readable metadata).
+
+## Install
+
+From the shacdn repo, copy the design system and any components (internal dependencies are resolved for you):
+
+```bash
+npm run shacdn:install -- /path/to/your-app
+npm run shacdn:install -- /path/to/your-app --components Button,Card,Input
+```
+
+Required npm packages: react, react-dom, sass. Optional: lucide-react.
+Import `src/styles/theme-init` and `src/styles/globals.scss` once in the app entry, then import each component from its folder (`./components/Button/Button`).
+
+## MCP server
+
+Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_components, get_component, get_component_bundle, get_install_command, get_design_system, get_integration_guide, install_to_project, list_screen_patterns, get_screen_pattern.
+
+## Components (125)
+
+- Accordion: Expandable FAQ / disclosure sections.
+- ActivityHeatmap: Year-at-a-glance contribution grid, one square per day.
+- Alert: Inline status banner on page.
+- AlertDialog: Blocking confirmation for destructive actions.
+- AnimatedList: Staggered fade-and-rise entrance for a vertical list.
+- AnimatedText: Text motion: fade, blur, slide, typewriter, gradient, scramble, word rotate, highlight.
+- AspectRatio: Fixed aspect ratio container for media.
+- Attachment: File/image attachment preview with upload states and actions.
+- Avatar: User avatar with fallback initials, badge and overlapping group.
+- Badge: Status tag or label chip.
+- Banner: Full-width page-level notice, optionally dismissible.
+- Bento: Mixed-span CSS grid layout (bento box).
+- Breadcrumb: Page hierarchy navigation.
+- Bubble: Chat message bubble with variants and reactions slot.
+- Button: Action button or link CTA (supports href).
+- ButtonGroup: Grouped buttons with shared border.
+- Calendar: Month grid date picker with single and range selection.
+- Callout: In-content notice with accent border (info/warning/success/danger).
+- Card: Content card with header/footer.
+- Carousel: Horizontal scroll-snap carousel (no Embla).
+- Chart: Zero-dep SVG charts: bar, grouped bar, diverging bar, donut, sparkline.
+- Checkbox: Boolean checkbox input.
+- CheckboxCards: Selectable cards for multiple choices (plans, add-ons, peripherals).
+- CheckboxGroup: Labeled checkbox list with shared value array.
+- Chip: Interactive removable or selectable label.
+- CodeBlock: Code sample with copy, highlighted lines, and file tabs.
+- Collapsible: Show/hide content region.
+- ColorPicker: Swatch trigger with color and hex inputs.
+- Combobox: Searchable select: compound Input/Content/List/Item (Appica-style) + legacy options API.
+- ComboButton: Primary action joined to a related-actions menu.
+- Command: Command palette with search filter.
+- ContextMenu: Right-click context menu.
+- CopyButton: Copies a value to the clipboard with an in-place confirmation.
+- Countdown: Launch countdown with rolling digits that turns into a live state at zero.
+- DataList: Key/value definition list for detail and settings rows.
+- DatePicker: Date input with calendar popup.
+- DateRangePicker: Start/end date input with range calendar popup.
+- Dialog: Modal dialog overlay.
+- Direction: RTL/LTR direction provider.
+- Dock: macOS-style dock with pointer magnification.
+- Drawer: Side panel / sheet overlay.
+- DropdownMenu: Dropdown action menu with checkbox, radio, shortcut and nested submenu parts.
+- Empty: Empty state placeholder.
+- ExpandableText: Line-clamped text with a fade and Read more / Show less, shown only on overflow.
+- Field: Form field wrapper with label/description.
+- FileUpload: Drag-and-drop file picker with type filter and previews.
+- FinancialTable: Comparison table for signed amounts, with an accent column for the active scenario.
+- Floating: Positioning primitives shared by every popup surface (portal, collision-aware placement, dismiss layer).
+- Form: Form composition helpers.
+- Gauge: Arc gauge showing a value against a range with threshold tones.
+- HoldToConfirm: Destructive action confirmed by press-and-hold (pointer or Space/Enter).
+- HoverCard: Rich preview on hover.
+- ImageCompare: Before/after image slider with a draggable, keyboard-operable divider.
+- InlineEdit: Rename in place: text turns into a field without moving; Enter commits, Escape cancels.
+- Input: Single-line text input.
+- InputGroup: Input with prefix/suffix addon.
+- InputMask: Masked text input for phones, dates, and codes.
+- InputOTP: One-time password / PIN input.
+- Item: List item row pattern.
+- JsonViewer: Collapsible JSON tree with paging for long arrays and copy value / path.
+- Kbd: Keyboard shortcut display.
+- Label: Form field label.
+- Lightbox: Click-to-enlarge media overlay with scrim.
+- Marker: Chat status chip or date/unread separator.
+- Marquee: Endless horizontal scrolling content strip.
+- Masonry: Column-packed variable-height card layout.
+- MentionTextarea: Composer textarea with @mentions, /commands autosuggest, and shortened link chips.
+- Menubar: Desktop-style menu bar.
+- Message: Chat message row: avatar slot + content + header/footer.
+- MessageScroller: Scrollable message list with auto-scroll and jump buttons (zero-dep; no @shadcn/react).
+- MetricCard: KPI card: value, signed delta with sentiment, optional sparkline.
+- Modal: Alias for Dialog API. Alias of Dialog.
+- MultiSelect: Multi-value select with chips and checkbox listbox.
+- NativeSelect: Styled native <select> element for simple or mobile-first forms.
+- NavigationMenu: Site navigation with dropdown panels.
+- NumberField: Bounded number input with +/- buttons, arrow/Page/Home/End keys and locale formatting.
+- NumberTicker: Animated count toward a number, with prefix, suffix, and decimals.
+- OrbitingCircles: Icons traveling on circular orbits around a center.
+- Pagination: Page navigation controls.
+- PasswordStrength: Live password strength meter with a rules checklist.
+- PasswordToggleField: Password input with show/hide toggle.
+- Popover: Floating content panel.
+- Progress: Linear progress bar.
+- ProgressRing: Circular determinate progress indicator.
+- Questionnaire: Multi-step question flow with progress and a completion state.
+- RadioCards: Selectable cards for a single choice (plan, shipping, billing).
+- RadioGroup: Single choice from group.
+- Rating: Star rating with keyboard, half steps, and read-only display.
+- Resizable: Drag-to-resize panel groups (zero-dep).
+- ScrollArea: Custom styled scroll container.
+- Scrollspy: On-this-page nav that tracks the visible section.
+- SegmentedControl: Single-choice segmented control with a sliding selection indicator.
+- Select: Custom listbox select with popup, groups and keyboard navigation.
+- Separator: Visual divider line.
+- Sheet: Alias for Drawer API. Alias of Drawer.
+- ShineBorder: Animated conic-gradient border around any content.
+- Sidebar: App sidebar layout with collapse (zero-dep).
+- Skeleton: Loading placeholder shimmer.
+- Slider: Range slider input.
+- Sonner: Registry alias for Toast. Alias of Toast.
+- Sortable: Pointer and keyboard reorderable list.
+- Spinner: Circular loading indicator.
+- SpinningText: Text set on a circle that rotates.
+- Stepper: Compact increment/decrement value control.
+- Steps: Wizard / checkout step indicator.
+- Switch: Toggle switch control.
+- Table: Data table with semantic parts.
+- TabNav: Link-based navigation that looks like tabs (no panels).
+- Tabs: Tabbed panel navigation.
+- Textarea: Multi-line text input.
+- TextShimmer: Calm light sweep across text to signal ongoing work.
+- ThemeSwitcher: Light/dark + color scheme picker.
+- ThinkingLoader: Compact AI working pill that walks through phases and settles on a check.
+- Timeline: Vertical status timeline for order tracking and event history.
+- TimePicker: Segmented time field (12/24h) with typing, arrows and AM/PM.
+- Toast: Transient corner notifications.
+- Toggle: Pressable toggle button.
+- ToggleGroup: Group of toggle buttons.
+- TokenField: Text input that commits values as removable tokens.
+- Toolbar: Accessible toolbar with roving focus for grouped controls.
+- ToolCallCard: Agent tool-call row with timer, arguments, result, copy, and retry.
+- Tooltip: Hover/focus tooltip hint.
+- TreeView: WAI-ARIA tree for nested folders with roving focus and expand/select.
+- Typography: Prose typography primitives (h1–h4, p, lead, muted, blockquote, list).
+- UsageMeter: Stacked allowance meter with legend and warning/over-limit tones.

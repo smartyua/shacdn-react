@@ -5,7 +5,7 @@ alwaysApply: true
 
 # LAN RAG (slug: `shacdn`)
 
-Collection `proj_shacdn`. MCP server `lan-rag`. API `http://192.168.2.172:8100`, MCP `/mcp`, UI `:8101`.
+Collection `proj_shacdn`. MCP server `lan-rag`. API `http://192.168.2.50:8100`, MCP `/mcp`, UI `:8101`.
 Never print or log `RAG_API_KEY`.
 
 ## Before writing or explaining code
@@ -30,7 +30,7 @@ Push the changed files from this Mac via MCP `ingest_files`:
 - max 50 files per call; split into several calls if needed
 
 Do **not** call `ingest` with `replace=true` after Mac edits. Host sources live only at
-`/Users/llm/rag/sources/shacdn` on `llm@192.168.2.172` and will wipe the index if stale.
+`/Users/llm/rag/sources/shacdn` on `llm@192.168.2.50` and will wipe the index if stale.
 
 ### Full sync + reindex (when the host tree / index is badly stale)
 
@@ -38,7 +38,7 @@ Do **not** call `ingest` with `replace=true` after Mac edits. Host sources live 
 rsync -a --delete \
   --exclude node_modules --exclude .git --exclude dist --exclude dist-ssr \
   --exclude coverage --exclude .ai/data --exclude .ai/logs --exclude .ai/session \
-  /Users/smarty/shacdn/ llm@192.168.2.172:/Users/llm/rag/sources/shacdn/
+  /Users/smarty/shacdn/ llm@192.168.2.50:/Users/llm/rag/sources/shacdn/
 ```
 
 Then MCP `ingest` `{ "project": "shacdn", "path": "/Users/llm/rag/sources/shacdn", "replace": true }`.

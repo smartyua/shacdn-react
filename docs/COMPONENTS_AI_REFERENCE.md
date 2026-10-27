@@ -15,7 +15,7 @@ Agent setup (MCP clients, skill, install, `llms.txt`) is documented on the demo 
 | Checkbox / radio / switch | `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Toggle`, `ToggleGroup` | |
 | Choice cards | `RadioCards`, `CheckboxCards` | Radix Themes pattern; not in shadcn registry |
 | Key / value rows | `DataList` | Radix Themes; definition list |
-| Date | `Calendar`, `DatePicker`, `DateRangePicker` | DatePicker / DateRangePicker → Calendar + Floating |
+| Date | `Calendar`, `DatePicker`, `DateRangePicker`, `ScheduleCalendar` | DatePicker / DateRangePicker → Calendar + Floating. ScheduleCalendar is the week/day/month agenda (`ScheduleEvent`) |
 | Modal / confirm | `Dialog`, `AlertDialog`, `Modal` (alias) | copies `Modal/modalLayer.tsx` |
 | Side panel | `Drawer`, `Sheet` (alias) | |
 | Menu | `DropdownMenu`, `ContextMenu`, `Menubar`, `NavigationMenu` | DropdownMenu: CheckboxItem, RadioItem, Sub, Shortcut |

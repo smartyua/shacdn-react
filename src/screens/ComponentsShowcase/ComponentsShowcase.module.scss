@@ -261,6 +261,13 @@ $preview-radius: $radius-lg;
   line-height: 1.5;
 }
 
+.selectionStatus {
+  margin: $spacing-md 0 0;
+  color: $muted-foreground;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+}
+
 .codeExample {
   background-color: $card;
   color: $foreground;

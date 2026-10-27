@@ -1275,6 +1275,20 @@ Drag-to-resize panel groups (zero-dep).
 import { ResizablePanelGroup } from './components/Resizable/Resizable';
 ```
 
+### ScheduleCalendar
+
+Week, day and month agenda with typed event contracts, drag move/resize and holiday chips.
+
+- Use for: schedule, agenda, week view, calendar events, time grid
+- Exports: `ScheduleCalendar`
+- Folder: `src/components/ScheduleCalendar/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ScheduleCalendar`
+
+```tsx
+import { ScheduleCalendar } from './components/ScheduleCalendar/ScheduleCalendar';
+```
+
 ### ScrollArea
 
 Custom styled scroll container.

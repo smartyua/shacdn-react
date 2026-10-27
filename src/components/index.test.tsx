@@ -68,6 +68,15 @@ const WITH_PROPS: Array<[string, () => React.ReactElement]> = [
     () => <library.ImageCompare beforeSrc="a.jpg" afterSrc="b.jpg" beforeAlt="Before" afterAlt="After" />,
   ],
   ['ActivityHeatmap', () => <library.ActivityHeatmap data={[]} weeks={4} endDate={new Date(2026, 0, 1)} />],
+  [
+    'ScheduleCalendar',
+    () => (
+      <library.ScheduleCalendar
+        defaultDate="2026-11-10"
+        events={[{ id: 'a', title: 'Sync', date: '2026-11-10', start: 540, end: 600 }]}
+      />
+    ),
+  ],
 ];
 
 describe('components barrel', () => {

@@ -43,6 +43,12 @@ Compared with the free (MIT) catalog on [uiarc.dev/components](https://uiarc.dev
 | File tree, JSON viewer, image compare | `TreeView`, `JsonViewer`, `ImageCompare` |
 | Button, input, select, dialog, tabs, accordion, toast, avatar, badge, calendar, etc. | Already covered by the shadcn primitives above |
 
+## Adapted product designs
+
+| Source | Here |
+|---|---|
+| [Kargul calendar](https://github.com/kargulstudio/calender-app-design) week, day and month agenda | `ScheduleCalendar`. Pass `ScheduleEvent` / `ScheduleHoliday` records. The date picker stays `Calendar`. |
+
 Not implemented yet (backlog, free items only):
 
 - **Buttons and actions:** floating/expanding button group, icon morph, confirm morph, swipe actions, reactions, user menu, eclipse/split/rise theme switch variants.

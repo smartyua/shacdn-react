@@ -20,7 +20,7 @@ Import `src/styles/theme-init` and `src/styles/globals.scss` once in the app ent
 
 Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_components, get_component, get_component_bundle, get_install_command, get_design_system, get_integration_guide, install_to_project, list_screen_patterns, get_screen_pattern.
 
-## Components (125)
+## Components (126)
 
 - Accordion: Expandable FAQ / disclosure sections.
 - ActivityHeatmap: Year-at-a-glance contribution grid, one square per day.
@@ -111,6 +111,7 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - RadioGroup: Single choice from group.
 - Rating: Star rating with keyboard, half steps, and read-only display.
 - Resizable: Drag-to-resize panel groups (zero-dep).
+- ScheduleCalendar: Week, day and month agenda with typed event contracts, drag move/resize and holiday chips.
 - ScrollArea: Custom styled scroll container.
 - Scrollspy: On-this-page nav that tracks the visible section.
 - SegmentedControl: Single-choice segmented control with a sliding selection indicator.

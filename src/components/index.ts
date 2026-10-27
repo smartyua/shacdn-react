@@ -19,6 +19,16 @@ export { BubbleGroup, Bubble, BubbleContent, BubbleReactions } from './Bubble/Bu
 export { Button } from './Button/Button';
 export { ButtonGroup } from './ButtonGroup/ButtonGroup';
 export { Calendar } from './Calendar/Calendar';
+export { ScheduleCalendar } from './ScheduleCalendar/ScheduleCalendar';
+export type {
+  ScheduleCalendarLabels,
+  ScheduleCalendarProps,
+  ScheduleEvent,
+  ScheduleEventColor,
+  ScheduleHoliday,
+  ScheduleSlot,
+  ScheduleView,
+} from './ScheduleCalendar/ScheduleCalendar';
 export { Callout, CalloutTitle, CalloutDescription } from './Callout/Callout';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './Card/Card';
 export { Carousel, CarouselViewport, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots, CarouselSlide } from './Carousel/Carousel';

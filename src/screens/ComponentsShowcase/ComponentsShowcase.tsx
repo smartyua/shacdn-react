@@ -73,6 +73,8 @@ import { RadioGroup, RadioGroupItem } from '../../components/RadioGroup/RadioGro
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../../components/Tooltip/Tooltip';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../components/Accordion/Accordion';
 import { Calendar } from '../../components/Calendar/Calendar';
+import { ScheduleCalendar, type ScheduleEvent } from '../../components/ScheduleCalendar/ScheduleCalendar';
+import { SCHEDULE_DEMO_EVENTS, SCHEDULE_DEMO_HOLIDAYS } from './scheduleCalendarDemo';
 import { AspectRatio } from '../../components/AspectRatio/AspectRatio';
 import { ScrollArea } from '../../components/ScrollArea/ScrollArea';
 import { Popover, PopoverContent, PopoverTrigger } from '../../components/Popover/Popover';
@@ -261,7 +263,7 @@ const COMBO_OPTIONS = [
 
 const COMPONENTS_NAV = [
   'Accordion', 'Alert', 'Alert Dialog', 'Attachment', 'Aspect Ratio', 'Avatar', 'Badge', 'Banner', 'Bento',
-  'Breadcrumb', 'Button', 'Button Group', 'Bubble', 'Calendar', 'Callout', 'Card', 'Carousel', 'Chart',
+  'Breadcrumb', 'Button', 'Button Group', 'Bubble', 'Calendar', 'Schedule Calendar', 'Callout', 'Card', 'Carousel', 'Chart',
   'Checkbox', 'Checkbox Cards', 'Checkbox Group', 'Chip', 'Collapsible', 'Color Picker', 'Combo Button', 'Combobox', 'Command', 'Context Menu',
   'Data List', 'Date Picker', 'Dialog', 'Direction', 'Drawer', 'Dropdown Menu', 'Empty', 'Field', 'Form', 'Hover Card',
   'Input', 'Input Group', 'Input OTP', 'Item', 'Kbd', 'Label', 'Lightbox', 'Marker', 'Marquee', 'Masonry',
@@ -551,6 +553,54 @@ const CalendarSection = () => {
     <section id="calendar" className={styles.section}>
       <h2>Calendar</h2>
       <Calendar selected={calDate} onSelect={d => setCalDate(d)} />
+    </section>
+  );
+};
+
+const ScheduleCalendarSection = () => {
+  const [events, setEvents] = useState<ScheduleEvent[]>(() => SCHEDULE_DEMO_EVENTS.map(event => ({ ...event })));
+  const [selectedId, setSelectedId] = useState<string | null>('ev-3');
+  const selected = events.find(event => event.id === selectedId);
+
+  return (
+    <section id="schedule-calendar" className={styles.section}>
+      <h2>Schedule Calendar</h2>
+      <p className={styles.sectionNote}>
+        Week, day and month agenda adapted from the Kargul calendar. Pass ScheduleEvent records,
+        drag to move or resize, click empty time to add one, and use Delete to remove the selected event.
+      </p>
+      <div style={{ height: '40rem' }}>
+        <ScheduleCalendar
+          events={events}
+          holidays={SCHEDULE_DEMO_HOLIDAYS}
+          defaultDate="2026-11-10"
+          defaultView="week"
+          dayStartHour={6}
+          selectedEventId={selectedId}
+          onEventSelect={event => setSelectedId(event?.id ?? null)}
+          onEventChange={next => {
+            setEvents(current => current.map(event => (event.id === next.id ? { ...event, ...next } : event)));
+          }}
+          onEventDelete={target => {
+            setEvents(current => current.filter(event => event.id !== target.id));
+            setSelectedId(current => (current === target.id ? null : current));
+          }}
+          onSlotSelect={slot => {
+            const created: ScheduleEvent = {
+              id: `slot-${slot.date}-${slot.start}-${Date.now()}`,
+              title: slot.allDay ? 'All-day event' : 'New event',
+              date: slot.date,
+              start: slot.start,
+              end: slot.end,
+              allDay: slot.allDay,
+              color: 'blue',
+            };
+            setEvents(current => [...current, created]);
+            setSelectedId(created.id);
+          }}
+        />
+      </div>
+      <p className={styles.selectionStatus}>{selected ? `Selected: ${selected.title} · ${selected.date}` : 'Nothing selected'}</p>
     </section>
   );
 };
@@ -1826,6 +1876,7 @@ export const ComponentsShowcase = () => {
         </section>
 
         <CalendarSection />
+        <ScheduleCalendarSection />
 
         <section id="chart" className={styles.section}>
           <h2>Chart</h2>

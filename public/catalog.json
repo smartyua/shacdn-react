@@ -1695,6 +1695,24 @@
       "install": "npm run shacdn:install -- /path/to/your-app --components Resizable"
     },
     {
+      "name": "ScheduleCalendar",
+      "folder": "ScheduleCalendar",
+      "description": "Week, day and month agenda with typed event contracts, drag move/resize and holiday chips",
+      "tasks": [
+        "schedule",
+        "agenda",
+        "week view",
+        "calendar events",
+        "time grid"
+      ],
+      "exports": [
+        "ScheduleCalendar"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ScheduleCalendar"
+    },
+    {
       "name": "ScrollArea",
       "folder": "ScrollArea",
       "description": "Custom styled scroll container",

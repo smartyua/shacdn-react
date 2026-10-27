@@ -29,6 +29,7 @@ export const COMPONENT_CATALOG: ComponentMeta[] = [
   { name: 'Button', folder: 'Button', description: 'Action button or link CTA (supports href)', tasks: ['button', 'cta', 'link', 'submit'], exports: ['Button'] },
   { name: 'ButtonGroup', folder: 'ButtonGroup', description: 'Grouped buttons with shared border', tasks: ['button group', 'segmented buttons'], exports: ['ButtonGroup'] },
   { name: 'Calendar', folder: 'Calendar', description: 'Month grid date picker with single and range selection', tasks: ['calendar', 'date', 'date range'], exports: ['Calendar'] },
+  { name: 'ScheduleCalendar', folder: 'ScheduleCalendar', description: 'Week, day and month agenda with typed event contracts, drag move/resize and holiday chips', tasks: ['schedule', 'agenda', 'week view', 'calendar events', 'time grid'], exports: ['ScheduleCalendar'] },
   { name: 'Callout', folder: 'Callout', description: 'In-content notice with accent border (info/warning/success/danger)', tasks: ['callout', 'inline alert', 'note', 'tip'], exports: ['Callout', 'CalloutTitle', 'CalloutDescription'] },
   { name: 'Card', folder: 'Card', description: 'Content card with header/footer', tasks: ['card', 'panel', 'container'], exports: ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardAction', 'CardContent', 'CardFooter'] },
   { name: 'Checkbox', folder: 'Checkbox', description: 'Boolean checkbox input', tasks: ['checkbox', 'check', 'form'], exports: ['Checkbox'] },

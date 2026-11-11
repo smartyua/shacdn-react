@@ -43,6 +43,22 @@ Compared with the free (MIT) catalog on [uiarc.dev/components](https://uiarc.dev
 | File tree, JSON viewer, image compare | `TreeView`, `JsonViewer`, `ImageCompare` |
 | Button, input, select, dialog, tabs, accordion, toast, avatar, badge, calendar, etc. | Already covered by the shadcn primitives above |
 
+## Motion studies
+
+Public behaviour from [Rare UI](https://rareui.com), [React Bits](https://reactbits.dev) and [Saurabh Bhayana](https://saurabhbhayana.com/components), rebuilt with SCSS tokens. These are not source ports. WebGL orbs, canvas physics, and Motion/Framer components were not copied.
+
+| Idea | Here |
+|---|---|
+| Aurora / ambient wash | `Aurora` |
+| Border beam | `BorderBeam` |
+| Pointer spotlight card | `GlowCard` |
+| Ripple dot grid | `DotField` |
+| Fluid / voice orb | `FluidOrb` (CSS; the WebGL orb was not ported) |
+| Scroll progress | `ScrollProgress` |
+| Pause for looping decoration | `MotionPauseButton` |
+
+Loops animate only inside `@media (prefers-reduced-motion: no-preference)`. Under reduced motion the frame, color, and progress stay, and the movement stops. Each loop has a visible pause control (WCAG 2.2.2). Properties used — `transform`, opacity, `background-position`, `conic-gradient`, `mask-image` — are supported in current Chrome, Firefox, Safari, and Edge. `@property` and `offset-path` are not used.
+
 ## Adapted product designs
 
 | Source | Here |

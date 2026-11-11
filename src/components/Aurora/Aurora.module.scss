@@ -1,0 +1,110 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: 100%;
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  min-height: 10rem;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background: $background;
+  isolation: isolate;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blobA,
+.blobB,
+.blobC {
+  position: absolute;
+  width: 55%;
+  height: 70%;
+  border-radius: 50%;
+  filter: blur(36px);
+  opacity: 0.7;
+}
+
+.blobA {
+  top: -20%;
+  left: -10%;
+  background: $chart-1;
+}
+
+.blobB {
+  right: -15%;
+  bottom: -25%;
+  background: $chart-2;
+}
+
+.blobC {
+  top: 10%;
+  left: 30%;
+  width: 40%;
+  background: $chart-4;
+  opacity: 0.45;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: $spacing-lg;
+  color: $foreground;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .root:not([data-paused]) .blobA {
+    animation: auroraA 14s ease-in-out infinite;
+  }
+
+  .root:not([data-paused]) .blobB {
+    animation: auroraB 18s ease-in-out infinite;
+  }
+
+  .root:not([data-paused]) .blobC {
+    animation: auroraC 12s ease-in-out infinite;
+  }
+}
+
+@keyframes auroraA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(18%, 12%, 0) scale(1.08);
+  }
+}
+
+@keyframes auroraB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-14%, -10%, 0) scale(1.12);
+  }
+}
+
+@keyframes auroraC {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-8%, 16%, 0);
+  }
+}

@@ -1,0 +1,40 @@
+@use '../../styles/variables.scss' as *;
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  border: $border-width solid $border;
+  background: $card;
+  color: $card-foreground;
+  isolation: isolate;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    11rem circle at var(--glow-x, 50%) var(--glow-y, 0%),
+    alpha($primary, 22%),
+    transparent 70%
+  );
+  transition: opacity $transition-base;
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  padding: $spacing-lg;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card[data-glow]::before {
+    opacity: 1;
+  }
+}

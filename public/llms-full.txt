@@ -139,6 +139,20 @@ File/image attachment preview with upload states and actions.
 import { AttachmentGroup } from './components/Attachment/Attachment';
 ```
 
+### Aurora
+
+Soft drifting color wash for heroes and empty states, with a pause control.
+
+- Use for: aurora, gradient background, ambient background
+- Exports: `Aurora`
+- Folder: `src/components/Aurora/`
+- Depends on: MotionPause
+- Install: `npm run shacdn:install -- /path/to/your-app --components Aurora`
+
+```tsx
+import { Aurora } from './components/Aurora/Aurora';
+```
+
 ### Avatar
 
 User avatar with fallback initials, badge and overlapping group.
@@ -193,6 +207,20 @@ Mixed-span CSS grid layout (bento box).
 
 ```tsx
 import { Bento } from './components/Bento/Bento';
+```
+
+### BorderBeam
+
+A single light traveling around a frame, paused on request.
+
+- Use for: border beam, animated border, light border
+- Exports: `BorderBeam`
+- Folder: `src/components/BorderBeam/`
+- Depends on: MotionPause
+- Install: `npm run shacdn:install -- /path/to/your-app --components BorderBeam`
+
+```tsx
+import { BorderBeam } from './components/BorderBeam/BorderBeam';
 ```
 
 ### Breadcrumb
@@ -587,6 +615,20 @@ macOS-style dock with pointer magnification.
 import { Dock } from './components/Dock/Dock';
 ```
 
+### DotField
+
+Dot grid with a pointer spotlight and a pauseable drift.
+
+- Use for: dot field, dot grid, ripple grid, spotlight background
+- Exports: `DotField`
+- Folder: `src/components/DotField/`
+- Depends on: MotionPause
+- Install: `npm run shacdn:install -- /path/to/your-app --components DotField`
+
+```tsx
+import { DotField } from './components/DotField/DotField';
+```
+
 ### Drawer
 
 Side panel / sheet overlay.
@@ -699,6 +741,20 @@ Positioning primitives shared by every popup surface (portal, collision-aware pl
 import { FloatingPortal } from './components/Floating/Floating';
 ```
 
+### FluidOrb
+
+CSS fluid orb for voice and agent presence, with idle, listening and speaking states.
+
+- Use for: fluid orb, voice orb, ai presence, orb
+- Exports: `FluidOrb`
+- Folder: `src/components/FluidOrb/`
+- Depends on: MotionPause
+- Install: `npm run shacdn:install -- /path/to/your-app --components FluidOrb`
+
+```tsx
+import { FluidOrb } from './components/FluidOrb/FluidOrb';
+```
+
 ### Form
 
 Form composition helpers.
@@ -725,6 +781,20 @@ Arc gauge showing a value against a range with threshold tones.
 
 ```tsx
 import { Gauge } from './components/Gauge/Gauge';
+```
+
+### GlowCard
+
+Card with a pointer-following spotlight, still when reduced motion is on.
+
+- Use for: glow card, spotlight card, hover card glow
+- Exports: `GlowCard`
+- Folder: `src/components/GlowCard/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components GlowCard`
+
+```tsx
+import { GlowCard } from './components/GlowCard/GlowCard';
 ```
 
 ### HoldToConfirm
@@ -1037,6 +1107,20 @@ Alias for Dialog API.
 import { Modal } from './components/Modal/Modal';
 ```
 
+### MotionPause
+
+Pause button for looping decoration. useMotionPause and usePrefersReducedMotion live beside it.
+
+- Use for: pause animation, reduced motion, motion pause
+- Exports: `MotionPauseButton`
+- Folder: `src/components/MotionPause/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components MotionPause`
+
+```tsx
+import { MotionPauseButton } from './components/MotionPause/MotionPause';
+```
+
 ### MultiSelect
 
 Multi-value select with chips and checkbox listbox.
@@ -1301,6 +1385,20 @@ Custom styled scroll container.
 
 ```tsx
 import { ScrollArea } from './components/ScrollArea/ScrollArea';
+```
+
+### ScrollProgress
+
+Thin reading-progress bar tied to the page or a scroll container.
+
+- Use for: scroll progress, reading progress, scroll indicator
+- Exports: `ScrollProgress`
+- Folder: `src/components/ScrollProgress/`
+- Depends on: nothing else in shacdn
+- Install: `npm run shacdn:install -- /path/to/your-app --components ScrollProgress`
+
+```tsx
+import { ScrollProgress } from './components/ScrollProgress/ScrollProgress';
 ```
 
 ### Scrollspy

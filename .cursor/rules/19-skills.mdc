@@ -7,5 +7,8 @@ alwaysApply: true
 
 - Cursor skill: `.cursor/skills/shacdn-style-guide/`
 - AI workflow skills: `.ai/skills/*/SKILL.md`
+- Interface skills (MIT, Jakub Krehel, see `.cursor/skills/interfaces.LICENSE`): `better-ui`, `better-accessibility`, `better-layout`, `better-typography`, `better-colors`, `better-writing`, `better-interface`, `interface-review`, plus `explain-interface`, `variant`, `state-machine`, `break`, `build-design`
+
+When polishing a screen, load `better-accessibility` and `better-ui` before changing motion. Looping decoration stays inside `prefers-reduced-motion: no-preference` and keeps a pause control. Press feedback on `Button` is `scale(0.96)` over 150ms and does not run under reduced motion. Text links do not scale.
 
 Select a skill matching the task (feature, bug, review, compress, knowledge-update, …) and follow its steps and done criteria.

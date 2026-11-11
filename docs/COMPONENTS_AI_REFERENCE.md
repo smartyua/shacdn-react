@@ -23,7 +23,7 @@ Agent setup (MCP clients, skill, install, `llms.txt`) is documented on the demo 
 | Toast | `Toast`, `Sonner` (alias) | `ToastProvider` |
 | Layout | `Card`, `Separator`, `Tabs`, `TabNav`, `Accordion`, `Collapsible`, `Resizable`, `ScrollArea`, `Sidebar` | TabNav is links, not panels |
 | Feedback | `Alert`, `Banner`, `Callout`, `Progress`, `ProgressRing`, `Spinner`, `Skeleton`, `Empty` | |
-| Motion | `AnimatedList`, `AnimatedText`, `Dock`, `Marquee`, `NumberTicker`, `OrbitingCircles`, `ShineBorder`, `SpinningText` | CSS motion; no animation library |
+| Motion | `AnimatedList`, `AnimatedText`, `Aurora`, `BorderBeam`, `Dock`, `DotField`, `FluidOrb`, `GlowCard`, `Marquee`, `NumberTicker`, `OrbitingCircles`, `ScrollProgress`, `ShineBorder`, `SpinningText` | CSS motion only (`transform`, opacity, `background-position`, conic-gradient). Loops sit inside `prefers-reduced-motion: no-preference` and expose `MotionPauseButton`. |
 | Extra inputs | `InputMask`, `FileUpload`, `Rating`, `Sortable`, `CodeBlock`, `Questionnaire` | shadcnspace categories that are not registry primitives |
 | Data | `Table`, `Pagination`, `Chart` | Chart: bar, grouped bar, donut, sparkline (zero-dep SVG) |
 | Metrics | `MetricCard`, `Gauge`, `UsageMeter`, `ActivityHeatmap` | MetricCard → Chart (Sparkline) |

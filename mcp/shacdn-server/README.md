@@ -23,6 +23,7 @@ MCP server for AI agents to integrate **shacdn** (React + SCSS shadcn/ui) into o
 | `get_design_system` | `variables.scss` / `globals.scss` / `theme.ts` |
 | `get_integration_guide` | Bootstrap guide for consumer project |
 | `install_to_project` | **Write** tokens (+ optional components) into a target folder |
+| `get_install_command` | One-line CLI, copy order, and required providers |
 | `list_screen_patterns` | Landing/showcase patterns |
 | `get_screen_pattern` | Screen source + component bundle |
 

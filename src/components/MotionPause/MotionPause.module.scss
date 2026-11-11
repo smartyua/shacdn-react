@@ -1,0 +1,27 @@
+@use '../../styles/variables.scss' as *;
+
+.pause {
+  min-height: $control-h-sm;
+  padding: 0 $spacing-sm;
+  border-radius: $radius-sm;
+  border: $border-width solid $border;
+  background: $background;
+  color: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-xs;
+  letter-spacing: $tracking-ui;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $ring;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+@media (hover: hover) {
+  .pause:hover {
+    background: $accent;
+    color: $accent-foreground;
+  }
+}

@@ -11,7 +11,13 @@
   font-weight: 500;
   letter-spacing: $tracking-ui;
   transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast,
-    opacity $transition-fast, box-shadow $transition-fast;
+    opacity $transition-fast, box-shadow $transition-fast, transform 150ms cubic-bezier(0.2, 0, 0, 1);
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:not(:disabled):active {
+      transform: scale(0.96);
+    }
+  }
   cursor: pointer;
   border: none;
   font-family: $font-sans;
@@ -97,6 +103,12 @@
   &:active {
     color: $muted-foreground;
     text-decoration: underline;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button.link:not(:disabled):active {
+    transform: none;
   }
 }
 

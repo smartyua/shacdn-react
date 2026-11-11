@@ -1,0 +1,145 @@
+@use '../../styles/variables.scss' as *;
+
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  max-width: 100%;
+}
+
+.orb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  border: $border-width solid $border;
+  background: $muted;
+  isolation: isolate;
+}
+
+.sm {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.md {
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.lg {
+  width: 11rem;
+  height: 11rem;
+}
+
+.blobA,
+.blobB,
+.blobC {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(14px);
+}
+
+.blobA {
+  width: 72%;
+  height: 72%;
+  top: 4%;
+  left: 8%;
+  background: $chart-1;
+}
+
+.blobB {
+  width: 64%;
+  height: 64%;
+  right: -6%;
+  bottom: -8%;
+  background: $chart-2;
+}
+
+.blobC {
+  width: 46%;
+  height: 46%;
+  top: 28%;
+  left: 28%;
+  background: $primary;
+  opacity: 0.55;
+}
+
+.root[data-state='listening'] .blobA {
+  background: $chart-2;
+}
+
+.root[data-state='listening'] .blobB {
+  background: $chart-3;
+}
+
+.root[data-state='speaking'] .blobA {
+  background: $chart-4;
+}
+
+.root[data-state='speaking'] .blobB {
+  background: $chart-1;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: $foreground;
+  font-family: $font-sans;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  letter-spacing: $tracking-ui;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .root:not([data-paused]) .blobA {
+    animation: orbA 8s ease-in-out infinite;
+  }
+
+  .root:not([data-paused]) .blobB {
+    animation: orbB 11s ease-in-out infinite;
+  }
+
+  .root:not([data-paused]) .blobC {
+    animation: orbC 7s ease-in-out infinite;
+  }
+
+  .root[data-state='speaking']:not([data-paused]) .blobA,
+  .root[data-state='speaking']:not([data-paused]) .blobB,
+  .root[data-state='speaking']:not([data-paused]) .blobC {
+    animation-duration: 3.2s;
+  }
+}
+
+@keyframes orbA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(16%, 10%, 0) scale(1.08);
+  }
+}
+
+@keyframes orbB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12%, -14%, 0) scale(1.1);
+  }
+}
+
+@keyframes orbC {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(6%, -8%, 0) scale(0.92);
+  }
+}

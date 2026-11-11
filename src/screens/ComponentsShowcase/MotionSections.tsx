@@ -10,6 +10,12 @@ import { NumberTicker } from '../../components/NumberTicker/NumberTicker';
 import { OrbitingCircles, OrbitingCirclesItem } from '../../components/OrbitingCircles/OrbitingCircles';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { Rating } from '../../components/Rating/Rating';
+import { Aurora } from '../../components/Aurora/Aurora';
+import { BorderBeam } from '../../components/BorderBeam/BorderBeam';
+import { DotField } from '../../components/DotField/DotField';
+import { FluidOrb } from '../../components/FluidOrb/FluidOrb';
+import { GlowCard } from '../../components/GlowCard/GlowCard';
+import { ScrollProgress } from '../../components/ScrollProgress/ScrollProgress';
 import { ShineBorder } from '../../components/ShineBorder/ShineBorder';
 import { Sortable, SortableItem } from '../../components/Sortable/Sortable';
 import { SpinningText } from '../../components/SpinningText/SpinningText';
@@ -169,6 +175,50 @@ export const MotionSections = () => {
         <h2>Spinning Text</h2>
         <SpinningText text="shacdn · motion · shacdn · motion · " />
       </section>
+
+      <section id="aurora" className={styles.section}>
+        <h2>Aurora</h2>
+        <Aurora>
+          <strong>Ambient wash</strong>
+          <p>A still color field when motion is reduced. Pause stops the drift.</p>
+        </Aurora>
+      </section>
+
+      <section id="border-beam" className={styles.section}>
+        <h2>Border Beam</h2>
+        <BorderBeam>
+          <div style={{ padding: '1rem 1.25rem' }}>One light travels the frame</div>
+        </BorderBeam>
+      </section>
+
+      <section id="dot-field" className={styles.section}>
+        <h2>Dot Field</h2>
+        <DotField>
+          <strong>Move across the grid</strong>
+          <p>The spotlight follows the pointer. Reduced motion keeps a static grid.</p>
+        </DotField>
+      </section>
+
+      <section id="fluid-orb" className={styles.section}>
+        <h2>Fluid Orb</h2>
+        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <FluidOrb label="Idle" state="idle" size="sm" />
+          <FluidOrb label="Listening" state="listening" size="md" />
+          <FluidOrb state="speaking" size="lg">
+            Live
+          </FluidOrb>
+        </div>
+      </section>
+
+      <section id="glow-card" className={styles.section}>
+        <h2>Glow Card</h2>
+        <GlowCard>
+          <strong>Spotlight</strong>
+          <p>The light follows the pointer and stays off when motion is reduced.</p>
+        </GlowCard>
+      </section>
+
+      <ScrollProgress />
     </>
   );
 };

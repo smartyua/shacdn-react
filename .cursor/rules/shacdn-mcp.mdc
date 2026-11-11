@@ -28,6 +28,7 @@ The official **`shadcn`** MCP (Tailwind registry) is for **parity audits** only 
 | `get_design_system` | `variables.scss` + `globals.scss` + theme helpers |
 | `get_integration_guide` | Step-by-step consumer project setup |
 | `install_to_project` | Write tokens (+ optional components) into `targetDir` |
+| `get_install_command` | One-line CLI plus copy order and required providers |
 | `list_screen_patterns` | Available screen compositions |
 | `get_screen_pattern` | Full screen + required component bundle |
 

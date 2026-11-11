@@ -165,6 +165,24 @@
       "install": "npm run shacdn:install -- /path/to/your-app --components Attachment"
     },
     {
+      "name": "Aurora",
+      "folder": "Aurora",
+      "description": "Soft drifting color wash for heroes and empty states, with a pause control",
+      "tasks": [
+        "aurora",
+        "gradient background",
+        "ambient background"
+      ],
+      "exports": [
+        "Aurora"
+      ],
+      "dependencies": [
+        "MotionPause"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components Aurora"
+    },
+    {
       "name": "Avatar",
       "folder": "Avatar",
       "description": "User avatar with fallback initials, badge and overlapping group",
@@ -237,6 +255,24 @@
       "dependencies": [],
       "providers": [],
       "install": "npm run shacdn:install -- /path/to/your-app --components Bento"
+    },
+    {
+      "name": "BorderBeam",
+      "folder": "BorderBeam",
+      "description": "A single light traveling around a frame, paused on request",
+      "tasks": [
+        "border beam",
+        "animated border",
+        "light border"
+      ],
+      "exports": [
+        "BorderBeam"
+      ],
+      "dependencies": [
+        "MotionPause"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components BorderBeam"
     },
     {
       "name": "Breadcrumb",
@@ -784,6 +820,25 @@
       "install": "npm run shacdn:install -- /path/to/your-app --components Dock"
     },
     {
+      "name": "DotField",
+      "folder": "DotField",
+      "description": "Dot grid with a pointer spotlight and a pauseable drift",
+      "tasks": [
+        "dot field",
+        "dot grid",
+        "ripple grid",
+        "spotlight background"
+      ],
+      "exports": [
+        "DotField"
+      ],
+      "dependencies": [
+        "MotionPause"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components DotField"
+    },
+    {
       "name": "Drawer",
       "folder": "Drawer",
       "description": "Side panel / sheet overlay",
@@ -948,6 +1003,25 @@
       "install": "npm run shacdn:install -- /path/to/your-app --components Floating"
     },
     {
+      "name": "FluidOrb",
+      "folder": "FluidOrb",
+      "description": "CSS fluid orb for voice and agent presence, with idle, listening and speaking states",
+      "tasks": [
+        "fluid orb",
+        "voice orb",
+        "ai presence",
+        "orb"
+      ],
+      "exports": [
+        "FluidOrb"
+      ],
+      "dependencies": [
+        "MotionPause"
+      ],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components FluidOrb"
+    },
+    {
       "name": "Form",
       "folder": "Form",
       "description": "Form composition helpers",
@@ -982,6 +1056,22 @@
       "dependencies": [],
       "providers": [],
       "install": "npm run shacdn:install -- /path/to/your-app --components Gauge"
+    },
+    {
+      "name": "GlowCard",
+      "folder": "GlowCard",
+      "description": "Card with a pointer-following spotlight, still when reduced motion is on",
+      "tasks": [
+        "glow card",
+        "spotlight card",
+        "hover card glow"
+      ],
+      "exports": [
+        "GlowCard"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components GlowCard"
     },
     {
       "name": "HoldToConfirm",
@@ -1389,6 +1479,22 @@
       "install": "npm run shacdn:install -- /path/to/your-app --components Modal"
     },
     {
+      "name": "MotionPause",
+      "folder": "MotionPause",
+      "description": "Pause button for looping decoration. useMotionPause and usePrefersReducedMotion live beside it",
+      "tasks": [
+        "pause animation",
+        "reduced motion",
+        "motion pause"
+      ],
+      "exports": [
+        "MotionPauseButton"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components MotionPause"
+    },
+    {
       "name": "MultiSelect",
       "folder": "MultiSelect",
       "description": "Multi-value select with chips and checkbox listbox",
@@ -1726,6 +1832,22 @@
       "dependencies": [],
       "providers": [],
       "install": "npm run shacdn:install -- /path/to/your-app --components ScrollArea"
+    },
+    {
+      "name": "ScrollProgress",
+      "folder": "ScrollProgress",
+      "description": "Thin reading-progress bar tied to the page or a scroll container",
+      "tasks": [
+        "scroll progress",
+        "reading progress",
+        "scroll indicator"
+      ],
+      "exports": [
+        "ScrollProgress"
+      ],
+      "dependencies": [],
+      "providers": [],
+      "install": "npm run shacdn:install -- /path/to/your-app --components ScrollProgress"
     },
     {
       "name": "Scrollspy",

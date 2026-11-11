@@ -20,7 +20,7 @@ Import `src/styles/theme-init` and `src/styles/globals.scss` once in the app ent
 
 Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_components, get_component, get_component_bundle, get_install_command, get_design_system, get_integration_guide, install_to_project, list_screen_patterns, get_screen_pattern.
 
-## Components (126)
+## Components (133)
 
 - Accordion: Expandable FAQ / disclosure sections.
 - ActivityHeatmap: Year-at-a-glance contribution grid, one square per day.
@@ -30,10 +30,12 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - AnimatedText: Text motion: fade, blur, slide, typewriter, gradient, scramble, word rotate, highlight.
 - AspectRatio: Fixed aspect ratio container for media.
 - Attachment: File/image attachment preview with upload states and actions.
+- Aurora: Soft drifting color wash for heroes and empty states, with a pause control.
 - Avatar: User avatar with fallback initials, badge and overlapping group.
 - Badge: Status tag or label chip.
 - Banner: Full-width page-level notice, optionally dismissible.
 - Bento: Mixed-span CSS grid layout (bento box).
+- BorderBeam: A single light traveling around a frame, paused on request.
 - Breadcrumb: Page hierarchy navigation.
 - Bubble: Chat message bubble with variants and reactions slot.
 - Button: Action button or link CTA (supports href).
@@ -62,6 +64,7 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - Dialog: Modal dialog overlay.
 - Direction: RTL/LTR direction provider.
 - Dock: macOS-style dock with pointer magnification.
+- DotField: Dot grid with a pointer spotlight and a pauseable drift.
 - Drawer: Side panel / sheet overlay.
 - DropdownMenu: Dropdown action menu with checkbox, radio, shortcut and nested submenu parts.
 - Empty: Empty state placeholder.
@@ -70,8 +73,10 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - FileUpload: Drag-and-drop file picker with type filter and previews.
 - FinancialTable: Comparison table for signed amounts, with an accent column for the active scenario.
 - Floating: Positioning primitives shared by every popup surface (portal, collision-aware placement, dismiss layer).
+- FluidOrb: CSS fluid orb for voice and agent presence, with idle, listening and speaking states.
 - Form: Form composition helpers.
 - Gauge: Arc gauge showing a value against a range with threshold tones.
+- GlowCard: Card with a pointer-following spotlight, still when reduced motion is on.
 - HoldToConfirm: Destructive action confirmed by press-and-hold (pointer or Space/Enter).
 - HoverCard: Rich preview on hover.
 - ImageCompare: Before/after image slider with a draggable, keyboard-operable divider.
@@ -94,6 +99,7 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - MessageScroller: Scrollable message list with auto-scroll and jump buttons (zero-dep; no @shadcn/react).
 - MetricCard: KPI card: value, signed delta with sentiment, optional sparkline.
 - Modal: Alias for Dialog API. Alias of Dialog.
+- MotionPause: Pause button for looping decoration. useMotionPause and usePrefersReducedMotion live beside it.
 - MultiSelect: Multi-value select with chips and checkbox listbox.
 - NativeSelect: Styled native <select> element for simple or mobile-first forms.
 - NavigationMenu: Site navigation with dropdown panels.
@@ -113,6 +119,7 @@ Local stdio server (`mcp/shacdn-server`). Tools: list_components, search_compone
 - Resizable: Drag-to-resize panel groups (zero-dep).
 - ScheduleCalendar: Week, day and month agenda with typed event contracts, drag move/resize and holiday chips.
 - ScrollArea: Custom styled scroll container.
+- ScrollProgress: Thin reading-progress bar tied to the page or a scroll container.
 - Scrollspy: On-this-page nav that tracks the visible section.
 - SegmentedControl: Single-choice segmented control with a sliding selection indicator.
 - Select: Custom listbox select with popup, groups and keyboard navigation.

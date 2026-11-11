@@ -44,7 +44,8 @@ describe('AiDocs', () => {
     for (const client of ['Cursor', 'Claude Code', 'VS Code', 'Codex']) {
       expect(screen.getByRole('button', { name: client })).toBeInTheDocument();
     }
-    const toc = screen.getByRole('navigation', { name: 'On this page' });
-    expect(within(toc).getAllByRole('link')).toHaveLength(6);
+    // jsdom's viewport is frozen at 1024px, so the max-width: 1100px rule hides .toc.
+    const toc = screen.getByRole('navigation', { name: 'On this page', hidden: true });
+    expect(within(toc).getAllByRole('link', { hidden: true })).toHaveLength(6);
   });
 });

@@ -26,6 +26,7 @@ describe('AnimatedList', () => {
         <span>Item</span>
       </AnimatedList>
     );
-    expect(screen.getByText('Item').parentElement).toHaveStyle({ animationDelay: '0ms' });
+    const row = screen.getByText('Item').parentElement as HTMLElement;
+    expect(row.style.animationDelay).toBe('0ms');
   });
 });
